@@ -660,7 +660,17 @@ def _about_blocks(body):
 
     # 逐块渲染并回填
     for i, (cls, inner) in enumerate(blocks):
-        sub = md_to_html(inner, img_prefix='')
+        # 块内可能直接写了裸 <img>（about.md 的二维码区就是），
+        # 先把裸 HTML 标签抠出来占位，避免被 markdown 转义成文本。
+        raw_html = []
+
+        def keep_html(m):
+            raw_html.append(m.group(0))
+            return '\x00HTML%d\x00' % (len(raw_html) - 1)
+
+        inner2 = re.sub(r'<img\b[^>]*>', keep_html, inner, flags=re.I)
+
+        sub = md_to_html(inner2, img_prefix='')
         # 块内 h3 降级为 h4
         sub = re.sub(r'<h3>(.*?)</h3>', r'<h4>\1</h4>', sub)
         # Q/A 问答对
@@ -672,11 +682,18 @@ def _about_blocks(body):
             fix_qa, sub)
         sub = re.sub(r'<p><strong>Q：(.*?)</strong></p>',
                      r'<div class="q">\1</div>', sub)
+        # 回填裸 HTML
+        for j, tag in enumerate(raw_html):
+            sub = sub.replace('\x00HTML%d\x00' % j, tag)
+        # 段落里独立的占位符（<p>\x00HTML0\x00</p>）去掉外壳
+        sub = re.sub(r'<p>(\s*<img\b[^>]*>\s*)</p>', r'\1', sub)
+
         html = html.replace('\x00BLK%d\x00' % i,
                             '<div class="%s">%s</div>' % (cls, sub))
 
     html = re.sub(r'<p>\s*</p>', '', html)
     html = re.sub(r'\x00BLK\d+\x00', '', html)
+    html = re.sub(r'\x00HTML\d+\x00', '', html)
     return html
 
 
