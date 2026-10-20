@@ -189,7 +189,9 @@ body {
 .home { font-size: 14px; color: var(--ink-2); text-decoration: none; }
 .home:hover { color: var(--accent); }
 
-.post { padding: 34px 0 60px; max-width: 780px; }
+/* .post 与 .page 都带 wrap 类，左右内边距写死在这里，
+   不依赖 .wrap 的 padding —— 后者在移动端会被其他规则覆盖成 0。 */
+.post { padding: 34px 24px 60px; max-width: 780px; }
 .crumb { margin-bottom: 16px; font-size: 13px; color: var(--ink-3); }
 .crumb a { color: var(--ink-3); text-decoration: none; }
 .crumb a:hover { color: var(--accent); }
@@ -272,7 +274,7 @@ body {
 .footlinks a:hover, .foot > p > a:hover { text-decoration: underline; }
 
 /* ---------- 关于本站 ---------- */
-.page { padding: 40px 0 60px; max-width: 780px; }
+.page { padding: 40px 24px 60px; max-width: 780px; }
 .page h1 { margin: 0 0 6px; font-size: 30px; font-weight: 600; }
 .pagesub { margin: 0 0 8px; font-size: 14px; color: var(--ink-3); }
 .page .content { border-top: 1px solid var(--line); }
@@ -490,7 +492,9 @@ img { max-width: 100%; }
   .top { padding: 14px 0; }
   .home { font-size: 15px; min-height: 40px; display: inline-flex; align-items: center; }
 
-  .post { padding: 24px 0 44px; }
+  /* 注意：.post 同时带 wrap 类，必须保留左右内边距，
+     否则中文正文会直接顶到屏幕物理边缘（375/390/430 屏实测边距为 0） */
+  .post { padding: 24px 20px 44px; }
   .crumb { margin-bottom: 12px; font-size: 13px; min-height: 32px; }
   .post h1 { font-size: 22px; line-height: 1.45; margin-bottom: 12px; }
   .meta { gap: 10px; font-size: 12px; }
@@ -543,7 +547,7 @@ img { max-width: 100%; }
 .disclaimer { padding: 16px 18px; }
 
   /* 关于本站 */
-  .page { padding: 26px 0 44px; }
+  .page { padding: 26px 20px 44px; }
   .page h1 { font-size: 22px; }
   .qrbox { padding: 18px 14px; }
   .feat h4, .faq .q, .qa .q { font-size: 15px; }
@@ -573,7 +577,9 @@ img { max-width: 100%; }
 /* --- 横屏手机：压缩纵向留白 --- */
 @media (max-height: 480px) and (orientation: landscape) {
   .hero { padding: 24px 0 18px; }
-  .post { padding: 18px 0 30px; }
+  /* 同样要保留左右内边距 */
+  .post { padding: 18px 20px 30px; }
+  .page { padding: 18px 20px 30px; }
 }
 
 /* --- 尊重系统的减弱动效设置 --- */
