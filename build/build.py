@@ -467,6 +467,11 @@ def build_index_html(arts, cats, years):
       <button id="clear">清除</button>
     </div>
     <div id="count" class="count"></div>
+    <div class="herobio">
+      <img src="/img/uploads/luwenyi-avatar.jpg" alt="吕文艺老师" width="56" height="56" />
+      <p><b>吕文艺</b>　「吕氏时空人」理论技术体系创立者，本站收录其公众号「时空坐标」原创文章。
+        <a href="about.html">了解本站 →</a></p>
+    </div>
   </div>
 </header>
 
@@ -648,27 +653,77 @@ def _about_blocks(body):
 
     def grab(m):
         blocks.append((m.group(1), m.group(2)))
-        return '\x00BLK%d\x00' % (len(blocks) - 1)
+        return '@@BLK%d@@' % (len(blocks) - 1)
 
-    # 匹配 <div class="xxx"> ... </div>（不嵌套 div）
-    src = re.sub(
-        r'<div class="(qrbox|feat|faq)">\n(.*?)\n?</div>',
-        grab, body, flags=re.S)
+    # 匹配 <div class="xxx"> ... </div>
+    # author 块内含嵌套 div（authorpic / authorinfo），
+    # 所以用「允许一层嵌套」的写法：先匹配到下一个 </div>，
+    # 若内部还有 <div 则继续往后找配对的闭合标签。
+    def find_block(text, start):
+        """从 text[start] 处的 <div class="..."> 开始，
+        找到配对的 </div>，返回 (内容, 结束位置)。"""
+        depth = 0
+        i = start
+        while True:
+            mo = re.compile(r'<div\b[^>]*>|</div>').search(text, i)
+            if not mo:
+                return text[start:], len(text)
+            if mo.group(0).startswith('</'):
+                depth -= 1
+                if depth == 0:
+                    return text[start:mo.start()], mo.end()
+            else:
+                depth += 1
+            i = mo.end()
+
+    out = []
+    pos = 0
+    pat = re.compile(r'<div class="(qrbox|feat|faq|author)">')
+    while True:
+        m = pat.search(body, pos)
+        if not m:
+            out.append(body[pos:])
+            break
+        out.append(body[pos:m.start()])
+        inner, endpos = find_block(body, m.start())
+        blocks.append((m.group(1), inner))
+        out.append('@@BLK%d@@' % (len(blocks) - 1))
+        pos = endpos
+    src = ''.join(out)
+
+    # 块外的裸 HTML（如作者配图 <img>）同样要保护
+    outer_html = []
+
+    def keep_outer(m):
+        outer_html.append(m.group(0))
+        return '@@OUT%d@@' % (len(outer_html) - 1)
+
+    src = re.sub(r'<img\b[^>]*>', keep_outer, src, flags=re.I)
 
     # 剩下的正常渲染
     html = md_to_html(src, img_prefix='')
+    # 块占位符独占一行时，md_to_html 会包一层 <p>，去掉
+    html = re.sub(r'<p>\s*(@@BLK\d+@@)\s*</p>', r'\1', html)
+    html = re.sub(r'<p>\s*(@@OUT\d+@@)\s*</p>', r'\1', html)
+    for j, tag in enumerate(outer_html):
+        html = html.replace('@@OUT%d@@' % j, tag)
 
     # 逐块渲染并回填
     for i, (cls, inner) in enumerate(blocks):
-        # 块内可能直接写了裸 <img>（about.md 的二维码区就是），
-        # 先把裸 HTML 标签抠出来占位，避免被 markdown 转义成文本。
+        # 块内可能直接写了裸 HTML 标签（about.md 的二维码区、作者卡就是），
+        # 先把裸 HTML 抠出来占位，避免被 markdown 转义成文本。
         raw_html = []
 
         def keep_html(m):
             raw_html.append(m.group(0))
-            return '\x00HTML%d\x00' % (len(raw_html) - 1)
+            return '@@HTML%d@@' % (len(raw_html) - 1)
 
-        inner2 = re.sub(r'<img\b[^>]*>', keep_html, inner, flags=re.I)
+        # 保留 <img ...>、<div ...>、</div> 这类块级结构标签
+        # 占位符用 @@ 包裹 —— md_to_html 的 esc() 不会动 @ 和数字，
+        # 而 \x00 控制符会被转义成可见字符。
+        inner2 = re.sub(
+            r'<img\b[^>]*>|</?div\b[^>]*>',
+            keep_html, inner, flags=re.I)
 
         sub = md_to_html(inner2, img_prefix='')
         # 块内 h3 降级为 h4
@@ -684,15 +739,18 @@ def _about_blocks(body):
                      r'<div class="q">\1</div>', sub)
         # 回填裸 HTML
         for j, tag in enumerate(raw_html):
-            sub = sub.replace('\x00HTML%d\x00' % j, tag)
-        # 段落里独立的占位符（<p>\x00HTML0\x00</p>）去掉外壳
+            sub = sub.replace('@@HTML%d@@' % j, tag)
+        # 段落里独立的占位符（<p>@@HTML0@@</p>）去掉外壳
         sub = re.sub(r'<p>(\s*<img\b[^>]*>\s*)</p>', r'\1', sub)
+        # 占位符独占一行时，包着的 <p> 也要去掉
+        sub = re.sub(r'<p>(\s*</?div\b[^>]*>\s*)</p>', r'\1', sub)
+        sub = re.sub(r'<p>(\s*@@HTML\d+@@\s*)</p>', r'\1', sub)
 
-        html = html.replace('\x00BLK%d\x00' % i,
+        html = html.replace('@@BLK%d@@' % i,
                             '<div class="%s">%s</div>' % (cls, sub))
 
     html = re.sub(r'<p>\s*</p>', '', html)
-    html = re.sub(r'\x00BLK\d+\x00', '', html)
+    html = re.sub(r'@@BLK\d+@@', '', html)
     html = re.sub(r'\x00HTML\d+\x00', '', html)
     return html
 

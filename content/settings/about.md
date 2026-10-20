@@ -28,25 +28,41 @@ subtitle: "时空人公益推广 · 站点说明"
 
 ---
 
+## 关于作者
+
+<div class="author">
+
+<div class="authorpic">
+
+<img src="/img/uploads/luwenyi-avatar.jpg" alt="吕文艺老师" width="150" />
+
+</div>
+
+<div class="authorinfo">
+
+### 吕文艺
+
+「吕氏时空人」理论技术体系创立者。地理专科、中文本科、MBA 硕士学历，曾定居北京与香港。2015 年之前的 8 年间，受邀为北京师范大学「易学与建筑学硕博（士）班」讲授《「自然科学风水学与传统人文风水学」比较学》。
+
+他主张站在**科学、逻辑、事实**的时空人四维角度，运用自然科学方法研究易学，创立了「吕氏八字命理学」「吕氏择吉」等技术体系，长期在民间免费传授，被易友称为「吕文艺时空人」。
+
+</div>
+
+</div>
+
+<img src="/img/uploads/luwenyi-photo.jpg" alt="吕文艺老师讲课现场" width="100%" />
+
+> 吕文艺老师在实地培训课上授课。
+
+---
+
 ## 二维码区
 
 <div class="qrbox">
 
 ### 关注公众号「时空坐标」
 
-<img src="/img/uploads/erweima.jpg" alt="微信公众号时空坐标二维码" width="220" />
-
-原始公众号二维码（图片可通过后台「站点设置 → 关于本站」上传替换）
-
-</div>
-
-<div class="qrbox">
-
-### 公众号头像
-
-<img src="/img/uploads/touxiang.jpg" alt="吕文艺老师头像" width="180" />
-
-吕文艺老师头像（可通过后台替换）
+公众号二维码待补。目前可通过微信搜索「**时空坐标**」找到，或直接阅读下方「本站功能」了解本站能做什么。
 
 </div>
 
