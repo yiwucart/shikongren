@@ -659,19 +659,22 @@ def _about_blocks(body):
     # author 块内含嵌套 div（authorpic / authorinfo），
     # 所以用「允许一层嵌套」的写法：先匹配到下一个 </div>，
     # 若内部还有 <div 则继续往后找配对的闭合标签。
-    def find_block(text, start):
-        """从 text[start] 处的 <div class="..."> 开始，
-        找到配对的 </div>，返回 (内容, 结束位置)。"""
-        depth = 0
-        i = start
+    def find_block(text, after_open):
+        """从 text[after_open]（开标签之后）开始扫描，
+        找到配对的 </div>，返回 (开标签内的内容, 结束位置)。
+
+        after_open 是开标签的结束位置，所以返回的内容**不含**开标签。
+        """
+        depth = 1
+        i = after_open
         while True:
             mo = re.compile(r'<div\b[^>]*>|</div>').search(text, i)
             if not mo:
-                return text[start:], len(text)
+                return text[after_open:], len(text)
             if mo.group(0).startswith('</'):
                 depth -= 1
                 if depth == 0:
-                    return text[start:mo.start()], mo.end()
+                    return text[after_open:mo.start()], mo.end()
             else:
                 depth += 1
             i = mo.end()
@@ -685,7 +688,7 @@ def _about_blocks(body):
             out.append(body[pos:])
             break
         out.append(body[pos:m.start()])
-        inner, endpos = find_block(body, m.start())
+        inner, endpos = find_block(body, m.end())
         blocks.append((m.group(1), inner))
         out.append('@@BLK%d@@' % (len(blocks) - 1))
         pos = endpos
