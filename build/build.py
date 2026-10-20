@@ -194,11 +194,35 @@ def md_to_html(body, img_prefix='../'):
     i = 0
     n = len(lines)
 
+    # 微信公众号排版残留：这些行在原公众号里是分页符/装饰符，
+    # 抓过来单独成行，在网页上表现为孤零零的圆点或「·2--」。
+    JUNK_RE = re.compile(
+        r'^[·•‧∙]\s*\d*\s*-*-*$'   # ·1--  ·2--  •
+        r'|^[-—–_=~·•\s]{3,}$'      # 纯符号行
+        r'|^\s*\d+\s*$'                # 单独一行数字（无意义）
+    )
+
+    def is_junk(line):
+        s = line.strip()
+        if not s:
+            return False
+        if JUNK_RE.match(s):
+            return True
+        # 孤立圆点 / 单个标点
+        if re.fullmatch(r'[·•‧∙。．、，,：:；;！!？?\-—–~～]{1,2}', s):
+            return True
+        return False
+
     while i < n:
         raw = lines[i]
         b = raw.strip()
 
         if not b:
+            i += 1
+            continue
+
+        # --- 微信排版残留，直接吞掉 ---
+        if is_junk(b):
             i += 1
             continue
 
@@ -288,6 +312,9 @@ def md_to_html(body, img_prefix='../'):
         i += 1
         while i < n and lines[i].strip():
             nxt = lines[i].strip()
+            if is_junk(nxt):
+                i += 1
+                continue
             if (re.match(r'^(#{1,6})\s+', nxt) or nxt.startswith('> ')
                     or re.fullmatch(r'!\[([^\]]*)\]\(([^)]+)\)', nxt)
                     or re.match(r'^([-*+]|\d+\.)\s+', nxt)
@@ -297,7 +324,13 @@ def md_to_html(body, img_prefix='../'):
             i += 1
         out.append('<p>%s</p>' % _inline(esc(' '.join(buf))))
 
-    return '\n'.join(out)
+    # 收敛连续空段落
+    final = []
+    for h in out:
+        if h == '<p></p>' and final and final[-1] == '<p></p>':
+            continue
+        final.append(h)
+    return '\n'.join(final)
 
 
 def slug_of(text, fallback):
