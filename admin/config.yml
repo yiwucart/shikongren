@@ -1,15 +1,24 @@
 backend:
-  # 自建服务器用 github backend + 本站自建的 OAuth 代理（decap_oauth.py）
+  # github backend + 访问令牌登录
   # 不能用 git-gateway：它依赖 Netlify Identity / GoTrue，脱离 Netlify 跑不起来
-  # base_url 必须与 OAuth 后台注册的 callback 主机名完全一致
   name: github
   repo: yiwucart/shikongren
   branch: main
-  base_url: https://shikongren.com
-  auth_endpoint: /decap/auth
 
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
+
+# 媒体库：左侧 Media 面板，浏览器里先选图再上传
+media_library:
+  name: 图片库
+  label: 图片
+  media_folder: "img/uploads"
+  public_folder: "/img/uploads"
+  max_file_size: 8000000
+  # 只允许常见图片格式，避免误传 exe/zip 进仓库
+  extensions: ["jpg", "jpeg", "png", "gif", "webp", "svg"]
+  # 同一文件重复上传时不新建副本
+  duplicate_fields: false
 
 site_url: https://shikongren.com
 display_url: https://shikongren.com
@@ -111,7 +120,11 @@ collections:
       - { label: "作者", name: author, widget: string, default: "吕文艺", required: false }
       - { label: "原文链接", name: url, widget: string, required: false,
           hint: "微信公众号原文地址，可留空" }
-      - { label: "正文", name: body, widget: markdown, required: false }
+      - label: "正文"
+        name: body
+        widget: markdown
+        required: false
+        hint: "排版用 Markdown：空行分段，## 小标题，**加粗**。插图见下方说明。"
       - { label: "系列标记", name: series, widget: string, required: false,
           hint: "例如：九、290局-八，留空表示不属于系列" }
 
