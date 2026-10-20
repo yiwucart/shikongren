@@ -54,8 +54,8 @@
   <p class="sub">时空人公益推广 · shikongren.com</p>
 
   <div class="box">
-    <h2>方式一：在线后台（Decap CMS）</h2>
-    <p>浏览器里写文章、传图片，点发布就上线。<strong>已完成技术配置</strong>，只差填入 GitHub 凭证。</p>
+    <h2>方式一：在线后台（Decap CMS）—— 已配置好，直接用</h2>
+    <p>浏览器里写文章、传图片，点「发布」就提交；服务器每 3 分钟自动重建一次，1 分钟内上线。</p>
     <div class="warn">
       本站用的是 <strong>github backend + 自建 OAuth 代理</strong>（服务器上 <code>/root/decap-oauth</code>，
       systemd 服务 <code>decap-oauth</code>）。没有用 git-gateway —— 那个依赖 Netlify，脱离 Netlify 跑不起来。
@@ -64,33 +64,22 @@
     <a class="btn ghost" href="/">返回站点</a>
 
     <hr>
-    <h2 style="font-size:15px">首次配置（只需做一次）</h2>
+    <h2 style="font-size:15px">使用步骤</h2>
     <ol class="steps">
-      <li>建一个 GitHub 仓库（叫 <code>shikongren</code> 即可），把站点内容推进去，分支用 <code>main</code></li>
-      <li>到 <code>https://github.com/settings/applications/new</code> 建 OAuth 应用：</li>
-    </ol>
-    <span class="path">Application name: shikongren.com CMS</span>
-    <span class="path">Homepage URL: https://shikongren.com</span>
-    <span class="path">Authorization callback URL: https://shikongren.com/decap/callback</span>
-    <ol class="steps" start="3">
-      <li>拿到 <b>Client ID</b> 和 <b>Client Secret</b>，填入服务器的 <code>/root/decap-oauth/.env</code>：</li>
-    </ol>
-    <span class="path">GITHUB_CLIENT_ID=你的ClientID</span>
-    <span class="path">GITHUB_CLIENT_SECRET=你的ClientSecret</span>
-    <span class="path">GITHUB_REPOSITORY=你的用户名/shikongren</span>
-    <ol class="steps" start="4">
-      <li>同时把 <code>admin/config.yml</code> 里的 <code>repo:</code> 改成你的 <code>用户名/shikongren</code></li>
-      <li>访问 <code>https://shikongren.com/admin/</code>，点「用 GitHub 登录」即可进入</li>
+      <li>点上面「进入内容管理后台」，页面上会出现一个 <b>「用 GitHub 登录」</b>按钮（英文是 <i>Log in with GitHub</i>）</li>
+      <li>点它 —— 会弹出一个新窗口，跳转到 GitHub 授权页，<b>在新窗口里点「授权」</b></li>
+      <li>授权后会自动跳回后台，左侧就是「文章」列表，可以新建、编辑、删除</li>
+      <li>写完点右上角 <b>「保存 / 发布」</b>，内容就进仓库了；服务器 3 分钟内自动重建上线</li>
     </ol>
     <p style="margin-top:14px;font-size:13px;color:var(--ink-3)">
-      说明：仓库需设为 <b>public</b> 或确保你的 GitHub 账号对私有仓库有写权限；
-      授权时 GitHub 会申请 <code>repo</code> 权限（用于提交文章和上传图片）。
+      首次登录时 GitHub 会申请 <code>repo</code> 权限（用于提交文章和上传图片），点授权即可。
+      如果新窗口没自动关闭，手动关掉它，回到后台页面刷新一下就行。
     </p>
   </div>
 
   <div class="box">
     <h2>方式二：把文章发给我</h2>
-    <p>不想配后台的话，这个最省事。你把 Markdown 文件发我，我跑脚本重建全站，约1 分钟。</p>
+    <p>不想用后台的话，这个最省事。你把 Markdown 文件发我，我跑脚本重建全站，约 1 分钟。</p>
     <span class="path">E:\BaiduNetdiskWorkspace\3yiwucart\AutoBat\08_longxia\workbuddy\吕氏时空人网站\_input\时空坐标\md\</span>
     <p style="margin-top:12px">文件名格式：<code>时空坐标_2026-10-20_文章标题.md</code><br>
     文件首行写成：<code># [标题](原文链接)</code></p>
@@ -98,9 +87,10 @@
   </div>
 
   <div class="box">
-    <h2>方式三：直接编辑服务器上的文件</h2>
-    <p>如果你熟悉命令行，也可以直接在服务器上改文件，改完执行重建脚本：</p>
-    <span class="path">python build_data.py &amp;&amp; python add_slug.py &amp;&amp; python gen_index.py &amp;&amp; python gen_posts.py &amp;&amp; python gen_seo.py</span>
+    <h2>方式三：直接改服务器上的文件</h2>
+    <p>如果你熟悉命令行，可以直接改仓库里的 markdown，然后重建：</p>
+    <span class="path">/www/wwwroot/shikongren.com/repo/content/posts/</span>
+    <p style="margin-top:12px">改完执行 <code>/root/deploy.sh</code> 即可重建并上线（定时器也会自动做）。</p>
   </div>
 
   <div class="box">
