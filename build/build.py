@@ -122,43 +122,181 @@ def clean_excerpt(body, n=110):
     return t
 
 
+IMG_PREFIX = '../'
+
+
+def _img_attrs(u, alt):
+    """解析图片地址，兼容 Decap 插入的尺寸后缀 =800x / =x450。
+
+    返回 (src, alt, style)。Decap CMS 图片按钮插入的是
+    `path =800x` 这种带空格后缀的写法，不做剥离浏览器会把地址
+    当成 `xxx.jpg =800x` 去请求，必然 404 裂图。
+    """
+    width = height = None
+    m = re.search(r'\s*=(\d*)x(\d*)\s*$', u)
+    if m:
+        width, height = m.group(1), m.group(2)
+        u = u[:m.start()].strip()
+        # =x450 只给高度时，按原比例补宽度上限
+        if not width and height:
+            width = str(int(int(height) * 4 / 3))
+        if not height and width:
+            height = str(int(int(width) * 3 / 4))
+    if u.startswith('/img/'):
+        u = IMG_PREFIX + u[1:]
+    style = ''
+    if width:
+        style = ' style="max-width:%spx;height:auto"' % width
+    elif height:
+        style = ' style="max-height:%spx;width:auto"' % height
+    return u, alt, style
+
+
+def _inline(text):
+    """行内语法：图片 / 链接 / 粗体 / 斜体 / 行内代码。"""
+    # 图片（可能带 =800x 尺寸后缀）
+    def _img(mm):
+        src, alt, style = _img_attrs(mm.group(2), mm.group(1))
+        return '<img src="%s" alt="%s"%s loading="lazy">' % (src, alt, style)
+
+    text = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', _img, text)
+    # 链接
+    text = re.sub(r'\[([^\]]+)\]\((https?://[^)\s]+)\)',
+                  r'<a href="\2" target="_blank" rel="noopener">\1</a>', text)
+    # 行内代码（先保护，避免里面内容被当成粗体）
+    codes = []
+
+    def _stash(m):
+        codes.append('<code>%s</code>' % m.group(1))
+        return '\x00%d\x00' % (len(codes) - 1)
+
+    text = re.sub(r'`([^`]+)`', _stash, text)
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    text = re.sub(r'(?<!\*)\*([^*\n]+)\*(?!\*)', r'<em>\1</em>', text)
+    for i, c in enumerate(codes):
+        text = text.replace('\x00%d\x00' % i, c)
+    return text
+
+
 def md_to_html(body, img_prefix='../'):
-    """极简 Markdown -> HTML：段落 / 图片 / 粗体 / 斜体 / 链接
+    """Markdown -> HTML。
 
     markdown 里的图片写成 /img/xxx（绝对路径，Decap 预览和线上都通用），
     输出到 posts/ 子目录的详情页时需要转成 ../img/xxx。
+    支持 Decap 插入的 `=800x` 尺寸后缀、标题、有序/无序列表、引用、
+    分隔线、表格。
     """
-    def fix_src(u):
-        if u.startswith('/img/'):
-            return img_prefix + u[1:]
-        return u
+    global IMG_PREFIX
+    IMG_PREFIX = img_prefix
 
     out = []
-    for blk in re.split(r'\n\s*\n', body):
-        b = blk.strip()
+    lines = (body or '').split('\n')
+    i = 0
+    n = len(lines)
+
+    while i < n:
+        raw = lines[i]
+        b = raw.strip()
+
         if not b:
+            i += 1
             continue
-        # 独立成行的图片
+
+        # --- 分隔线 ---
+        if re.fullmatch(r'(-{3,}|\*{3,}|_{3,})', b):
+            out.append('<hr>')
+            i += 1
+            continue
+
+        # --- 标题 ---
+        m = re.match(r'^(#{1,6})\s+(.*)$', b)
+        if m:
+            lvl = len(m.group(1))
+            out.append('<h%d>%s</h%d>' % (lvl, _inline(esc(m.group(2))), lvl))
+            i += 1
+            continue
+
+        # --- 独立成行的图片（含尺寸后缀） ---
         m = re.fullmatch(r'!\[([^\]]*)\]\(([^)]+)\)', b)
         if m:
-            out.append('<figure><img src="%s" alt="%s" loading="lazy"></figure>'
-                       % (esc(fix_src(m.group(2))), esc(m.group(1))))
+            src, alt, style = _img_attrs(esc(m.group(2)), esc(m.group(1)))
+            out.append('<figure><img src="%s" alt="%s"%s loading="lazy"></figure>'
+                       % (src, alt, style))
+            i += 1
             continue
-        if b.startswith('!['):
-            b = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)',
-                       lambda mm: '<img src="%s" alt="%s" loading="lazy">'
-                       % (esc(fix_src(mm.group(2))), esc(mm.group(1))), b)
-        b = esc(b)
-        # 段内图片
-        b = re.sub(r'!\[([^\]]*)\]\(([^)\s]+)\)',
-                   lambda mm: '<img src="%s" alt="%s" loading="lazy">'
-                   % (esc(fix_src(mm.group(2))), esc(mm.group(1))), b)
-        # 链接 [文字](地址)
-        b = re.sub(r'\[([^\]]+)\]\((https?://[^)\s]+)\)',
-                   r'<a href="\2" target="_blank" rel="noopener">\1</a>', b)
-        b = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', b)
-        b = re.sub(r'(?<!\*)\*([^*\n]+)\*(?!\*)', r'<em>\1</em>', b)
-        out.append('<p>%s</p>' % b)
+
+        # --- 表格 ---
+        if ('|' in b) and i + 1 < n and re.fullmatch(
+                r'\|?[\s:|-]+\|[\s:|-]*', lines[i + 1].strip()):
+            tbl = []
+            while i < n and '|' in lines[i] and lines[i].strip():
+                cells = [c.strip() for c in lines[i].strip().strip('|').split('|')]
+                if re.fullmatch(r'[\s:|-]+', lines[i].strip()):
+                    i += 1
+                    continue
+                tbl.append(cells)
+                i += 1
+            if tbl:
+                head, rows = tbl[0], tbl[1:]
+                h = ['<table><thead><tr>']
+                for c in head:
+                    h.append('<th>%s</th>' % _inline(esc(c)))
+                h.append('</tr></thead><tbody>')
+                for r in rows:
+                    h.append('<tr>')
+                    for c in r:
+                        h.append('<td>%s</td>' % _inline(esc(c)))
+                    h.append('</tr>')
+                h.append('</tbody></table>')
+                out.append(''.join(h))
+            continue
+
+        # --- 引用块 ---
+        if b.startswith('> '):
+            buf = []
+            while i < n and lines[i].strip().startswith('>'):
+                buf.append(re.sub(r'^\s*>\s?', '', lines[i]))
+                i += 1
+            inner = _inline(esc('\n\n'.join(x.strip() for x in buf if x.strip())))
+            out.append('<blockquote>%s</blockquote>' % inner)
+            continue
+
+        # --- 列表（连续行合并） ---
+        m = re.match(r'^([-*+]|\d+\.)\s+(.*)$', b)
+        if m:
+            ordered = bool(re.match(r'^\d+\.$', m.group(1)))
+            items = []
+            while i < n:
+                mm = re.match(r'^\s*([-*+]|\d+\.)\s+(.*)$', lines[i])
+                if not mm:
+                    if not lines[i].strip():
+                        break
+                    if items:  # 续行
+                        items[-1] += ' ' + lines[i].strip()
+                        i += 1
+                        continue
+                    break
+                items.append(mm.group(2))
+                i += 1
+            tag = 'ol' if ordered else 'ul'
+            li = ''.join('<li>%s</li>' % _inline(esc(t)) for t in items)
+            out.append('<%s>%s</%s>' % (tag, li, tag))
+            continue
+
+        # --- 普通段落（连续非空行合并） ---
+        buf = [b]
+        i += 1
+        while i < n and lines[i].strip():
+            nxt = lines[i].strip()
+            if (re.match(r'^(#{1,6})\s+', nxt) or nxt.startswith('> ')
+                    or re.fullmatch(r'!\[([^\]]*)\]\(([^)]+)\)', nxt)
+                    or re.match(r'^([-*+]|\d+\.)\s+', nxt)
+                    or re.fullmatch(r'(-{3,}|\*{3,}|_{3,})', nxt)):
+                break
+            buf.append(nxt)
+            i += 1
+        out.append('<p>%s</p>' % _inline(esc(' '.join(buf))))
+
     return '\n'.join(out)
 
 
