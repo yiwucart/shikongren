@@ -63,22 +63,23 @@
     <a class="btn" href="/admin/">进入内容管理后台</a>
     <a class="btn ghost" href="/">返回站点</a>
     <div class="warn">
-      本站用的是 <b>github backend + 自建 OAuth 代理</b>（服务器上 <code>/root/decap-oauth</code>，
-      systemd 服务 <code>decap-oauth</code>）。没有用 git-gateway —— 那个依赖 Netlify，脱离 Netlify 跑不起来。
+      本站用的是 <b>github backend + 访问令牌登录</b>。令牌直接保存在浏览器本地，Decap 用它直接读写 GitHub 仓库。
+      没有用 git-gateway —— 那个依赖 Netlify，脱离 Netlify 跑不起来。
     </div>
   </div>
 
   <div class="box">
     <h2>使用步骤</h2>
     <ol class="steps">
-      <li>点上面「进入内容管理后台」，页面加载后左侧会出现一个 <b>「用 GitHub 登录」</b>按钮（英文是 <i>Log in with GitHub</i>）</li>
-      <li>点它 —— 会弹出一个新窗口，跳转到 GitHub 授权页，<b>在新窗口里点「授权」</b></li>
-      <li>授权后会自动跳回后台，左侧就是「文章」列表，可以新建、编辑、删除</li>
+      <li>点上面「进入内容管理后台」</li>
+      <li>在页面上填入 <b>GitHub 访问令牌</b>（一串 <code>ghp_</code> 开头的字符），点「验证并进入后台」</li>
+      <li>令牌生成方法：打开 <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener">github.com/settings/tokens/new</a>，Note 填 <code>shikongren</code>，勾选 <code>repo</code> 权限，生成后复制<br>（登录页上点「如何获取令牌？」有同样的图文步骤）</li>
+      <li>进去后左侧就是「文章」列表，可以新建、编辑、删除</li>
       <li>写完点右上角 <b>「保存 / 发布」</b>，内容就进仓库了；服务器 3 分钟内自动重建上线</li>
     </ol>
     <div class="tip">
-      首次登录时 GitHub 会申请 <code>repo</code> 权限（用于提交文章和上传图片），点授权即可。<br>
-      如果新窗口没自动关闭，手动关掉它，回到后台页面刷新一下就行。
+      令牌只存在你自己浏览器的 localStorage 里，不会发送到除 GitHub 以外的任何地方。<br>
+      令牌泄露了怎么办：去<a href="https://github.com/settings/tokens" target="_blank" rel="noopener"> GitHub 令牌设置页</a>把它删掉，重新生成一个即可。
     </div>
   </div>
 
