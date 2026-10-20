@@ -124,6 +124,42 @@ def clean_excerpt(body, n=110):
 
 IMG_PREFIX = '../'
 
+# 微信公众号排版残留：这些行在原公众号里是分页符/装饰符，
+# 抓过来单独成行，在网页上表现为孤零零的圆点或「·2--」。
+JUNK_RE = re.compile(
+    r'^[·•‧∙]\s*\d*\s*-*-*$'   # ·1--  ·2--  •
+    r'|^[-—–_=~·•\s]{3,}$'      # 纯符号行
+    r'|^\s*\d+\s*$'                # 单独一行数字（无意义）
+)
+
+
+def plain_text(body, n=0):
+    """把 markdown 正文压成纯文本，用于全文检索索引。
+
+    去掉图片、链接地址、强调符号和排版残留，只留可读文字。
+    n > 0 时截断到 n 字。
+    """
+    t = re.sub(r'!\[[^\]]*\]\([^)]*\)', ' ', body)
+    t = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', t)
+    t = re.sub(r'https?://\S+', ' ', t)
+    t = re.sub(r'&(?:quot|amp|lt|gt|#39|nbsp);', ' ', t)
+    t = re.sub(r'^#{1,6}\s+', '', t, flags=re.M)
+    t = re.sub(r'[*#>`~\[\](){}|_]', ' ', t)
+    # 逐行丢弃排版残留
+    keep = []
+    for ln in t.split('\n'):
+        s = ln.strip()
+        if not s or JUNK_RE.match(s):
+            continue
+        if re.fullmatch(r'[·•‧∙。．、，,：:；;！!？?\-—–~～]{1,2}', s):
+            continue
+        keep.append(s)
+    t = ' '.join(keep)
+    t = re.sub(r'\s+', ' ', t).strip()
+    if n and len(t) > n:
+        t = t[:n]
+    return t
+
 
 def _img_attrs(u, alt):
     """解析图片地址，兼容 Decap 插入的尺寸后缀 =800x / =x450。
@@ -194,14 +230,7 @@ def md_to_html(body, img_prefix='../'):
     i = 0
     n = len(lines)
 
-    # 微信公众号排版残留：这些行在原公众号里是分页符/装饰符，
-    # 抓过来单独成行，在网页上表现为孤零零的圆点或「·2--」。
-    JUNK_RE = re.compile(
-        r'^[·•‧∙]\s*\d*\s*-*-*$'   # ·1--  ·2--  •
-        r'|^[-—–_=~·•\s]{3,}$'      # 纯符号行
-        r'|^\s*\d+\s*$'                # 单独一行数字（无意义）
-    )
-
+    # 微信公众号排版残留由模块级 JUNK_RE 判定
     def is_junk(line):
         s = line.strip()
         if not s:
@@ -464,6 +493,11 @@ def build_index_html(arts, cats, years):
     <p>关注原作者公众号「时空坐标」，获取最新文章</p>
     <p>微信公众号：<b>时空坐标</b></p>
   </div>
+  <p class="footlinks">
+    <a href="about.html">关于本站</a> ·
+    <a href="sitemap.xml">网站地图</a> ·
+    <a href="/admin/">内容管理</a>
+  </p>
   <p class="copy">© 时空人公益推广 · shikongren.com · 内容仅供学习参考</p>
 </footer>
 
@@ -522,6 +556,7 @@ POST_TPL = '''<!doctype html>
 </article>
 
 <footer class="wrap foot">
+  <p><a href="../about.html">关于本站</a> · <a href="../index.html">← 返回首页</a></p>
   <p class="copy">© 时空人公益推广 · shikongren.com · 内容仅供学习参考</p>
 </footer>
 </body>
@@ -555,8 +590,113 @@ def build_post_html(a, by_cat):
         content=md_to_html(a['body']), related=rh)
 
 
+ABOUT_TPL = '''<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{title} · 时空人公益推广</title>
+<meta name="description" content="{desc}">
+<meta name="author" content="吕文艺">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{site}">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="{canonical}">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a href="index.html" class="home">← 返回时空人公益推广</a>
+</div></header>
+
+<article class="wrap page">
+  <h1>{title}</h1>
+  <p class="pagesub">{subtitle}</p>
+  <div class="content">
+{content}
+  </div>
+</article>
+
+<footer class="wrap foot">
+  <div class="disclaimer">
+    <h4>免责声明</h4>
+    <p>本站内容仅供学习参考，版权归原作者所有，不构成任何建议。</p>
+  </div>
+  <p><a href="index.html">← 返回首页</a> · <a href="sitemap.xml">网站地图</a></p>
+  <p class="copy">© 时空人公益推广 · shikongren.com · {n_arts} 篇原创文章</p>
+</footer>
+</body>
+</html>'''
+
+
+def _about_blocks(body):
+    """把about.md 里的自定义块转成 HTML。
+
+    源文件里用原始 HTML 写了三种块级容器：
+      <div class="qrbox"> 二维码区（居中）
+      <div class="feat">  功能介绍
+      <div class="faq">   常见问答
+
+    md_to_html 会把裸 HTML 转义，所以这里先把整块抠出来占位，
+    单独走markdown 渲染（块内标题降级、Q/A 转问答样式），
+    最后再把渲染结果塞回占位符。
+    """
+    blocks = []
+
+    def grab(m):
+        blocks.append((m.group(1), m.group(2)))
+        return '\x00BLK%d\x00' % (len(blocks) - 1)
+
+    # 匹配 <div class="xxx"> ... </div>（不嵌套 div）
+    src = re.sub(
+        r'<div class="(qrbox|feat|faq)">\n(.*?)\n?</div>',
+        grab, body, flags=re.S)
+
+    # 剩下的正常渲染
+    html = md_to_html(src, img_prefix='')
+
+    # 逐块渲染并回填
+    for i, (cls, inner) in enumerate(blocks):
+        sub = md_to_html(inner, img_prefix='')
+        # 块内 h3 降级为 h4
+        sub = re.sub(r'<h3>(.*?)</h3>', r'<h4>\1</h4>', sub)
+        # Q/A 问答对
+        def fix_qa(m):
+            return ('<div class="qa"><div class="q">%s</div>'
+                    '<div class="a">%s</div></div>') % (m.group(1), m.group(2))
+        sub = re.sub(
+            r'<p><strong>Q：(.*?)</strong></p>\s*<p>(.*?)</p>',
+            fix_qa, sub)
+        sub = re.sub(r'<p><strong>Q：(.*?)</strong></p>',
+                     r'<div class="q">\1</div>', sub)
+        html = html.replace('\x00BLK%d\x00' % i,
+                            '<div class="%s">%s</div>' % (cls, sub))
+
+    html = re.sub(r'<p>\s*</p>', '', html)
+    html = re.sub(r'\x00BLK\d+\x00', '', html)
+    return html
+
+
+def build_about_html(page, arts):
+    fm = page.get('frontmatter') or {}
+    body = page.get('body') or ''
+    title = fm.get('title') or '关于本站'
+    subtitle = fm.get('subtitle') or ''
+    desc = clean_excerpt(body, 120)
+    canonical = DOMAIN + '/about.html'
+    return ABOUT_TPL.format(
+        title=esc(title), subtitle=esc(subtitle), desc=esc(desc),
+        site=SITE_NAME, canonical=canonical,
+        content=_about_blocks(body), n_arts=len(arts))
+
+
 def build_sitemap(arts):
-    urls = ['<url><loc>%s/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>' % DOMAIN]
+    urls = ['<url><loc>%s/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>' % DOMAIN,
+            '<url><loc>%s/about.html</loc><changefreq>monthly</changefreq>'
+            '<priority>0.8</priority></url>' % DOMAIN]
     for a in arts:
         urls.append('<url><loc>%s/posts/%s.html</loc><lastmod>%s</lastmod>'
                     '<changefreq>monthly</changefreq><priority>0.6</priority></url>'
@@ -629,9 +769,75 @@ def main():
     with open(os.path.join(DATA_DIR, 'index.json'), 'w', encoding='utf-8') as f:
         json.dump(idx, f, ensure_ascii=False, separators=(',', ':'))
 
+    # ---- 全文检索索引（分片） ----
+    # 全部正文纯文本 272 万字，一次性加载约 7.8MB，移动端加载会卡。
+    # 方案：按分片输出 6 个 JSON，前端首次输入关键词时才异步加载，
+    # 全部加载完约 1.3MB/片，可并行请求，且只在本机磁盘不走网络。
+    FULL = []
+    for a in arts:
+        FULL.append({
+            't': a['title'],
+            's': a['slug'],
+            'd': a['date'],
+            'c': a['category'],
+            'g': a['tags'],
+            'x': plain_text(a['body']),
+        })
+
+    # 清单：告诉前端有多少片、分片文件名
+    shard_dir = os.path.join(DATA_DIR, 'search')
+    os.makedirs(shard_dir, exist_ok=True)
+    # 清掉上一轮的旧分片，避免残留
+    for old in os.listdir(shard_dir):
+        if old.startswith('s') and old.endswith('.json'):
+            os.remove(os.path.join(shard_dir, old))
+
+    # 按字符数均衡分片（不是按篇数）—— 文章长短差异大（几百到3.4万字），
+    # 按篇数分会出现 2MB 和 0.6MB 的失衡片，前端并行加载时
+    # 慢的那片决定总耗时。中文 UTF-8 约 3 字节/字，
+    # 目标每片 1.3MB ≈ 44 万字符。
+    SHARD_CHARS = 450000
+    shard_files = []
+    total_full_bytes = 0
+    buf = []
+    buf_len = 0
+    idx_written = 0
+    for item in FULL:
+        buf.append(item)
+        buf_len += len(item['x']) + len(item['t']) + 40
+        if buf_len >= SHARD_CHARS and len(shard_files) < 15:
+            name = 's%d.json' % len(shard_files)
+            with open(os.path.join(shard_dir, name), 'w', encoding='utf-8') as f:
+                json.dump(buf, f, ensure_ascii=False, separators=(',', ':'))
+            total_full_bytes += os.path.getsize(os.path.join(shard_dir, name))
+            shard_files.append(name)
+            buf = []
+            buf_len = 0
+    if buf:
+        name = 's%d.json' % len(shard_files)
+        with open(os.path.join(shard_dir, name), 'w', encoding='utf-8') as f:
+            json.dump(buf, f, ensure_ascii=False, separators=(',', ':'))
+        total_full_bytes += os.path.getsize(os.path.join(shard_dir, name))
+        shard_files.append(name)
+
+    with open(os.path.join(DATA_DIR, 'search-manifest.json'), 'w',
+              encoding='utf-8') as f:
+        json.dump({'shards': shard_files, 'count': len(FULL)},
+                  f, separators=(',', ':'))
+
     # 首页
     with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(build_index_html(arts, cats, years))
+
+    # 关于本站
+    settings = load_settings()
+    if 'about' in settings:
+        with open(os.path.join(OUT, 'about.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(build_about_html(settings['about'], arts))
+        print('关于页: 已生成')
+    else:
+        print('关于页: 缺少 content/settings/about.md，跳过')
 
     # sitemap / robots
     with open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8', newline='\n') as f:
@@ -639,7 +845,8 @@ def main():
     with open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % DOMAIN)
 
-    print('详情页: %d   索引: %d' % (n, len(idx)))
+    print('详情页: %d   列表索引: %d   全文索引: %d 篇 / %d 分片 (%.1fMB)'
+          % (n, len(idx), len(FULL), len(shard_files), total_full_bytes / 1024 / 1024))
     print('构建完成')
     return 0
 

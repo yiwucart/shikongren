@@ -90,6 +90,15 @@ body {
 .searchbar button:hover { color: var(--accent); border-color: var(--accent); }
 .count { margin-top: 12px; font-size: 13px; color: var(--ink-3); min-height: 20px; }
 
+/* 搜索命中高亮 */
+.card mark, .ex mark {
+  background: #fdf0d0;
+  color: #8a5a1a;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+.empty mark { background: #fdf0d0; }
+
 /* ---------- 分类导航 ---------- */
 .cats {
   display: flex;
@@ -258,10 +267,80 @@ body {
 .disclaimer p { margin: 0; line-height: 1.8; }
 .foot p { margin: 0 0 8px; line-height: 1.8; }
 .foot .copy { margin-top: 24px; font-size: 13px; color: var(--ink-3); }
+.footlinks { margin-top: 18px; font-size: 13px; }
+.footlinks a, .foot > p > a { color: var(--accent); text-decoration: none; }
+.footlinks a:hover, .foot > p > a:hover { text-decoration: underline; }
 
-/* ============================================================
-   移动端适配
-   ============================================================ */
+/* ---------- 关于本站 ---------- */
+.page { padding: 40px 0 60px; max-width: 780px; }
+.page h1 { margin: 0 0 6px; font-size: 30px; font-weight: 600; }
+.pagesub { margin: 0 0 8px; font-size: 14px; color: var(--ink-3); }
+.page .content { border-top: 1px solid var(--line); }
+
+/* 二维码区：居中展示 */
+.qrbox {
+  margin: 0 0 1.6em;
+  padding: 22px;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.qrbox h4 { margin: 0 0 12px; font-size: 15px; color: var(--accent); }
+.qrbox img {
+  display: block;
+  margin: 0 auto 10px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.qrbox p { margin: 0; font-size: 12px; color: var(--ink-3); line-height: 1.7; }
+
+/* 功能介绍块 */
+.feat { margin: 0 0 1.6em; }
+.feat h4 {
+  margin: 1.3em 0 .35em;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  padding-left: 11px;
+  border-left: 3px solid var(--accent);
+}
+.feat > h4:first-child { margin-top: 0; }
+.feat p { margin: 0 0 .6em; font-size: 15px; line-height: 1.85; color: var(--ink-2); }
+
+/* 常见问答 */
+.faq { margin: 0 0 1.6em; }
+.qa {
+  margin: 0 0 .8em;
+  padding: 13px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.qa .q, .faq > .q {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.qa .a { font-size: 15px; line-height: 1.8; color: var(--ink-2); }
+
+/* 内容页表格 */
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 0 0 1.2em;
+}
+.content th, .content td {
+  border: 1px solid var(--line);
+  padding: 9px 12px;
+  text-align: left;
+}
+.content th { background: var(--accent-soft); font-weight: 600; }
+
+/* 移动端适配
 
 /* iOS Safari 会把地址栏缩放导致字号变化，16px 是触发自动放大的临界值 */
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -397,7 +476,14 @@ img { max-width: 100%; }
   .related time { font-size: 12px; }
 
   .foot { padding: 30px 0 40px; font-size: 13px; }
-  .disclaimer { padding: 16px 18px; }
+.disclaimer { padding: 16px 18px; }
+
+  /* 关于本站 */
+  .page { padding: 26px 0 44px; }
+  .page h1 { font-size: 22px; }
+  .qrbox { padding: 18px 14px; }
+  .feat h4, .faq .q, .qa .q { font-size: 15px; }
+  .feat p, .qa .a { font-size: 14px; line-height: 1.8; }
 }
 
 /* --- 超窄屏（iPhone SE 等320px） --- */
