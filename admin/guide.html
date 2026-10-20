@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>使用说明 · 内容管理 · 时空人公益推广</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  body { background: var(--bg); }
+  .adm { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  .adm h1 { margin: 0 0 6px; font-size: 26px; font-weight: 600; }
+  .adm .sub { margin: 0 0 28px; font-size: 14px; color: var(--ink-3); }
+  .box {
+    padding: 24px; margin-bottom: 22px;
+    background: var(--panel);
+    border: 1px solid var(--line); border-radius: var(--radius);
+  }
+  .box h2 { margin: 0 0 6px; font-size: 17px; font-weight: 600; }
+  .box p { margin: 0 0 16px; font-size: 14px; color: var(--ink-2); line-height: 1.75; }
+  .btn {
+    display: inline-block; padding: 10px 20px;
+    font-size: 14px; font-family: inherit;
+    color: #fff; background: var(--accent);
+    border: 1px solid var(--accent); border-radius: 8px;
+    text-decoration: none; cursor: pointer;
+    transition: opacity .15s;
+  }
+  .btn:hover { opacity: .88; }
+  .btn.ghost { color: var(--accent); background: transparent; }
+  .btn + .btn { margin-left: 10px; }
+  .path {
+    display: block; margin: 8px 0; padding: 9px 12px;
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px;
+    color: var(--ink-2); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 6px;
+    word-break: break-all;
+  }
+  ol.steps { margin: 12px 0 0; padding-left: 22px; font-size: 14px; color: var(--ink-2); line-height: 2; }
+  ol.steps b { color: var(--ink); }
+  .warn {
+    padding: 12px 14px; margin-bottom: 16px; font-size: 14px;
+    color: #8a5a1a; background: #fdf6ee;
+    border: 1px solid #f0dcc4; border-radius: 8px; line-height: 1.75;
+  }
+  .tip { padding: 12px 14px; margin: 14px 0 0; font-size: 13px;
+         color: var(--ink-2); background: var(--bg);
+         border: 1px solid var(--line); border-radius: 8px; line-height: 1.8; }
+  hr { margin: 40px 0; border: none; border-top: 1px solid var(--line); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  th { color: var(--ink); font-weight: 600; background: var(--bg); }
+</style>
+</head>
+<body>
+<div class="adm">
+  <h1>内容管理 · 使用说明</h1>
+  <p class="sub">时空人公益推广 · shikongren.com</p>
+
+  <div class="box">
+    <h2>进入后台</h2>
+    <p>在浏览器里写文章、传图片，点「发布」就提交；服务器每 3 分钟自动重建一次，1 分钟内上线。</p>
+    <a class="btn" href="/admin/">进入内容管理后台</a>
+    <a class="btn ghost" href="/">返回站点</a>
+    <div class="warn">
+      本站用的是 <b>github backend + 自建 OAuth 代理</b>（服务器上 <code>/root/decap-oauth</code>，
+      systemd 服务 <code>decap-oauth</code>）。没有用 git-gateway —— 那个依赖 Netlify，脱离 Netlify 跑不起来。
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>使用步骤</h2>
+    <ol class="steps">
+      <li>点上面「进入内容管理后台」，页面加载后左侧会出现一个 <b>「用 GitHub 登录」</b>按钮（英文是 <i>Log in with GitHub</i>）</li>
+      <li>点它 —— 会弹出一个新窗口，跳转到 GitHub 授权页，<b>在新窗口里点「授权」</b></li>
+      <li>授权后会自动跳回后台，左侧就是「文章」列表，可以新建、编辑、删除</li>
+      <li>写完点右上角 <b>「保存 / 发布」</b>，内容就进仓库了；服务器 3 分钟内自动重建上线</li>
+    </ol>
+    <div class="tip">
+      首次登录时 GitHub 会申请 <code>repo</code> 权限（用于提交文章和上传图片），点授权即可。<br>
+      如果新窗口没自动关闭，手动关掉它，回到后台页面刷新一下就行。
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>「发布」之后多久能看到？</h2>
+    <p>服务器每 <b>3 分钟</b>自动检查一次仓库，有新提交就重建全站。所以：</p>
+    <table>
+      <tr><th>操作</th><th>生效时间</th></tr>
+      <tr><td>改文章正文 / 标题 / 栏目</td><td>点发布后 1～4 分钟</td></tr>
+      <tr><td>新建文章</td><td>同上</td></tr>
+      <tr><td>删除文章</td><td>同上（会同时从首页和搜索里移除）</td></tr>
+      <tr><td>上传图片</td><td>同上</td></tr>
+    </table>
+    <div class="tip">急的话，在后台点发布后等一会儿刷新首页即可；超过 5 分钟没变化就告诉我。</div>
+  </div>
+
+  <div class="box">
+    <h2>各字段怎么填</h2>
+    <table>
+      <tr><th>字段</th><th>说明</th></tr>
+      <tr><td>标题</td><td>文章标题，必填</td></tr>
+      <tr><td>发布日期</td><td>选个日期。首页排序是<b>时间靠后靠前</b>，2026 的排在 2025 前面</td></tr>
+      <tr><td>栏目</td><td>从下拉里选。已有 14 个栏目：预测案例、预测理论、风水实务、八字命理、易学基础、化解调理、命运格局、面相手相、择日用事、姓名测字、行业辨伪、学员心得、培训招生、综合论述</td></tr>
+      <tr><td>标签</td><td>逗号分隔，可留空。用于站内标签检索</td></tr>
+      <tr><td>作者</td><td>默认「吕文艺」，一般不用改</td></tr>
+      <tr><td>原文链接</td><td>微信公众号原文地址。转载的文章建议填上</td></tr>
+      <tr><td>正文</td><td>支持 Markdown。图片用「媒体库」按钮插入</td></tr>
+      <tr><td>系列标记</td><td>例如「九、290局-八」，留空表示不属于系列</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>插入图片</h2>
+    <p>在正文编辑器里点工具栏的<b>「媒体库 / Media Library」</b>图标，选择本地图片上传即可。上传后会自动生成链接，直接插入正文。</p>
+    <p>已有的 1069 张历史配图没有全部放进媒体库（体积太大），需要用旧图的话，把图片发给我，我帮你加进去。</p>
+  </div>
+
+  <div class="box">
+    <h2>不想用后台？把文章发给我</h2>
+    <p>最省事的方式。你把 Markdown 文件发我，我跑脚本重建全站，约 1 分钟。</p>
+    <span class="path">E:\BaiduNetdiskWorkspace\3yiwucart\AutoBat\08_longxia\workbuddy\吕氏时空人网站\_input\时空坐标\md\</span>
+    <p style="margin-top:12px">文件名格式：<code>时空坐标_2026-10-20_文章标题.md</code><br>
+    文件首行写成：<code># [标题](原文链接)</code></p>
+    <p style="margin-top:10px">或者你从公众号后台拿到的 md 直接丢进来也行，脚本会自动识别。</p>
+  </div>
+
+  <div class="box">
+    <h2>直接改服务器上的文件</h2>
+    <p>如果你熟悉命令行，可以直接改仓库里的 markdown，然后重建：</p>
+    <span class="path">/www/wwwroot/shikongren.com/repo/content/posts/</span>
+    <p style="margin-top:12px">改完执行 <code>/root/deploy.sh</code> 即可重建并上线（定时器也会自动做）。</p>
+  </div>
+</div>
+</body>
+</html>
