@@ -259,10 +259,169 @@ body {
 .foot p { margin: 0 0 8px; line-height: 1.8; }
 .foot .copy { margin-top: 24px; font-size: 13px; color: var(--ink-3); }
 
+/* ============================================================
+   移动端适配
+   ============================================================ */
+
+/* iOS Safari 会把地址栏缩放导致字号变化，16px 是触发自动放大的临界值 */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  /* 防止超宽元素（长URL、长英文单词）撑破布局 */
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+img { max-width: 100%; }
+
+/* --- 平板：两列 --- */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .post { max-width: 100%; }
+}
+
+/* --- 手机 --- */
 @media (max-width: 640px) {
-  .hero { padding: 40px 0 30px; }
-  .hero h1 { font-size: 30px; }
-  .post h1 { font-size: 24px; }
-  .content { font-size: 16px; }
-  .grid { grid-template-columns: 1fr; }
+  /* 布局间距收窄 */
+  .wrap { padding: 0 16px; }
+
+  /* Hero */
+  .hero { padding: 34px 0 24px; }
+  .eyebrow { font-size: 12px; letter-spacing: .18em; margin-bottom: 10px; }
+  .hero h1 { font-size: 26px; line-height: 1.35; margin-bottom: 12px; }
+  .lede { font-size: 15px; line-height: 1.75; margin-bottom: 20px; }
+
+  /* 数据栏横向紧凑排列，避免占三行 */
+  .stats { gap: 8px 20px; font-size: 13px; margin-bottom: 18px; }
+  .stats b { font-size: 18px; }
+
+  /* 搜索框：上下堆叠，按钮给足触控高度 */
+  .searchbar { flex-direction: column; gap: 8px; max-width: 100%; }
+  .searchbar input {
+    padding: 12px 14px;
+    font-size: 16px;/* 16px 起，避免 iOS 聚焦时自动放大 */
+    min-height: 46px;
+  }
+  .searchbar button {
+    padding: 12px 18px;
+    min-height: 46px;/* 触控目标 >= 44px */
+    font-size: 15px;
+    color: var(--accent);
+  }
+
+  /* 分类标签横向滚动，不换行占满屏 */
+  .cats {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 18px 16px 8px;
+    margin: 0 -16px;/* 让标签贴到屏幕边缘，暗示可滑动 */
+  }
+  .cats::-webkit-scrollbar { display: none; }
+  .cats a {
+    flex: 0 0 auto;/* 不被压缩 */
+    padding: 8px 15px;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  /* 卡片单列，点击区域更大 */
+  .grid { grid-template-columns: 1fr; gap: 12px; padding: 20px 0 40px; }
+  .card { padding: 16px 18px; }
+  .card:active { background: #fcfaf7; }/* 触摸反馈 */
+  .card h3 { font-size: 17px; line-height: 1.5; margin-bottom: 6px; }
+  .card .ex {
+    font-size: 14px;
+    line-height: 1.65;
+    -webkit-line-clamp: 3;
+    margin-bottom: 10px;
+  }
+  .card .m { font-size: 12px; gap: 10px; }
+
+  /* 详情页 */
+  .top { padding: 14px 0; }
+  .home { font-size: 15px; min-height: 40px; display: inline-flex; align-items: center; }
+
+  .post { padding: 24px 0 44px; }
+  .crumb { margin-bottom: 12px; font-size: 13px; min-height: 32px; }
+  .post h1 { font-size: 22px; line-height: 1.45; margin-bottom: 12px; }
+  .meta { gap: 10px; font-size: 12px; }
+
+  /* 标签：加大点击区 */
+  .tags { gap: 8px; margin-top: 14px; }
+  .tags a { padding: 7px 13px; font-size: 13px; min-height: 34px; display: inline-flex; align-items: center; }
+
+  /* 正文 */
+  .content {
+    margin-top: 22px;
+    padding-top: 22px;
+    font-size: 17px;/* 保持 17px，太小在手机上阅读吃力 */
+    line-height: 1.95;
+  }
+  .content p { margin: 0 0 1.05em; }
+  .content h2 { font-size: 19px; margin: 1.6em 0 .6em; }
+  .content h3 { font-size: 17px; margin: 1.4em 0 .5em; }
+  .content figure { margin: 0 0 1.2em; }
+  /* 手机上图片圆角减小，更贴合屏幕 */
+  .content img, .content figure img { border-radius: 6px; }
+  .content blockquote {
+    margin: 0 0 1.1em;
+    padding: 10px 14px;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 0 6px 6px 0;
+  }
+  .content table {
+    display: block;
+    overflow-x: auto;/* 宽表格横向滚动，不撑破页面 */
+    -webkit-overflow-scrolling: touch;
+    font-size: 14px;
+    margin-bottom: 1.1em;
+  }
+  .content pre {
+    overflow-x: auto;
+    font-size: 13px;
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  .notice { margin-top: 32px; padding: 16px 18px; font-size: 14px; }
+  .related { margin-top: 32px; padding-top: 22px; }
+  .related li { padding: 12px 0; gap: 12px; }
+  .related a { font-size: 15px; min-height: 40px; display: flex; align-items: center; }
+  .related time { font-size: 12px; }
+
+  .foot { padding: 30px 0 40px; font-size: 13px; }
+  .disclaimer { padding: 16px 18px; }
+}
+
+/* --- 超窄屏（iPhone SE 等320px） --- */
+@media (max-width: 360px) {
+  .wrap { padding: 0 14px; }
+  .hero h1 { font-size: 23px; }
+  .post h1 { font-size: 20px; }
+  .content { font-size: 16.5px; line-height: 1.9; }
+  .stats { gap: 6px 14px; }
+  .searchbar button { padding: 12px 14px; }
+}
+
+/* --- 横屏手机：压缩纵向留白 --- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hero { padding: 24px 0 18px; }
+  .post { padding: 18px 0 30px; }
+}
+
+/* --- 尊重系统的减弱动效设置 --- */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto !important; }
+}
+
+/* --- 键盘可达性：焦点可见 --- */
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
