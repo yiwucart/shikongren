@@ -43,7 +43,7 @@
   <p class="sub">时空人公益推广 · 仅限管理员登录</p>
 
   <div class="card">
-    <h2>登录方式一：粘贴访问令牌（推荐）</h2>
+    <h2>登录方式：粘贴访问令牌</h2>
     <label for="tok">GitHub Personal Access Token</label>
     <textarea id="tok" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" spellcheck="false"></textarea>
     <button class="btn-primary" id="btn">验证并进入后台</button>
@@ -59,16 +59,6 @@
       </ol>
       <p class="tip">令牌只存在你自己的浏览器里（localStorage），不会发给除 GitHub 以外的任何人。</p>
     </details>
-  </div>
-
-  <hr>
-
-  <div class="card">
-    <h2>登录方式二：GitHub 账号授权</h2>
-    <p class="sub" style="margin:0 0 4px">
-      如果已配置 OAuth App，可直接用 GitHub 账号登录。
-    </p>
-    <button class="btn-ghost" id="btn-oauth">用 GitHub 账号登录</button>
   </div>
 
   <p style="text-align:center;margin-top:26px">
@@ -87,7 +77,6 @@
   var gate = document.getElementById('gate');
   var tokEl = document.getElementById('tok');
   var btn = document.getElementById('btn');
-  var oauthBtn = document.getElementById('btn-oauth');
   var msg = document.getElementById('msg');
 
   function say(text, kind) {
@@ -154,11 +143,6 @@
 
   tokEl.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) btn.click();
-  });
-
-  oauthBtn.addEventListener('click', function () {
-    window.open('/decap/auth?scope=repo&provider=github&site_id=shikongren.com',
-      'decap-oauth', 'width=680,height=760');
   });
 
   // 已经有有效登录态就直接进后台
