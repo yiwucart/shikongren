@@ -311,12 +311,14 @@ img { max-width: 100%; }
 
   /* 分类标签横向滚动，不换行占满屏 */
   .cats {
+    display: flex;
     flex-wrap: nowrap;
+    gap: 8px;
+    max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding: 18px 16px 8px;
-    margin: 0 -16px;/* 让标签贴到屏幕边缘，暗示可滑动 */
+    padding: 18px 0 8px;
   }
   .cats::-webkit-scrollbar { display: none; }
   .cats a {
