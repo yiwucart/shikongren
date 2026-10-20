@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>插图说明 · 内容管理 · 时空人公益推广</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  body{background:#faf8f4}
+  .wrap{max-width:720px;margin:0 auto;padding:44px 20px 80px;color:#333}
+  h1{font-size:22px;font-weight:600;margin:0 0 6px}
+  .sub{font-size:14px;color:#777;margin:0 0 30px;line-height:1.8}
+  .box{background:#fff;border:1px solid #e8e0d4;border-radius:10px;padding:22px 24px;margin-bottom:18px}
+  .box h2{font-size:15px;font-weight:600;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+  .num{background:#8a5a1a;color:#fff;width:20px;height:20px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none}
+  p{font-size:14px;line-height:1.9;margin:0 0 10px}
+  ol,ul{margin:0;padding-left:22px;font-size:14px;line-height:1.9}
+  li{margin-bottom:8px}
+  code{background:#f4efe7;padding:2px 6px;border-radius:3px;font-size:13px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;color:#7a4a12}
+  a{color:#8a5a1a}
+  pre{background:#2f2a26;color:#f0e9df;padding:13px 15px;border-radius:6px;overflow-x:auto;
+    font-size:13px;line-height:1.7;font-family:ui-monospace,Menlo,Consolas,monospace;margin:0}
+  .tip{font-size:13px;color:#777;line-height:1.8;background:#fdf6ee;
+    border-left:3px solid #d9b98a;padding:10px 14px;border-radius:0 5px 5px 0;margin-top:14px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  th,td{border:1px solid #e5dccd;padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#f7f2ea;font-weight:600}
+  hr{border:none;border-top:1px solid #ece5d9;margin:22px 0}
+  .foot{text-align:center;margin-top:28px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>怎么插图</h1>
+<p class="sub">后台正文编辑器插图的完整步骤 · 时空人公益推广</p>
+
+<div class="box">
+  <h2><span class="num">1</span>上传图片</h2>
+  <p>编辑文章时，把鼠标移到<strong>正文输入框</strong>上，工具栏会出现一排按钮，点其中的<strong>图片图标</strong>（一个 mountains+sun 的小图）。</p>
+  <ol>
+    <li>弹出的窗口里有<strong>「选择文件」</strong>按钮（英文是 <i>Choose an Image</i> 或 <i>Select Media</i>）</li>
+    <li>从电脑里选一张图，选完先点<strong>「选择 / Select」</strong>确认</li>
+    <li>图片出现在媒体库列表里，点它的<strong>缩略图</strong>选中</li>
+    <li>下方「Insert / 插入」按钮变亮，点它</li>
+    <li>图片就被插进正文了，同时图片文件已经进了仓库的 <code>img/uploads/</code></li>
+  </ol>
+  <div class="tip">
+    如果正文框上方<strong>没有图片按钮</strong>，可以直接去左侧<strong>「Media / 媒体」</strong>面板上传 —— 效果完全一样，上传后在那边能看到所有已传图片，随时复用。
+  </div>
+</div>
+
+<div class="box">
+  <h2><span class="num">2</span>上传时能做的设置</h2>
+  <table>
+    <tr><th>设置项</th><th>作用</th><th>建议</th></tr>
+    <tr><td>文件名 / Alt 文本</td><td>显示在图下方，也是搜索引擎读图的依据</td><td>写中文说明，如「足弓示意图」</td></tr>
+    <tr><td>文件大小上限</td><td>超过 8MB 会被拒绝</td><td>手机照片先压到 2MB 以内</td></tr>
+    <tr><td>格式</td><td>只接受 jpg / png / gif / webp / svg</td><td>不要上传 bmp、tiff、heic</td></tr>
+  </table>
+  <p style="margin-top:12px">已限制 5 种常用格式 + 8MB 上限，防止误把大文件传进仓库拖慢网站。</p>
+</div>
+
+<div class="box">
+  <h2><span class="num">3</span>调整图片显示尺寸</h2>
+  <p>插图后想控制宽度，直接在正文里把这段文字里的 <code>800</code> 换成你想要的像素数：</p>
+<pre>![足弓示意图](/img/uploads/足弓示意图2.jpg =800x)</pre>
+  <p style="margin-top:12px">其中 <code>800</code> 就是显示宽度（像素）。手机拍的竖图建议用 <code>600</code>，横图用 <code>800</code>。</p>
+</div>
+
+<div class="box">
+  <h2><span class="num">4</span>发图前的几条经验</h2>
+  <ul>
+    <li><strong>先传图，再保存文章。</strong>图片是独立提交到仓库的，如果图还没传完就点发布，文章里的图会显示成裂图。</li>
+    <li><strong>一张图一次只传一张</strong>。批量选择时 GitHub 会限流，容易只成功一半。</li>
+    <li><strong>文件名用中文或英文都行</strong>，但别用空格和特殊符号（<code># ? &amp; %</code>），会导致链接失效。</li>
+    <li><strong>不要从微信里直接复制粘贴图片</strong>。微信的图有防盗链，粘过来过几天就会裂。必须先下载到电脑再上传。</li>
+    <li>图片容量大的话，网站打开会变慢。单篇文章插 5～10 张比较合适。</li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="box">
+  <h2>排版速查</h2>
+  <table>
+    <tr><th>想要的效果</th><th>在正文框里输入</th></tr>
+    <tr><td>新段落</td><td>空一行</td></tr>
+    <tr><td>小标题</td><td><code>##标题</code></td></tr>
+    <tr><td>加粗</td><td><code>**要加粗的字**</code></td></tr>
+    <tr><td>无序列表</td><td>行首 <code>- </code></td></tr>
+    <tr><td>有序列表</td><td>行首 <code>1. </code></td></tr>
+    <tr><td>引用</td><td>行首 <code>&gt; </code></td></tr>
+    <tr><td>插入图片</td><td>用工具栏的图片按钮</td></tr>
+    <tr><td>插入链接</td><td><code>[文字](https://地址)</code></td></tr>
+  </table>
+</div>
+
+<p class="foot">
+  <a href="/admin/guide.html">← 使用说明</a>
+  &nbsp;·&nbsp;
+  <a href="/admin/">进入后台</a>
+  &nbsp;·&nbsp;
+  <a href="/">返回站点</a>
+</p>
+
+</div>
+</body>
+</html>
