@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>内容管理 · 时空人公益推广</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  body { background: var(--bg); }
+  .adm { max-width: 1000px; margin: 0 auto; padding: 34px 24px 80px; }
+  .adm h1 { margin: 0 0 6px; font-size: 26px; font-weight: 600; }
+  .adm .sub { margin: 0 0 28px; font-size: 14px; color: var(--ink-3); }
+  .box {
+    padding: 24px; margin-bottom: 22px;
+    background: var(--panel);
+    border: 1px solid var(--line); border-radius: var(--radius);
+  }
+  .box h2 { margin: 0 0 6px; font-size: 17px; font-weight: 600; }
+  .box p { margin: 0 0 16px; font-size: 14px; color: var(--ink-2); line-height: 1.75; }
+  .btn {
+    display: inline-block; padding: 10px 20px;
+    font-size: 14px; font-family: inherit;
+    color: #fff; background: var(--accent);
+    border: 1px solid var(--accent); border-radius: 8px;
+    text-decoration: none; cursor: pointer;
+    transition: opacity .15s;
+  }
+  .btn:hover { opacity: .88; }
+  .btn.ghost { color: var(--accent); background: transparent; }
+  .btn + .btn { margin-left: 10px; }
+  .path {
+    display: block; margin: 8px 0; padding: 9px 12px;
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px;
+    color: var(--ink-2); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 6px;
+    word-break: break-all;
+  }
+  ol.steps { margin: 12px 0 0; padding-left: 22px; font-size: 14px; color: var(--ink-2); line-height: 2; }
+  .warn {
+    padding: 12px 14px; margin-bottom: 16px; font-size: 14px;
+    color: #8a5a1a; background: #fdf6ee;
+    border: 1px solid #f0dcc4; border-radius: 8px; line-height: 1.75;
+  }
+  .stat { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 14px; }
+  .stat div { font-size: 14px; color: var(--ink-3); }
+  .stat b { display: block; font-size: 22px; color: var(--accent); font-weight: 600; }
+  hr { margin: 40px 0; border: none; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="adm">
+  <h1>内容管理</h1>
+  <p class="sub">时空人公益推广 · shikongren.com</p>
+
+  <div class="box">
+    <h2>方式一：在线后台（Decap CMS）</h2>
+    <p>浏览器里写文章、传图片，点发布就上线。<strong>已完成技术配置</strong>，只差填入 GitHub 凭证。</p>
+    <div class="warn">
+      本站用的是 <strong>github backend + 自建 OAuth 代理</strong>（服务器上 <code>/root/decap-oauth</code>，
+      systemd 服务 <code>decap-oauth</code>）。没有用 git-gateway —— 那个依赖 Netlify，脱离 Netlify 跑不起来。
+    </div>
+    <a class="btn" href="/admin/">进入内容管理后台</a>
+    <a class="btn ghost" href="/">返回站点</a>
+
+    <hr>
+    <h2 style="font-size:15px">首次配置（只需做一次）</h2>
+    <ol class="steps">
+      <li>建一个 GitHub 仓库（叫 <code>shikongren</code> 即可），把站点内容推进去，分支用 <code>main</code></li>
+      <li>到 <code>https://github.com/settings/applications/new</code> 建 OAuth 应用：</li>
+    </ol>
+    <span class="path">Application name: shikongren.com CMS</span>
+    <span class="path">Homepage URL: https://shikongren.com</span>
+    <span class="path">Authorization callback URL: https://shikongren.com/decap/callback</span>
+    <ol class="steps" start="3">
+      <li>拿到 <b>Client ID</b> 和 <b>Client Secret</b>，填入服务器的 <code>/root/decap-oauth/.env</code>：</li>
+    </ol>
+    <span class="path">GITHUB_CLIENT_ID=你的ClientID</span>
+    <span class="path">GITHUB_CLIENT_SECRET=你的ClientSecret</span>
+    <span class="path">GITHUB_REPOSITORY=你的用户名/shikongren</span>
+    <ol class="steps" start="4">
+      <li>同时把 <code>admin/config.yml</code> 里的 <code>repo:</code> 改成你的 <code>用户名/shikongren</code></li>
+      <li>访问 <code>https://shikongren.com/admin/</code>，点「用 GitHub 登录」即可进入</li>
+    </ol>
+    <p style="margin-top:14px;font-size:13px;color:var(--ink-3)">
+      说明：仓库需设为 <b>public</b> 或确保你的 GitHub 账号对私有仓库有写权限；
+      授权时 GitHub 会申请 <code>repo</code> 权限（用于提交文章和上传图片）。
+    </p>
+  </div>
+
+  <div class="box">
+    <h2>方式二：把文章发给我</h2>
+    <p>不想配后台的话，这个最省事。你把 Markdown 文件发我，我跑脚本重建全站，约1 分钟。</p>
+    <span class="path">E:\BaiduNetdiskWorkspace\3yiwucart\AutoBat\08_longxia\workbuddy\吕氏时空人网站\_input\时空坐标\md\</span>
+    <p style="margin-top:12px">文件名格式：<code>时空坐标_2026-10-20_文章标题.md</code><br>
+    文件首行写成：<code># [标题](原文链接)</code></p>
+    <p style="margin-top:10px">或者你从公众号后台拿到的 md 直接丢进来也行，脚本会自动识别。</p>
+  </div>
+
+  <div class="box">
+    <h2>方式三：直接编辑服务器上的文件</h2>
+    <p>如果你熟悉命令行，也可以直接在服务器上改文件，改完执行重建脚本：</p>
+    <span class="path">python build_data.py &amp;&amp; python add_slug.py &amp;&amp; python gen_index.py &amp;&amp; python gen_posts.py &amp;&amp; python gen_seo.py</span>
+  </div>
+
+  <div class="box">
+    <h2>当前内容状态</h2>
+    <div class="stat">
+      <div><b id="nPost">689</b>篇文章</div>
+      <div><b id="nImg">0</b> 张本地图片</div>
+      <div><b>14</b> 个栏目</div>
+      <div><b>334</b> 万字</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

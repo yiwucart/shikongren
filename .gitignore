@@ -1,0 +1,3 @@
+# 站点图片（体积大，保留在服务器上不入库；Decap 新上传的图片走 img/uploads/）
+img/*
+!img/uploads/

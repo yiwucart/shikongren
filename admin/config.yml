@@ -1,0 +1,127 @@
+backend:
+  # 自建服务器用 github backend + 本站自建的 OAuth 代理（decap_oauth.py）
+  # 不能用 git-gateway：它依赖 Netlify Identity / GoTrue，脱离 Netlify 跑不起来
+  # base_url 必须与 OAuth 后台注册的 callback 主机名完全一致
+  name: github
+  repo: yiwucart/shikongren
+  branch: main
+  base_url: https://shikongren.com
+  auth_endpoint: /decap/auth
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+site_url: https://shikongren.com
+display_url: https://shikongren.com
+logo_url: /img/logo.svg
+
+publish_mode: simple
+
+collections:
+  - name: posts
+    label: "文章"
+    label_singular: "文章"
+    folder: "content/posts"
+    create: true
+    delete: true
+    extension: "md"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    summary: "{{title}} — {{category}} · {{date}}"
+    sortable_fields: ["date", "title", "category"]
+    preview_path: "posts/{{slug}}.html"
+    view_filters:
+      - label: "全部"
+        field: category
+        pattern: ".*"
+      - label: "预测案例"
+        field: category
+        pattern: "预测案例"
+      - label: "预测理论"
+        field: category
+        pattern: "预测理论"
+      - label: "风水实务"
+        field: category
+        pattern: "风水实务"
+      - label: "八字命理"
+        field: category
+        pattern: "八字命理"
+      - label: "易学基础"
+        field: category
+        pattern: "易学基础"
+      - label: "化解调理"
+        field: category
+        pattern: "化解调理"
+      - label: "命运格局"
+        field: category
+        pattern: "命运格局"
+      - label: "面相手相"
+        field: category
+        pattern: "面相手相"
+      - label: "择日用事"
+        field: category
+        pattern: "择日用事"
+      - label: "姓名测字"
+        field: category
+        pattern: "姓名测字"
+      - label: "行业辨伪"
+        field: category
+        pattern: "行业辨伪"
+      - label: "学员心得"
+        field: category
+        pattern: "学员心得"
+      - label: "培训招生"
+        field: category
+        pattern: "培训招生"
+      - label: "综合论述"
+        field: category
+        pattern: "综合论述"
+    fields:
+      - { label: "标题", name: title, widget: string }
+      - { label: "发布日期", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: "栏目"
+        name: category
+        widget: select
+        options:
+          - { label: "预测案例", value: "预测案例" }
+          - { label: "预测理论", value: "预测理论" }
+          - { label: "风水实务", value: "风水实务" }
+          - { label: "八字命理", value: "八字命理" }
+          - { label: "易学基础", value: "易学基础" }
+          - { label: "化解调理", value: "化解调理" }
+          - { label: "命运格局", value: "命运格局" }
+          - { label: "面相手相", value: "面相手相" }
+          - { label: "择日用事", value: "择日用事" }
+          - { label: "姓名测字", value: "姓名测字" }
+          - { label: "行业辨伪", value: "行业辨伪" }
+          - { label: "学员心得", value: "学员心得" }
+          - { label: "培训招生", value: "培训招生" }
+          - { label: "综合论述", value: "综合论述" }
+          - { label: "易学", value: "易学" }
+          - { label: "风水", value: "风水" }
+          - { label: "八字", value: "八字" }
+          - { label: "预测", value: "预测" }
+          - { label: "调理", value: "调理" }
+          - { label: "其他", value: "其他" }
+      - label: "标签（逗号分隔）"
+        name: tags
+        widget: list
+        default: []
+        required: false
+      - { label: "作者", name: author, widget: string, default: "吕文艺", required: false }
+      - { label: "原文链接", name: url, widget: string, required: false,
+          hint: "微信公众号原文地址，可留空" }
+      - { label: "正文", name: body, widget: markdown, required: false }
+      - { label: "系列标记", name: series, widget: string, required: false,
+          hint: "例如：九、290局-八，留空表示不属于系列" }
+
+  - name: settings
+    label: "站点设置"
+    files:
+      - name: about
+        label: "关于本站"
+        file: content/settings/about.md
+        format: frontmatter
+        fields:
+          - { label: "页面标题", name: title, widget: string }
+          - { label: "正文", name: body, widget: markdown }
