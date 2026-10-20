@@ -567,6 +567,9 @@ img { max-width: 100%; }
 /* --- 超窄屏（iPhone SE 等320px） --- */
 @media (max-width: 360px) {
   .wrap { padding: 0 14px; }
+  /* 超窄屏收窄到 16px：既留呼吸感，又不至于一行只剩十来个字 */
+  .post { padding: 22px 16px 40px; }
+  .page { padding: 22px 16px 40px; }
   .hero h1 { font-size: 23px; }
   .post h1 { font-size: 20px; }
   .content { font-size: 16.5px; line-height: 1.9; }
