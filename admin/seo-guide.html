@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>搜索引擎收录 · 时空人公益推广</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  body{background:#faf8f4}
+  .wrap{max-width:760px;margin:0 auto;padding:44px 20px 80px;color:#333}
+  h1{font-size:24px;font-weight:600;margin:0 0 8px}
+  .sub{font-size:14px;color:#777;margin:0 0 30px;line-height:1.8}
+  .box{background:#fff;border:1px solid #e8e0d4;border-radius:10px;padding:22px 24px;margin-bottom:18px}
+  .box h2{font-size:16px;font-weight:600;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+  .num{background:#8a5a1a;color:#fff;width:22px;height:22px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none}
+  p{font-size:14px;line-height:1.85;margin:0 0 10px}
+  ol,ul{margin:0;padding-left:22px;font-size:14px;line-height:1.9}
+  li{margin-bottom:9px}
+  a{color:#8a5a1a}
+  code{background:#f4efe7;padding:2px 6px;border-radius:3px;font-size:13px;
+    font-family:ui-monospace,Menlo,Consolas,monospace;color:#7a4a12;word-break:break-all}
+  pre{background:#2f2a26;color:#f0e9df;padding:13px 15px;border-radius:6px;overflow-x:auto;
+    font-size:13px;line-height:1.7;font-family:ui-monospace,Menlo,Consolas,monospace;margin:0 0 10px}
+  .tip{font-size:13px;color:#777;line-height:1.8;background:#fdf6ee;
+    border-left:3px solid #d9b98a;padding:11px 14px;border-radius:0 5px 5px 0;margin-top:12px}
+  .ok{background:#eef7ee;color:#2d6b2f;border:1px solid #c9e2ca}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  th,td{border:1px solid #e5dccd;padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#f7f2ea;font-weight:600}
+  hr{border:none;border-top:1px solid #ece5d9;margin:24px 0}
+  .foot{text-align:center;margin-top:30px;font-size:13px}
+  .pri{background:#fdf0d0;border-radius:4px;padding:1px 7px;font-size:12px;color:#8a5a1a;margin-left:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>让搜索引擎收录本站</h1>
+<p class="sub">收录指引 · shikongren.com · 技术上已全部就绪</p>
+
+<div class="box">
+  <h2><span class="num">✓</span>已完成的准备工作</h2>
+  <p>下面这些我已经全部配置好，你<strong>不需要再做</strong>，只管去三个平台点一下「提交网址」：</p>
+  <table>
+    <tr><th>项目</th><th>状态</th><th>地址</th></tr>
+    <tr><td>网站地图 sitemap</td><td>已生成（692 条）</td><td><code>https://shikongren.com/sitemap.xml</code></td></tr>
+    <tr><td>robots.txt</td><td>已配置，允许全部抓取</td><td><code>https://shikongren.com/robots.txt</code></td></tr>
+    <tr><td>canonical 标签</td><td>每页都有，防止重复收录</td><td>—</td></tr>
+    <tr><td>Open Graph 标签</td><td>已配置，微信/FB 分享正常</td><td>—</td></tr>
+    <tr><td>HTTPS</td><td>已启用（搜索引擎优先收录 HTTPS）</td><td>—</td></tr>
+    <tr><td>移动端适配</td><td>已完成</td><td>—</td></tr>
+  </table>
+</div>
+
+<div class="box">
+  <h2><span class="num">1</span>百度收录<span class="pri">最重要，中文站靠它</span></h2>
+  <ol>
+    <li>打开 <a href="https://ziyuan.baidu.com/linksubmit/index" target="_blank" rel="noopener">ziyuan.baidu.com/linksubmit</a></li>
+    <li>用你的<strong>百度账号</strong>登录（没有就先注册）</li>
+    <li>左侧菜单找「<strong>链接提交</strong>」</li>
+    <li>找到「<strong>普通收录</strong>」里的「sitemap 地址」输入框</li>
+    <li>粘贴：<code>https://shikongren.com/sitemap.xml</code></li>
+    <li>点「提交」，提示 <code>success</code> 就成了</li>
+  </ol>
+  <div class="tip">
+    百度对个人站有<strong>资质审核</strong>：提交后可能几天内短信/站内信通知你补充备案号与联系方式。
+    麻烦是麻烦一点，但中文流量基本全靠百度，值得走完这一步。
+    <br>如果提示需要备案，域名已解析到境内服务器（腾讯云香港节点），<strong>暂时不需要 ICP 备案</strong>，
+    若被要求提交备案信息，可如实说明站点为非经营性内容归档。
+  </div>
+</div>
+
+<div class="box">
+  <h2><span class="num">2</span>必应收录<span class="pri">覆盖百度之外的搜索</span></h2>
+  <ol>
+    <li>打开 <a href="https://www.bing.com/webmasters" target="_blank" rel="noopener">bing.com/webmasters</a></li>
+    <li>用<strong>微软账号</strong>登录（QQ 邮箱 / 微软账号都可以）</li>
+    <li>点「<strong>添加网站</strong>」，填 <code>https://shikongren.com</code></li>
+    <li>验证归属：把生成的 <code>bing_verification_xxx.html</code> 放到网站根目录
+      <br><span style="color:#999">（告诉我文件名内容，我帮你放上去）</span></li>
+    <li>验证通过后，进「<strong>网站地图</strong>」，填 <code>https://shikongren.com/sitemap.xml</code></li>
+    <li>必应收录快，几天到一周可见</li>
+  </ol>
+</div>
+
+<div class="box">
+  <h2><span class="num">3</span>Google 收录<span class="pri">可选，覆盖海外与港澳</span></h2>
+  <ol>
+    <li>打开 <a href="https://search.google.com/search-console" target="_blank" rel="noopener">search.google.com/search-console</a></li>
+    <li>用 Google 账号登录</li>
+    <li>「添加网址」，选「网址前缀」类型，填 <code>https://shikongren.com</code></li>
+    <li>验证方式建议选「<strong>HTML 标签</strong>」或「<strong>DNS</strong>」，把值发我，我帮你配</li>
+    <li>验证通过后，左侧「网址映射」→「提交站点地图」，填上面的 sitemap 地址</li>
+  </ol>
+  <div class="tip">
+    Google 抓取中文内容很慢，且对香港/海外节点收录一般。如果主要面向国内读者，
+    <strong>优先把百度做掉</strong>，Google 可选。
+  </div>
+</div>
+
+<hr>
+
+<div class="box">
+  <h2><span class="num">4</span>提交之后的维护</h2>
+  <ul>
+    <li><strong>新文章不必手动提交</strong>：sitemap 里有全部 692 条 URL，
+      搜索引擎会定期自己来抓。新文章发布后 1～2 周内会被发现。</li>
+    <li><strong>看收录效果</strong>：在百度搜索框输入 <code>site:shikongren.com</code>，
+      能看到已被收录的页面数量。没收录的话，在百度站长后台点「手动提交」再推一次。</li>
+    <li><strong>每周看一次数据</strong>：百度站长后台「流量与关键词」能看到哪些词带来了访问，
+      按这个方向补充相关内容。</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>常见问题</h2>
+  <table>
+    <tr><th>问题</th><th>说明</th></tr>
+    <tr><td>要等多久能被搜到？</td><td>百度通常 1～4 周；必应 3 天～1 周</td></tr>
+    <tr><td>百度收录量上不去？</td><td>先确认 <code>site:shikongren.com</code> 有结果，再考虑提交更多内容量</td></tr>
+    <tr><td>需要备案吗？</td><td>服务器在香港节点，暂不需要 ICP 备案</td></tr>
+    <tr><td>会不会被判定为垃圾站？</td><td>已加免责声明、不做商业推广、内容完整标注出处，风险低</td></tr>
+  </table>
+</div>
+
+<p class="foot">
+  <a href="/about.html">← 关于本站</a>
+  &nbsp;·&nbsp;
+  <a href="/">返回首页</a>
+</p>
+
+</div>
+</body>
+</html>
