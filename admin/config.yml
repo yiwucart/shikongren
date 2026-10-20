@@ -7,19 +7,10 @@ backend:
 
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
-
-# 媒体库：左侧 Media 面板，浏览器里先选图再上传
-# 注意：不要写 name 字段 —— 有name 会被当成 registerMediaLibrary 外部库引用，
-# 而本站没注册外部库，会报 "Missing external media library"
-media_library:
-  label: 图片库
-  media_folder: "img/uploads"
-  public_folder: "/img/uploads"
-  max_file_size: 8000000
-  # 只允许常见图片格式，避免误传 exe/zip 进仓库
-  extensions: ["jpg", "jpeg", "png", "gif", "webp", "svg"]
-  # 同一文件重复上传时不新建副本
-  duplicate_fields: false
+# 注意：不要在这里写 media_library —— 这个版本的 media_library 是给
+# uploadcare 之类的「外部媒体库」用的（必须 name + config），
+# 写了会报 "Missing external media library"。左侧 Media 面板由上面
+# 这两行自动提供，浏览器里选图上传即可。
 
 site_url: https://shikongren.com
 display_url: https://shikongren.com
