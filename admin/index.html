@@ -6,60 +6,25 @@
 <meta name="robots" content="noindex">
 <title>内容管理 · 时空人公益推广</title>
 <link rel="stylesheet" href="/style.css">
-<style>
-  body { background: var(--bg); }
-  .adm { max-width: 720px; margin: 0 auto; padding: 60px 24px 80px; text-align: center; }
-  .adm .lgo { width: 64px; height: 64px; margin: 0 auto 20px; display: block; }
-  .adm h1 { margin: 0 0 8px; font-size: 24px; font-weight: 600; }
-  .adm p.sub { margin: 0 0 28px; font-size: 14px; color: var(--ink-3); }
-  .adm a.help { display: inline-block; margin-top: 24px; font-size: 14px; color: var(--ink-2); }
-  .adm a.help:hover { color: var(--accent); }
-  #err { display: none; margin-top: 24px; padding: 14px 16px; font-size: 13px;
-         text-align: left; color: #8a5a1a; background: #fdf6ee;
-         border: 1px solid #f0dcc4; border-radius: 8px; line-height: 1.8; }
-  .spin { margin-top: 20px; font-size: 13px; color: var(--ink-3); }
-</style>
 </head>
 <body>
-  <div class="adm">
-    <img class="lgo" src="/img/logo.svg" alt="">
-    <h1>内容管理后台</h1>
-    <p class="sub">时空人公益推广 · shikongren.com</p>
-    <div id="app"></div>
-    <div class="spin" id="spin">正在加载编辑器…</div>
-    <div id="err"></div>
-    <p><a class="help" href="/admin/guide.html">使用说明与常见问题 →</a></p>
-  </div>
-
-  <script src="/admin/decap-cms.js"></script>
-  <script>
-  (function () {
-    var spin = document.getElementById('spin');
-    var err = document.getElementById('err');
-    function fail(msg) {
-      spin.style.display = 'none';
-      err.style.display = 'block';
-      err.innerHTML = msg;
-    }
-    window.addEventListener('error', function (e) {
-      if (e && e.target && e.target.tagName === 'SCRIPT') {
-        fail('<b>编辑器脚本加载失败</b><br>请刷新页面重试；若持续失败，可能是网络未能加载 /admin/decap-cms.js，' +
-             '请把这个页面地址发给管理员。');
+<!-- Decap CMS 会自动挂载到 body；这里不要放自定义容器，否则会干扰它渲染 -->
+<script src="/admin/decap-cms.js"></script>
+<script>
+(function () {
+  // 仅在脚本完全没加载起来时给出可读提示，不干扰 Decap 自身渲染
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      if (typeof CMS === 'undefined') {
+        document.body.insertAdjacentHTML('afterbegin',
+          '<div style="max-width:680px;margin:60px auto;padding:20px;font-size:14px;' +
+          'color:#8a5a1a;background:#fdf6ee;border:1px solid #f0dcc4;border-radius:8px;' +
+          'line-height:1.8">编辑器脚本加载失败，请刷新页面重试。若持续失败，请把 ' +
+          'https://shikongren.com/admin/ 这个地址发给管理员。</div>');
       }
-    });
-    if (typeof CMS === 'undefined') {
-      setTimeout(function () {
-        if (typeof CMS === 'undefined') {
-          fail('<b>编辑器未能启动</b><br>decap-cms.js 已加载但未注册 CMS 对象，请刷新页面重试；' +
-               '若持续失败请把此页地址发给管理员。');
-        }
-      }, 3000);
-    } else {
-      CMS.init({
-        config: { load_config_file: false }
-      });
-    }
-  })();
-  </script>
+    }, 4000);
+  });
+})();
+</script>
 </body>
 </html>
