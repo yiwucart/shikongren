@@ -23,6 +23,7 @@ import re
 import sys
 import json
 import html
+import time
 import datetime
 import urllib.parse
 import collections
@@ -49,6 +50,27 @@ POSTS_OUT = os.path.join(OUT, 'posts')
 DOMAIN = 'https://shikongren.com'
 SITE_NAME = '时空人公益推广'
 AUTHOR = '吕文艺'
+
+# 静态资源版本戳：每次构建用源文件 mtime 生成，
+# 这样改了 style.css / app.js 后，URL 会变，浏览器自动取新版本。
+# 否则浏览器会一直用缓存里的旧 CSS（站点是纯静态生成，
+# 文件名不带内容哈希，没法靠 long-cache + immutable）。
+def _stamp():
+    try:
+        latest = 0.0
+        for name in ('style.css', 'app.js'):
+            p = os.path.join(SRC, name)
+            if os.path.exists(p):
+                latest = max(latest, os.path.getmtime(p))
+        if latest:
+            return str(int(latest))
+    except Exception:
+        pass
+    # 退化方案：用当前时间，保证每次构建 URL 都不同
+    return str(int(time.time()))
+
+
+STAMP = _stamp()
 
 CATS = collections.OrderedDict([
     ('预测案例', ('预测案例', '现场断验实录')),
@@ -442,7 +464,7 @@ def build_index_html(arts, cats, years):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>时空人公益推广 · 吕文艺老师作品归档</title>
 <meta name="description" content="吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=%s">
 <link rel="canonical" href="%s/">
 <meta property="og:url" content="%s/">
 <meta property="og:type" content="website">
@@ -506,14 +528,14 @@ def build_index_html(arts, cats, years):
   <p class="copy">© 时空人公益推广 · shikongren.com · 内容仅供学习参考</p>
 </footer>
 
-<script src="app.js"></script>
+<script src="app.js?v=%s"></script>
 </body>
-</html>''' % (len(arts), DOMAIN, DOMAIN, SITE_NAME,
+</html>''' % (len(arts), STAMP, DOMAIN, DOMAIN, SITE_NAME,
               len(arts), n_cat, len(years),
               len(arts),
               min(years) if years else '', max(years) if years else '',
               total_words // 10000,
-              nav, ''.join(cards))
+              nav, ''.join(cards), STAMP)
 
 
 POST_TPL = '''<!doctype html>
@@ -532,7 +554,7 @@ POST_TPL = '''<!doctype html>
 <meta property="article:author" content="吕文艺">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="{canonical}">
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../style.css?v={stamp}">
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -592,7 +614,7 @@ def build_post_html(a, by_cat):
         title=esc(a['title']), desc=esc(desc), cat=esc(CATS.get(a['category'], a['category'])[0]),
         date=esc(a['date']), words=a['words'], author=esc(a['author']),
         url_line=url_line, tags=tg, site=SITE_NAME, canonical=canonical,
-        content=md_to_html(a['body']), related=rh)
+        content=md_to_html(a['body']), related=rh, stamp=STAMP)
 
 
 ABOUT_TPL = '''<!doctype html>
@@ -610,7 +632,7 @@ ABOUT_TPL = '''<!doctype html>
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="{canonical}">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v={stamp}">
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -768,7 +790,7 @@ def build_about_html(page, arts):
     return ABOUT_TPL.format(
         title=esc(title), subtitle=esc(subtitle), desc=esc(desc),
         site=SITE_NAME, canonical=canonical,
-        content=_about_blocks(body), n_arts=len(arts))
+        content=_about_blocks(body), n_arts=len(arts), stamp=STAMP)
 
 
 def build_sitemap(arts):
