@@ -9,9 +9,10 @@ media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
 # 媒体库：左侧 Media 面板，浏览器里先选图再上传
+# 注意：不要写 name 字段 —— 有name 会被当成 registerMediaLibrary 外部库引用，
+# 而本站没注册外部库，会报 "Missing external media library"
 media_library:
-  name: 图片库
-  label: 图片
+  label: 图片库
   media_folder: "img/uploads"
   public_folder: "/img/uploads"
   max_file_size: 8000000
