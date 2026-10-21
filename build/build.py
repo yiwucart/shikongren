@@ -922,20 +922,28 @@ def main():
     with open(os.path.join(DATA_DIR, 'index.json'), 'w', encoding='utf-8') as f:
         json.dump(idx, f, ensure_ascii=False, separators=(',', ':'))
 
-    # ---- 全文检索索引（分片） ----
-    # 全部正文纯文本 272 万字，一次性加载约 7.8MB，移动端加载会卡。
-    # 方案：按分片输出 6 个 JSON，前端首次输入关键词时才异步加载，
-    # 全部加载完约 1.3MB/片，可并行请求，且只在本机磁盘不走网络。
+    # ---- 检索索引（双层） ----
+    # 全部正文纯文本 272 万字，一次性加载约 7.9MB，跨境访问要好几分钟。
+    # 改成两层：
+    #   1) 摘要索引 summaries.json —— 标题 + 正文前 600 字，约 1.1MB，
+    #      gzip 后 0.4MB，输入关键词后立即加载并出结果（秒开）。
+    #   2) 全文索引 s*.json —— 完整正文分片，摘要层结果不够时按需补充，
+    #      让用户先看到东西再等全文。
+    SUMMARY_CHARS = 600
+
+    BRIEF = []
     FULL = []
     for a in arts:
-        FULL.append({
+        pt = plain_text(a['body'])
+        base = {
             't': a['title'],
             's': a['slug'],
             'd': a['date'],
             'c': a['category'],
             'g': a['tags'],
-            'x': plain_text(a['body']),
-        })
+        }
+        BRIEF.append(dict(base, x=pt[:SUMMARY_CHARS]))
+        FULL.append(dict(base, x=pt))
 
     # 清单：告诉前端有多少片、分片文件名
     shard_dir = os.path.join(DATA_DIR, 'search')
@@ -944,6 +952,12 @@ def main():
     for old in os.listdir(shard_dir):
         if old.startswith('s') and old.endswith('.json'):
             os.remove(os.path.join(shard_dir, old))
+
+    # ---- 第 1 层：摘要索引（单个文件，常驻加载） ----
+    brief_path = os.path.join(shard_dir, 'summaries.json')
+    with open(brief_path, 'w', encoding='utf-8') as f:
+        json.dump(BRIEF, f, ensure_ascii=False, separators=(',', ':'))
+    brief_bytes = os.path.getsize(brief_path)
 
     # 按字符数均衡分片（不是按篇数）—— 文章长短差异大（几百到3.4万字），
     # 按篇数分会出现 2MB 和 0.6MB 的失衡片，前端并行加载时
@@ -975,7 +989,8 @@ def main():
 
     with open(os.path.join(DATA_DIR, 'search-manifest.json'), 'w',
               encoding='utf-8') as f:
-        json.dump({'shards': shard_files, 'count': len(FULL)},
+        json.dump({'shards': shard_files, 'count': len(FULL),
+                   'summary': 'search/summaries.json'},
                   f, separators=(',', ':'))
 
     # 首页
@@ -998,8 +1013,10 @@ def main():
     with open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % DOMAIN)
 
-    print('详情页: %d   列表索引: %d   全文索引: %d 篇 / %d 分片 (%.1fMB)'
-          % (n, len(idx), len(FULL), len(shard_files), total_full_bytes / 1024 / 1024))
+    print('详情页: %d   列表索引: %d' % (n, len(idx)))
+    print('检索索引: 摘要 %.1fMB（常驻） + 全文 %.1fMB / %d 分片（按需）'
+          % (brief_bytes / 1024 / 1024, total_full_bytes / 1024 / 1024,
+             len(shard_files)))
     print('构建完成')
     return 0
 
