@@ -72,6 +72,189 @@ def _stamp():
 
 STAMP = _stamp()
 
+# ---------------------------------------------------------------- 多语言
+
+# 三种语言站点：
+#   zh-Hans（简体）→ 站点根目录        URL 前缀 ''
+#   zh-Hant（繁體）→ /tc/             URL 前缀 'tc'
+#   en（English）→ /en/              URL 前缀 'en'
+#
+# 繁体版不是独立维护的内容，而是**构建时由简体源经 OpenCC 自动生成**，
+# 所以繁体文章不进 CMS（避免双份维护、避免两边不同步）。
+# 英文版目前只出「语言选择页 + 关于页」，文章翻译需要人工审校，
+# 确认范围后再开。
+LANGS = [
+    {
+        'code': 'zh-Hans',
+        'dir': '',                 # 相对站点根的子目录，空 = 根
+        'html_lang': 'zh-CN',
+        'label': '简',
+        'full': '简体中文',
+        'og': 'zh_CN',
+    },
+    {
+        'code': 'zh-Hant',
+        'dir': 'tc',
+        'html_lang': 'zh-Hant',
+        'label': '繁',
+        'full': '繁體中文',
+        'og': 'zh_TW',
+        'opencc': 's2twp',         # 简体 -> 台湾正体+词汇
+    },
+    {
+        'code': 'en',
+        'dir': 'en',
+        'html_lang': 'en',
+        'label': 'EN',
+        'full': 'English',
+        'og': 'en_US',
+        'stub': True,              # 只出选择页，不出文章列表
+    },
+]
+LANG_BY_DIR = {l['dir']: l for l in LANGS}
+
+
+def get_opencc(conf):
+    """取（或建）该语言需要的 OpenCC 转换器。取不到就返回 None（降级为不转换）。"""
+    name = conf.get('opencc')
+    if not name:
+        return None
+    global _OPENCC_CACHE
+    if name in _OPENCC_CACHE:
+        return _OPENCC_CACHE[name]
+    try:
+        import opencc
+        _OPENCC_CACHE[name] = opencc.OpenCC(name)
+    except Exception as e:
+        print('  ! 警告：OpenCC 不可用（%s），该语言跳过转换：%s' % (name, e))
+        _OPENCC_CACHE[name] = None
+    return _OPENCC_CACHE[name]
+
+
+_OPENCC_CACHE = {}
+
+
+def url_for(lang, rel=''):
+    """某一语言下的绝对站内 URL（用于 canonical / hreflang / 切换器）。
+
+    rel 是**该语言自己的**相对路径，例如繁体的 'posts/xxx.html'。
+    'index.html' 归一化成目录形式（/、/tc/、/en/）—— 目录形式的 URL 更符合
+    搜索引擎与用户的习惯，也让 hreflang 三条互指的路径保持一致。
+    """
+    d = lang['dir']
+    if rel in ('', 'index.html'):
+        return ('%s/%s/' % (DOMAIN, d)) if d else (DOMAIN + '/')
+    return '%s/%s/%s' % (DOMAIN, d, rel) if d else '%s/%s' % (DOMAIN, rel)
+
+
+def lang_prefix(lang):
+    """页面内相对链接的前缀。从 /tc/ 页面里链 'posts/x.html' 要写成 '../posts/x.html'。"""
+    return ('../' if lang['dir'] else '')
+
+
+def build_switcher(cur, rel=''):
+    """三语切换器。cur 是当前语言对象，rel 是当前页在该语言下的相对路径。"""
+    cc = get_opencc(cur)
+    lbl = cc.convert('语言切换') if cc else '语言切换'
+    out = ['<nav class="langsw" aria-label="%s">' % lbl]
+    for l in LANGS:
+        if l['code'] == cur['code']:
+            cls, mark, href, cur_attr = 'on', '<span class="cur"> · </span>', '#', ' aria-current="true"'
+        elif l.get('stub') and rel.replace('index.html', ''):
+            # 英文文章页还不存在，点过去会到英文说明页 —— 仍可达，保留链接
+            cls, mark, href, cur_attr = '', '', url_for(l, 'index.html'), ''
+        else:
+            cls, mark, href, cur_attr = '', '', url_for(l, rel), ''
+        out.append('<a class="%s" href="%s" hreflang="%s"%s title="%s">%s%s</a>'
+                   % (cls, esc(href), l['code'], cur_attr, l['full'], l['label'], mark))
+    out.append('</nav>')
+    return ''.join(out)
+
+
+def hreflang_tags(lang, rel='index.html'):
+    """三语互指 + x-default。rel 用该语言自己的相对路径，各语言同 slug。
+
+    **未上线的语言不进 hreflang** —— 声明一个不存在的语言版本会让搜索引擎
+    反复抓 404。英文版目前只有说明页，所以文章页只声明简 / 繁两条。
+    """
+    base = rel.replace('index.html', '')
+    is_index = base == ''
+    tags = []
+    for l in LANGS:
+        if l.get('stub') and not is_index:
+            continue
+        href = url_for(l, base)
+        tags.append('<link rel="alternate" hreflang="%s" href="%s">' % (l['code'], esc(href)))
+    tags.append('<link rel="alternate" hreflang="x-default" href="%s">'
+                % esc(url_for(LANGS[0], base)))
+    return '\n'.join(tags)
+
+
+# ---------------------------------------------------------------- 界面文案
+# 界面固定文案（导航、按钮、页脚免责声明等）。繁体版用 OpenCC 现场转，
+# 英文版暂时只有少量文案（stub 语言不出文章页，用不到多少）。
+UI_ZH = {
+    'eyebrow': '吕氏时空人 · 公益推广',
+    'h1': '时空人公益推广',
+    'subtitle': '吕文艺老师作品归档',
+    'lede': '吕文艺老师「吕氏时空人」理论技术作品的整理与检索。本站收录微信公众号「时空坐标」原创文章 %d 篇，覆盖 %d 个主题，%d 年内容。',
+    'ph': '输入标题或关键词，例如：案例集锦、八字、化解、择日…',
+    'clear': '清除',
+    'stat_n': '篇原创',
+    'stat_first': '最早',
+    'stat_last': '最新',
+    'stat_words': '万字',
+    'about_link': '了解本站 →',
+    'about_bio': '「吕氏时空人」理论技术体系创立者，本站收录其公众号「时空坐标」原创文章。',
+    'all': '全部',
+    'nomatch': '没有匹配的文章，换个关键词试试。',
+    'home': '首页',
+    'back': '← 返回时空人公益推广',
+    'back_home': '← 返回首页',
+    'words_unit': '字',
+    'author': '作者',
+    'source': '出处',
+    'source_v': '微信公众号「时空坐标」｜ 作者：吕文艺',
+    'stmt': '声明',
+    'stmt_v': '本站内容仅供学习参考，版权归原作者所有，不构成任何建议。',
+    'related': '同类文章',
+    'disclaimer': '免责声明',
+    'disclaimer_v': '本站为传统文化交流性质的内容归档，所载文章观点与内容仅供学习参考，不构成任何建议，亦不作为任何决策依据。读者应独立判断、自负其责。',
+    'copyright': '本站全部内容来源于微信公众号「时空坐标」，作者署名吕文艺，版权归原作者及原作者所在平台所有。',
+    'nogoods': '本站与原作者不存在商业关系，内容经原作者授权整理归档，仅供学习参考。如需引用，请注明出处并以原文为准。',
+    'takedown': '如原作者或权利人认为收录内容需要处理，请通过下方方式联系，将立即处理。',
+    'follow': '关注原作者公众号「时空坐标」，获取最新文章',
+    'wechat': '微信公众号：',
+    'tel': '联系原作者：吕文艺老师',
+    'about_site': '关于本站',
+    'sitemap': '网站地图',
+    'cms': '内容管理',
+    'copy': '© 时空人公益推广 · shikongren.com · 内容仅供学习参考',
+    'copy_n': '© 时空人公益推广 · shikongren.com · %d 篇原创文章',
+    'site_name': '时空人公益推广',
+    'wechat_name': '时空坐标',
+    'author_name': '吕文艺',
+    'account_alt': '吕文艺老师',
+    'lang_label': '语言切换',
+    'orig_link': '原文链接',
+    'cat_crumb': '分类',
+}
+
+
+def ui(lang):
+    """界面文案 —— 繁体由简体文案经 OpenCC 转（保证两个版本措辞永远一致）。"""
+    cc = get_opencc(lang)
+    if not cc:
+        return dict(UI_ZH)
+    out = {}
+    for k, v in UI_ZH.items():
+        out[k] = cc.convert(v) if '%' not in v else v
+    # 带占位符的文案单独处理（%d 要保留）
+    for k in ('lede', 'copy_n'):
+        out[k] = cc.convert(UI_ZH[k])
+    return out
+
+
 CATS = collections.OrderedDict([
     ('预测案例', ('预测案例', '现场断验实录')),
     ('预测理论', ('预测理论', '时空人预测术原理与体系')),
@@ -396,7 +579,13 @@ def slug_of(text, fallback):
 
 # ---------------------------------------------------------------- 读取内容
 
-def load_articles():
+def load_articles(lang=None):
+    """读全部 .md 文章。传入 lang 时返回繁体版（OpenCC 转换标题/分类/标签/正文）。
+
+    繁体转换在**内存里**做，不写临时文件 —— 源码仓库里永远只有简体一份。
+    """
+    lang = lang or LANGS[0]
+    cc = get_opencc(lang)
     arts = []
     if not os.path.isdir(POSTS_DIR):
         return arts
@@ -408,23 +597,52 @@ def load_articles():
         slug = os.path.splitext(fn)[0]
         date = str(fm.get('date') or '')
         words = fm.get('words') or len(re.sub(r'\s+', '', body))
+        cat0 = fm.get('category') or '综合论述'
+        cat = cat0
+        tags = fm.get('tags') or []
+        if isinstance(tags, str):
+            tags = [tags]
+        author = fm.get('author') or AUTHOR
+        if cc:
+            title = cc.convert(title)
+            cat = cc.convert(cat0)
+            body = cc.convert(body)
+            tags = [cc.convert(str(t)) for t in tags]
+            series = cc.convert(fm.get('series') or '')
+            author = cc.convert(author)
+        else:
+            series = fm.get('series') or ''
         arts.append({
             'title': title,
             'slug': slug,
             'date': date,
             'year': date[:4] if len(date) >= 4 else '',
-            'author': fm.get('author') or AUTHOR,
+            'author': author,
             'url': fm.get('url') or '',
             'account': '时空坐标',
-            'series': fm.get('series') or '',
-            'category': fm.get('category') or '综合论述',
-            'tags': fm.get('tags') or [],
+            'series': series,
+            # cat_key 永远是**简体原名** —— 统计、分类导航、CATS 查表都用它，
+            # 与语言无关；category 是显示名（繁体版里是繁体）。
+            # 早前版本只存 category，繁体下 '预测案例'→'預測案例' 查不到 CATS，
+            # 导致分类导航和「覆盖 N 个主题」全部失效。
+            'cat_key': cat0,
+            'category': cat,
+            'tags': tags,
             'words': int(words),
             'body': body.strip(),
         })
     # 时间靠后靠前；同日按标题排
     arts.sort(key=lambda a: (a['date'] or '', a['title']), reverse=True)
     return arts
+
+
+def cat_labels(lang):
+    """分类显示名 —— 繁体时连分类说明一起转。"""
+    cc = get_opencc(lang)
+    out = collections.OrderedDict()
+    for k, v in CATS.items():
+        out[k] = (cc.convert(v[0]), cc.convert(v[1])) if cc else v
+    return out
 
 
 def load_settings():
@@ -472,7 +690,10 @@ def _load_verify_metas():
 VERIFY_BLOCK = '\n'.join(_load_verify_metas())
 
 
-def build_index_html(arts, cats, years):
+def build_index_html(arts, cats, years, lang):
+    T = ui(lang)
+    L = cat_labels(lang)
+    pfx = lang_prefix(lang)
     cards = []
     for a in arts:
         ex = clean_excerpt(a['body'])
@@ -481,129 +702,159 @@ def build_index_html(arts, cats, years):
             '<div class="c">%s</div>'
             '<h3>%s</h3>'
             '<p class="ex">%s</p>'
-            '<div class="m"><time>%s</time><span>%d 字</span></div>'
+            '<div class="m"><time>%s</time><span>%d %s</span></div>'
             '</a>' % (esc(a['slug']), esc(a['category']), esc(a['title']),
-                      esc(ex), esc(a['date']), a['words']))
+                      esc(ex), esc(a['date']), a['words'], T['words_unit']))
 
-    nav = ''.join('<a href="#cat-%s">%s <em>%d</em></a>' % (c, esc(CATS[c][0]), cats.get(c, 0))
+    nav = ''.join('<a href="#cat-%s">%s <em>%d</em></a>' % (c, esc(L[c][0]), cats.get(c, 0))
                   for c in CATS if cats.get(c, 0))
 
     total_words = sum(a['words'] for a in arts)
     n_cat = len([c for c in CATS if cats.get(c, 0)])
 
-    return '''<!doctype html>
-<html lang="zh-CN">
+    return INDEX_TPL.format(
+        hlang=lang['html_lang'],
+        title='%s · %s' % (T['h1'], T['subtitle']),
+        desc='吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。' % len(arts),
+        stamp=STAMP,
+        canonical=url_for(lang, 'index.html'),
+        og=lang['og'],
+        site=T['site_name'],
+        alt=hreflang_tags(lang, 'index.html'),
+        verify=VERIFY_BLOCK,
+        eyebrow=T['eyebrow'],
+        h1=T['h1'],
+        lede=T['lede'] % (len(arts), n_cat, len(years)),
+        s_n=len(arts), s_nu=T['stat_n'],
+        s_first=min(years) if years else '', s_firstu=T['stat_first'],
+        s_last=max(years) if years else '', s_lastu=T['stat_last'],
+        s_words=total_words // 10000, s_wordsu=T['stat_words'],
+        ph=T['ph'], clear=T['clear'],
+        bio=T['about_bio'], aboutlink=T['about_link'],
+        author_name=T['author_name'], author_alt=T['account_alt'],
+        wechat_name=T['wechat_name'],
+        langsw=build_switcher(lang, 'index.html'),
+        allu=T['all'], nav=nav, cards=''.join(cards), nomatch=T['nomatch'],
+        disc_h=T['disclaimer'], disc=T['disclaimer_v'],
+        cp=T['copyright'], ng=T['nogoods'], td=T['takedown'],
+        follow=T['follow'], wechat=T['wechat'], tel=T['tel'],
+        about_site=T['about_site'], sitemap=T['sitemap'], cms=T['cms'],
+        copy=T['copy'],
+        pfx=pfx)
+
+
+INDEX_TPL = '''<!doctype html>
+<html lang="{hlang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>时空人公益推广 · 吕文艺老师作品归档</title>
-<meta name="description" content="吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。">
-<link rel="stylesheet" href="style.css?v=%s">
-<link rel="canonical" href="%s/">
-<meta property="og:url" content="%s/">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="stylesheet" href="{pfx}style.css?v={stamp}">
+<link rel="canonical" href="{canonical}">
+{alt}
+<meta property="og:url" content="{canonical}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="%s">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:site_name" content="{site}">
+<meta property="og:locale" content="{og}">
 <meta name="twitter:card" content="summary">
-%s
+{verify}
 </head>
 <body>
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">吕氏时空人 · 公益推广</p>
-    <h1>时空人公益推广</h1>
-    <p class="lede">吕文艺老师「吕氏时空人」理论技术作品的整理与检索。本站收录微信公众号「时空坐标」原创文章 %d 篇，覆盖 %d 个主题，%d 年内容。</p>
+    <p class="eyebrow">{eyebrow}</p>
+    {langsw}
+    <h1>{h1}</h1>
+    <p class="lede">{lede}</p>
     <div class="stats">
-      <span><b>%d</b> 篇原创</span>
-      <span><b>%s</b> 最早</span>
-      <span><b>%s</b> 最新</span>
-      <span><b>%d</b> 万字</span>
+      <span><b>{s_n}</b> {s_nu}</span>
+      <span><b>{s_first}</b> {s_firstu}</span>
+      <span><b>{s_last}</b> {s_lastu}</span>
+      <span><b>{s_words}</b> {s_wordsu}</span>
     </div>
     <div class="searchbar">
-      <input id="q" type="search" placeholder="输入标题或关键词，例如：案例集锦、八字、化解、择日…" autocomplete="off">
-      <button id="clear">清除</button>
+      <input id="q" type="search" placeholder="{ph}" autocomplete="off">
+      <button id="clear">{clear}</button>
     </div>
     <div id="count" class="count"></div>
     <div class="herobio">
-      <img src="/img/uploads/luwenyi-avatar.jpg" alt="吕文艺老师" width="56" height="56" />
-      <p><b>吕文艺</b>　「吕氏时空人」理论技术体系创立者，本站收录其公众号「时空坐标」原创文章。
-        <a href="about.html">了解本站 →</a></p>
+      <img src="/img/uploads/luwenyi-avatar.jpg" alt="{author_alt}" width="56" height="56" />
+      <p><b>{author_name}</b>　{bio}
+        <a href="about.html">{aboutlink}</a></p>
     </div>
   </div>
 </header>
 
 <nav class="cats wrap">
-  <a href="#" class="all">全部</a>%s
+  <a href="#" class="all">{allu}</a>{nav}
 </nav>
 
 <main class="wrap">
-  <div id="grid" class="grid">%s</div>
-  <p id="empty" class="empty" hidden>没有匹配的文章，换个关键词试试。</p>
+  <div id="grid" class="grid">{cards}</div>
+  <p id="empty" class="empty" hidden>{nomatch}</p>
 </main>
 
 <footer class="wrap foot">
   <div class="disclaimer">
-    <h4>免责声明</h4>
-    <p>本站为传统文化交流性质的内容归档，所载文章观点与内容仅供学习参考，<strong>不构成任何建议</strong>，亦不作为任何决策依据。读者应独立判断、自负其责。</p>
+    <h4>{disc_h}</h4>
+    <p>{disc}</p>
   </div>
   <div class="src">
-    <p>本站全部内容来源于微信公众号「<b>时空坐标</b>」，作者署名<b>吕文艺</b>，版权归原作者及原作者所在平台所有。</p>
-    <p>本站与原作者不存在商业关系，内容经原作者授权整理归档，<strong>仅供学习参考</strong>。如需引用，请注明出处并以原文为准。</p>
-    <p>如原作者或权利人认为收录内容需要处理，请通过下方方式联系，将立即处理。</p>
+    <p>{cp}</p>
+    <p>{ng}</p>
+    <p>{td}</p>
   </div>
   <div class="contact">
-    <p>关注原作者公众号「时空坐标」，获取最新文章</p>
-    <p>微信公众号：<b>时空坐标</b></p>
-    <p>联系原作者：吕文艺老师 <a class="tel" href="tel:18601944999">18601944999</a></p>
+    <p>{follow}</p>
+    <p>{wechat}<b>{wechat_name}</b></p>
+    <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a></p>
   </div>
   <p class="footlinks">
-    <a href="about.html">关于本站</a> ·
-    <a href="sitemap.xml">网站地图</a> ·
-    <a href="/admin/">内容管理</a>
+    <a href="about.html">{about_site}</a> ·
+    <a href="{pfx}sitemap.xml">{sitemap}</a> ·
+    <a href="/admin/">{cms}</a>
   </p>
-  <p class="copy">© 时空人公益推广 · shikongren.com · 内容仅供学习参考</p>
+  <p class="copy">{copy}</p>
 </footer>
 
-<script src="app.js?v=%s"></script>
+<script src="{pfx}app.js?v={stamp}"></script>
 </body>
-</html>''' % (len(arts), STAMP, DOMAIN, DOMAIN, SITE_NAME, VERIFY_BLOCK,
-              len(arts), n_cat, len(years),
-              len(arts),
-              min(years) if years else '', max(years) if years else '',
-              total_words // 10000,
-              nav, ''.join(cards), STAMP)
+</html>'''
 
 
 POST_TPL = '''<!doctype html>
-<html lang="zh-CN">
+<html lang="{hlang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title} · 时空人公益推广</title>
+<title>{title} · {site}</title>
 <meta name="description" content="{desc}">
-<meta name="author" content="吕文艺">
+<meta name="author" content="{author}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="{site}">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="吕文艺">
+<meta property="og:locale" content="{og}">
+<meta property="article:author" content="{author}">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="{canonical}">
+{alt}
 <link rel="stylesheet" href="../style.css?v={stamp}">
 {verify}
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a href="../index.html" class="home">← 返回时空人公益推广</a>
+  <a href="../index.html" class="home">{back}</a>
+  {langsw}
 </div></header>
 
 <article class="wrap post">
-  <nav class="crumb"><a href="../index.html">首页</a> / <span>{cat}</span></nav>
+  <nav class="crumb"><a href="../index.html">{home}</a> / <span>{cat}</span></nav>
   <h1>{title}</h1>
   <div class="meta">
     <span class="badge">{cat}</span>
-    <time>{date}</time><span>{words} 字</span><span>作者 {author}</span>
+    <time>{date}</time><span>{words} {wu}</span><span>{author_l} {author}</span>
   </div>
   {tags}
   <div class="content">
@@ -611,9 +862,9 @@ POST_TPL = '''<!doctype html>
   </div>
 
   <div class="notice">
-    <p><b>出处</b>：微信公众号「时空坐标」｜ 作者：吕文艺</p>
+    <p><b>{source}</b>：{source_v}</p>
     {url_line}
-    <p><b>声明</b>：本站内容仅供学习参考，版权归原作者所有，不构成任何建议。</p>
+    <p><b>{stmt}</b>：{stmt_v}</p>
   </div>
 
   {related}
@@ -621,16 +872,18 @@ POST_TPL = '''<!doctype html>
 
 <footer class="wrap foot">
   <div class="contact">
-    <p>联系原作者：吕文艺老师 <a class="tel" href="tel:18601944999">18601944999</a> · 微信公众号「时空坐标」</p>
+    <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a> · {wechat_v}</p>
   </div>
-  <p><a href="../about.html">关于本站</a> · <a href="../index.html">← 返回首页</a></p>
-  <p class="copy">© 时空人公益推广 · shikongren.com · 内容仅供学习参考</p>
+  <p><a href="../about.html">{about_site}</a> · <a href="../index.html">{back_home}</a></p>
+  <p class="copy">{copy}</p>
 </footer>
 </body>
 </html>'''
 
 
-def build_post_html(a, by_cat):
+def build_post_html(a, by_cat, lang):
+    T = ui(lang)
+    L = cat_labels(lang)
     desc = clean_excerpt(a['body'], 100)
     tg = ''
     if a['tags']:
@@ -640,45 +893,55 @@ def build_post_html(a, by_cat):
     rel = [x for x in by_cat.get(a['category'], []) if x['slug'] != a['slug']][:6]
     rh = ''
     if rel:
-        rh = ('<div class="related"><h4>同类文章</h4><ul>' +
+        rh = ('<div class="related"><h4>%s</h4><ul>' % T['related'] +
               ''.join('<li><a href="%s.html">%s</a><time>%s</time></li>'
                       % (x['slug'], esc(x['title']), x['date']) for x in rel) +
               '</ul></div>')
     if a['url']:
-        url_line = ('<p><b>原文链接</b>：<a href="%s" target="_blank" rel="noopener">%s</a></p>'
-                    % (esc(a['url']), esc(a['url'])))
+        url_line = ('<p><b>%s</b>：<a href="%s" target="_blank" rel="noopener">%s</a></p>'
+                    % (T['orig_link'], esc(a['url']), esc(a['url'])))
     else:
-        url_line = '<p><b>原文链接</b>：微信公众号「时空坐标」</p>'
-    canonical = DOMAIN + '/posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')
+        url_line = '<p><b>%s</b>：%s</p>' % (T['orig_link'], T['source_v'].split('｜')[0])
+    slugq = urllib.parse.quote(a['slug'] + '.html', safe='/-.')
     return POST_TPL.format(
-        title=esc(a['title']), desc=esc(desc), cat=esc(CATS.get(a['category'], a['category'])[0]),
-        date=esc(a['date']), words=a['words'], author=esc(a['author']),
-        url_line=url_line, tags=tg, site=SITE_NAME, canonical=canonical,
+        hlang=lang['html_lang'],
+        title=esc(a['title']), desc=esc(desc), cat=esc(L.get(a['category'], a['category'])[0]),
+        date=esc(a['date']), words=a['words'], wu=T['words_unit'],
+        author=esc(a['author']), author_l=T['author'],
+        url_line=url_line, tags=tg, site=T['site_name'], og=lang['og'],
+        canonical=url_for(lang, 'posts/' + slugq),
+        alt=hreflang_tags(lang, 'posts/' + slugq),
+        langsw=build_switcher(lang, 'posts/' + slugq),
+        back=T['back'], home=T['home'],
+        source=T['source'], source_v=T['source_v'], stmt=T['stmt'], stmt_v=T['stmt_v'],
         content=md_to_html(a['body']), related=rh, stamp=STAMP,
-        verify=VERIFY_BLOCK)
+        verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
+        about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'])
 
 
 ABOUT_TPL = '''<!doctype html>
-<html lang="zh-CN">
+<html lang="{hlang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title} · 时空人公益推广</title>
+<title>{title} · {site}</title>
 <meta name="description" content="{desc}">
 <meta name="author" content="吕文艺">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{site}">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:locale" content="{og}">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="{canonical}">
-<link rel="stylesheet" href="style.css?v={stamp}">
+{alt}
+<link rel="stylesheet" href="{pfx}style.css?v={stamp}">
 {verify}
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a href="index.html" class="home">← 返回时空人公益推广</a>
+  <a href="{pfx}index.html" class="home">{back}</a>
+  {langsw}
 </div></header>
 
 <article class="wrap page">
@@ -691,11 +954,11 @@ ABOUT_TPL = '''<!doctype html>
 
 <footer class="wrap foot">
   <div class="disclaimer">
-    <h4>免责声明</h4>
-    <p>本站内容仅供学习参考，版权归原作者所有，不构成任何建议。</p>
+    <h4>{disc_h}</h4>
+    <p>{disc}</p>
   </div>
-  <p><a href="index.html">← 返回首页</a> · <a href="sitemap.xml">网站地图</a></p>
-  <p class="copy">© 时空人公益推广 · shikongren.com · {n_arts} 篇原创文章</p>
+  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p class="copy">{copy}</p>
 </footer>
 </body>
 </html>'''
@@ -832,32 +1095,319 @@ def _about_blocks(body):
     return html
 
 
-def build_about_html(page, arts):
+def build_about_html(page, arts, lang):
+    T = ui(lang)
+    cc = get_opencc(lang)
     fm = page.get('frontmatter') or {}
     body = page.get('body') or ''
     title = fm.get('title') or '关于本站'
     subtitle = fm.get('subtitle') or ''
+    if cc:
+        title = cc.convert(title)
+        subtitle = cc.convert(subtitle) if subtitle else subtitle
+        body = cc.convert(body)
     desc = clean_excerpt(body, 120)
-    canonical = DOMAIN + '/about.html'
+    slugq = urllib.parse.quote('about.html', safe='/-.')
     return ABOUT_TPL.format(
+        hlang=lang['html_lang'],
         title=esc(title), subtitle=esc(subtitle), desc=esc(desc),
-        site=SITE_NAME, canonical=canonical,
-        content=_about_blocks(body), n_arts=len(arts), stamp=STAMP,
-        verify=VERIFY_BLOCK)
+        site=T['site_name'], og=lang['og'],
+        canonical=url_for(lang, 'about.html'),
+        alt=hreflang_tags(lang, 'about.html'),
+        langsw=build_switcher(lang, 'about.html'),
+        back=T['back'], pfx=lang_prefix(lang),
+        content=_about_blocks(body), stamp=STAMP,
+        verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
+        back_home=T['back_home'], sitemap=T['sitemap'],
+        copy=T['copy_n'] % len(arts))
 
 
-def build_sitemap(arts):
-    urls = ['<url><loc>%s/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>' % DOMAIN,
-            '<url><loc>%s/about.html</loc><changefreq>monthly</changefreq>'
-            '<priority>0.8</priority></url>' % DOMAIN]
+EN_TPL = '''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shikongren Archive · Lü Wenyi\'s works</title>
+<meta name="description" content="An archive and search index of Lü Wenyi\'s original articles on the Lü School of Shikongren (时空人) theory.">
+<link rel="stylesheet" href="../style.css?v={stamp}">
+<link rel="canonical" href="{canonical}">
+{alt}
+<meta property="og:url" content="{canonical}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{site}">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+{verify}
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a href="../index.html" class="home">&larr; Back to the Chinese archive</a>
+  {langsw}
+</div></header>
+
+<article class="wrap page">
+  <h1>English edition is being prepared</h1>
+  <p class="pagesub">{n} original articles &middot; Lü Wenyi (吕文艺), founder of the Lü School of Shikongren</p>
+  <div class="content">
+    <div class="notice">
+      <p><b>Status</b>: This English edition is <b>not yet available</b>. The Chinese archive is
+      complete with {n} articles; a full English translation is being prepared and reviewed.</p>
+      <p><b>Why it takes time</b>: These articles concern Chinese metaphysical arts
+      (八字 Bāzì / 風水 Fēngshuǐ / 六爻 Liùyáo) whose technical terms
+      &mdash; 用神 <i>yòngshén</i>, 忌神 <i>jìshén</i>, 大運 <i>dàyùn</i>, 五行 <i>wǔxíng</i> &mdash;
+      have no standard English equivalents. A literal machine translation would be misleading,
+      so every article is reviewed by a human before publication.</p>
+      <p><b>In the meantime</b>, please use the Chinese edition. If you read Chinese and would like
+      to help review translations, please get in touch.</p>
+    </div>
+
+    <h2>Read in Chinese</h2>
+    <ul>
+      <li><a href="../index.html">Simplified Chinese &mdash; {n} articles, full-text search</a></li>
+      <li><a href="../tc/index.html">Traditional Chinese &mdash; {n} articles, full-text search</a></li>
+      <li><a href="../about.html">About this site</a></li>
+    </ul>
+
+    <h2>About Lü Wenyi (吕文艺)</h2>
+    <p>Lü Wenyi is the founder of the Lü School of Shikongren (吕氏时空人), a system that
+    approaches Chinese metaphysics as a natural science. He has taught it publicly since 2001
+    and has published over ten million characters of original writing, roughly 90% of which is
+    his own. More than two hundred thousand students have studied his work, of whom about
+    fourteen thousand attended in-person classes.</p>
+    <p>His published books include
+    <i>Natural Science Feng Shui</i> (2018, 410pp),
+    <i>Natural Science Eight Characters</i> (2018, 496pp),
+    <i>Six Lines Prediction</i>, <i>Character Analysis</i>,
+    <i>Twenty-three Master Techniques of Lü School Feng Shui</i>, and others.</p>
+    <p>The full archive of his articles is published under the WeChat public account
+    「时空坐标」 and collected on this site for study and reference only.</p>
+  </div>
+</article>
+
+<footer class="wrap foot">
+  <div class="disclaimer">
+    <h4>Disclaimer</h4>
+    <p>All content on this site is collected for the study of traditional Chinese culture.
+    The views expressed are for reference only and constitute no advice. Readers should
+    judge independently and bear their own responsibility.</p>
+  </div>
+  <p><a href="../index.html">&larr; Back to homepage</a> &middot;
+     <a href="../tc/index.html">繁體中文</a> &middot;
+     <a href="../sitemap.xml">Sitemap</a></p>
+  <p class="copy">&copy; Shikongren Archive &middot; shikongren.com &middot; For study and reference only</p>
+</footer>
+</body>
+</html>'''
+
+
+def build_sitemap(arts, lang):
+    urls = ['<url><loc>%s</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>'
+            % url_for(lang, 'index.html'),
+            '<url><loc>%s</loc><changefreq>monthly</changefreq>'
+            '<priority>0.8</priority></url>' % url_for(lang, 'about.html')]
+    if lang.get('stub'):
+        return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                + '\n'.join(urls) + '\n</urlset>\n')
     for a in arts:
-        urls.append('<url><loc>%s/posts/%s.html</loc><lastmod>%s</lastmod>'
+        urls.append('<url><loc>%s</loc><lastmod>%s</lastmod>'
                     '<changefreq>monthly</changefreq><priority>0.6</priority></url>'
-                    % (DOMAIN, urllib.parse.quote(a['slug'], safe='/-.'),
+                    % (url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
                        a['date'] or '2026-01-01'))
+    # 三语互指：告诉搜索引擎同一篇文章的其它语言版本
+    for l in LANGS:
+        if l['code'] == lang['code']:
+            continue
+        for a in arts:
+            urls.append('<url><loc>%s</loc>'
+                        '<xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
+                        '</url>' % (url_for(lang, 'posts/'
+                                            + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
+                                    l['code'],
+                                    url_for(l, 'posts/'
+                                            + urllib.parse.quote(a['slug'] + '.html', safe='/-.'))))
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+            'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
             + '\n'.join(urls) + '\n</urlset>\n')
+
+
+# ---------------------------------------------------------------- 单语言构建
+
+def build_one_lang(lang, settings):
+    """构建一种语言的完整站点。输出到 OUT/[<dir>/]。
+
+    简体 → 站点根；繁體 → OUT/tc/；English → OUT/en/。
+    每个语言有独立的 data/ 目录（articles.json / index.json / search-manifest.json），
+    这样前端按当前页面语言加载对应索引，互不干扰。
+    """
+    out_dir = os.path.join(OUT, lang['dir']) if lang['dir'] else OUT
+    data_dir = os.path.join(out_dir, 'data')
+    posts_out = os.path.join(out_dir, 'posts')
+    os.makedirs(data_dir, exist_ok=True)
+    os.makedirs(posts_out, exist_ok=True)
+
+    arts = load_articles(lang)
+    cats = collections.Counter(a['cat_key'] for a in arts)
+    years = set(a['year'] for a in arts if a['year'])
+    by_cat = collections.defaultdict(list)
+    for a in arts:
+        by_cat[a['cat_key']].append(a)
+
+    # 前端按这个字段决定加载哪个索引
+    idx_prefix = ('%s/data/' % lang['dir']) if lang['dir'] else '/data/'
+
+    stub = bool(lang.get('stub'))
+
+    if stub:
+        # 英文版暂只有一篇说明页，放在该语言的 index.html（搜索引擎抓 /en/ 就是它）
+        with open(os.path.join(out_dir, 'index.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(EN_TPL.format(
+                stamp=STAMP, site=SITE_NAME, n=len(arts),
+                canonical=url_for(lang, 'index.html'),
+                alt=hreflang_tags(lang, 'index.html'),
+                langsw=build_switcher(lang, 'index.html'),
+                verify=VERIFY_BLOCK))
+        with open(os.path.join(out_dir, 'about.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(EN_TPL.format(
+                stamp=STAMP, site=SITE_NAME, n=len(arts),
+                canonical=url_for(lang, 'about.html'),
+                alt=hreflang_tags(lang, 'about.html'),
+                langsw=build_switcher(lang, 'about.html'),
+                verify=VERIFY_BLOCK))
+        with open(os.path.join(out_dir, 'sitemap.xml'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(build_sitemap([], lang))
+        return dict(n=0, brief=0, full=0, shards=0)
+
+    # 详情页
+    for a in arts:
+        with open(os.path.join(posts_out, a['slug'] + '.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(build_post_html(a, by_cat, lang))
+
+    with open(os.path.join(data_dir, 'articles.json'), 'w', encoding='utf-8') as f:
+        json.dump(arts, f, ensure_ascii=False, indent=1)
+    idx = [{'t': a['title'], 's': a['slug'], 'd': a['date'], 'c': a['category'],
+            'w': a['words'], 'b': clean_excerpt(a['body'], 260), 'g': a['tags']}
+           for a in arts]
+    with open(os.path.join(data_dir, 'index.json'), 'w', encoding='utf-8') as f:
+        json.dump(idx, f, ensure_ascii=False, separators=(',', ':'))
+
+    brief_bytes, full_bytes, n_shard = build_search_index(arts, data_dir)
+
+    # 繁简搜索映射表：繁体页允许用简体关键词搜（「阳宅」→ 命中「陽宅」）。
+    # 映射表从**真实语料**用 OpenCC 提取（1194 对正向 / 1238 对反向），
+    # 不是通用 OpenCC 全表 —— 只覆盖本站实际用到的字，体积小、命中准。
+    tcmap_src = os.path.join(SRC, 'build', 'tcmap.json')
+    if os.path.isfile(tcmap_src):
+        with open(tcmap_src, 'rb') as fr:
+            blob = fr.read()
+        with open(os.path.join(data_dir, 'tcmap.json'), 'wb') as fw:
+            fw.write(blob)
+
+    # 繁简搜索映射表：繁体页允许用简体关键词搜（「阳宅」→ 命中「陽宅」）。
+    # 映射表从**真实语料**用 OpenCC 提取（1194 对正向 / 1238 对反向），
+    # 不是通用 OpenCC 全表 —— 只覆盖本站实际用到的字，体积小、命中准。
+    tcmap_src = os.path.join(SRC, 'build', 'tcmap.json')
+    if os.path.isfile(tcmap_src):
+        with open(tcmap_src, 'rb') as fr:
+            blob = fr.read()
+        with open(os.path.join(data_dir, 'tcmap.json'), 'wb') as fw:
+            fw.write(blob)
+
+    # 首页
+    with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
+        f.write(build_index_html(arts, cats, years, lang))
+
+    # 关于页
+    html = ''
+    if 'about' in settings:
+        html = build_about_html(settings['about'], arts, lang)
+    if html:
+        with open(os.path.join(out_dir, 'about.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(html)
+
+    # sitemap：每种语言一份，放在该语言的目录里，与页面层级一致
+    with open(os.path.join(out_dir, 'sitemap.xml'), 'w',
+              encoding='utf-8', newline='\n') as f:
+        f.write(build_sitemap(arts, lang))
+
+    # 把语言信息写进 manifest，前端据此知道去哪加载、当前是什么语言
+    mpath = os.path.join(data_dir, 'search-manifest.json')
+    with open(mpath, encoding='utf-8') as f:
+        manifest = json.load(f)
+    manifest['lang'] = lang['code']
+    manifest['dir'] = lang['dir']
+    manifest['indexBase'] = idx_prefix
+    with open(mpath, 'w', encoding='utf-8') as f:
+        json.dump(manifest, f, ensure_ascii=False, separators=(',', ':'))
+
+    return dict(n=len(arts), brief=brief_bytes, full=full_bytes, shards=n_shard)
+
+
+def build_search_index(arts, data_dir):
+    """生成双层检索索引（摘要层 + 全文分片层）。
+
+    全部正文纯文本 272 万字，一次性加载约 7.9MB，跨境访问要好几分钟。
+    改成两层：
+      1) 摘要索引 summaries.json —— 标题 + 正文前 600 字，约 1.2MB，
+         gzip 后约 0.45MB，输入关键词后立即加载并出结果（秒开）。
+      2) 全文索引 s*.json —— 完整正文分片，摘要层结果不够时按需补充。
+    """
+    SUMMARY_CHARS = 600
+    BRIEF, FULL = [], []
+    for a in arts:
+        pt = plain_text(a['body'])
+        base = {'t': a['title'], 's': a['slug'], 'd': a['date'],
+                'c': a['category'], 'g': a['tags']}
+        BRIEF.append(dict(base, x=pt[:SUMMARY_CHARS]))
+        FULL.append(dict(base, x=pt))
+
+    shard_dir = os.path.join(data_dir, 'search')
+    os.makedirs(shard_dir, exist_ok=True)
+    for old in os.listdir(shard_dir):
+        if old.startswith('s') and old.endswith('.json'):
+            os.remove(os.path.join(shard_dir, old))
+
+    brief_path = os.path.join(shard_dir, 'summaries.json')
+    with open(brief_path, 'w', encoding='utf-8') as f:
+        json.dump(BRIEF, f, ensure_ascii=False, separators=(',', ':'))
+    brief_bytes = os.path.getsize(brief_path)
+
+    # 按字符数均衡分片（不是按篇数）—— 文章长短差异大（几百到 3.4 万字），
+    # 按篇数分会出现 2MB 和 0.6MB 的失衡片，前端并行加载时慢的那片决定总耗时。
+    SHARD_CHARS = 450000
+    shard_files = []
+    total_full = 0
+    buf, buf_len = [], 0
+    for item in FULL:
+        buf.append(item)
+        buf_len += len(item['x']) + len(item['t']) + 40
+        if buf_len >= SHARD_CHARS and len(shard_files) < 15:
+            name = 's%d.json' % len(shard_files)
+            with open(os.path.join(shard_dir, name), 'w', encoding='utf-8') as f:
+                json.dump(buf, f, ensure_ascii=False, separators=(',', ':'))
+            total_full += os.path.getsize(os.path.join(shard_dir, name))
+            shard_files.append(name)
+            buf, buf_len = [], 0
+    if buf:
+        name = 's%d.json' % len(shard_files)
+        with open(os.path.join(shard_dir, name), 'w', encoding='utf-8') as f:
+            json.dump(buf, f, ensure_ascii=False, separators=(',', ':'))
+        total_full += os.path.getsize(os.path.join(shard_dir, name))
+        shard_files.append(name)
+
+    with open(os.path.join(data_dir, 'search-manifest.json'), 'w',
+              encoding='utf-8') as f:
+        json.dump({'shards': shard_files, 'count': len(FULL),
+                   'summary': 'search/summaries.json'},
+                  f, ensure_ascii=False, separators=(',', ':'))
+
+    return brief_bytes, total_full, len(shard_files)
 
 
 # ---------------------------------------------------------------- 主流程
@@ -870,13 +1420,7 @@ def main():
         print('错误：content/posts 下没有找到任何 .md 文章')
         return 1
 
-    cats = collections.Counter(a['category'] for a in arts)
-    years = set(a['year'] for a in arts if a['year'])
-    by_cat = collections.defaultdict(list)
-    for a in arts:
-        by_cat[a['category']].append(a)
-
-    # 自检
+    # 自检（只对简体源做一次，与语言无关）
     problems = []
     seen = {}
     for a in arts:
@@ -897,131 +1441,22 @@ def main():
             return 1
         print('（仍继续构建）')
 
+    cats = collections.Counter(a['cat_key'] for a in arts)
+    years = set(a['year'] for a in arts if a['year'])
     print('文章数: %d   分类: %d   年份: %d' %
           (len(arts), len([c for c in CATS if cats.get(c, 0)]), len(years)))
     if check_only:
         return 0
 
-    os.makedirs(DATA_DIR, exist_ok=True)
-    os.makedirs(POSTS_OUT, exist_ok=True)
-
-    # 详情页
-    n = 0
-    for a in arts:
-        with open(os.path.join(POSTS_OUT, a['slug'] + '.html'), 'w',
-                  encoding='utf-8', newline='\n') as f:
-            f.write(build_post_html(a, by_cat))
-        n += 1
-
-    # 数据
-    with open(os.path.join(DATA_DIR, 'articles.json'), 'w', encoding='utf-8') as f:
-        json.dump(arts, f, ensure_ascii=False, indent=1)
-    idx = [{'t': a['title'], 's': a['slug'], 'd': a['date'], 'c': a['category'],
-            'w': a['words'], 'b': clean_excerpt(a['body'], 260), 'g': a['tags']}
-           for a in arts]
-    with open(os.path.join(DATA_DIR, 'index.json'), 'w', encoding='utf-8') as f:
-        json.dump(idx, f, ensure_ascii=False, separators=(',', ':'))
-
-    # ---- 检索索引（双层） ----
-    # 全部正文纯文本 272 万字，一次性加载约 7.9MB，跨境访问要好几分钟。
-    # 改成两层：
-    #   1) 摘要索引 summaries.json —— 标题 + 正文前 600 字，约 1.1MB，
-    #      gzip 后 0.4MB，输入关键词后立即加载并出结果（秒开）。
-    #   2) 全文索引 s*.json —— 完整正文分片，摘要层结果不够时按需补充，
-    #      让用户先看到东西再等全文。
-    SUMMARY_CHARS = 600
-
-    BRIEF = []
-    FULL = []
-    for a in arts:
-        pt = plain_text(a['body'])
-        base = {
-            't': a['title'],
-            's': a['slug'],
-            'd': a['date'],
-            'c': a['category'],
-            'g': a['tags'],
-        }
-        BRIEF.append(dict(base, x=pt[:SUMMARY_CHARS]))
-        FULL.append(dict(base, x=pt))
-
-    # 清单：告诉前端有多少片、分片文件名
-    shard_dir = os.path.join(DATA_DIR, 'search')
-    os.makedirs(shard_dir, exist_ok=True)
-    # 清掉上一轮的旧分片，避免残留
-    for old in os.listdir(shard_dir):
-        if old.startswith('s') and old.endswith('.json'):
-            os.remove(os.path.join(shard_dir, old))
-
-    # ---- 第 1 层：摘要索引（单个文件，常驻加载） ----
-    brief_path = os.path.join(shard_dir, 'summaries.json')
-    with open(brief_path, 'w', encoding='utf-8') as f:
-        json.dump(BRIEF, f, ensure_ascii=False, separators=(',', ':'))
-    brief_bytes = os.path.getsize(brief_path)
-
-    # 按字符数均衡分片（不是按篇数）—— 文章长短差异大（几百到3.4万字），
-    # 按篇数分会出现 2MB 和 0.6MB 的失衡片，前端并行加载时
-    # 慢的那片决定总耗时。中文 UTF-8 约 3 字节/字，
-    # 目标每片 1.3MB ≈ 44 万字符。
-    SHARD_CHARS = 450000
-    shard_files = []
-    total_full_bytes = 0
-    buf = []
-    buf_len = 0
-    idx_written = 0
-    for item in FULL:
-        buf.append(item)
-        buf_len += len(item['x']) + len(item['t']) + 40
-        if buf_len >= SHARD_CHARS and len(shard_files) < 15:
-            name = 's%d.json' % len(shard_files)
-            with open(os.path.join(shard_dir, name), 'w', encoding='utf-8') as f:
-                json.dump(buf, f, ensure_ascii=False, separators=(',', ':'))
-            total_full_bytes += os.path.getsize(os.path.join(shard_dir, name))
-            shard_files.append(name)
-            buf = []
-            buf_len = 0
-    if buf:
-        name = 's%d.json' % len(shard_files)
-        with open(os.path.join(shard_dir, name), 'w', encoding='utf-8') as f:
-            json.dump(buf, f, ensure_ascii=False, separators=(',', ':'))
-        total_full_bytes += os.path.getsize(os.path.join(shard_dir, name))
-        shard_files.append(name)
-
-    with open(os.path.join(DATA_DIR, 'search-manifest.json'), 'w',
-              encoding='utf-8') as f:
-        json.dump({'shards': shard_files, 'count': len(FULL),
-                   'summary': 'search/summaries.json'},
-                  f, separators=(',', ':'))
-
-    # 首页
-    with open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(build_index_html(arts, cats, years))
-
-    # 关于本站
     settings = load_settings()
-    if 'about' in settings:
-        with open(os.path.join(OUT, 'about.html'), 'w',
-                  encoding='utf-8', newline='\n') as f:
-            f.write(build_about_html(settings['about'], arts))
-        print('关于页: 已生成')
-    else:
-        print('关于页: 缺少 content/settings/about.md，跳过')
 
-    # sitemap / robots
-    with open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(build_sitemap(arts))
-    with open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as f:
-        f.write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % DOMAIN)
-
-    # 搜索引擎所有权验证文件（verify/ 目录下的文件原样复制到站点根目录）
+    # 搜索引擎验证文件（verify/ 目录下的文件原样复制到站点根目录）
     verify_src = os.path.join(SRC, 'verify')
     n_verify = 0
     if os.path.isdir(verify_src):
         for fn in sorted(os.listdir(verify_src)):
             fpath = os.path.join(verify_src, fn)
-            if not os.path.isfile(fpath):
-                continue
-            if not re.match(r'^[A-Za-z0-9._-]+$', fn):
+            if not os.path.isfile(fpath) or not re.match(r'^[A-Za-z0-9._-]+$', fn):
                 continue
             with open(fpath, 'rb') as fr:
                 blob = fr.read()
@@ -1031,13 +1466,17 @@ def main():
     if n_verify:
         print('验证文件: %d 个已复制到站点根目录' % n_verify)
 
-    print('详情页: %d   列表索引: %d' % (n, len(idx)))
-    print('检索索引: 摘要 %.1fMB（常驻） + 全文 %.1fMB / %d 分片（按需）'
-          % (brief_bytes / 1024 / 1024, total_full_bytes / 1024 / 1024,
-             len(shard_files)))
+    for lang in LANGS:
+        r = build_one_lang(lang, settings)
+        if lang.get('stub'):
+            print('%s: 选择页已生成（文章翻译待做）' % lang['full'])
+        else:
+            print('%s: 详情页 %d   摘要索引 %.1fMB + 全文 %.1fMB / %d 分片'
+                  % (lang['full'], r['n'], r['brief'] / 1024 / 1024,
+                     r['full'] / 1024 / 1024, r['shards']))
+
     print('构建完成')
-    return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(main() or 0)

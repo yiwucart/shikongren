@@ -189,6 +189,55 @@ body {
 .home { font-size: 14px; color: var(--ink-2); text-decoration: none; }
 .home:hover { color: var(--accent); }
 
+/* ---------- 语言切换器（简 / 繁 / EN） ----------
+   位置：首页在 eyebrow 下方；详情页/关于页在顶栏返回链接右侧。
+   窄屏（≤560px）改为固定在右下角悬浮，不占正文空间。 */
+.langsw {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0 0 18px;
+  padding: 3px;
+  background: rgba(255, 255, 255, .78);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.langsw a {
+  display: inline-block;
+  padding: 3px 11px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.langsw a:hover { background: var(--accent-soft); color: var(--accent); }
+.langsw a.on {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.langsw a.on:hover { background: var(--accent); color: #fff; }
+.langsw .cur { opacity: .6; font-weight: 400; }
+/* 顶栏里的切换器：跟返回链接同一行，不额外占一行 */
+.top .langsw { margin: 0; float: right; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+
+@media (max-width: 560px) {
+  .langsw {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    margin: 0;
+    z-index: 40;
+    background: rgba(255, 255, 255, .95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+  }
+  .top .langsw { position: static; box-shadow: none; }
+}
+
 /* .post 与 .page 都带 wrap 类，左右内边距写死在这里，
    不依赖 .wrap 的 padding —— 后者在移动端会被其他规则覆盖成 0。 */
 .post { padding: 34px 24px 60px; max-width: 780px; }

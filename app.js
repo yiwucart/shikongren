@@ -31,8 +31,26 @@
   var fullLoading = false;
   var loadFailed = false;
 
+  // 索引按语言各有一份（简体在 /data/，繁體在 /tc/data/，英文在 /en/data/）。
+  // 页面在哪个语言目录下，就加载哪个语言的索引 —— 不能写死 /data/，
+  // 否则繁体页会去拉简体的索引，搜出来的结果是简体。
+  var DATA_BASE = (function () {
+    // app.js 被 <script src="app.js"> 或 "../app.js" 引入，
+    // 用当前 script 的 URL 反推站点根，再拼语言前缀。
+    var me = document.currentScript;
+    var src = (me && me.src) || '';
+    // .../app.js 或 .../tc/../app.js —— 统一解析成绝对路径再取目录
+    var m = src.match(/^(.*\/)(?:[a-z-]+\/)?app\.js/);
+    var root = m ? m[1] : '/';
+    // 从 <html lang> 判断当前语言：zh-Hant -> tc，en -> en
+    var lang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+    var dir = lang.indexOf('hant') >= 0 ? 'tc/'
+             : lang.indexOf('en') === 0 ? 'en/' : '';
+    return root + dir + 'data/';
+  })();
+
   function loadManifest() {
-    return fetch('/data/search-manifest.json', { cache: 'force-cache' })
+    return fetch(DATA_BASE + 'search-manifest.json', { cache: 'force-cache' })
       .then(function (r) { return r.json(); });
   }
 
@@ -42,9 +60,9 @@
     sumLoading = true;
     return loadManifest()
       .then(function (mf) {
-        // manifest 里的 summary 路径相对于 /data/（如 search/summaries.json）
+        // manifest 里的 summary 路径相对于该语言的 data/（如 search/summaries.json）
         var rel = mf.summary || 'search/summaries.json';
-        var url = rel.charAt(0) === '/' ? rel : '/data/' + rel;
+        var url = rel.charAt(0) === '/' ? rel : DATA_BASE + rel;
         return fetch(url, { cache: 'force-cache' }).then(function (r) { return r.json(); });
       })
       .then(function (data) {
@@ -66,7 +84,7 @@
     return loadManifest()
       .then(function (mf) {
         return Promise.all(mf.shards.map(function (name) {
-          return fetch('/data/search/' + name, { cache: 'force-cache' })
+          return fetch(DATA_BASE + 'search/' + name, { cache: 'force-cache' })
             .then(function (r) { return r.json(); });
         }));
       })
@@ -81,6 +99,50 @@
       });
   }
 
+  // ---------------------------------------------------------------- 繁简互搜
+  // 繁体页的正文是繁体（「陽宅」），但很多读者（包括台湾用户习惯打简体）
+  // 会输入「阳宅」。tcmap.json 是从**本站真实语料**用 OpenCC 提取的
+  // 1194 对正向 / 1238 对反向单字映射，只覆盖本站实际用到的字。
+  // 做法：把用户输入的每个 token 同时展开成「原形 + 异体形」，
+  //       一个 token 只要命中任意一种写法就算命中。
+  var TCMAP = null;
+  var tcmapLoading = false;
+  function loadTcmap() {
+    if (TCMAP || tcmapLoading) return Promise.resolve(TCMAP);
+    tcmapLoading = true;
+    return fetch(DATA_BASE + 'tcmap.json', { cache: 'force-cache' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { TCMAP = d; return TCMAP; })
+      .catch(function () { TCMAP = null; return null; });
+  }
+
+  var PAGE_LANG = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+  var IS_HANT = PAGE_LANG.indexOf('hant') >= 0;
+  // 索引渲染出的卡片是「重新生成」的，得自己补上语言前缀，
+  // 否则繁体页里点索引结果会跳到 /posts/...（简体页）
+  var POSTS_PREFIX = IS_HANT ? '/tc/posts/' : '/posts/';
+
+  // 单字映射转换（逐字替换，够用且零依赖）
+  function mapChars(s, table) {
+    if (!table) return s;
+    var out = '';
+    for (var i = 0; i < s.length; i++) {
+      out += (table[s.charAt(i)] || s.charAt(i));
+    }
+    return out;
+  }
+
+  // 把 token 展开成等价写法列表：本字 + 另一侧写法
+  function variants(tok) {
+    if (!TCMAP || !IS_HANT) return [tok];
+    var t2s = mapChars(tok, TCMAP.t2s);
+    var s2t = mapChars(tok, TCMAP.s2t);
+    var vs = [tok];
+    if (t2s !== tok) vs.push(t2s);
+    if (s2t !== tok) vs.push(s2t);
+    return vs;
+  }
+
   // 关键词分段：空格分隔的多词按 AND 处理
   function tokens(kw) {
     return norm(kw).split(' ').filter(function (t) { return t.length > 0; });
@@ -88,18 +150,30 @@
 
   function matchAll(hay, toks) {
     for (var i = 0; i < toks.length; i++) {
-      if (hay.indexOf(toks[i]) < 0) return false;
+      var vs = variants(toks[i]);
+      var ok = false;
+      for (var j = 0; j < vs.length; j++) {
+        if (hay.indexOf(vs[j]) >= 0) { ok = true; break; }
+      }
+      if (!ok) return false;
     }
     return true;
+  }
+
+  // 变体感知的高亮与片段：把命中位置的写法都包上 <mark>
+  function variantsWithToks(toks) {
+    var out = [];
+    toks.forEach(function (t) { variants(t).forEach(function (v) { out.push(v); }); });
+    return out;
   }
 
   // 从正文里截出命中片段
   function snippet(text, toks, len) {
     var lo = -1;
-    for (var i = 0; i < toks.length; i++) {
-      var p = text.indexOf(toks[i]);
+    variantsWithToks(toks).forEach(function (v) {
+      var p = text.indexOf(v);
       if (p >= 0 && (lo < 0 || p < lo)) lo = p;
-    }
+    });
     if (lo < 0) return text.slice(0, len) + '…';
     var start = Math.max(0, lo - 30);
     var out = text.slice(start, start + len);
@@ -114,9 +188,13 @@
 
   function mark(text, toks) {
     var out = esc(text);
-    toks.forEach(function (t) {
-      if (!t) return;
-      var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    // 先按长度降序替换，避免短词先替换后把长词的 <mark> 拆开
+    var vs = variantsWithToks(toks).sort(function (a, b) { return b.length - a.length; });
+    var seen = {};
+    vs.forEach(function (t) {
+      if (!t || seen[t]) return;
+      seen[t] = 1;
+      var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(?!<mark>)', 'gi');
       out = out.replace(re, '<mark>$1</mark>');
     });
     return out;
@@ -142,7 +220,7 @@
   function renderHits(hits, kw, label) {
     var toks = tokens(kw);
     var html = hits.map(function (h) {
-      return '<a class="card" href="/posts/' + encodeURIComponent(h.s + '.html') + '">' +
+      return '<a class="card" href="' + POSTS_PREFIX + encodeURIComponent(h.s + '.html') + '">' +
         '<span class="c">' + esc(h.c) + '</span>' +
         '<h3>' + mark(h.t, toks) + '</h3>' +
         '<p class="ex">' + mark(snippet(h.x, toks, 120), toks) + '</p>' +
@@ -173,10 +251,15 @@
         return matchAll(h, toks);
       });
       list.sort(function (a, b) {
-        var k = toks[0] || '';
-        var ta = norm(a.querySelector('h3').textContent).indexOf(k) >= 0 ? 0 : 1;
-        var tb = norm(b.querySelector('h3').textContent).indexOf(k) >= 0 ? 0 : 1;
-        return ta - tb;
+        var vs = variantsWithToks(toks);
+        function hasTitle(el) {
+          var t = norm(el.querySelector('h3').textContent);
+          for (var i = 0; i < vs.length; i++) {
+            if (t.indexOf(vs[i]) >= 0) return true;
+          }
+          return false;
+        }
+        return (hasTitle(a) ? 0 : 1) - (hasTitle(b) ? 0 : 1);
       });
     }
     render(list, kw, 'instant');
@@ -275,6 +358,9 @@
       applyInstant('');
     }
   });
+
+  // 繁体页提前把映射表拉下来，用户第一次输入就能繁简互搜
+  if (IS_HANT) loadTcmap();
 
   render(all, '');
 })();
