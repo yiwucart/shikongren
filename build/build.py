@@ -1013,6 +1013,24 @@ def main():
     with open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('User-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n' % DOMAIN)
 
+    # 搜索引擎所有权验证文件（verify/ 目录下的文件原样复制到站点根目录）
+    verify_src = os.path.join(SRC, 'verify')
+    n_verify = 0
+    if os.path.isdir(verify_src):
+        for fn in sorted(os.listdir(verify_src)):
+            fpath = os.path.join(verify_src, fn)
+            if not os.path.isfile(fpath):
+                continue
+            if not re.match(r'^[A-Za-z0-9._-]+$', fn):
+                continue
+            with open(fpath, 'rb') as fr:
+                blob = fr.read()
+            with open(os.path.join(OUT, fn), 'wb') as fw:
+                fw.write(blob)
+            n_verify += 1
+    if n_verify:
+        print('验证文件: %d 个已复制到站点根目录' % n_verify)
+
     print('详情页: %d   列表索引: %d' % (n, len(idx)))
     print('检索索引: 摘要 %.1fMB（常驻） + 全文 %.1fMB / %d 分片（按需）'
           % (brief_bytes / 1024 / 1024, total_full_bytes / 1024 / 1024,
