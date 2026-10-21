@@ -439,7 +439,38 @@ def load_settings():
     return out
 
 
+def _load_verify_metas():
+    """从 content/settings/verification.md 提取搜索引擎验证用的 meta 标签。
+
+    文件里「## meta 标签」小节下、每行一个完整的 <meta ...> 标签原文。
+    这些标签会被注入到所有页面的 <head>，用于 Google / 必应 / 百度
+    的「HTML 标签」方式验证站点所有权。
+    """
+    p = os.path.join(SETTINGS_DIR, 'verification.md')
+    if not os.path.exists(p):
+        return []
+    body = parse_frontmatter(read_text(p))[1]
+    # 只取「## meta 标签」到下一个 ## 之间的内容
+    m = re.search(r'##\s*meta\s*标签(.*?)(?=\n##\s|\Z)', body, re.S)
+    if not m:
+        return []
+    out = []
+    for line in m.group(1).split('\n'):
+        s = line.strip()
+        if not s.startswith('<meta'):
+            continue
+        # 注释行 <!-- ... --> 里的内容要跳过
+        if s.startswith('<!--'):
+            continue
+        out.append(s)
+    return out
+
+
 # ---------------------------------------------------------------- 输出
+
+# 搜索引擎验证 meta 标签（来自 content/settings/verification.md）
+VERIFY_BLOCK = '\n'.join(_load_verify_metas())
+
 
 def build_index_html(arts, cats, years):
     cards = []
@@ -474,6 +505,7 @@ def build_index_html(arts, cats, years):
 <meta property="og:site_name" content="%s">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
+%s
 </head>
 <body>
 <header class="hero">
@@ -534,7 +566,7 @@ def build_index_html(arts, cats, years):
 
 <script src="app.js?v=%s"></script>
 </body>
-</html>''' % (len(arts), STAMP, DOMAIN, DOMAIN, SITE_NAME,
+</html>''' % (len(arts), STAMP, DOMAIN, DOMAIN, SITE_NAME, VERIFY_BLOCK,
               len(arts), n_cat, len(years),
               len(arts),
               min(years) if years else '', max(years) if years else '',
@@ -559,6 +591,7 @@ POST_TPL = '''<!doctype html>
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="../style.css?v={stamp}">
+{verify}
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -621,7 +654,8 @@ def build_post_html(a, by_cat):
         title=esc(a['title']), desc=esc(desc), cat=esc(CATS.get(a['category'], a['category'])[0]),
         date=esc(a['date']), words=a['words'], author=esc(a['author']),
         url_line=url_line, tags=tg, site=SITE_NAME, canonical=canonical,
-        content=md_to_html(a['body']), related=rh, stamp=STAMP)
+        content=md_to_html(a['body']), related=rh, stamp=STAMP,
+        verify=VERIFY_BLOCK)
 
 
 ABOUT_TPL = '''<!doctype html>
@@ -640,6 +674,7 @@ ABOUT_TPL = '''<!doctype html>
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="{canonical}">
 <link rel="stylesheet" href="style.css?v={stamp}">
+{verify}
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -807,7 +842,8 @@ def build_about_html(page, arts):
     return ABOUT_TPL.format(
         title=esc(title), subtitle=esc(subtitle), desc=esc(desc),
         site=SITE_NAME, canonical=canonical,
-        content=_about_blocks(body), n_arts=len(arts), stamp=STAMP)
+        content=_about_blocks(body), n_arts=len(arts), stamp=STAMP,
+        verify=VERIFY_BLOCK)
 
 
 def build_sitemap(arts):
