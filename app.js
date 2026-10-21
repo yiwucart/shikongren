@@ -42,7 +42,9 @@
     sumLoading = true;
     return loadManifest()
       .then(function (mf) {
-        var url = '/' + (mf.summary || 'search/summaries.json');
+        // manifest 里的 summary 路径相对于 /data/（如 search/summaries.json）
+        var rel = mf.summary || 'search/summaries.json';
+        var url = rel.charAt(0) === '/' ? rel : '/data/' + rel;
         return fetch(url, { cache: 'force-cache' }).then(function (r) { return r.json(); });
       })
       .then(function (data) {
