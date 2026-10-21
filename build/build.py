@@ -1357,14 +1357,30 @@ def build_one_lang(lang, settings):
               encoding='utf-8', newline='\n') as f:
         f.write(build_sitemap(arts, lang))
 
+    # sitemapindex.xml：根目录一份，汇总三语 sitemap
+    if not lang['dir']:
+        with open(os.path.join(out_dir, 'sitemapindex.xml'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(build_sitemap_index())
+
     # robots.txt：只根目录一份，指向主 sitemap。
     # 站点在百度资源平台验证的是 https://www.shikongren.com，
     # 所以这里必须用 www 域名，否则百度会当成两个不同站点。
     if not lang['dir']:
         with open(os.path.join(out_dir, 'robots.txt'), 'w',
                   encoding='utf-8', newline='\n') as f:
-            f.write('User-agent: *\nAllow: /\n\n'
-                    'Sitemap: %s/sitemap.xml\n' % DOMAIN)
+            f.write(
+                # 显式放行百度爬虫。理论上 User-agent: * 已经覆盖，
+                # 但站长平台的「Robots 检查」工具按 UA 精确匹配，
+                # 显式写一段 Baiduspider 能让检查结果直接显示「允许」，
+                # 也避免以后有人加了别的 Disallow 规则误伤。
+                'User-agent: Baiduspider\n'
+                'Allow: /\n\n'
+                'User-agent: Baiduspider-image\n'
+                'Allow: /\n\n'
+                'User-agent: *\n'
+                'Allow: /\n\n'
+                'Sitemap: %s/sitemap.xml\n' % DOMAIN)
 
     # 把语言信息写进 manifest，前端据此知道去哪加载、当前是什么语言
     mpath = os.path.join(data_dir, 'search-manifest.json')
@@ -1377,6 +1393,22 @@ def build_one_lang(lang, settings):
         json.dump(manifest, f, ensure_ascii=False, separators=(',', ':'))
 
     return dict(n=len(arts), brief=brief_bytes, full=full_bytes, shards=n_shard)
+
+
+def build_sitemap_index():
+    """生成 sitemapindex.xml —— 汇总简 / 繁 / en 三份 sitemap。
+
+    百度 sitemap 提交有「天级提交配额」和「存量文件配额」两重限制，
+    未备案新站的天级配额往往是 0。提交一个 sitemapindex 比提交三份
+    sitemap 更省配额（存量文件名额按份数算）。
+    """
+    items = []
+    for l in LANGS:
+        loc = url_for(l, 'sitemap.xml')
+        items.append('  <sitemap><loc>%s</loc></sitemap>' % loc)
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + '\n'.join(items) + '\n</sitemapindex>\n')
 
 
 def build_search_index(arts, data_dir):
