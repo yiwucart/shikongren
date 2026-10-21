@@ -1378,6 +1378,12 @@ def build_one_lang(lang, settings):
                 'Allow: /\n\n'
                 'User-agent: Baiduspider-image\n'
                 'Allow: /\n\n'
+                'User-agent: Bingbot\n'
+                'Allow: /\n\n'
+                'User-agent: Googlebot\n'
+                'Allow: /\n\n'
+                'User-agent: Googlebot-Image\n'
+                'Allow: /\n\n'
                 'User-agent: *\n'
                 'Allow: /\n\n'
                 'Sitemap: %s/sitemap.xml\n' % DOMAIN)
