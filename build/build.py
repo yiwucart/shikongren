@@ -705,6 +705,115 @@ def _load_verify_metas():
 VERIFY_BLOCK = '\n'.join(_load_verify_metas())
 
 
+def _ld_json(data):
+    """把 dict 序列化成可安全嵌入 <script> 的 JSON-LD 字符串。"""
+    return json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
+
+
+def ld_home(lang, canonical, title, desc, n_posts):
+    """首页结构化数据：WebSite + SearchAction + ItemList。
+
+    Google 会把 SearchAction 当作站点的搜索入口展示；
+    ItemList 让首页的 690 篇文章以列表富结果呈现。
+    """
+    site_name = '时空人公益推广'
+    data = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'WebSite',
+                '@id': DOMAIN + '/#website',
+                'name': site_name,
+                'alternateName': '吕氏时空人',
+                'url': canonical,
+                'inLanguage': lang.get('html_lang', 'zh-CN'),
+                'publisher': {'@id': DOMAIN + '/#person'},
+                'potentialAction': {
+                    '@type': 'SearchAction',
+                    'target': {
+                        '@type': 'EntryPoint',
+                        'urlTemplate': canonical + '?q={search_term_string}',
+                    },
+                    'query-input': 'required name=search_term_string',
+                },
+            },
+            {
+                '@type': 'Person',
+                '@id': DOMAIN + '/#person',
+                'name': '吕文艺',
+                'url': canonical + 'about.html',
+                'description': '吕氏时空人理论技术作者',
+            },
+        ],
+    }
+    return _ld_json(data)
+
+
+def ld_post(a, canonical, title, desc, lang):
+    """文章详情页结构化数据：Article / BlogPosting + BreadcrumbList。
+
+    datePublished / dateModified 用文章的原始日期，
+    有了它 Google 才有资格给文章加「日期」富结果标签。
+    """
+    d = a['date'] or '2026-01-01'
+    date_iso = d + 'T00:00:00+08:00'
+    data = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'BlogPosting',
+                '@id': canonical + '#article',
+                'mainEntityOfPage': {'@type': 'WebPage', '@id': canonical},
+                'headline': title[:110],
+                'description': desc,
+                'datePublished': date_iso,
+                'dateModified': date_iso,
+                'inLanguage': lang.get('html_lang', 'zh-CN'),
+                'wordCount': a.get('words', 0),
+                'author': {
+                    '@type': 'Person',
+                    'name': '吕文艺',
+                    'url': DOMAIN + '/about.html',
+                },
+                'publisher': {
+                    '@type': 'Organization',
+                    'name': '时空人公益推广',
+                    'url': DOMAIN + '/',
+                },
+                'isPartOf': {
+                    '@type': 'Blog',
+                    'name': '时空人公益推广',
+                    'url': DOMAIN + '/',
+                },
+            },
+            {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {'@type': 'ListItem', 'position': 1, 'name': '首页', 'item': DOMAIN + '/'},
+                    {'@type': 'ListItem', 'position': 2, 'name': '关于', 'item': DOMAIN + '/about.html'},
+                    {'@type': 'ListItem', 'position': 3, 'name': title[:60]},
+                ],
+            },
+        ],
+    }
+    return _ld_json(data)
+
+
+def ld_page(canonical, title, desc, lang):
+    """关于页 / EN 页等普通页面：WebPage + BreadcrumbList。"""
+    data = {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        '@id': canonical + '#webpage',
+        'url': canonical,
+        'name': title,
+        'description': desc,
+        'inLanguage': lang.get('html_lang', 'zh-CN'),
+        'isPartOf': {'@type': 'WebSite', 'url': DOMAIN + '/'},
+    }
+    return _ld_json(data)
+
+
 def build_index_html(arts, cats, years, lang):
     T = ui(lang)
     L = cat_labels(lang)
@@ -755,7 +864,11 @@ def build_index_html(arts, cats, years, lang):
         follow=T['follow'], wechat=T['wechat'], tel=T['tel'],
         about_site=T['about_site'], sitemap=T['sitemap'], cms=T['cms'],
         copy=T['copy'],
-        pfx=pfx)
+        pfx=pfx,
+        ld=ld_home(lang, url_for(lang, 'index.html'),
+                   '%s · %s' % (T['h1'], T['subtitle']),
+                   '吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。' % len(arts),
+                   len(arts)))
 
 
 INDEX_TPL = '''<!doctype html>
@@ -770,11 +883,17 @@ INDEX_TPL = '''<!doctype html>
 {alt}
 <meta property="og:url" content="{canonical}">
 <meta property="og:type" content="website">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="{og}">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{desc}">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 {verify}
+<script type="application/ld+json">{ld}</script>
 </head>
 <body>
 <header class="hero">
@@ -853,12 +972,19 @@ POST_TPL = '''<!doctype html>
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="{og}">
 <meta property="article:author" content="{author}">
+<meta property="article:published_time" content="{pubdate}">
+<meta property="article:modified_time" content="{pubdate}">
+<meta property="article:section" content="{category}">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{desc}">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="{canonical}">
 {alt}
 <link rel="stylesheet" href="{pfx}style.css?v={stamp}">
 {verify}
+<script type="application/ld+json">{ld}</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -935,7 +1061,11 @@ def build_post_html(a, by_cat, lang):
         source=T['source'], source_v=T['source_v'], stmt=T['stmt'], stmt_v=T['stmt_v'],
         content=md_to_html(a['body']), related=rh, stamp=STAMP,
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
-        about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'])
+        about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'],
+        ld=ld_post(a, url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
+                   a['title'], desc, lang),
+        pubdate=(a['date'] or '2026-01-01'),
+        category=cat_display(lang, a['category'], a['category']))
 
 
 ABOUT_TPL = '''<!doctype html>
@@ -953,10 +1083,12 @@ ABOUT_TPL = '''<!doctype html>
 <meta property="og:locale" content="{og}">
 <meta name="twitter:card" content="summary">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="{canonical}">
 {alt}
 <link rel="stylesheet" href="{pfx}style.css?v={stamp}">
 {verify}
+<script type="application/ld+json">{ld}</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -1139,7 +1271,8 @@ def build_about_html(page, arts, lang):
         content=_about_blocks(body), stamp=STAMP,
         verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
         back_home=T['back_home'], sitemap=T['sitemap'],
-        copy=T['copy_n'] % len(arts))
+        copy=T['copy_n'] % len(arts),
+        ld=ld_page(url_for(lang, 'about.html'), title, desc, lang))
 
 
 EN_TPL = '''<!doctype html>
@@ -1158,7 +1291,9 @@ EN_TPL = '''<!doctype html>
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 {verify}
+<script type="application/ld+json">{ld}</script>
 </head>
 <body>
 <header class="top"><div class="wrap">
@@ -1289,7 +1424,11 @@ def build_one_lang(lang, settings):
                 canonical=url_for(lang, 'index.html'),
                 alt=hreflang_tags(lang, 'index.html'),
                 langsw=build_switcher(lang, 'index.html'),
-                verify=VERIFY_BLOCK))
+                verify=VERIFY_BLOCK,
+                ld=ld_page(url_for(lang, 'index.html'),
+                           'Shikongren Archive · Lü Wenyi\'s works',
+                           'An archive and search index of Lü Wenyi\'s original articles.',
+                           lang)))
         with open(os.path.join(out_dir, 'about.html'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(EN_TPL.format(
@@ -1297,7 +1436,11 @@ def build_one_lang(lang, settings):
                 canonical=url_for(lang, 'about.html'),
                 alt=hreflang_tags(lang, 'about.html'),
                 langsw=build_switcher(lang, 'about.html'),
-                verify=VERIFY_BLOCK))
+                verify=VERIFY_BLOCK,
+                ld=ld_page(url_for(lang, 'about.html'),
+                           'Shikongren Archive · Lü Wenyi\'s works',
+                           'An archive and search index of Lü Wenyi\'s original articles.',
+                           lang)))
         with open(os.path.join(out_dir, 'sitemap.xml'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(build_sitemap([], lang))
