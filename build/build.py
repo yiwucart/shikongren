@@ -705,6 +705,24 @@ def _load_verify_metas():
 VERIFY_BLOCK = '\n'.join(_load_verify_metas())
 
 
+def cover_image(body, lang, fallback='/img/uploads/luwenyi-avatar.jpg'):
+    """取正文第一张图片的**绝对 URL**，用作 og:image。
+
+    og:image 必须是绝对地址（Google / 微信 / Facebook 都不会去解析相对路径），
+    所以这里把正文里的相对 img src 转成站点绝对 URL。
+    没有图就退回作者头像。
+    """
+    m = re.search(r'<img[^>]+src="([^"]+)"', body or '')
+    src = m.group(1) if m else fallback
+    if src.startswith('http://') or src.startswith('https://'):
+        return src
+    if src.startswith('/'):
+        return DOMAIN + src
+    # 正文里是相对路径（../img/xxx），去掉 ../ 前缀后按站点根拼
+    rel = re.sub(r'^(\.\./)+', '', src)
+    return DOMAIN + '/' + rel
+
+
 def _ld_json(data):
     """把 dict 序列化成可安全嵌入 <script> 的 JSON-LD 字符串。"""
     return json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
@@ -868,7 +886,8 @@ def build_index_html(arts, cats, years, lang):
         ld=ld_home(lang, url_for(lang, 'index.html'),
                    '%s · %s' % (T['h1'], T['subtitle']),
                    '吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。' % len(arts),
-                   len(arts)))
+                   len(arts)),
+        cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
 
 
 INDEX_TPL = '''<!doctype html>
@@ -887,9 +906,12 @@ INDEX_TPL = '''<!doctype html>
 <meta property="og:description" content="{desc}">
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="{og}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{cover}">
+<meta property="og:image" content="{cover}">
+<meta property="og:image:alt" content="{title}">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 {verify}
@@ -975,9 +997,12 @@ POST_TPL = '''<!doctype html>
 <meta property="article:published_time" content="{pubdate}">
 <meta property="article:modified_time" content="{pubdate}">
 <meta property="article:section" content="{category}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{cover}">
+<meta property="og:image" content="{cover}">
+<meta property="og:image:alt" content="{title}">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="{canonical}">
@@ -1065,7 +1090,8 @@ def build_post_html(a, by_cat, lang):
         ld=ld_post(a, url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
                    a['title'], desc, lang),
         pubdate=(a['date'] or '2026-01-01'),
-        category=cat_display(lang, a['category'], a['category']))
+        category=cat_display(lang, a['category'], a['category']),
+        cover=cover_image(a['body'], lang))
 
 
 ABOUT_TPL = '''<!doctype html>
@@ -1081,7 +1107,9 @@ ABOUT_TPL = '''<!doctype html>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="{og}">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{cover}">
+<meta property="og:image" content="{cover}">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <link rel="canonical" href="{canonical}">
@@ -1272,7 +1300,8 @@ def build_about_html(page, arts, lang):
         verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
         back_home=T['back_home'], sitemap=T['sitemap'],
         copy=T['copy_n'] % len(arts),
-        ld=ld_page(url_for(lang, 'about.html'), title, desc, lang))
+        ld=ld_page(url_for(lang, 'about.html'), title, desc, lang),
+        cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
 
 
 EN_TPL = '''<!doctype html>
@@ -1289,7 +1318,9 @@ EN_TPL = '''<!doctype html>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{cover}">
+<meta property="og:image" content="{cover}">
 <meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 {verify}
@@ -1428,7 +1459,8 @@ def build_one_lang(lang, settings):
                 ld=ld_page(url_for(lang, 'index.html'),
                            'Shikongren Archive · Lü Wenyi\'s works',
                            'An archive and search index of Lü Wenyi\'s original articles.',
-                           lang)))
+                           lang),
+                cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg'))
         with open(os.path.join(out_dir, 'about.html'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(EN_TPL.format(
@@ -1440,7 +1472,8 @@ def build_one_lang(lang, settings):
                 ld=ld_page(url_for(lang, 'about.html'),
                            'Shikongren Archive · Lü Wenyi\'s works',
                            'An archive and search index of Lü Wenyi\'s original articles.',
-                           lang)))
+                           lang),
+                cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg'))
         with open(os.path.join(out_dir, 'sitemap.xml'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(build_sitemap([], lang))
