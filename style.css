@@ -328,6 +328,83 @@ body {
 }
 .qa .a { font-size: 15px; line-height: 1.8; color: var(--ink-2); }
 
+/* 履历 / 著作 / 课程体系 / 联系方式 */
+.bio, .works, .courses, .contact { margin: 0 0 1.6em; }
+.bio p, .works p, .courses p, .contact p {
+  margin: 0 0 .7em;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+.bio ul, .works ul {
+  margin: 0 0 1.1em;
+  padding-left: 1.3em;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+.bio li, .works li { margin: 0 0 .45em; }
+.bio strong, .works strong { color: var(--ink); font-weight: 600; }
+
+/* 课程体系表格：横向可滚动，避免手机上撑破布局 */
+.courses .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.courses table {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 0 0 1.2em;
+}
+.courses th, .courses td {
+  border: 1px solid var(--line);
+  padding: 9px 12px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.7;
+}
+.courses th { background: var(--accent-soft); font-weight: 600; white-space: nowrap; }
+.courses td:first-child { color: var(--ink); font-weight: 500; }
+
+/* 联系方式：突出手机号 */
+.contact {
+  padding: 22px 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.contact p:last-child { margin-bottom: 0; }
+.contact .tel {
+  display: inline-block;
+  margin: .2em 0 .1em;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--accent);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+.contact .tel:hover { text-decoration: underline; }
+.contact .telnote {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 0 0 1em;
+}
+
+/* 页脚里的联系方式：不要卡片化，字号也收敛 */
+.foot .contact {
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  margin: 0 0 8px;
+}
+.foot .contact .tel {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+.foot .contact p:last-child { margin-bottom: 8px; }
+
 /* 首页作者小卡 */
 .herobio {
   display: flex;

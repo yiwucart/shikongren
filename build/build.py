@@ -218,6 +218,9 @@ def _inline(text):
         return '<img src="%s" alt="%s"%s loading="lazy">' % (src, alt, style)
 
     text = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', _img, text)
+    # 电话链接（tel:）—— 不加 target="_blank"
+    text = re.sub(r'\[([^\]]+)\]\((tel:[^)\s]+)\)',
+                  r'<a class="tel" href="\2">\1</a>', text)
     # 链接
     text = re.sub(r'\[([^\]]+)\]\((https?://[^)\s]+)\)',
                   r'<a href="\2" target="_blank" rel="noopener">\1</a>', text)
@@ -519,6 +522,7 @@ def build_index_html(arts, cats, years):
   <div class="contact">
     <p>关注原作者公众号「时空坐标」，获取最新文章</p>
     <p>微信公众号：<b>时空坐标</b></p>
+    <p>联系原作者：吕文艺老师 <a class="tel" href="tel:18601944999">18601944999</a></p>
   </div>
   <p class="footlinks">
     <a href="about.html">关于本站</a> ·
@@ -583,6 +587,9 @@ POST_TPL = '''<!doctype html>
 </article>
 
 <footer class="wrap foot">
+  <div class="contact">
+    <p>联系原作者：吕文艺老师 <a class="tel" href="tel:18601944999">18601944999</a> · 微信公众号「时空坐标」</p>
+  </div>
   <p><a href="../about.html">关于本站</a> · <a href="../index.html">← 返回首页</a></p>
   <p class="copy">© 时空人公益推广 · shikongren.com · 内容仅供学习参考</p>
 </footer>
@@ -666,6 +673,11 @@ def _about_blocks(body):
       <div class="qrbox"> 二维码区（居中）
       <div class="feat">  功能介绍
       <div class="faq">   常见问答
+      <div class="author">作者卡
+      <div class="bio">   履历（列表）
+      <div class="works"> 著作（列表）
+      <div class="courses">课程体系（含表格）
+      <div class="contact"> 联系方式
 
     md_to_html 会把裸 HTML 转义，所以这里先把整块抠出来占位，
     单独走markdown 渲染（块内标题降级、Q/A 转问答样式），
@@ -703,7 +715,7 @@ def _about_blocks(body):
 
     out = []
     pos = 0
-    pat = re.compile(r'<div class="(qrbox|feat|faq|author)">')
+    pat = re.compile(r'<div class="(qrbox|feat|faq|author|bio|works|courses|contact)">')
     while True:
         m = pat.search(body, pos)
         if not m:
@@ -743,14 +755,19 @@ def _about_blocks(body):
             raw_html.append(m.group(0))
             return '@@HTML%d@@' % (len(raw_html) - 1)
 
-        # 保留 <img ...>、<div ...>、</div> 这类块级结构标签
+        # 保留 <img ...>、<div ...>、</div>、<a ...> 这类块级结构标签
         # 占位符用 @@ 包裹 —— md_to_html 的 esc() 不会动 @ 和数字，
         # 而 \x00 控制符会被转义成可见字符。
         inner2 = re.sub(
-            r'<img\b[^>]*>|</?div\b[^>]*>',
+            r'<img\b[^>]*>|</?div\b[^>]*>|</?a\b[^>]*>',
             keep_html, inner, flags=re.I)
 
         sub = md_to_html(inner2, img_prefix='')
+        # 课程体系里的表格包一层横向滚动容器，手机上不撑破布局
+        if '<table>' in sub:
+            sub = sub.replace('<table>',
+                              '<div class="tablewrap"><table>')
+            sub = sub.replace('</table>', '</table></div>')
         # 块内 h3 降级为 h4
         sub = re.sub(r'<h3>(.*?)</h3>', r'<h4>\1</h4>', sub)
         # Q/A 问答对
