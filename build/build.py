@@ -773,6 +773,7 @@ INDEX_TPL = '''<!doctype html>
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="{og}">
 <meta name="twitter:card" content="summary">
+<meta name="baidu-site-verification" content="codeva-m8NOGhhwKD" />
 {verify}
 </head>
 <body>
@@ -853,6 +854,7 @@ POST_TPL = '''<!doctype html>
 <meta property="og:locale" content="{og}">
 <meta property="article:author" content="{author}">
 <meta name="twitter:card" content="summary">
+<meta name="baidu-site-verification" content="codeva-m8NOGhhwKD" />
 <link rel="canonical" href="{canonical}">
 {alt}
 <link rel="stylesheet" href="{pfx}style.css?v={stamp}">
@@ -950,6 +952,7 @@ ABOUT_TPL = '''<!doctype html>
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="{og}">
 <meta name="twitter:card" content="summary">
+<meta name="baidu-site-verification" content="codeva-m8NOGhhwKD" />
 <link rel="canonical" href="{canonical}">
 {alt}
 <link rel="stylesheet" href="{pfx}style.css?v={stamp}">
@@ -1154,6 +1157,7 @@ EN_TPL = '''<!doctype html>
 <meta property="og:site_name" content="{site}">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
+<meta name="baidu-site-verification" content="codeva-m8NOGhhwKD" />
 {verify}
 </head>
 <body>
