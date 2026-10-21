@@ -645,6 +645,21 @@ def cat_labels(lang):
     return out
 
 
+def cat_display(lang, key, fallback=None):
+    """取分类显示名。
+
+    CATS 里没有的分类（如「其他」—— 有文章用了它但表里没这一项）
+    直接用原名，**不要**退化成 `L.get(k, k)[0]`：
+    那样会拿到字符串的第二个字，把「其他」截成「其」。
+    """
+    name = fallback if fallback is not None else key
+    pair = cat_labels(lang).get(key)
+    if pair:
+        return pair[0]
+    cc = get_opencc(lang)
+    return cc.convert(name) if cc else name
+
+
 def load_settings():
     out = {}
     if not os.path.isdir(SETTINGS_DIR):
@@ -706,8 +721,8 @@ def build_index_html(arts, cats, years, lang):
             '</a>' % (esc(a['slug']), esc(a['category']), esc(a['title']),
                       esc(ex), esc(a['date']), a['words'], T['words_unit']))
 
-    nav = ''.join('<a href="#cat-%s">%s <em>%d</em></a>' % (c, esc(L[c][0]), cats.get(c, 0))
-                  for c in CATS if cats.get(c, 0))
+    nav = ''.join('<a href="#cat-%s">%s <em>%d</em></a>' % (c, esc(cat_display(lang, c)), cats.get(c, 0))
+                  for c in cats if cats.get(c, 0))
 
     total_words = sum(a['words'] for a in arts)
     n_cat = len([c for c in CATS if cats.get(c, 0)])
@@ -907,7 +922,7 @@ def build_post_html(a, by_cat, lang):
     slugq = urllib.parse.quote(a['slug'] + '.html', safe='/-.')
     return POST_TPL.format(
         hlang=lang['html_lang'],
-        title=esc(a['title']), desc=esc(desc), cat=esc(L.get(a['category'], a['category'])[0]),
+        title=esc(a['title']), desc=esc(desc), cat=esc(cat_display(lang, a['cat_key'])),
         date=esc(a['date']), words=a['words'], wu=T['words_unit'],
         author=esc(a['author']), author_l=T['author'],
         url_line=url_line, tags=tg, site=T['site_name'], og=lang['og'],
