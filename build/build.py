@@ -708,19 +708,31 @@ VERIFY_BLOCK = '\n'.join(_load_verify_metas())
 def cover_image(body, lang, fallback='/img/uploads/luwenyi-avatar.jpg'):
     """取正文第一张图片的**绝对 URL**，用作 og:image。
 
-    og:image 必须是绝对地址（Google / 微信 / Facebook 都不会去解析相对路径），
-    所以这里把正文里的相对 img src 转成站点绝对 URL。
+    og:image 必须是绝对地址（Google / 微信 / Facebook 都不会去解析相对路径）。
+
+    正文源码是 **markdown**，图片写成 `![alt](/img/xxx.jpg)`；
+    渲染后的 HTML 则是 `<img src="../img/xxx.jpg">`。
+    两种写法都要认 —— 优先 markdown 源码，其次渲染后的 HTML。
     没有图就退回作者头像。
     """
-    m = re.search(r'<img[^>]+src="([^"]+)"', body or '')
-    src = m.group(1) if m else fallback
+    src = None
+    m = re.search(r'!\[[^\]]*\]\(([^)\s]+)', body or '')
+    if m:
+        src = m.group(1)
+    if not src:
+        m = re.search(r'<img[^>]+src="([^"]+)"', body or '')
+        if m:
+            src = m.group(1)
+    if not src:
+        return DOMAIN + fallback
     if src.startswith('http://') or src.startswith('https://'):
         return src
     if src.startswith('/'):
         return DOMAIN + src
-    # 正文里是相对路径（../img/xxx），去掉 ../ 前缀后按站点根拼
+    # 相对路径（../img/xxx），去掉 ../ 前缀后按站点根拼
     rel = re.sub(r'^(\.\./)+', '', src)
     return DOMAIN + '/' + rel
+
 
 
 def _ld_json(data):
