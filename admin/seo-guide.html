@@ -55,6 +55,27 @@
 </div>
 
 <div class="box">
+  <h2><span class="num">0</span>第一步：所有权验证<span class="pri">三个平台都要先过这关</span></h2>
+  <p>提交网址之前，搜索引擎会先要求证明这个站是你的。三种方式，<strong>你不用自己动手放文件</strong>，把值发我，我这边有自动通道：</p>
+  <table>
+    <tr><th>平台</th><th>推荐验证方式</th><th>你需要做的</th></tr>
+    <tr><td>百度</td><td>站点属性验证（HTML 文件 / meta 标签）</td><td>点「添加网站」→ 拿到验证文件或 meta 标签 → 发我</td></tr>
+    <tr><td>必应</td><td>把 <code>bing_verification_xxx.html</code> 放根目录</td><td>拿到文件名和内容 → 发我</td></tr>
+    <tr><td>Google</td><td>HTML 标签（最省事）</td><td>点「添加网址」→ 选「HTML 标签」→ 复制那行 meta → 发我</td></tr>
+  </table>
+  <div class="tip">
+    <strong>我这边已经打通的自动通道：</strong>
+    <ul style="margin:6px 0 0">
+      <li><strong>meta 标签</strong>（Google / 必应）→ 你把整行 <code>&lt;meta name="google-site-verification" content="..."&gt;</code> 发我，
+        我放进 <code>content/settings/verification.md</code>，构建时自动注入到<strong>所有页面</strong>的 head 里，全站生效。</li>
+      <li><strong>根目录文件</strong>（百度 / 必应 / Google HTML 文件验证）→ 你把文件内容发我，
+        我放进仓库 <code>verify/</code> 目录，构建时自动复制到<strong>网站根目录</strong>。</li>
+    </ul>
+    你只要做一件事：<strong>去后台点一下，把那段文字发我</strong>。
+  </div>
+</div>
+
+<div class="box">
   <h2><span class="num">1</span>百度收录<span class="pri">最重要，中文站靠它</span></h2>
   <ol>
     <li>打开 <a href="https://ziyuan.baidu.com/linksubmit/index" target="_blank" rel="noopener">ziyuan.baidu.com/linksubmit</a></li>
@@ -63,6 +84,8 @@
     <li>找到「<strong>普通收录</strong>」里的「sitemap 地址」输入框</li>
     <li>粘贴：<code>https://shikongren.com/sitemap.xml</code></li>
     <li>点「提交」，提示 <code>success</code> 就成了</li>
+    <li>再点左侧「<strong>手动提交</strong>」，把 <code>https://shikongren.com/</code> 和
+      <code>https://shikongren.com/about.html</code> 各提交一次（首页收录权重高，先推它）</li>
   </ol>
   <div class="tip">
     百度对个人站有<strong>资质审核</strong>：提交后可能几天内短信/站内信通知你补充备案号与联系方式。
