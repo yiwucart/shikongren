@@ -235,6 +235,8 @@ body {
     background: rgba(255, 255, 255, .95);
     box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
   }
+  /* 悬浮切换器会压住最后一张卡片，页脚留出它的高度 */
+  body { padding-bottom: 56px; }
   .top .langsw { position: static; box-shadow: none; }
 }
 

@@ -840,17 +840,17 @@ POST_TPL = '''<!doctype html>
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="{canonical}">
 {alt}
-<link rel="stylesheet" href="../style.css?v={stamp}">
+<link rel="stylesheet" href="{pfx}style.css?v={stamp}">
 {verify}
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a href="../index.html" class="home">{back}</a>
+  <a href="{pfx}index.html" class="home">{back}</a>
   {langsw}
 </div></header>
 
 <article class="wrap post">
-  <nav class="crumb"><a href="../index.html">{home}</a> / <span>{cat}</span></nav>
+  <nav class="crumb"><a href="{pfx}index.html">{home}</a> / <span>{cat}</span></nav>
   <h1>{title}</h1>
   <div class="meta">
     <span class="badge">{cat}</span>
@@ -874,7 +874,7 @@ POST_TPL = '''<!doctype html>
   <div class="contact">
     <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a> · {wechat_v}</p>
   </div>
-  <p><a href="../about.html">{about_site}</a> · <a href="../index.html">{back_home}</a></p>
+  <p><a href="{pfx}about.html">{about_site}</a> · <a href="{pfx}index.html">{back_home}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -884,11 +884,13 @@ POST_TPL = '''<!doctype html>
 def build_post_html(a, by_cat, lang):
     T = ui(lang)
     L = cat_labels(lang)
+    # 详情页在 <lang>/posts/ 下，比索引页深一层，站内相对链接要多上一级 ../
+    pfx = '../../' if lang['dir'] else '../'
     desc = clean_excerpt(a['body'], 100)
     tg = ''
     if a['tags']:
         tg = '<div class="tags">' + ''.join(
-            '<a href="../index.html#t-%s">#%s</a>' % (esc(t), esc(t))
+            '<a href="%sindex.html#t-%s">#%s</a>' % (pfx, esc(t), esc(t))
             for t in a['tags']) + '</div>'
     rel = [x for x in by_cat.get(a['category'], []) if x['slug'] != a['slug']][:6]
     rh = ''
@@ -912,7 +914,7 @@ def build_post_html(a, by_cat, lang):
         canonical=url_for(lang, 'posts/' + slugq),
         alt=hreflang_tags(lang, 'posts/' + slugq),
         langsw=build_switcher(lang, 'posts/' + slugq),
-        back=T['back'], home=T['home'],
+        back=T['back'], home=T['home'], pfx=pfx,
         source=T['source'], source_v=T['source_v'], stmt=T['stmt'], stmt_v=T['stmt_v'],
         content=md_to_html(a['body']), related=rh, stamp=STAMP,
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
@@ -1129,7 +1131,7 @@ EN_TPL = '''<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Shikongren Archive · Lü Wenyi\'s works</title>
 <meta name="description" content="An archive and search index of Lü Wenyi\'s original articles on the Lü School of Shikongren (时空人) theory.">
-<link rel="stylesheet" href="../style.css?v={stamp}">
+<link rel="stylesheet" href="{pfx}style.css?v={stamp}">
 <link rel="canonical" href="{canonical}">
 {alt}
 <meta property="og:url" content="{canonical}">
@@ -1264,7 +1266,7 @@ def build_one_lang(lang, settings):
         with open(os.path.join(out_dir, 'index.html'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(EN_TPL.format(
-                stamp=STAMP, site=SITE_NAME, n=len(arts),
+                stamp=STAMP, site=SITE_NAME, n=len(arts), pfx='../',
                 canonical=url_for(lang, 'index.html'),
                 alt=hreflang_tags(lang, 'index.html'),
                 langsw=build_switcher(lang, 'index.html'),
@@ -1272,7 +1274,7 @@ def build_one_lang(lang, settings):
         with open(os.path.join(out_dir, 'about.html'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(EN_TPL.format(
-                stamp=STAMP, site=SITE_NAME, n=len(arts),
+                stamp=STAMP, site=SITE_NAME, n=len(arts), pfx='../',
                 canonical=url_for(lang, 'about.html'),
                 alt=hreflang_tags(lang, 'about.html'),
                 langsw=build_switcher(lang, 'about.html'),
