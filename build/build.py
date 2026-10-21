@@ -47,7 +47,7 @@ POSTS_DIR = os.path.join(CONTENT, 'posts')
 SETTINGS_DIR = os.path.join(CONTENT, 'settings')
 DATA_DIR = os.path.join(OUT, 'data')
 POSTS_OUT = os.path.join(OUT, 'posts')
-DOMAIN = 'https://shikongren.com'
+DOMAIN = 'https://www.shikongren.com'
 SITE_NAME = '时空人公益推广'
 AUTHOR = '吕文艺'
 
@@ -1230,23 +1230,23 @@ def build_sitemap(arts, lang):
         return ('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                 + '\n'.join(urls) + '\n</urlset>\n')
+    # 三语互指：xhtml:link 必须写在**同一个 <url> 节点内部**。
+    # 早期版本把每种语言各生成一个独立 <url> 节点，loc 完全相同，
+    # 结果 690 篇文章生成了 2072 条 loc（只有 692 条唯一），
+    # 百度对重复 sitemap 会判定站点质量差。详见 2026-10-21 排查记录。
+    alts_by_lang = [l for l in LANGS if l['code'] != lang['code']]
     for a in arts:
+        loc = url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.'))
+        alt = ''
+        for l in alts_by_lang:
+            if l.get('stub'):
+                continue
+            alt += ('<xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
+                    % (l['code'],
+                       url_for(l, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.'))))
         urls.append('<url><loc>%s</loc><lastmod>%s</lastmod>'
-                    '<changefreq>monthly</changefreq><priority>0.6</priority></url>'
-                    % (url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
-                       a['date'] or '2026-01-01'))
-    # 三语互指：告诉搜索引擎同一篇文章的其它语言版本
-    for l in LANGS:
-        if l['code'] == lang['code']:
-            continue
-        for a in arts:
-            urls.append('<url><loc>%s</loc>'
-                        '<xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
-                        '</url>' % (url_for(lang, 'posts/'
-                                            + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
-                                    l['code'],
-                                    url_for(l, 'posts/'
-                                            + urllib.parse.quote(a['slug'] + '.html', safe='/-.'))))
+                    '<changefreq>monthly</changefreq><priority>0.6</priority>%s</url>'
+                    % (loc, a['date'] or '2026-01-01', alt))
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
             'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
@@ -1356,6 +1356,15 @@ def build_one_lang(lang, settings):
     with open(os.path.join(out_dir, 'sitemap.xml'), 'w',
               encoding='utf-8', newline='\n') as f:
         f.write(build_sitemap(arts, lang))
+
+    # robots.txt：只根目录一份，指向主 sitemap。
+    # 站点在百度资源平台验证的是 https://www.shikongren.com，
+    # 所以这里必须用 www 域名，否则百度会当成两个不同站点。
+    if not lang['dir']:
+        with open(os.path.join(out_dir, 'robots.txt'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write('User-agent: *\nAllow: /\n\n'
+                    'Sitemap: %s/sitemap.xml\n' % DOMAIN)
 
     # 把语言信息写进 manifest，前端据此知道去哪加载、当前是什么语言
     mpath = os.path.join(data_dir, 'search-manifest.json')
