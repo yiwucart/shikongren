@@ -850,7 +850,7 @@ def build_index_html(arts, cats, years, lang):
     pfx = lang_prefix(lang)
     cards = []
     for a in arts:
-        ex = clean_excerpt(a['body'])
+        ex = clean_excerpt(a['body'], 78)
         cards.append(
             '<a class="card" href="posts/%s.html">'
             '<div class="c">%s</div>'
@@ -1574,7 +1574,7 @@ def build_one_lang(lang, settings):
                 'Allow: /\n\n'
                 'User-agent: *\n'
                 'Allow: /\n\n'
-                'Sitemap: %s/sitemap.xml\n' % DOMAIN)
+                'Sitemap: %s/sitemapindex.xml\n' % DOMAIN)
 
     # 把语言信息写进 manifest，前端据此知道去哪加载、当前是什么语言
     mpath = os.path.join(data_dir, 'search-manifest.json')
