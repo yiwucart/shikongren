@@ -6,6 +6,7 @@ cat_key: "易学基础"
 tags: ["Bazi", "Tiangan Dizhi", "Yixue basics"]
 author: "Lü Wenyi"
 series: "Heavenly Stems and Earthly Branches"
+order: 1
 src: "天干地支到底是什么东西？（一）-370.md"
 words: 1911
 ---

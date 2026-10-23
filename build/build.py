@@ -523,11 +523,19 @@ def parse_frontmatter(text):
 
 
 def clean_excerpt(body, n=110):
+    # 英文译文正文以译者注（markdown 引用块）开头。卡片摘要、meta description、
+    # 搜索索引的摘要都走这里，不剥掉的话读者看到的第一句永远是
+    # "Translator's note. ..."。已核查中文 690 篇没有以引用开头的，剥离是安全的。
+    body = re.sub(r'^\s*(?:>[^\n]*\n)+', '', body or '')
+    body = re.sub(r'^\s*(?:-{3,}|\*{3,}|_{3,})[ \t]*\n', '', body)
+    body = body.lstrip('\n')
     t = re.sub(r'!\[[^\]]*\]\([^)]*\)', ' ', body)
     t = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', t)
     t = re.sub(r'https?://\S+', ' ', t)
     t = re.sub(r'&(?:quot|amp|lt|gt|#39|nbsp);', ' ', t)
-    t = re.sub(r'[*#>`~\[\](){}|]', ' ', t)
+    # 强调符直接删掉而不是换成空格 —— 否则 "*zhenxing*," 会变成 "zhenxing ,"。
+    t = re.sub(r'[*`~]', '', t)
+    t = re.sub(r'[#>()\[\]{}|]', ' ', t)
     t = re.sub(r'\s+', ' ', t).strip()
     if len(t) > n:
         t = t[:n].rstrip() + '…'
@@ -831,6 +839,10 @@ def load_articles(lang=None):
             'url': fm.get('url') or '',
             'account': '时空坐标',
             'series': series,
+            # 系列内阅读顺序。英文精选集要能顺着读，但原文日期和阅读顺序
+            # 并不同步（来源篇写于 2020，总论写于 2021，却应该排在总论之后），
+            # 所以给个显式顺序号；没写的排到该系列末尾，仍按日期。
+            'order': int(fm.get('order') or 999),
             # cat_key 永远是**简体原名** —— 统计、分类导航、CATS 查表都用它，
             # 与语言无关；category 是显示名（繁体版里是繁体）。
             # 早前版本只存 category，繁体下 '预测案例'→'預測案例' 查不到 CATS，
@@ -850,7 +862,7 @@ def load_articles(lang=None):
     if lang.get('code') == 'en':
         # 英文是精选集不是全量归档：同一系列要能顺着读（一→二→三），
         # 所以先按系列归堆、再按日期正序，而不是像中文那样倒序压在最前。
-        arts.sort(key=lambda a: (a.get('series') or '~', a['date'] or ''))
+        arts.sort(key=lambda a: (a.get('series') or '~', a.get('order') or 999, a['date'] or ''))
     return arts
 
 
@@ -1122,7 +1134,7 @@ def build_index_html(arts, cats, years, lang):
         s_last=('to %s' % max(years)) if (is_en and years) else (max(years) if years else ''),
         s_lastu='' if is_en else T['stat_last'],
         # 中文按万字折算；英文只有几千词，折算出来是 0，直接给准数。
-        s_words=total_words if is_en else total_words // 10000,
+        s_words=format(total_words, ',') if is_en else total_words // 10000,
         s_wordsu=('words' if total_words != 1 else 'word') if is_en else T['stat_words'],
         ph=T['ph'], clear=T['clear'],
         bio=T['about_bio'], aboutlink=T['about_link'],
@@ -1346,7 +1358,13 @@ def build_post_html(a, by_cat, lang):
         langsw=build_switcher(lang, 'posts/' + slugq, post=a),
         back=T['back'], home=T['home'], pfx=pfx, home_pfx=home_pfx,
         source=T['source'], source_v=T['source_v'], stmt=T['stmt'], stmt_v=T['stmt_v'],
-        content=md_to_html(a['body']), related=rh, stamp=STAMP,
+        # 正文图片源是 /img/xxx，渲染成相对路径要按当前页面深度算：
+        #   /posts/x.html     → ../img/
+        #   /tc/posts/x.html  → ../../img/
+        #   /en/posts/x.html  → ../../img/
+        # 之前一律用 '../'，繁体靠 `cp -al img tc/img` 的硬链接兜着才没破图，
+        # 英文没有这层兜底就 404 了。pfx 正好就是这个深度，直接复用。
+        content=md_to_html(a['body'], img_prefix=pfx), related=rh, stamp=STAMP,
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
         about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'],
         ld=ld_post(a, url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),

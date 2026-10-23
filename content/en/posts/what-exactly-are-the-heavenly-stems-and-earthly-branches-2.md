@@ -6,6 +6,7 @@ cat_key: "易学基础"
 tags: ["Bazi", "Jupiter", "Saturn", "Tiangan Dizhi"]
 author: "Lü Wenyi"
 series: "Heavenly Stems and Earthly Branches"
+order: 2
 src: "天干地支到底是什么东西？（二）-369.md"
 words: 1613
 ---
