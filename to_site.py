@@ -607,7 +607,7 @@ MAP2 = [
      'Working the Remedy', '化解调理', 'Remediation'),
     ('sample-96-winning-the-contract.md',
      'winning-the-contract',
-     'Winning the Contract: Direction, the Seal Star and the Right Gift',
+     'Winning the Contract: Direction and the Right Gift',
      '2021-06-27', ['Remediation', 'Business', 'Direction'], 8097,
      '承接（揽）业务的调理方法-336.md', 11,
      'Working the Remedy', '化解调理', 'Remediation'),

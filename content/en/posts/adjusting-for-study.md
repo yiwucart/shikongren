@@ -8,7 +8,7 @@ author: "Lü Wenyi"
 series: "Working the Remedy"
 order: 12
 src: "学业学习的调理方法（一）-340.md"
-words: 1908
+words: 1910
 ---
 
 > **Translator's note.** The most useful piece in this layer for anyone who has ever bought a Wen Chang pagoda the night before an exam. Two things carry it. The first is a distinction the system takes seriously — the output star produces *cleverness*, the officer star produces *judgement*, and they are not the same gift. The second is an honest statement of the remedy's time constant: five years can be promised, one month cannot, and the pagoda sold at the door of the examination hall can only add a few marks.
@@ -16,7 +16,7 @@ words: 1908
 ---
 
 
-Study is adjusted through two things, and the order matters: the **seal star** (*xiaoyin*), which governs examination results, and the **output star** (*shishang*), which governs the ability to learn. Results first, capacity second.
+Study is adjusted through two things, and the order matters: the **seal star**, which governs examination results, and the **output star**, which governs the ability to learn. Results first, capacity second.
 
 But before the method, a distinction that the author spends several pages establishing, because it decides what the adjustment can be aimed at.
 
@@ -66,7 +66,7 @@ This is why, on the author's account, chart-only divination cannot be accurate �
 
 He wants to sit the postgraduate entrance examination. The adjustment can strengthen the energy available and can make him work; it cannot add knowledge he has not acquired.
 
-**The two stars.** 子 water is the seal star and is favourable. 丁 fire is the output star and is favourable.
+**The two stars.** 子 water is the seal star (印, *yin*) and is favourable. 丁 fire is the output star (食伤, *shishang*) and is favourable.
 
 **Does 子 reach the day master 甲?** Yes, by two routes. 子 is the hour branch, and the hour stem is also 甲 — the seal star sits directly beneath the day master. And in the 庚子 year, 子 combines with the day branch 申, bringing it under the day master again. Seal star favourable, and in close relation: good.
 

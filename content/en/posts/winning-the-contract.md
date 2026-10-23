@@ -1,5 +1,5 @@
 ---
-title: "Winning the Contract: Direction, the Seal Star and the Right Gift"
+title: "Winning the Contract: Direction and the Right Gift"
 date: "2021-06-27"
 category: "Remediation"
 cat_key: "化解调理"
