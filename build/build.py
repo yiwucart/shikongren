@@ -458,7 +458,7 @@ CATS_EN = {
     '风水实务': ('Feng Shui Practice', 'Sand and water, the origin point, graves, direction'),
     '八字命理': ('Bazi and Four Pillars', 'The four pillars, the ten gods and the three systems'),
     '易学基础': ('Foundations of Yixue', 'Trigrams, yin-yang, the five phases, Qimen'),
-    '化解调理': ('Remediation', 'What can actually be done about a predicted disaster'),
+    '化解调理': ('Remediation', 'What can be done about a fate, and where the claim stops'),
     '命运格局': ('Fate and Life Pattern', 'Levels of fate and the shape of a life'),
     '面相手相': ('Physiognomy', 'Face and palm reading'),
     '择日用事': ('Date Selection', 'Choosing days and hours'),
