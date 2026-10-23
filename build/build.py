@@ -837,6 +837,9 @@ def load_articles(lang=None):
             'year': date[:4] if len(date) >= 4 else '',
             'author': author,
             'url': fm.get('url') or '',
+            # 英文译文的 frontmatter 用 src 指回中文原文件名（如 '五行相生的顺序…-614.md'）。
+            # 英文篇没有微信链接，靠它生成「Chinese original」指向中文对应页。
+            'src': (fm.get('src') or '').strip(),
             'account': '时空坐标',
             'series': series,
             # 系列内阅读顺序。英文精选集要能顺着读，但原文日期和阅读顺序
@@ -1344,6 +1347,15 @@ def build_post_html(a, by_cat, lang):
     if a['url']:
         url_line = ('<p><b>%s</b>：<a href="%s" target="_blank" rel="noopener">%s</a></p>'
                     % (T['orig_link'], esc(a['url']), esc(a['url'])))
+    elif a.get('src'):
+        # 英文译文：没有微信链接，但能指回中文原文。
+        # 不加这个分支时，这里会退化成 source_v，和上面那行 Source 完全一样。
+        _z = a['src'][:-3] if a['src'].endswith('.md') else a['src']
+        _zh = url_for(LANGS[0], 'posts/' + urllib.parse.quote(_z + '.html', safe='/-.'))
+        # 文件名尾部是原文序号（-614），读者不需要看见
+        _zt = re.sub(r'-\d+$', '', _z)
+        url_line = ('<p><b>%s</b>：<a href="%s">%s</a></p>'
+                    % (T['orig_link'], esc(_zh), esc(_zt)))
     else:
         url_line = '<p><b>%s</b>：%s</p>' % (T['orig_link'], T['source_v'].split('｜')[0])
     slugq = urllib.parse.quote(a['slug'] + '.html', safe='/-.')

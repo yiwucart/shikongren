@@ -5,7 +5,7 @@ category: "Foundations of Yixue"
 cat_key: "易学基础"
 tags: ["Tiangan Dizhi", "Jupiter", "Saturn", "Astronomy"]
 author: "Lü Wenyi"
-series: "Heavenly Stems and Earthly Branches"
+series: "Foundations of Yixue"
 order: 4
 src: "十天干的天文学科学来源是什么？-586.md"
 words: 1114

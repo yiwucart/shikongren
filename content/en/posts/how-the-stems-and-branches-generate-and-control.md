@@ -5,7 +5,7 @@ category: "Foundations of Yixue"
 cat_key: "易学基础"
 tags: ["Bazi", "Tiangan Dizhi", "Wuxing"]
 author: "Lü Wenyi"
-series: "Heavenly Stems and Earthly Branches"
+series: "Foundations of Yixue"
 order: 7
 src: "天干地支的生克问题-366.md"
 words: 1490

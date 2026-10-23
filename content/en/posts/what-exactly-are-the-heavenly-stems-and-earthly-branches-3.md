@@ -5,7 +5,7 @@ category: "Foundations of Yixue"
 cat_key: "易学基础"
 tags: ["Feng shui", "Tiangan Dizhi", "Direction"]
 author: "Lü Wenyi"
-series: "Heavenly Stems and Earthly Branches"
+series: "Foundations of Yixue"
 order: 3
 src: "天干地支到底是什么东西？（三）-368.md"
 words: 3437

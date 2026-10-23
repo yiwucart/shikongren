@@ -5,7 +5,7 @@ category: "Foundations of Yixue"
 cat_key: "易学基础"
 tags: ["Yin Yang", "Bazi", "Tiangan Dizhi"]
 author: "Lü Wenyi"
-series: "Heavenly Stems and Earthly Branches"
+series: "Foundations of Yixue"
 order: 6
 src: "干支阴阳属性的本质是什么？-459.md"
 words: 580
