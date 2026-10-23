@@ -453,7 +453,7 @@ def i18n(lang):
 
 # 英文分类名。key 仍是简体原名 —— cat_key 从不翻译，只在显示时查这张表。
 CATS_EN = {
-    '预测案例': ('Case Studies', 'Verified readings and field records'),
+    '预测案例': ('Divination Cases', 'Live readings, field records and the method behind them'),
     '预测理论': ('Prediction Theory', 'How the Shikongren method works'),
     '风水实务': ('Feng Shui Practice', 'Sand and water, the origin point, graves, direction'),
     '八字命理': ('Bazi and Four Pillars', 'The four pillars, the ten gods and the three systems'),
