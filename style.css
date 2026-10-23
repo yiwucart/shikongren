@@ -22,6 +22,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* 英文页拉丁字体优先：中文字体把 “ ” ’ 按全角宽度渲染，
+   英文正文里会出现明显的假空格（如 Person ’ s）。中文页不受影响。 */
+html[lang="en"] body {
+  font-family: Georgia, "Iowan Old Style", "Songti SC", "Noto Serif SC", serif;
+}
+
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 
 /* ---------- Hero ---------- */
