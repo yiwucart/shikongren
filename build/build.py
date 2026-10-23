@@ -456,7 +456,7 @@ CATS_EN = {
     '预测案例': ('Case Studies', 'Verified readings and field records'),
     '预测理论': ('Prediction Theory', 'How the Shikongren method works'),
     '风水实务': ('Feng Shui Practice', 'Sand and water, the origin point, graves, direction'),
-    '八字命理': ('Bazi', 'The four pillars and the time system'),
+    '八字命理': ('Bazi and Four Pillars', 'The four pillars, the ten gods and the three systems'),
     '易学基础': ('Foundations of Yixue', 'Trigrams, yin-yang, the five phases, Qimen'),
     '化解调理': ('Remediation', 'Averting harm and adjusting a fate'),
     '命运格局': ('Fate and Life Pattern', 'Levels of fate and the shape of a life'),
