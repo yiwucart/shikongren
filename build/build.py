@@ -108,7 +108,9 @@ LANGS = [
         'label': 'EN',
         'full': 'English',
         'og': 'en_US',
-        'stub': True,              # 只出选择页，不出文章列表
+        # 英文不是转出来的，是人工翻译：正文放 content/en/posts/，
+        # frontmatter 里用 src 指回中文原文（hreflang 靠它配对）。
+        'posts_sub': ('en', 'posts'),
     },
 ]
 LANG_BY_DIR = {l['dir']: l for l in LANGS}
@@ -152,14 +154,68 @@ def lang_prefix(lang):
     return ('../' if lang['dir'] else '')
 
 
-def build_switcher(cur, rel=''):
-    """三语切换器。cur 是当前语言对象，rel 是当前页在该语言下的相对路径。"""
+_EN_PAIR = None
+
+
+def _en_pairs():
+    """中文 slug -> 英文 slug 对照表。
+
+    英文文章的 frontmatter 里 `src` 写中文原文件名（含 `-370` 这种旧编号），
+    这里把它剥成 slug。表只建一次，构建全程复用。
+    """
+    global _EN_PAIR
+    if _EN_PAIR is not None:
+        return _EN_PAIR
+    m = {}
+    d = os.path.join(CONTENT, 'en', 'posts')
+    if os.path.isdir(d):
+        for fn in sorted(os.listdir(d)):
+            if not fn.endswith('.md'):
+                continue
+            fm, _ = parse_frontmatter(read_text(os.path.join(d, fn)))
+            src = str(fm.get('src') or '').strip()
+            if not src:
+                continue
+            m[os.path.splitext(src)[0]] = os.path.splitext(fn)[0]
+    _EN_PAIR = m
+    return m
+
+
+def _post_slugs(lang, post):
+    """给定当前语言的文章，返回 {语言code: slug} —— 没有译文的语言不出现在结果里。"""
+    zh_slug = post['slug']
+    if lang.get('code') == 'en':
+        zh_slug = os.path.splitext(post.get('src') or '')[0]
+        if not zh_slug:
+            # 英文原创稿（没有中文原文）：只有英文版
+            return {'en': post['slug']}
+    out = {'zh-Hans': zh_slug, 'zh-Hant': zh_slug}
+    en = _en_pairs().get(zh_slug)
+    if en:
+        out['en'] = en
+    return out
+
+
+def build_switcher(cur, rel='', post=None):
+    """三语切换器。cur 是当前语言对象，rel 是当前页在该语言下的相对路径。
+
+    post 不为空时按译文实际存在与否给链接：没有英文译文的文章，
+    点 EN 回到英文首页（可到达），而不是给一个 404。
+    """
     cc = get_opencc(cur)
-    lbl = cc.convert('语言切换') if cc else '语言切换'
+    lbl = cc.convert('语言切换') if cc else ('Language' if cur.get('code') == 'en' else '语言切换')
+    slugs = _post_slugs(cur, post) if post else None
     out = ['<nav class="langsw" aria-label="%s">' % lbl]
     for l in LANGS:
         if l['code'] == cur['code']:
             cls, mark, href, cur_attr = 'on', '<span class="cur"> · </span>', '#', ' aria-current="true"'
+        elif slugs is not None:
+            s = slugs.get(l['code'])
+            if s:
+                href = url_for(l, 'posts/' + urllib.parse.quote(s + '.html', safe='/-.'))
+            else:
+                href = url_for(l, 'index.html')
+            cls, mark, cur_attr = '', '', ''
         elif l.get('stub') and rel.replace('index.html', ''):
             # 英文文章页还不存在，点过去会到英文说明页 —— 仍可达，保留链接
             cls, mark, href, cur_attr = '', '', url_for(l, 'index.html'), ''
@@ -171,22 +227,35 @@ def build_switcher(cur, rel=''):
     return ''.join(out)
 
 
-def hreflang_tags(lang, rel='index.html'):
-    """三语互指 + x-default。rel 用该语言自己的相对路径，各语言同 slug。
+def hreflang_tags(lang, rel='index.html', post=None):
+    """三语互指 + x-default。
 
-    **未上线的语言不进 hreflang** —— 声明一个不存在的语言版本会让搜索引擎
-    反复抓 404。英文版目前只有说明页，所以文章页只声明简 / 繁两条。
+    索引页/关于页：三种语言同路径，直接用 rel。
+    文章页：slug 各语言不同 —— 中文与繁体同 slug（繁体是构建时转的），
+    英文 slug 是独立的，所以要用 frontmatter 的 src 建对照表。
+    **没有译文的语言不进 hreflang**，否则等于让搜索引擎去抓 404。
     """
-    base = rel.replace('index.html', '')
-    is_index = base == ''
     tags = []
+    if post is None:
+        base = rel.replace('index.html', '')
+        for l in LANGS:
+            href = url_for(l, base)
+            tags.append('<link rel="alternate" hreflang="%s" href="%s">' % (l['code'], esc(href)))
+        tags.append('<link rel="alternate" hreflang="x-default" href="%s">'
+                    % esc(url_for(LANGS[0], base)))
+        return '\n'.join(tags)
+
+    slugs = _post_slugs(lang, post)
     for l in LANGS:
-        if l.get('stub') and not is_index:
+        s = slugs.get(l['code'])
+        if not s:
             continue
-        href = url_for(l, base)
+        href = url_for(l, 'posts/' + urllib.parse.quote(s + '.html', safe='/-.'))
         tags.append('<link rel="alternate" hreflang="%s" href="%s">' % (l['code'], esc(href)))
-    tags.append('<link rel="alternate" hreflang="x-default" href="%s">'
-                % esc(url_for(LANGS[0], base)))
+    zh = slugs.get('zh-Hans')
+    if zh:
+        href = url_for(LANGS[0], 'posts/' + urllib.parse.quote(zh + '.html', safe='/-.'))
+        tags.append('<link rel="alternate" hreflang="x-default" href="%s">' % esc(href))
     return '\n'.join(tags)
 
 
@@ -197,7 +266,7 @@ UI_ZH = {
     'eyebrow': '吕氏时空人 · 公益推广',
     'h1': '时空人公益推广',
     'subtitle': '吕文艺老师作品归档',
-    'lede': '吕文艺老师「吕氏时空人」理论技术作品的整理与检索。本站收录微信公众号「时空坐标」原创文章 %d 篇，覆盖 %d 个主题，%d 年内容。',
+    'lede': '吕文艺老师「吕氏时空人」理论技术作品的整理与检索。本站收录微信公众号「时空坐标」原创文章 %s 篇，覆盖 %s 个主题，%s 年内容。',
     'ph': '输入标题或关键词，例如：案例集锦、八字、化解、择日…',
     'clear': '清除',
     'stat_n': '篇原创',
@@ -238,11 +307,83 @@ UI_ZH = {
     'lang_label': '语言切换',
     'orig_link': '原文链接',
     'cat_crumb': '分类',
+    'meta_desc': '吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。',
 }
 
 
+# 英文界面文案。英文版不是 OpenCC 转的，是独立撰写 —— 这些key必须与 UI_ZH 一一对应，
+# 缺一个就会在页面上留一个空的 {} 位置，所以下面用 assert 卡住。
+UI_EN = {
+    'eyebrow': 'Lü School of Shikongren · Public archive',
+    'h1': 'Shikongren Archive',
+    'subtitle': "Lü Wenyi's collected works",
+    'lede': ('A searchable archive of original articles by Lü Wenyi, founder of the Lü School of '
+             'Shikongren. %s articles across %s, spanning %s.'),
+    'ph': 'Search articles — e.g. Bazi, feng shui, direction…',
+    'clear': 'Clear',
+    'stat_n': 'articles',
+    'stat_first': 'from',
+    'stat_last': 'to',
+    'stat_words': 'k words',
+    'about_link': 'About this archive →',
+    'about_bio': ('Founder of the Lü School of Shikongren (Lüshi Shikongren), a system that treats '
+                  'Chinese metaphysics as a natural science.'),
+    'all': 'All',
+    'nomatch': 'Nothing matches. Try a different keyword.',
+    'home': 'Home',
+    'back': '← Back to the archive',
+    'back_home': '← Back to the index',
+    'words_unit': 'words',
+    'author': 'by',
+    'source': 'Source',
+    'source_v': 'WeChat public account “Shikongren Coordinates” (时空坐标) · by Lü Wenyi',
+    'stmt': 'Notice',
+    'stmt_v': ('This is a study archive. Copyright remains with the author. '
+               'Nothing here constitutes advice.'),
+    'related': 'Related articles',
+    'disclaimer': 'Disclaimer',
+    'disclaimer_v': ('This site archives material for the study of traditional Chinese culture. '
+                     'The views expressed are those of the author and are offered for reference '
+                     'only. They constitute no advice and should not be used as the basis for any '
+                     'decision. Readers should judge independently and bear their own responsibility.'),
+    'copyright': ('All content originates from the WeChat public account “Shikongren Coordinates” '
+                  '(时空坐标) and is attributed to Lü Wenyi. Copyright remains with the author and '
+                  'the publishing platform.'),
+    'nogoods': ('This site has no commercial relationship with the author. Content is archived '
+                'with permission for study and reference. When quoting, cite the original and '
+                'treat the Chinese text as authoritative.'),
+    'takedown': ('If the author or a rights holder believes any archived item should be removed, '
+                 'please use the contact below and it will be handled promptly.'),
+    'follow': 'Follow the author’s WeChat account “Shikongren Coordinates” for new articles',
+    'wechat': 'WeChat: ',
+    'tel': 'Contact the author, Lü Wenyi: ',
+    'about_site': 'About this archive',
+    'sitemap': 'Sitemap',
+    'cms': 'Content admin',
+    'copy': '© Shikongren Archive · shikongren.com · For study and reference only',
+    'copy_n': '© Shikongren Archive · shikongren.com · %d original articles',
+    'site_name': 'Shikongren Archive',
+    'wechat_name': '时空坐标 (Shikongren Coordinates)',
+    'author_name': 'Lü Wenyi',
+    'account_alt': 'Lü Wenyi',
+    'lang_label': 'Language',
+    'orig_link': 'Chinese original',
+    'cat_crumb': 'Topic',
+    'meta_desc': ('An archive and search index of %d original articles by Lü Wenyi on the Lü School '
+                  'of Shikongren theory — Bazi, feng shui, Liuyao and the classical foundations.'),
+}
+
+_missing = set(UI_ZH) - set(UI_EN)
+assert not _missing, 'UI_EN 缺文案：%s' % ', '.join(sorted(_missing))
+
+
 def ui(lang):
-    """界面文案 —— 繁体由简体文案经 OpenCC 转（保证两个版本措辞永远一致）。"""
+    """界面文案 —— 繁体由简体文案经 OpenCC 转；英文用独立撰写的 UI_EN。
+
+    两种语言共用同一套 key，模板里只写 {key}，所以这里必须返回**完整**的字典。
+    """
+    if lang.get('code') == 'en':
+        return dict(UI_EN)
     cc = get_opencc(lang)
     if not cc:
         return dict(UI_ZH)
@@ -250,7 +391,7 @@ def ui(lang):
     for k, v in UI_ZH.items():
         out[k] = cc.convert(v) if '%' not in v else v
     # 带占位符的文案单独处理（%d 要保留）
-    for k in ('lede', 'copy_n'):
+    for k in ('lede', 'copy_n', 'meta_desc'):
         out[k] = cc.convert(UI_ZH[k])
     return out
 
@@ -272,7 +413,73 @@ CATS = collections.OrderedDict([
     ('综合论述', ('综合论述', '其他文章')),
 ])
 
+# 前端（app.js）用的文案。搜索计数是 JS 现场拼的，模板管不到，
+# 所以构建时把当前语言的一份塞进 window.I18N，app.js 优先用它、没有就退回中文。
+I18N_ZH = {
+    'count_all': '共收录 %d 篇',
+    'count_search': '搜索「%s」：命中 %d 篇',
+    'count_full': '（全文）',
+    'count_sum': '（标题与摘要）',
+    'count_summary': '（摘要）',
+    'count_loading': '搜索「%s」：摘要命中 %d 篇，正在补全全文…',
+    'len_k': '%d 千字',
+    'len_c': '%d 字',
+}
+
+I18N_EN = {
+    'count_all': '%d articles',
+    'count_all_one': '%d article',
+    'count_search': 'Search “%s”: %d results',
+    'count_search_one': 'Search “%s”: %d result',
+    'count_loading_one': 'Search “%s”: %d result in summaries, loading full text…',
+    'count_full': ' (full text)',
+    'count_sum': ' (title and summary)',
+    'count_summary': ' (summary)',
+    'count_loading': 'Search “%s”: %d results in summaries, loading full text…',
+    'len_k': '%dk chars',
+    'len_c': '%d chars',
+}
+
+
+def i18n(lang):
+    """前端文案。繁体走 OpenCC（这些串含 % 但不能不转，否则 JS 里蹦简体）。"""
+    if lang.get('code') == 'en':
+        return dict(I18N_EN)
+    cc = get_opencc(lang)
+    if not cc:
+        return dict(I18N_ZH)
+    return {k: cc.convert(v) for k, v in I18N_ZH.items()}
+
+
+# 英文分类名。key 仍是简体原名 —— cat_key 从不翻译，只在显示时查这张表。
+CATS_EN = {
+    '预测案例': ('Case Studies', 'Verified readings and field records'),
+    '预测理论': ('Prediction Theory', 'How the Shikongren method works'),
+    '风水实务': ('Feng Shui Practice', 'Sand and water, the origin point, graves, direction'),
+    '八字命理': ('Bazi', 'The four pillars and the time system'),
+    '易学基础': ('Foundations of Yixue', 'Trigrams, yin-yang, the five phases, Qimen'),
+    '化解调理': ('Remediation', 'Averting harm and adjusting a fate'),
+    '命运格局': ('Fate and Life Pattern', 'Levels of fate and the shape of a life'),
+    '面相手相': ('Physiognomy', 'Face and palm reading'),
+    '择日用事': ('Date Selection', 'Choosing days and hours'),
+    '姓名测字': ('Names and Characters', 'Personal names and character analysis'),
+    '行业辨伪': ('Industry Critique', 'Exposing the trade’s tricks'),
+    '学员心得': ('Student Notes', 'Reflections from students'),
+    '培训招生': ('Courses', 'Past courses and enrolment'),
+    '综合论述': ('Essays', 'Other writing'),
+}
+
+
 # ---------------------------------------------------------------- 工具
+
+def _plural(n, word):
+    """英文单复数：1 topic / 3 topics。只处理规则复数，够用。"""
+    if n == 1:
+        return '1 %s' % word
+    if word.endswith('y'):
+        return '%d %sies' % (n, word[:-1])
+    return '%d %ss' % (n, word)
+
 
 def esc(s):
     return html.escape(str(s or ''), quote=True)
@@ -583,16 +790,19 @@ def load_articles(lang=None):
     """读全部 .md 文章。传入 lang 时返回繁体版（OpenCC 转换标题/分类/标签/正文）。
 
     繁体转换在**内存里**做，不写临时文件 —— 源码仓库里永远只有简体一份。
+    英文不走转换：正文是人工翻译，单独放在 content/en/posts/（lang['posts_sub']）。
     """
     lang = lang or LANGS[0]
     cc = get_opencc(lang)
+    sub = lang.get('posts_sub')
+    posts_dir = os.path.join(CONTENT, *sub) if sub else POSTS_DIR
     arts = []
-    if not os.path.isdir(POSTS_DIR):
+    if not os.path.isdir(posts_dir):
         return arts
-    for fn in sorted(os.listdir(POSTS_DIR)):
+    for fn in sorted(os.listdir(posts_dir)):
         if not fn.endswith('.md'):
             continue
-        fm, body = parse_frontmatter(read_text(os.path.join(POSTS_DIR, fn)))
+        fm, body = parse_frontmatter(read_text(os.path.join(posts_dir, fn)))
         title = fm.get('title') or os.path.splitext(fn)[0]
         slug = os.path.splitext(fn)[0]
         date = str(fm.get('date') or '')
@@ -625,19 +835,32 @@ def load_articles(lang=None):
             # 与语言无关；category 是显示名（繁体版里是繁体）。
             # 早前版本只存 category，繁体下 '预测案例'→'預測案例' 查不到 CATS，
             # 导致分类导航和「覆盖 N 个主题」全部失效。
-            'cat_key': cat0,
+            # 英文文章的 category 是英文，所以必须在 frontmatter 里显式写 cat_key。
+            'cat_key': fm.get('cat_key') or cat0,
             'category': cat,
             'tags': tags,
             'words': int(words),
             'body': body.strip(),
+            # 英文文章指回中文原文文件名（不含 .md），hreflang 配对靠它；
+            # 中文文章没有这个字段。
+            'src': str(fm.get('src') or ''),
         })
     # 时间靠后靠前；同日按标题排
     arts.sort(key=lambda a: (a['date'] or '', a['title']), reverse=True)
+    if lang.get('code') == 'en':
+        # 英文是精选集不是全量归档：同一系列要能顺着读（一→二→三），
+        # 所以先按系列归堆、再按日期正序，而不是像中文那样倒序压在最前。
+        arts.sort(key=lambda a: (a.get('series') or '~', a['date'] or ''))
     return arts
 
 
 def cat_labels(lang):
-    """分类显示名 —— 繁体时连分类说明一起转。"""
+    """分类显示名 —— 繁体经 OpenCC 转；英文查 CATS_EN（缺的退回简体原名）。"""
+    if lang.get('code') == 'en':
+        out = collections.OrderedDict()
+        for k, v in CATS.items():
+            out[k] = CATS_EN.get(k, v)
+        return out
     cc = get_opencc(lang)
     out = collections.OrderedDict()
     for k, v in CATS.items():
@@ -670,6 +893,15 @@ def load_settings():
         fm, body = parse_frontmatter(read_text(os.path.join(SETTINGS_DIR, fn)))
         out[os.path.splitext(fn)[0]] = {'frontmatter': fm, 'body': body.strip()}
     return out
+
+
+def load_en_about():
+    """英文关于页（content/en/about.md）。没有就返回 None，由调用方退回中文版。"""
+    p = os.path.join(CONTENT, 'en', 'about.md')
+    if not os.path.isfile(p):
+        return None
+    fm, body = parse_frontmatter(read_text(p))
+    return {'frontmatter': fm, 'body': body.strip()}
 
 
 def _load_verify_metas():
@@ -846,6 +1078,7 @@ def ld_page(canonical, title, desc, lang):
 
 def build_index_html(arts, cats, years, lang):
     T = ui(lang)
+    is_en = lang.get('code') == 'en'
     L = cat_labels(lang)
     pfx = lang_prefix(lang)
     cards = []
@@ -869,7 +1102,7 @@ def build_index_html(arts, cats, years, lang):
     return INDEX_TPL.format(
         hlang=lang['html_lang'],
         title='%s · %s' % (T['h1'], T['subtitle']),
-        desc='吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。' % len(arts),
+        desc=T['meta_desc'] % len(arts),
         stamp=STAMP,
         canonical=url_for(lang, 'index.html'),
         og=lang['og'],
@@ -878,11 +1111,19 @@ def build_index_html(arts, cats, years, lang):
         verify=VERIFY_BLOCK,
         eyebrow=T['eyebrow'],
         h1=T['h1'],
-        lede=T['lede'] % (len(arts), n_cat, len(years)),
+        lede=T['lede'] % (len(arts) if lang.get('code') != 'en' else str(len(arts)),
+                          n_cat if lang.get('code') != 'en' else _plural(n_cat, 'topic'),
+                          len(years) if lang.get('code') != 'en' else _plural(len(years), 'year')),
         s_n=len(arts), s_nu=T['stat_n'],
-        s_first=min(years) if years else '', s_firstu=T['stat_first'],
-        s_last=max(years) if years else '', s_lastu=T['stat_last'],
-        s_words=total_words // 10000, s_wordsu=T['stat_words'],
+        # 中文是「2021 最早」，英文得写成「from 2021」—— 语序相反，
+        # 模板只有一个 <b>{值}</b> {单位} 的位置，所以英文把介词并进值里。
+        s_first=('from %s' % min(years)) if (is_en and years) else (min(years) if years else ''),
+        s_firstu='' if is_en else T['stat_first'],
+        s_last=('to %s' % max(years)) if (is_en and years) else (max(years) if years else ''),
+        s_lastu='' if is_en else T['stat_last'],
+        # 中文按万字折算；英文只有几千词，折算出来是 0，直接给准数。
+        s_words=total_words if is_en else total_words // 10000,
+        s_wordsu=('words' if total_words != 1 else 'word') if is_en else T['stat_words'],
         ph=T['ph'], clear=T['clear'],
         bio=T['about_bio'], aboutlink=T['about_link'],
         author_name=T['author_name'], author_alt=T['account_alt'],
@@ -895,9 +1136,10 @@ def build_index_html(arts, cats, years, lang):
         about_site=T['about_site'], sitemap=T['sitemap'], cms=T['cms'],
         copy=T['copy'],
         pfx=pfx,
+        i18n=json.dumps(i18n(lang), ensure_ascii=False),
         ld=ld_home(lang, url_for(lang, 'index.html'),
                    '%s · %s' % (T['h1'], T['subtitle']),
-                   '吕文艺老师「吕氏时空人」理论技术作品归档与检索站，收录原创文章 %d 篇。' % len(arts),
+                   T['meta_desc'] % len(arts),
                    len(arts)),
         cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
 
@@ -987,6 +1229,7 @@ INDEX_TPL = '''<!doctype html>
   <p class="copy">{copy}</p>
 </footer>
 
+<script>window.I18N={i18n};</script>
 <script src="{pfx}app.js?v={stamp}"></script>
 </body>
 </html>'''
@@ -1025,12 +1268,12 @@ POST_TPL = '''<!doctype html>
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a href="{pfx}index.html" class="home">{back}</a>
+  <a href="{home_pfx}index.html" class="home">{back}</a>
   {langsw}
 </div></header>
 
 <article class="wrap post">
-  <nav class="crumb"><a href="{pfx}index.html">{home}</a> / <span>{cat}</span></nav>
+  <nav class="crumb"><a href="{home_pfx}index.html">{home}</a> / <span>{cat}</span></nav>
   <h1>{title}</h1>
   <div class="meta">
     <span class="badge">{cat}</span>
@@ -1054,7 +1297,7 @@ POST_TPL = '''<!doctype html>
   <div class="contact">
     <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a> · {wechat_v}</p>
   </div>
-  <p><a href="{pfx}about.html">{about_site}</a> · <a href="{pfx}index.html">{back_home}</a></p>
+  <p><a href="{home_pfx}about.html">{about_site}</a> · <a href="{home_pfx}index.html">{back_home}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -1065,14 +1308,21 @@ def build_post_html(a, by_cat, lang):
     T = ui(lang)
     L = cat_labels(lang)
     # 详情页在 <lang>/posts/ 下，比索引页深一层，站内相对链接要多上一级 ../
+    # pfx 给静态资源用（style.css / app.js 在站点根）；
+    # home_pfx 给语言首页用 —— 文章永远在 <lang>/posts/ 下一层，所以固定 '../'。
+    # 之前二者混用，繁体/英文文章页的「返回首页」会跳到简体首页。
     pfx = '../../' if lang['dir'] else '../'
+    home_pfx = '../'
     desc = clean_excerpt(a['body'], 100)
     tg = ''
     if a['tags']:
         tg = '<div class="tags">' + ''.join(
-            '<a href="%sindex.html#t-%s">#%s</a>' % (pfx, esc(t), esc(t))
+            '<a href="%sindex.html#t-%s">#%s</a>' % (home_pfx, esc(t), esc(t))
             for t in a['tags']) + '</div>'
-    rel = [x for x in by_cat.get(a['category'], []) if x['slug'] != a['slug']][:6]
+    # 同类文章按 cat_key（简体原名）取 —— 不能用 a['category']：
+    # 繁体版的 category 是繁体、英文版是英文，都查不到 by_cat 的键，
+    # 结果就是繁体/英文页面永远没有「同类文章」。
+    rel = [x for x in by_cat.get(a['cat_key'], []) if x['slug'] != a['slug']][:6]
     rh = ''
     if rel:
         rh = ('<div class="related"><h4>%s</h4><ul>' % T['related'] +
@@ -1092,9 +1342,9 @@ def build_post_html(a, by_cat, lang):
         author=esc(a['author']), author_l=T['author'],
         url_line=url_line, tags=tg, site=T['site_name'], og=lang['og'],
         canonical=url_for(lang, 'posts/' + slugq),
-        alt=hreflang_tags(lang, 'posts/' + slugq),
-        langsw=build_switcher(lang, 'posts/' + slugq),
-        back=T['back'], home=T['home'], pfx=pfx,
+        alt=hreflang_tags(lang, 'posts/' + slugq, post=a),
+        langsw=build_switcher(lang, 'posts/' + slugq, post=a),
+        back=T['back'], home=T['home'], pfx=pfx, home_pfx=home_pfx,
         source=T['source'], source_v=T['source_v'], stmt=T['stmt'], stmt_v=T['stmt_v'],
         content=md_to_html(a['body']), related=rh, stamp=STAMP,
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
@@ -1102,7 +1352,7 @@ def build_post_html(a, by_cat, lang):
         ld=ld_post(a, url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
                    a['title'], desc, lang),
         pubdate=(a['date'] or '2026-01-01'),
-        category=cat_display(lang, a['category'], a['category']),
+        category=cat_display(lang, a['cat_key'], a['category']),
         cover=cover_image(a['body'], lang))
 
 
@@ -1412,16 +1662,21 @@ def build_sitemap(arts, lang):
     # 早期版本把每种语言各生成一个独立 <url> 节点，loc 完全相同，
     # 结果 690 篇文章生成了 2072 条 loc（只有 692 条唯一），
     # 百度对重复 sitemap 会判定站点质量差。详见 2026-10-21 排查记录。
-    alts_by_lang = [l for l in LANGS if l['code'] != lang['code']]
+    # 另外：英文 slug 与中文不同，必须走 _post_slugs 配对，
+    # 直接拼 a['slug'] 会生成 690 条指向不存在页面的英文链接。
     for a in arts:
-        loc = url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.'))
+        slugs = _post_slugs(lang, a)
+        loc = url_for(lang, 'posts/' + urllib.parse.quote(slugs[lang['code']] + '.html', safe='/-.'))
         alt = ''
-        for l in alts_by_lang:
-            if l.get('stub'):
+        for l in LANGS:
+            if l['code'] == lang['code']:
+                continue
+            s = slugs.get(l['code'])
+            if not s:
                 continue
             alt += ('<xhtml:link rel="alternate" hreflang="%s" href="%s"/>'
                     % (l['code'],
-                       url_for(l, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.'))))
+                       url_for(l, 'posts/' + urllib.parse.quote(s + '.html', safe='/-.'))))
         urls.append('<url><loc>%s</loc><lastmod>%s</lastmod>'
                     '<changefreq>monthly</changefreq><priority>0.6</priority>%s</url>'
                     % (loc, a['date'] or '2026-01-01', alt))
@@ -1531,10 +1786,13 @@ def build_one_lang(lang, settings):
     with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(build_index_html(arts, cats, years, lang))
 
-    # 关于页
+    # 关于页 —— 英文版用自己的一份（content/en/about.md），没有就退回中文那份
+    page = settings.get('about')
+    if lang.get('code') == 'en':
+        page = load_en_about() or page
     html = ''
-    if 'about' in settings:
-        html = build_about_html(settings['about'], arts, lang)
+    if page:
+        html = build_about_html(page, arts, lang)
     if html:
         with open(os.path.join(out_dir, 'about.html'), 'w',
                   encoding='utf-8', newline='\n') as f:

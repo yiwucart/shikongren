@@ -17,6 +17,21 @@
   var countEl = document.getElementById('count');
   var empty = document.getElementById('empty');
 
+  // 界面文案由构建时注入的 window.I18N 提供（英文站需要）。
+  // 没有注入时退回下面的中文原文 —— 繁体/简体页面行为不变。
+  var T = window.I18N || {};
+  function tx(k, def) { return typeof T[k] === 'string' ? T[k] : def; }
+  function fmt(tpl, a, b) {
+    var args = [a, b], i = 0;
+    return tpl.replace(/%[sd]/g, function () { return args[i++]; });
+  }
+  // 英语要分单复数（1 result / 3 results）；中文没有这回事，
+  // 没有 xxx_one 这条文案时直接退回原串。
+  function pick(base, n, def) {
+    if (n === 1) { var o = tx(base + '_one', null); if (o) return o; }
+    return tx(base, def);
+  }
+
   var all = Array.prototype.slice.call(grid.querySelectorAll('.card'));
   var catOf = all.map(function (el) {
     return el.querySelector('.c').textContent.trim();
@@ -208,10 +223,10 @@
     grid.appendChild(frag);
     var n = list.length;
     if (kw) {
-      countEl.innerHTML = '搜索「' + esc(kw) + '」：命中 ' + n + ' 篇' +
-        (mode === 'full' ? '（全文）' : '（标题与摘要）');
+      countEl.innerHTML = fmt(pick('count_search', n, '搜索「%s」：命中 %d 篇'), esc(kw), n) +
+        (mode === 'full' ? tx('count_full', '（全文）') : tx('count_sum', '（标题与摘要）'));
     } else {
-      countEl.textContent = '共收录 ' + n + ' 篇';
+      countEl.textContent = pick('count_all', n, '共收录 %d 篇').replace('%d', n);
     }
     empty.hidden = n > 0;
   }
@@ -225,12 +240,14 @@
         '<h3>' + mark(h.t, toks) + '</h3>' +
         '<p class="ex">' + mark(snippet(h.x, toks, 120), toks) + '</p>' +
         '<div class="m"><span>' + esc(h.d) + '</span><span>' +
-        (h.x.length > 1200 ? Math.round(h.x.length / 1000) + ' 千字' : h.x.length + ' 字') +
+        (h.x.length > 1200
+          ? tx('len_k', '%d 千字').replace('%d', Math.round(h.x.length / 1000))
+          : tx('len_c', '%d 字').replace('%d', h.x.length)) +
         '</span></div></a>';
     }).join('');
     grid.innerHTML = html;
-    countEl.innerHTML = '搜索「' + esc(kw) + '」：命中 ' + hits.length + ' 篇' +
-      (label ? '（' + label + '）' : '');
+    countEl.innerHTML = fmt(pick('count_search', hits.length, '搜索「%s」：命中 %d 篇'), esc(kw), hits.length) +
+      (label || '');
     empty.hidden = hits.length > 0;
   }
 
@@ -287,14 +304,14 @@
   function applySummary(kw) {
     if (!SUMMARY) return 0;
     var hits = matchIndex(SUMMARY, tokens(kw), curCat);
-    renderHits(hits, kw, '摘要');
+    renderHits(hits, kw, tx('count_summary', '（摘要）'));
     return hits.length;
   }
 
   function applyFull(kw) {
     if (!FULL) return 0;
     var hits = matchIndex(FULL, tokens(kw), curCat);
-    renderHits(hits, kw, '全文');
+    renderHits(hits, kw, tx('count_full', '（全文）'));
     return hits.length;
   }
 
@@ -317,8 +334,7 @@
         // 摘要层已经有足够结果，就不拉全文了（省流量和时间）
         if (n >= 3) return;
         // 第 3 级：结果不足，后台补全文
-        countEl.innerHTML = '搜索「' + esc(kw) + '」：摘要命中 ' + n +
-          ' 篇，正在补全全文…';
+        countEl.innerHTML = fmt(pick('count_loading', n, '搜索「%s」：摘要命中 %d 篇，正在补全全文…'), esc(kw), n);
         loadFull().then(function (full) {
           if (full && q.value.trim() === kw) applyFull(kw);
         });
