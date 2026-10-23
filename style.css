@@ -658,6 +658,13 @@ img { max-width: 100%; }
     font-size: 14px;
     margin-bottom: 1.1em;
   }
+  /* 窄屏给单元格一个宽度下限：否则多列表格被压到最窄，
+     body 上的 word-break: break-word 会把英文单词逐字母拆行 */
+  .content th, .content td {
+    min-width: 6.5em;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
   .content pre {
     overflow-x: auto;
     font-size: 13px;
