@@ -8,13 +8,15 @@ author: "Lü Wenyi"
 series: "Working the Remedy"
 order: 5
 src: "网瘾戒断的调理方法-337.md"
-words: 2078
+words: 2137
 ---
 
 > **Translator's note.** The clearest worked example in the collection of how a remedy is actually designed: take a behaviour, find its structural description in the chart, and adjust the environment so the behaviour loses its footing. The reasoning here is worth following even if you accept none of it — the move is from “he sits still” to “make the day master move,” and from there to the two directions that govern it. Note also the honesty about side effects: the author tells the client the remedy will cost money, and lets him choose. The last section sets out a criterion for a real theory — proposition and converse must both hold — which is a better piece of epistemology than most of what appears in this field.
 
 ---
 
+
+A behaviour has a structural description, and once you have the description the remedy follows from it. What follows is the author's method worked end to end: from the chart, to the two directions that govern it, to the side effects the client is asked to accept, to the food on the table and the friends in the room.
 
 ## 1. The ordinary method
 
