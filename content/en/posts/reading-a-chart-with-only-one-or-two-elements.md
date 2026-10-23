@@ -11,16 +11,16 @@ src: "命局只有一个或两个五行时怎么算命？-629.md"
 words: 1320
 ---
 
-> **Translator's note.** Two things to flag before you read. First, the "Ten Gods positions" table below is **not** the classical *shishen* system. In standard Bazi, the Ten Gods are derived relationally from the day stem against every other character, so *which* god appears in a given position depends on the chart. The table here assigns **fixed** meanings to positions — the year stem is *always* the Wealth position, the month branch is *always* the Lover position, regardless of what character sits there. This is the author's own "Bazi model," and reading it as classical *shishen* will make the rest of the essay incoherent. Second, "special charts" (*teshu mingju*) is a real term of art in Chinese fate calculation, used for charts that break the normal patterns — one element only, or two. The author's argument is that the category is a confession of theoretical failure, not a description of rare cases.
+> **Translator's note.** Two things to flag before you read. First, the “Ten Gods positions” table below is **not** the classical *shishen* system. In standard Bazi, the Ten Gods are derived relationally from the day stem against every other character, so *which* god appears in a given position depends on the chart. The table here assigns **fixed** meanings to positions — the year stem is *always* the Wealth position, the month branch is *always* the Lover position, regardless of what character sits there. This is the author's own “Bazi model,” and reading it as classical *shishen* will make the rest of the essay incoherent. Second, “special charts” (*teshu mingju*) is a real term of art in Chinese fate calculation, used for charts that break the normal patterns — one element only, or two. The author's argument is that the category is a confession of theoretical failure, not a description of rare cases.
 
 ---
 
 
-In Bazi practice you will meet many charts built from a single element, or two, or three. Traditional fate calculation calls these "special charts" and reads them as exceptions.
+In Bazi practice you will meet many charts built from a single element, or two, or three. Traditional fate calculation calls these “special charts” and reads them as exceptions.
 
-But what *is* a "special chart"? I have put it this way: **a "special chart" is a chart the masters cannot explain in theory and cannot predict accurately — it is the excuse they offer clients and readers, the loincloth they use to cover the fatal defect in their own system.**
+But what *is* a “special chart”? I have put it this way: **a “special chart” is a chart the masters cannot explain in theory and cannot predict accurately — it is the excuse they offer clients and readers, the loincloth they use to cover the fatal defect in their own system.**
 
-In reading fate there is no such division as special versus ordinary. If the theoretical system is scientifically correct, then **every** chart is an ordinary chart. Only when a system is flawed — congenitally, fatally flawed — does the category "special chart" have to exist.
+In reading fate there is no such division as special versus ordinary. If the theoretical system is scientifically correct, then **every** chart is an ordinary chart. Only when a system is flawed — congenitally, fatally flawed — does the category “special chart” have to exist.
 
 Using our Lü Wenyi Bazi Model, a chart of one element, or two, or three is just an ordinary chart. There are no special charts. Whatever chart you face, memorise the following positional assignments and every chart becomes ordinary.
 
@@ -38,7 +38,7 @@ Using our Lü Wenyi Bazi Model, a chart of one element, or two, or three is just
 | Hour stem | The **Output** (food/wounding) position |
 | Hour branch | The **Officer–Killing** position, and a secondary Output position |
 
-Memorise this and every chart is ordinary. The notion of a "special chart" disappears.
+Memorise this and every chart is ordinary. The notion of a “special chart” disappears.
 
 ![](/img/81e8a58d089d944b.png)
 
@@ -46,7 +46,7 @@ Memorise this and every chart is ordinary. The notion of a "special chart" disap
 
 **Male: *wu-wu / wu-wu / wu-wu / wu-wu*** — four identical pillars, 戊午 repeated.
 
-From antiquity this has been treated as the textbook "special chart." Virtually every system on record is helpless against it — the classic image is a dog trying to bite a hedgehog, with nowhere to start. Even the *Ditan Sui* — the eighteenth-century classic on Bazi — gives an account of this configuration that does not match the actual lives of the men who carry it.
+From antiquity this has been treated as the textbook “special chart.” Virtually every system on record is helpless against it — the classic image is a dog trying to bite a hedgehog, with nowhere to start. Even the *Ditan Sui* — the eighteenth-century classic on Bazi — gives an account of this configuration that does not match the actual lives of the men who carry it.
 
 I have been fortunate enough to meet two men with this exact chart. The first was a computer typist at Li Hongcheng's company in Haikou. Every master in that company read his chart on the spot. Not one got even a single event in his life right. The second was a neighbour of a friend in the Henan *Yijing* circle.
 
@@ -77,7 +77,7 @@ Now suppose this person is **short**. Then the month stem and hour stem never ac
 
 ### 2. The crown of the head
 
-Now the year stem *wu* earth. Its strength in this chart is "strong." Earth governs squareness, so a strong year stem implies a **square** crown. But the short man in Haikou has a round crown — small, thin, round-headed.
+Now the year stem *wu* earth. Its strength in this chart is “strong.” Earth governs squareness, so a strong year stem implies a **square** crown. But the short man in Haikou has a round crown — small, thin, round-headed.
 
 The year stem is unfavourable; the crown implied by an unfavourable element is square. His is round. **The fact contradicts the implication, so the fact is auspicious.** And the year stem is the Wealth position — an auspicious Wealth position means this man will never be without money. The year stem is also the father's position, likewise auspicious, so he inherits from his father.
 
@@ -85,7 +85,7 @@ The tall man from Henan has a crown that is square-to-round, essentially matchin
 
 ---
 
-From this I hope it is now entirely clear: **there are no "special charts" in the world. There is only the falseness and error of chart-reading theories.** There is exactly one kind of chart, the ordinary kind. The so-called special chart is simply a chart the masters cannot read and never could.
+From this I hope it is now entirely clear: **there are no “special charts” in the world. There is only the falseness and error of chart-reading theories.** There is exactly one kind of chart, the ordinary kind. The so-called special chart is simply a chart the masters cannot read and never could.
 
 The Bazi model is scientific, materialist, dialectical, objective and grounded in reality. And once this is understood, three central questions in Bazi follow:
 

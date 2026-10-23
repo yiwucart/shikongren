@@ -26,8 +26,8 @@ Any scar left on the body, whatever its size, is information of this kind. Any g
 
 Here is the trouble. From a chart we can only determine *that* the information is present; we have no way to measure *how much*. So a reading is frequently correct and the client still says it is wrong. The reason is always the same: before giving the result, nobody explained what the category actually covers.
 
-**The essence of a "bloodshed disaster" is loss of blood. Giving blood is the best way to defuse it.** Donating blood also defuses other unfavourable information — loss of money, being targeted by petty people, lawsuits and disputes — because the direction in which an energy expresses itself can be turned. Modern medicine has established that donating blood does the body no harm.
+**The essence of a “bloodshed disaster” is loss of blood. Giving blood is the best way to defuse it.** Donating blood also defuses other unfavourable information — loss of money, being targeted by petty people, lawsuits and disputes — because the direction in which an energy expresses itself can be turned. Modern medicine has established that donating blood does the body no harm.
 
 ![](/img/30c415403a0a5d95.jpeg)
 
-Some people, in order to extract money, tell everyone who sits down that they face a "matter of life and death, a pass they must cross." The only purpose is to send the client looking for a remedy, and paying for it.
+Some people, in order to extract money, tell everyone who sits down that they face a “matter of life and death, a pass they must cross.” The only purpose is to send the client looking for a remedy, and paying for it.

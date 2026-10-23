@@ -11,12 +11,12 @@ src: "《神兵奇门遁甲》才是真正的奇门遁甲，其它所有奇门�
 words: 2906
 ---
 
-> **Translator's note.** *Shenbing Qimen* (神兵奇门, "Divine Troops Qimen") is the author's own school, which he traces through his maternal grandfather to a lineage he attributes to Zhuge Liang (181–234), the Three Kingdoms strategist to whom Chinese tradition also attributes the *Qimen Dunjia* corpus. This is the most promotional piece in the collection, and it makes a very large claim: that every other qimen school in circulation — including the various "Zhuge Qimen," "Yin-pan Qimen," "Numerical Qimen" and "Ritual Qimen" on the market — is a fake, because all of them cast only one chart. We have kept his technical distinction intact, since it is the substance of the argument, and condensed the sales passages. The family-lineage claim and the anecdotes below cannot be independently verified; they are recorded as the author tells them.
+> **Translator's note.** *Shenbing Qimen* (神兵奇门, “Divine Troops Qimen”) is the author's own school, which he traces through his maternal grandfather to a lineage he attributes to Zhuge Liang (181–234), the Three Kingdoms strategist to whom Chinese tradition also attributes the *Qimen Dunjia* corpus. This is the most promotional piece in the collection, and it makes a very large claim: that every other qimen school in circulation — including the various “Zhuge Qimen,” “Yin-pan Qimen,” “Numerical Qimen” and “Ritual Qimen” on the market — is a fake, because all of them cast only one chart. We have kept his technical distinction intact, since it is the substance of the argument, and condensed the sales passages. The family-lineage claim and the anecdotes below cannot be independently verified; they are recorded as the author tells them.
 
 ---
 
 
-*Shenbing Qimen Dunjia* is a secret art of the Zhuge Liang line, transmitted in a single thread across a thousand years. Its theoretical system has **no relationship whatever** to the "Zhuge Qimen" now sold in the marketplace. What circulates under that name is no different in kind from "Yin-pan Qimen," "Numerical Qimen," "Ritual Qimen" and the rest: a jianghu fake wearing a qimen label to part the public from its money.
+*Shenbing Qimen Dunjia* is a secret art of the Zhuge Liang line, transmitted in a single thread across a thousand years. Its theoretical system has **no relationship whatever** to the “Zhuge Qimen” now sold in the marketplace. What circulates under that name is no different in kind from “Yin-pan Qimen,” “Numerical Qimen,” “Ritual Qimen” and the rest: a jianghu fake wearing a qimen label to part the public from its money.
 
 This system is the result of more than twenty years of work on two sources: the *Qimen Notebooks* left by my maternal grandfather — a record of cases, successes and failures, from the Zhuge line he carried — and the strange stories about his use of the art that still circulate in the Jin-Shaan-Meng border country. I then rebuilt the theory on the *Lü school of time, space and person*, closing the technical defects that afflict *Shenbing Qimen* and every other qimen school alike.
 
@@ -36,15 +36,15 @@ Only the Zhuge line casts both. The **time chart** is built purely from time —
 
 Whatever you are asking about, you must fuse the time chart and the fact chart before the reading has any correspondence to the actual matter, and before the conclusion can be precise.
 
-*Shenbing Qimen* is emphatically **not** what the corpse-schools do: stay inside the single time chart and rummage through its gates, stars, palaces, stems, instruments and spirits looking for a "host and guest," a "useful god," an "enemy god," a "jealous god." Take partnership: find the earth-plate Life Gate for the party supplying capital, take the palace where the heaven-plate Life Gate lands for the working partner. Take friendship: the day stem's palace is you, the hour stem is the friend. Take marriage: *yi* is the woman, *geng* the man. Take a loan: the *zhifu* is the lender, the *tianyi* minor *zhifu* the borrower. Take litigation: *zhifu* the plaintiff, *tianyi* the defendant. Take illness: *tianrui* is the disease; the Life and Death gates give the outcome. Take a life reading: the birth-year stem and branch gives the subject's palace — or the time he walked in the door.
+*Shenbing Qimen* is emphatically **not** what the corpse-schools do: stay inside the single time chart and rummage through its gates, stars, palaces, stems, instruments and spirits looking for a “host and guest,” a “useful god,” an “enemy god,” a “jealous god.” Take partnership: find the earth-plate Life Gate for the party supplying capital, take the palace where the heaven-plate Life Gate lands for the working partner. Take friendship: the day stem's palace is you, the hour stem is the friend. Take marriage: *yi* is the woman, *geng* the man. Take a loan: the *zhifu* is the lender, the *tianyi* minor *zhifu* the borrower. Take litigation: *zhifu* the plaintiff, *tianyi* the defendant. Take illness: *tianrui* is the disease; the Life and Death gates give the outcome. Take a life reading: the birth-year stem and branch gives the subject's palace — or the time he walked in the door.
 
 All of that is fantasy. It is self-pleasuring inside a sealed time system, analysing generation, control, clash, combination and storage vaults to produce a verdict. It is absurd, and it is why those schools cannot deliver.
 
-I renamed the "life-and-death chart" the "fact chart" to take some of the drama out of it. **The name does not mean "life and death" literally.** It means the *fact chart* formed by the actual, objective, concrete combination of a person, an event and an object that will decide whether the matter succeeds or fails. It is not cast from time at all.
+I renamed the “life-and-death chart” the “fact chart” to take some of the drama out of it. **The name does not mean “life and death” literally.** It means the *fact chart* formed by the actual, objective, concrete combination of a person, an event and an object that will decide whether the matter succeeds or fails. It is not cast from time at all.
 
 Its substance is the living factual element that plays the decisive role when qimen is used to predict — and the decisive factor in whether a remedy works. **The life-and-death chart is the soul of qimen. The time chart is only its corpse.**
 
-Zhuge Liang's greatest secret was never the "yin dun, ninth round, yang dun, third round" business of setting up a chart by clock. That is only the analysis platform. **Any qimen school without the life-and-death chart is a eunuch qimen — gelded.**
+Zhuge Liang's greatest secret was never the “yin dun, ninth round, yang dun, third round” business of setting up a chart by clock. That is only the analysis platform. **Any qimen school without the life-and-death chart is a eunuch qimen — gelded.**
 
 The extraordinary accuracy of *Shenbing Qimen* readings, and the startling effect of its remedies, come from the fusion of the two.
 
@@ -76,7 +76,7 @@ With the fusion of time chart and fact chart, the outcome of every classic war i
 
 There is one precondition: the fact chart must be cast correctly — when each side moved, from which direction, in what environmental state, with what distinguishing features, toward what objective. Get the fact chart right, combine it with the time chart of the engagement, and you can read the outcome and the shape of the engagement precisely. The Russia–Ukraine crisis can be read the same way: the final outcome, and the character of the major turns along the way.
 
-### 3. "Every step out the door is an encounter"
+### 3. “Every step out the door is an encounter”
 
 From the chart you can predict, for a person leaving a given place, what he will meet within 300 metres (500 in the countryside) in each of the eight — or twenty-four — directions: **what kind of event, auspicious or not; what sort of person; what sort of object.**
 
@@ -86,15 +86,15 @@ About two minutes after he left he telephoned. The moment he came out of the com
 
 That is the predictive power of *Shenbing Qimen*.
 
-### 4. "The visitor needs no introduction"
+### 4. “The visitor needs no introduction”
 
 From the chart you can predict in advance **what sort of person will come today, from what direction, to discuss what sort of matter.**
 
 Every morning I cast a chart and then walk 300 metres in whatever direction takes me. From the people, events and objects I meet, read against the chart, I can say precisely who will come today, from where, and what they will want to talk about.
 
-### 5. "Scatter beans, raise troops"
+### 5. “Scatter beans, raise troops”
 
-*San dou cheng bing* — "scatter beans and they become soldiers" — does not mean, as the words suggest, that a handful of beans turns into a company of men.
+*San dou cheng bing* — “scatter beans and they become soldiers” — does not mean, as the words suggest, that a handful of beans turns into a company of men.
 
 **It means locating hidden energy through the chart, and then using that hidden energy — at a specific time, in a specific direction, in a specific environment — to strengthen your auspicious energy and weaken the inauspicious, so as to accomplish your objective.** It is a method of fate adjustment.
 
@@ -110,7 +110,7 @@ On the fifth day he called. She was back. She and the lover had quarrelled over 
 
 That is *Shenbing Qimen*.
 
-### 6. "Borrowing years from heaven"
+### 6. “Borrowing years from heaven”
 
 *Xiang tian jie shou* does not mean a person can live forever. It means that, by this method, the enormous physical and mental suffering of someone gravely ill can be substantially reduced, the progression of a malignant disease can be slowed, and life thereby indirectly extended. It can also buy a little time for an elderly person waiting for children or relatives to come and see them one last time.
 
@@ -120,7 +120,7 @@ In the winter of 2015 my mother's health was failing by the day at home. She had
 
 In the spring of 2016 I sent her to stay with my sister in Baotou, also in the *xu* direction. She lived healthily for another year, and died in the summer of 2017.
 
-That is "borrowing years from heaven." (This is only the directional application; the other methods are not convenient to describe here.)
+That is “borrowing years from heaven.” (This is only the directional application; the other methods are not convenient to describe here.)
 
 ### 7. Lifetime readings
 
@@ -144,7 +144,7 @@ The original lists some sixty items. All of them, and their associated detail, c
 
 Applied together, they can intervene substantially in the process and outcome of what a person or an organisation is doing: the speed, the direction, the scale.
 
-"Scattering beans" and "borrowing years" are two applications among many of the remedial method. **Remember: every remedy has preconditions and limits. No remedy raises the dead, turns a beggar into the richest man in the world, or turns a servant into an emperor.**
+“Scattering beans” and “borrowing years” are two applications among many of the remedial method. **Remember: every remedy has preconditions and limits. No remedy raises the dead, turns a beggar into the richest man in the world, or turns a servant into an emperor.**
 
 ### 11. It answers what the other schools cannot even formulate
 
@@ -158,11 +158,11 @@ In accuracy of prediction and in the power of remedial fate adjustment, it leave
 
 It does not matter whether you have any qimen background. If you want to learn, this system will surprise you.
 
-**There is no "cannot learn it," no "cannot get it accurate," no bait-and-switch. Each part is learned complete and can be used independently and accurately.** Not transmitting false theory and false technique is the floor I have set for public teaching.
+**There is no “cannot learn it,” no “cannot get it accurate,” no bait-and-switch. Each part is learned complete and can be used independently and accurately.** Not transmitting false theory and false technique is the floor I have set for public teaching.
 
 ### 13. Start with the walk
 
-Perhaps you do not believe any of this. Then learn one technique — "every step out the door is an encounter" — and you will understand, at 100%, why this system leaves the others ten thousand miles behind.
+Perhaps you do not believe any of this. Then learn one technique — “every step out the door is an encounter” — and you will understand, at 100%, why this system leaves the others ten thousand miles behind.
 
 Because this question — leaving the house and moving in one of twenty-four directions, what specific thing, what sort of person, what strange object will I meet within 500 metres — has been asked for two thousand years, and only *Shenbing Qimen* has ever answered it completely. The other schools tell a story and cannot do it.
 

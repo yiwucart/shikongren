@@ -11,13 +11,13 @@ src: "十天干的天文学科学来源是什么？-586.md"
 words: 1114
 ---
 
-> **Translator's note.** This article belongs with the three that follow it. Together they answer a single question: what are the Stems and Branches *made of*? The answer given here is astronomical, not symbolic — the ten Stems are read as ten configurations of Jupiter, Saturn, Earth and the Sun. Readers who have met the Stems only as "Yang Wood is a tall tree, Yin Wood is a flower" should expect that reading to be dismissed, politely at first and then not politely at all.
+> **Translator's note.** This article belongs with the three that follow it. Together they answer a single question: what are the Stems and Branches *made of*? The answer given here is astronomical, not symbolic — the ten Stems are read as ten configurations of Jupiter, Saturn, Earth and the Sun. Readers who have met the Stems only as “Yang Wood is a tall tree, Yin Wood is a flower” should expect that reading to be dismissed, politely at first and then not politely at all.
 >
 > The original contains a passage cursing named and unnamed plagiarists in extremely violent language (premature death, dismemberment, the extinction of one's descendants). It has been condensed into a single sentence. The argument does not depend on it.
 
 ---
 
-Saturn was called *zhenxing*, "the garrison star", in ancient China. It is one of the eight planets and the second largest in the solar system.
+Saturn was called *zhenxing*, “the garrison star”, in ancient China. It is one of the eight planets and the second largest in the solar system.
 
 On the question of the Heavenly Stems, modern astronomy has established something specific: of all the planets, the two that most affect life on Earth are Jupiter and, after it, Saturn. The relationship between the two is called, in astronomy, the Jupiter–Saturn system — and that system exerts a substantial influence on terrestrial life.
 
@@ -49,7 +49,7 @@ Anyone studying this system has to go down into its nouns and concepts. Stay at 
 
 Once the nature of the four-pillar chart is clear, the rest follows. Take any combination of Stem and Branch — *jia-zi*, say. If it appears as a **year**, it denotes one particular arrangement of Earth, Sun, Jupiter and Saturn; you could locate those four bodies in the sky at that moment. If the year is *yi-chou*, that denotes a different arrangement.
 
-Different arrangements mean that every living thing on Earth receives the "primordial life energy" of the cosmos at a different intensity and through a different mode of action. Because the positions of Earth, Sun, Jupiter and Saturn differ from year to year, people born in a *jia-zi* year, a *yi-chou* year and a *bing-yin* year differ enormously in their fates.
+Different arrangements mean that every living thing on Earth receives the “primordial life energy” of the cosmos at a different intensity and through a different mode of action. Because the positions of Earth, Sun, Jupiter and Saturn differ from year to year, people born in a *jia-zi* year, a *yi-chou* year and a *bing-yin* year differ enormously in their fates.
 
 **A year** denotes the broad positional relationship among these four bodies.
 

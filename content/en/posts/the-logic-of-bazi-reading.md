@@ -11,12 +11,12 @@ src: "浅谈八字算命的底层逻辑-300.md"
 words: 1198
 ---
 
-> **Translator's note.** The gate into the Bazi material. Before any technique, Lü insists on the boundary: a birth chart can say *what kind* of thing will happen, never *how much*. Everything the trade promises beyond that — the size of a fortune, the height of a degree, the length of a life — he says outright cannot be delivered, and he uses his own students' refusal to take part in "duels" over those questions as the proof that the refusal is honest. Read this first; the eighteen essays that follow are all applications of this one boundary.
+> **Translator's note.** The gate into the Bazi material. Before any technique, Lü insists on the boundary: a birth chart can say *what kind* of thing will happen, never *how much*. Everything the trade promises beyond that — the size of a fortune, the height of a degree, the length of a life — he says outright cannot be delivered, and he uses his own students' refusal to take part in “duels” over those questions as the proof that the refusal is honest. Read this first; the eighteen essays that follow are all applications of this one boundary.
 
 ---
 
 
-What is "underlying logic"?
+What is “underlying logic”?
 
 Underlying logic is a way of thinking that starts from the nature of a thing and works out from there how its problems can be solved.
 
@@ -35,7 +35,7 @@ So what is the underlying logic of bazi reading — meaning here bazi as a *time
 1. **People born under the same five-fold coincidence do not have the same fate.**
 2. **People born under the same five-fold coincidence do not convert their fate-energy in the same direction.**
 
-By "five-fold coincidence" I mean the same year, month, day and hour of birth — which is to say, the same four pillars — plus the same sex. A "six-fold coincidence" adds the same birthplace.
+By “five-fold coincidence” I mean the same year, month, day and hour of birth — which is to say, the same four pillars — plus the same sex. A “six-fold coincidence” adds the same birthplace.
 
 **From these two pieces of logic we can derive the limits of bazi calculation:**
 
@@ -56,19 +56,19 @@ So: five-fold coincidences have different fates. That is underlying logic. It is
 
 Lü-school bazi admits that bazi cannot calculate the level of wealth, cannot calculate the level of education, cannot calculate the size of an official misfortune or an injury, cannot calculate the length of a life. In short, it does not do quantitative things at all. Of all the bazi schools in China, only the Lü school dares to admit this. Only the Lü school admits that bazi is an ECG machine and not an all-purpose device. That is precisely what is most admirable about it.
 
-Someone will say: "Just because the Lü school cannot calculate the level of wealth doesn't mean nobody can." Yes — and if you put it that way, of course I can calculate it too. Without looking at the chart at all, by guessing, I might well be more accurate than you.
+Someone will say: “Just because the Lü school cannot calculate the level of wealth doesn't mean nobody can.” Yes — and if you put it that way, of course I can calculate it too. Without looking at the chart at all, by guessing, I might well be more accurate than you.
 
-Someone else will say: "Lü-school readers want your height, the size of your backside, and how much flesh is on the soles of your feet before they will read you. People will laugh at that. How are you supposed to earn a living?"
+Someone else will say: “Lü-school readers want your height, the size of your backside, and how much flesh is on the soles of your feet before they will read you. People will laugh at that. How are you supposed to earn a living?”
 
 Yes, you are right again. Science is not for earning a living. If earning a living is what you want, you need not study the Lü school at all — you need not study even traditional bazi. Learn a bit of patter and you are fully equipped.
 
-Many "yixue masters" in Taiwan run dedicated courses in exactly that patter. No bazi required. Learn the script and you can make a living.
+Many “yixue masters” in Taiwan run dedicated courses in exactly that patter. No bazi required. Learn the script and you can make a living.
 
 But come back to it: if you have thoroughly understood Lü-school theory, and on top of that you have mastered the patter in live practice — can you really not make a living?
 
-Lately, in various group chats, I keep seeing people say that Lü-school students dare not practise, and they drag this or that student off to "duel" with traditional bazi readers — over the level of wealth, over the level of education, over life and death, over how many brothers a man has, and even, heaven help us, over a person's occupation.
+Lately, in various group chats, I keep seeing people say that Lü-school students dare not practise, and they drag this or that student off to “duel” with traditional bazi readers — over the level of wealth, over the level of education, over life and death, over how many brothers a man has, and even, heaven help us, over a person's occupation.
 
-The underlying logic of Lü-school theory states plainly what can be judged and what cannot. Insist on dragging Lü-school students into judging things that are "no better than guessing," and whose brain is the sick one?
+The underlying logic of Lü-school theory states plainly what can be judged and what cannot. Insist on dragging Lü-school students into judging things that are “no better than guessing,” and whose brain is the sick one?
 
 Others have tried to drag Teacher Lü himself into traditional groups to duel with the masters. Teacher Lü has already offended the entire traditional yixue world. Heaven knows how many pits have been dug for him to fall into. Do you seriously imagine he will walk into them obligingly? If Teacher Lü's head were as waterlogged as yours, those hundred and eighty thousand students would have scattered long ago.
 

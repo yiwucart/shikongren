@@ -11,7 +11,7 @@ src: "司马懿为何观星象而知诸葛亮气数已尽-683.md"
 words: 848
 ---
 
-> **Translator's note.** A short piece of technical history rather than argument. The famous scene in *Romance of the Three Kingdoms* — Zhuge Liang reading his own death in the sky, Sima Yi reading Zhuge Liang's — is usually left unexplained by the novel. The explanation offered here is that both men were watching the same star, and that "watching the stars" in the old literature almost always means watching the Big Dipper, understood not as seven stars but as nine. The four rival naming systems for those nine stars are set out, since a Western reader will meet all four and assume they are different things.
+> **Translator's note.** A short piece of technical history rather than argument. The famous scene in *Romance of the Three Kingdoms* — Zhuge Liang reading his own death in the sky, Sima Yi reading Zhuge Liang's — is usually left unexplained by the novel. The explanation offered here is that both men were watching the same star, and that “watching the stars” in the old literature almost always means watching the Big Dipper, understood not as seven stars but as nine. The four rival naming systems for those nine stars are set out, since a Western reader will meet all four and assume they are different things.
 
 ---
 
@@ -24,11 +24,11 @@ It is this. Beyond pure astronomy, whenever the heavens were read for the fate o
 
 ## 1. Seven stars, or nine
 
-What we call the "seven stars of the Northern Dipper" is really **nine**. Beyond the seven usually seen there are two faint "hidden stars," called **Zuofu** (Left Assistant) and **Youbi** (Right Assistant). With them the set is complete, and the nine are counted in order.
+What we call the “seven stars of the Northern Dipper” is really **nine**. Beyond the seven usually seen there are two faint “hidden stars,” called **Zuofu** (Left Assistant) and **Youbi** (Right Assistant). With them the set is complete, and the nine are counted in order.
 
 A reader who goes into the old texts will meet four separate sets of names. They are not four systems. They are four vocabularies for the same nine stars, and the correspondence is fixed:
 
-| No. | Direction | Ziwei (purple star) | Bazhai (eight houses) | Qimen (nine palaces) |
+| # | Direction | Ziwei (purple star) | Bazhai (eight houses) | Qimen (nine palaces) |
 |---|---|---|---|---|
 | 1 | North, water | Tanlang, the Greedy Wolf | Shengqi, Life Breath | Tianpeng |
 | 2 | Southwest, earth | Jumen, the Great Gate | Tianyi, Heavenly Doctor | Tianrui |
@@ -40,7 +40,7 @@ A reader who goes into the old texts will meet four separate sets of names. They
 | 8 | Northeast, earth | Zuofu, Left Assistant | Fubai, Hidden Position | Tianren |
 | 9 | South, fire | Youbi, Right Assistant | — | Tianying |
 
-So the catalogue that runs "Tanlang, Jumen, Lucun, Wenqu, Lianzhen, Wuqu, Pojun"; the one that runs "Shengqi, Tianyi, Huohai, Liusha, Wugui, Yannian, Jueming, Fubai"; the one that runs "Tianchong, Tianren, Tianrui, Tianpeng, Tianying, Tianxin, Tianzhu, Tianfu, Tianqin"; and the one that runs "one white, two black, three jade, four green, five yellow, six white, seven red, eight white, nine purple" — all four name the same nine.
+So the catalogue that runs “Tanlang, Jumen, Lucun, Wenqu, Lianzhen, Wuqu, Pojun”; the one that runs “Shengqi, Tianyi, Huohai, Liusha, Wugui, Yannian, Jueming, Fubai”; the one that runs “Tianchong, Tianren, Tianrui, Tianpeng, Tianying, Tianxin, Tianzhu, Tianfu, Tianqin”; and the one that runs “one white, two black, three jade, four green, five yellow, six white, seven red, eight white, nine purple” — all four name the same nine.
 
 ![](/img/dce000dc318661f7.jpeg)
 

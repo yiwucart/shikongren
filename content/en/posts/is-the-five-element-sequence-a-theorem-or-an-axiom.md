@@ -47,7 +47,7 @@ So why can the five elements generate across the standard order?
 
 ![One substance, many names](/img/3174310e83cba20e.jpeg)
 
-Consider big-bang cosmology. The universe formed when a "singularity" exploded and particles of like nature spread outward. If that account is correct, then everything in the universe — however unlike on the surface — is made of the same basic constituents. Modern physics confirms it: a flower, a pile of dung, a dog, a person, all children of the same mother.
+Consider big-bang cosmology. The universe formed when a “singularity” exploded and particles of like nature spread outward. If that account is correct, then everything in the universe — however unlike on the surface — is made of the same basic constituents. Modern physics confirms it: a flower, a pile of dung, a dog, a person, all children of the same mother.
 
 That is why Wood generates Earth (a tree becomes coal), Fire generates Wood (light energy becomes a tree), Water generates Fire (oil burns directly), and so on, outside the standard order. It is also why a single object can carry several elements at once.
 

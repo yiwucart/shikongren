@@ -16,7 +16,7 @@ words: 1149
 ---
 
 
-What follows are live case readings by Lü Wen-yi in the hundred-day top-predictor intensive. Through them you can understand the whole of the Shikongren method — and the essential difference between it and the "external response," "body and use," "analogy" and "image and meaning" methods you think you know, which have no logic at all and rest on random imagining. You will also understand why those methods are not fit to tie this one's shoes.
+What follows are live case readings by Lü Wen-yi in the hundred-day top-predictor intensive. Through them you can understand the whole of the Shikongren method — and the essential difference between it and the “external response,” “body and use,” “analogy” and “image and meaning” methods you think you know, which have no logic at all and rest on random imagining. You will also understand why those methods are not fit to tie this one's shoes.
 
 Enough talk; let the cases speak. Because the method is very simple, the key words in these cases are replaced with X to keep it confidential. Written out in full, ten or a dozen cases would teach you the whole thing, and Teacher Lü would have nothing to eat. A man must eat, so a little is withheld. Forgive me.
 
@@ -42,7 +42,7 @@ The student's feedback:
 
 **Classroom case two.**
 
-A student asked: "When I got up at noon my phone fell on the floor. I got up quickly and picked it up. The phone was not damaged, but the case cracked. It still works." How does the Shikongren method read this?
+A student asked: “When I got up at noon my phone fell on the floor. I got up quickly and picked it up. The phone was not damaged, but the case cracked. It still works.” How does the Shikongren method read this?
 
 Teacher Lü analysed on the spot:
 

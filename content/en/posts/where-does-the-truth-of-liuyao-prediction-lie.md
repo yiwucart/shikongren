@@ -11,12 +11,12 @@ src: "“六爻预测学”的真理何在？-663.md"
 words: 2818
 ---
 
-> **Translator's note.** This essay is the companion to "How Do You Choose the *Yongshen* in Liuyao Divination?" — it supplies the test that the earlier piece assumes. The author's criterion is blunt: a divination theory may call itself scientific only if it survives two probes. Ask the same question a hundred times and the verdict must not change; hand the reader a heap of hexagrams and he must be able to sort them into the specific questions they answer. By that standard he acquits liuyao and convicts every "new liuyao" school currently on sale. The two classical texts he names — *Huangjin Ce* (《黄金策》, "Golden Policies," a Ming compendium attributed to Liu Bowen) and *Bushi Zhengzong* (《卜筮正宗》, "The Orthodox of Divination," Wang Hongxu's Qing manual) — remain the standard liuyao curriculum to this day. The original is deliberately rough, and several passages are personal attacks; we have kept the argument and cut the invective.
+> **Translator's note.** This essay is the companion to “How Do You Choose the *Yongshen* in Liuyao Divination?” — it supplies the test that the earlier piece assumes. The author's criterion is blunt: a divination theory may call itself scientific only if it survives two probes. Ask the same question a hundred times and the verdict must not change; hand the reader a heap of hexagrams and he must be able to sort them into the specific questions they answer. By that standard he acquits liuyao and convicts every “new liuyao” school currently on sale. The two classical texts he names — *Huangjin Ce* (《黄金策》, “Golden Policies,” a Ming compendium attributed to Liu Bowen) and *Bushi Zhengzong* (《卜筮正宗》, “The Orthodox of Divination,” Wang Hongxu's Qing manual) — remain the standard liuyao curriculum to this day. The original is deliberately rough, and several passages are personal attacks; we have kept the argument and cut the invective.
 
 ---
 
 
-For more than a decade, a crowd of home-grown "swindler-masters" has made its living doing violence to the theory of traditional liuyao prediction — inventing "new liuyao theories" off the top of their heads and feeding them to students who do not know better. So I take up the scalpel again: objective, realistic, materialist, dialectical, scientific. Time to dissect these theories-for-fleecing.
+For more than a decade, a crowd of home-grown “swindler-masters” has made its living doing violence to the theory of traditional liuyao prediction — inventing “new liuyao theories” off the top of their heads and feeding them to students who do not know better. So I take up the scalpel again: objective, realistic, materialist, dialectical, scientific. Time to dissect these theories-for-fleecing.
 
 ## Test one: repetition
 
@@ -24,7 +24,7 @@ For more than a decade, a crowd of home-grown "swindler-masters" has made its li
 
 If you ask the same question a hundred times and get *auspicious* on this hexagram and *inauspicious* on that one, with no stable answer anywhere in the pile, then you may take it as proven: the theory is wrong, and it is a fraud.
 
-So here is a challenge to every master who has ever invented a "new liuyao method." Suppose I ask about one matter and shake the coins a hundred times. Suppose I then, without telling you, send a hundred different people to you — different status, different trades, different walks of life — each carrying one of those hundred hexagrams. Will you guarantee that your "new liuyao theory" derives the same verdict from all one hundred?
+So here is a challenge to every master who has ever invented a “new liuyao method.” Suppose I ask about one matter and shake the coins a hundred times. Suppose I then, without telling you, send a hundred different people to you — different status, different trades, different walks of life — each carrying one of those hundred hexagrams. Will you guarantee that your “new liuyao theory” derives the same verdict from all one hundred?
 
 Perhaps the master will say yes. Then let the students do it themselves. Shake the coins eight or ten times over one question. Then have different students, in different cities, at different hours, telephone these masters and ask for a reading. You will learn exactly how shamelessly these men boast. It is a certainty that they will read the same matter, from its different hexagrams, as flatly opposite outcomes.
 
@@ -38,11 +38,11 @@ Because if liuyao is a science and not a pseudoscience, it must withstand repeat
 
 Take this case. A man is negotiating to go into business with three different partners at once. Before shaking the coins he does not tell you which hexagram refers to which partner. He shakes fifteen times — five per partner — and asks: with which of the three can I actually make money?
 
-Can you, using liuyao, sort those fifteen hexagrams into three groups of five, such that each group is exactly the "will I make money with this particular partner" question?
+Can you, using liuyao, sort those fifteen hexagrams into three groups of five, such that each group is exactly the “will I make money with this particular partner” question?
 
 Some students will think I am being unfair to liuyao. I am not. If the theory you are using is scientific and correct, this is trivial — a matter of turning your hand over. If the theory you are using is wrong, then it is harder than climbing to heaven.
 
-**Any "liuyao theory" whatsoever can be dissected to the bone with those two blades. Any swindler-master and any swindler-theory will stand exposed in five minutes.** And if you dare not — or would rather not — apply those two blades to the theory you learned and the theory you teach, then you have only one road left: the road of the teacher who cheats, and you will never arrive anywhere.
+**Any “liuyao theory” whatsoever can be dissected to the bone with those two blades. Any swindler-master and any swindler-theory will stand exposed in five minutes.** And if you dare not — or would rather not — apply those two blades to the theory you learned and the theory you teach, then you have only one road left: the road of the teacher who cheats, and you will never arrive anywhere.
 
 ## So where is the truth?
 
@@ -56,9 +56,9 @@ Of all the predictive traditions China has handed down over a thousand years, on
 
 Consider the alternatives.
 
-**Bazi.** From the day it was born, bazi has been unable to account for the "five-fold identicals" — people born in the same year, month, day, hour *and* of the same sex, whose lives nonetheless differ. That is not a marginal objection. It is the first question anyone asks.
+**Bazi.** From the day it was born, bazi has been unable to account for the “five-fold identicals” — people born in the same year, month, day, hour *and* of the same sex, whose lives nonetheless differ. That is not a marginal objection. It is the first question anyone asks.
 
-**Feng shui.** Apart from the sitting-direction and *fenjin* (分金, the fine graduation of the compass) method — whose practical value is real but narrow — every other feng shui theory has almost no operational grip. This, incidentally, is the real reason feng shui has circulated for a thousand years while its masters have produced nothing beyond *fenjin*. If the *fenjin* theory were as precise and as decisive as the masters claim, there would not be an unlucky person left on earth, because every house and every grave is built to the best available sitting-direction and *fenjin*. The facts slap the feng shui masters in the face daily. "Useful and true" feng shui theory is very thin on the ground — that is traditional feng shui's fatal flaw.
+**Feng shui.** Apart from the sitting-direction and *fenjin* (分金, the fine graduation of the compass) method — whose practical value is real but narrow — every other feng shui theory has almost no operational grip. This, incidentally, is the real reason feng shui has circulated for a thousand years while its masters have produced nothing beyond *fenjin*. If the *fenjin* theory were as precise and as decisive as the masters claim, there would not be an unlucky person left on earth, because every house and every grave is built to the best available sitting-direction and *fenjin*. The facts slap the feng shui masters in the face daily. “Useful and true” feng shui theory is very thin on the ground — that is traditional feng shui's fatal flaw.
 
 **Qimen Dunjia.** From the moment it was founded, qimen has carried an unresolved quarrel: whether to intercalate the leap month when setting up the chart (置润 *zhirun* versus 不置润 *buzhirun*), and whether to use the fixed-palace method (排宫 *paigong*) or the flying-palace method (飞宫 *feigong*). Four founding patriarchs could not settle it between them. A predictive theory whose own basic set-up is still in dispute also carries a fatal flaw.
 
@@ -88,21 +88,21 @@ The tradition also contains verdicts evolved out of moral convention and marketp
 
 ## The parts that block a student's progress
 
-**1. "Never a fourth hexagram" (卦不过三).**
+**1. “Never a fourth hexagram” (卦不过三).**
 
 Traditional liuyao holds that the hexagram is a divine instrument, that the same matter may not be asked twice, and that a repeat inquiry will not be answered — *ask again and the spirit will not tell you.*
 
-In fact, repeated readings disagree because the **reading theory contains errors**, not because the spirit has fallen silent. But because we were taught "never a fourth hexagram," our thinking was fenced in. We assumed the fault lay with the spirit rather than with the theory, and so we lost every opportunity to discover which parts of the theory were wrong. That is why accuracy never reached 100%.
+In fact, repeated readings disagree because the **reading theory contains errors**, not because the spirit has fallen silent. But because we were taught “never a fourth hexagram,” our thinking was fenced in. We assumed the fault lay with the spirit rather than with the theory, and so we lost every opportunity to discover which parts of the theory were wrong. That is why accuracy never reached 100%.
 
-**2. "Sincerity makes it work" (心诚则灵).**
+**2. “Sincerity makes it work” (心诚则灵).**
 
 Traditional liuyao holds that the hexagram is accurate only if the querent shakes the coins with a sincere heart. In fact, all the querent needs to do is concentrate for a moment and hold the question in mind. **Whether the hexagram is accurate is decided by the reader's theory.**
 
-When a reading fails, we blame the querent's sincerity. That is self-deception. If your skill were high and your theory correct, then before reading the querent's hexagram you would shake one yourself, sincerely, and ask *"was this querent sincere when he shook?"* — and only then decide whether to proceed. Nobody does that. So let me say it without manners: **a failed reading is your theory's fault, not the querent's.**
+When a reading fails, we blame the querent's sincerity. That is self-deception. If your skill were high and your theory correct, then before reading the querent's hexagram you would shake one yourself, sincerely, and ask *“was this querent sincere when he shook?”* — and only then decide whether to proceed. Nobody does that. So let me say it without manners: **a failed reading is your theory's fault, not the querent's.**
 
 When the querent shakes, it is the reader's job to keep reminding him to concentrate. If you did not remind him, what kind of reader are you? And if you did remind him and he was still distracted, why read the hexagram at all?
 
-This "sincerity" doctrine has done real damage. It stopped us from studying the *principles* of the hexagram in depth, and that is why a man can study divination his whole life and still die unable to read with certainty. It is also why certain masters now drag out a "uncertainty principle" to excuse their own ignorance. (The uncertainty principle, properly understood, says that no predictive theory can ever resolve the finest details with perfect precision. It does not say that being wrong is correct and scientific. A theory that cannot even get the *direction* of an event right — is that still a theory?)
+This “sincerity” doctrine has done real damage. It stopped us from studying the *principles* of the hexagram in depth, and that is why a man can study divination his whole life and still die unable to read with certainty. It is also why certain masters now drag out a “uncertainty principle” to excuse their own ignorance. (The uncertainty principle, properly understood, says that no predictive theory can ever resolve the finest details with perfect precision. It does not say that being wrong is correct and scientific. A theory that cannot even get the *direction* of an event right — is that still a theory?)
 
 **3. No sense of what to look at first.**
 
@@ -130,7 +130,7 @@ And note: *Golden Policies* and *The Orthodox of Divination* already state the a
 
 **5. The miraculous on-the-spot verdict, sorted by category.**
 
-The tradition's catalogues of "iron-mouth" verdicts (铁口直断) — one list for illness, one for lawsuits, one for travel — have badly obstructed students.
+The tradition's catalogues of “iron-mouth” verdicts (铁口直断) — one list for illness, one for lawsuits, one for travel — have badly obstructed students.
 
 Because the power of an on-the-spot verdict does not come from the formula. It comes from knowing how the human matter actually works. If you know no medicine, you may recite the illness formulas backwards and you will still never call a diagnosis on the spot. If you do not understand the launch sequence and basic principles of a satellite, you may have the formulas at your fingertips and you will never say on the spot where in the launch the fault lies. If you know nothing of fishing, the formulas may be carved into your brain and you will never say on the spot what happened out on the water.
 

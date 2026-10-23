@@ -11,7 +11,7 @@ src: "检验八字理论正确与否的唯一标准是什么？-533.md"
 words: 1311
 ---
 
-> **Translator's note.** A scorecard. Three older explanations of the identical-chart problem are taken up in turn and dismissed — the "seasonal adjustment" story via a famous Qing anecdote about a minister and a blacksmith born in the same hour, Shao Weihua's rule about elder and younger twins, and Li Hanchen's four differences. Then the sharper move: the accuracy claimed by the trade is decomposed into theory, cold reading, and betting on the odds. The standard proposed is brutal and simple: rank ten thousand people born under one chart.
+> **Translator's note.** A scorecard. Three older explanations of the identical-chart problem are taken up in turn and dismissed — the “seasonal adjustment” story via a famous Qing anecdote about a minister and a blacksmith born in the same hour, Shao Weihua's rule about elder and younger twins, and Li Hanchen's four differences. Then the sharper move: the accuracy claimed by the trade is decomposed into theory, cold reading, and betting on the odds. The standard proposed is brutal and simple: rank ten thousand people born under one chart.
 
 ---
 
@@ -28,7 +28,7 @@ A five-fold coincidence means born in the same year, month, day and hour, and of
 
 Shi Yizhi, a Qing grand secretary, had a father who was thoroughly versed in Ziping fortune-telling. In the *xinyou* year of Kangxi (1681) the father took the whole family to the capital. Midway, their boat stopped at a wharf, and Yizhi was born there. The father cast the bazi and concluded that the boy would certainly enjoy great wealth and rank. That day the river wind was strong and the boat could not proceed. The father went ashore for a walk and happened on a blacksmith's household where a boy had also just been born. He asked the birth hour; it was exactly the same as Yizhi's. The father quietly noted the address.
 
-More than twenty years later Yizhi had risen to imperial commissioner. His father, retired, passed through the place where Yizhi was born and found that the boy born in the same hour was at home swinging a hammer at the forge. The old man was overcome. He could not sleep all night, turning it over, and then it came to him. He said to himself: "This chart has rather too much fire and lacks the water that would control it. The one born on the boat had the river water to check the fire. The one born beside the forge had fire added to fire, with nothing to adjust it. So the blacksmith's son's poverty and meanness were fated too."
+More than twenty years later Yizhi had risen to imperial commissioner. His father, retired, passed through the place where Yizhi was born and found that the boy born in the same hour was at home swinging a hammer at the forge. The old man was overcome. He could not sleep all night, turning it over, and then it came to him. He said to himself: “This chart has rather too much fire and lacks the water that would control it. The one born on the boat had the river water to check the fire. The one born beside the forge had fire added to fire, with nothing to adjust it. So the blacksmith's son's poverty and meanness were fated too.”
 
 This reading sounds reasonable. But sit down and think about it. The chart needs water — but is there not a great deal of water in a river? Can too much water not drown a man? Thirsty as you are, hold your head under the pond and you drown. And a man dying of thirst in the desert: will one drop save him?
 

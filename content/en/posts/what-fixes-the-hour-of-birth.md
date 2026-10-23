@@ -11,7 +11,7 @@ src: "人的“出生时辰”的判断标准究竟是什么？-461.md"
 words: 1452
 ---
 
-> **Translator's note.** A reader in the West who has had a chart cast knows the experience: the practitioner asks for the minute of birth, sometimes the second, and if the hour is uncertain will "rectify" it — a procedure with no agreed method and a strong smell of guesswork. This essay argues that the whole demand for precision is a mistake, and that it was manufactured by practitioners who could not read accurately and needed something to blame. Three arguments are given, the third decisive: birth is a process, not an instant. What follows from it is that a chart at an hour boundary can be read either way and come out right.
+> **Translator's note.** A reader in the West who has had a chart cast knows the experience: the practitioner asks for the minute of birth, sometimes the second, and if the hour is uncertain will “rectify” it — a procedure with no agreed method and a strong smell of guesswork. This essay argues that the whole demand for precision is a mistake, and that it was manufactured by practitioners who could not read accurately and needed something to blame. Three arguments are given, the third decisive: birth is a process, not an instant. What follows from it is that a chart at an hour boundary can be read either way and come out right.
 
 ---
 
@@ -25,7 +25,7 @@ Fixing the hour of birth was originally very simple. In the early days of the fo
 > the slanting sun, *shen*; sunset, *you*;
 > dusk, *xu*; when people settle in, *hai*.
 
-In the old world there were no accurate timepieces and no such thing as Beijing time — no "four fifty-two and thirty seconds in the afternoon" to be had anywhere. There was nothing to be precise with.
+In the old world there were no accurate timepieces and no such thing as Beijing time — no “four fifty-two and thirty seconds in the afternoon” to be had anywhere. There was nothing to be precise with.
 
 ## 1. Why precision is not needed
 
@@ -43,7 +43,7 @@ But then: what instrument are you timing with? Is it that accurate? Suppose it i
 
 ## 3. Who made it complicated
 
-These are non-problems, and the masters have made them desperately complicated. Why? Because their theory is faulty. When a reading fails they do not suspect the theory; they blame the hour. Others invented "true solar time," and still could not read accurately.
+These are non-problems, and the masters have made them desperately complicated. Why? Because their theory is faulty. When a reading fails they do not suspect the theory; they blame the hour. Others invented “true solar time,” and still could not read accurately.
 
 Before there were clocks, our ancestors read charts by the hour and read them accurately. Since clocks arrived, nobody reads accurately. That says we have made the hour too complicated, and that we no longer know what the hour means.
 
@@ -79,9 +79,9 @@ The hour is a simple matter that fraudulent masters have made complicated. The q
 
 A person born at 22:59:59 and one born at 23:00:01: if you insist on distinguishing them, one is *hai* hour of the first day and one is *zi* hour of the second, and the charts differ entirely. On your theory the two fates differ greatly.
 
-Read on our model, the *hai* reading of day one and the *zi* reading of day two come out the same. Where it is the same person, the fate is the same — because his fate-energy has a channel of release and a direction of expression, so no difference arises. And therefore the whole question of "night *zi*" and "early *zi*" does not arise either. That distinction was invented by people whose system was incomplete, who could not solve accuracy and so dragged it in — unwilling to say they were wrong, insisting the hour was at fault, looking for someone to take the blame. Once you understand the system, test it in practice: for the same person, a boundary hour read either way is right.
+Read on our model, the *hai* reading of day one and the *zi* reading of day two come out the same. Where it is the same person, the fate is the same — because his fate-energy has a channel of release and a direction of expression, so no difference arises. And therefore the whole question of “night *zi*” and “early *zi*” does not arise either. That distinction was invented by people whose system was incomplete, who could not solve accuracy and so dragged it in — unwilling to say they were wrong, insisting the hour was at fault, looking for someone to take the blame. Once you understand the system, test it in practice: for the same person, a boundary hour read either way is right.
 
-The ancients held that past eleven at night it is already *zi* of the next day. Their boundary was eleven, not midnight. "The third quarter of the *wu* hour" is twelve o'clock. It is we who insist on reading the old sayings with modern assumptions.
+The ancients held that past eleven at night it is already *zi* of the next day. Their boundary was eleven, not midnight. “The third quarter of the *wu* hour” is twelve o'clock. It is we who insist on reading the old sayings with modern assumptions.
 
 The great failing of readers today: when a reading is wrong, they always decide the client is at fault, never the theory.
 

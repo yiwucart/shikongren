@@ -21,7 +21,7 @@ words: 580
 
 Read the pair that way and two things follow. First, a great many traditional formulations that currently have to be memorised become readable — you can see why they were formulated at all. Second, a great many errors that practitioners make in the middle of a reading become avoidable, because you can now tell which of two similar-looking configurations actually threatens the client and which does not.
 
-Traditional Bazi holds that when the Officer and the Seven Killings appear together — *guansha hunza*, "officers and killers mixed" — the configuration is bad. In ordinary cases that judgement holds. But in practice, not every such chart is bad, and practitioners who apply the rule mechanically get it wrong.
+Traditional Bazi holds that when the Officer and the Seven Killings appear together — *guansha hunza*, “officers and killers mixed” — the configuration is bad. In ordinary cases that judgement holds. But in practice, not every such chart is bad, and practitioners who apply the rule mechanically get it wrong.
 
 Why is it *usually* bad? Because when the Officer and the Seven Killings appear together, what you actually have on the chart is **the same element showing up in both a Yang and a Yin Stem or Branch.** And if Yang is the body and Yin is the spirit, then both of the forces that control you are present at once — one aimed at the flesh, the other at the spirit. *Guansha hunza* therefore destroys the body **and** destroys the spirit.
 
@@ -31,4 +31,4 @@ So when *guansha hunza* turns up in an actual reading, whether the outcome is au
 
 The yin–yang attribute of the Stems and Branches therefore has genuine analytical value in practice — it is one of the few distinctions that carries real information.
 
-But the finer subdivisions that the tradition piles on top of it — splitting the Officer into "Seven Killings" and "Direct Officer", splitting Wealth into "Proper Wealth" and "Indirect Wealth", and so on through the whole list — have almost no practical value at all. Whatever analytical work those categories were supposed to do is already done by the yin–yang distinction underneath them. Their only real effect is to leave students of the system thoroughly confused about what they are looking at, and to give practitioners a vocabulary for sounding authoritative while saying nothing.
+But the finer subdivisions that the tradition piles on top of it — splitting the Officer into “Seven Killings” and “Direct Officer”, splitting Wealth into “Proper Wealth” and “Indirect Wealth”, and so on through the whole list — have almost no practical value at all. Whatever analytical work those categories were supposed to do is already done by the yin–yang distinction underneath them. Their only real effect is to leave students of the system thoroughly confused about what they are looking at, and to give practitioners a vocabulary for sounding authoritative while saying nothing.

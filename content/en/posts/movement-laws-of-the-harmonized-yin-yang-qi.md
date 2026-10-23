@@ -11,7 +11,7 @@ src: "风水的“阴阳冲和之气”的运动规律是什么？-570.md"
 words: 951
 ---
 
-> **Translator's note.** This is the theoretical floor of the author's feng shui system. Everything he says elsewhere about siting, dragon veins and "true dragon points" rests on the two movement laws stated here: energy arrives from above and settles, and it is pressed down by mountains and drawn upward by water. The middle section is a polemic — he argues from the descendants of history's most celebrated feng shui masters rather than from texts. We have kept the argument and trimmed the repetition.
+> **Translator's note.** This is the theoretical floor of the author's feng shui system. Everything he says elsewhere about siting, dragon veins and “true dragon points” rests on the two movement laws stated here: energy arrives from above and settles, and it is pressed down by mountains and drawn upward by water. The middle section is a polemic — he argues from the descendants of history's most celebrated feng shui masters rather than from texts. We have kept the argument and trimmed the repetition.
 
 ---
 
@@ -31,7 +31,7 @@ For a person standing on the ground, energy also arrives at the top of the head.
 **(a) It gathers along the surface, from higher to lower.**
 **(b) It seeps into the soil and accumulates along the strata, running from high ground toward low.**
 
-Those are the movement laws of feng shui's "harmonized yin–yang qi." A person moving about on the surface draws this energy from two channels: what falls directly from above, and what moves across the surface.
+Those are the movement laws of feng shui's “harmonized yin–yang qi.” A person moving about on the surface draws this energy from two channels: what falls directly from above, and what moves across the surface.
 
 ---
 
@@ -53,9 +53,9 @@ The energy of a dragon vein and the energy of the harmonized yin–yang qi share
 
 Once you see this, you can begin to see which directions deliver auspicious energy and which deliver the harmful kind. These are only the basic laws, of course. The Earth is also rotating; what we have described holds without factoring in rotation, gravity or weight.
 
-With that in hand, we can say that the traditional rule "there must be a *mingtang* — a bright hall — in front of the point" is not entirely wrong. A bright hall *does* collect energy. Traditional feng shui got that much right.
+With that in hand, we can say that the traditional rule “there must be a *mingtang* — a bright hall — in front of the point” is not entirely wrong. A bright hall *does* collect energy. Traditional feng shui got that much right.
 
-But that is **surface** energy. Energy inside the strata has nothing to do with it. Which means: a true dragon point is **not** equivalent to "having a bright hall."
+But that is **surface** energy. Energy inside the strata has nothing to do with it. Which means: a true dragon point is **not** equivalent to “having a bright hall.”
 
 There are two kinds of true dragon point:
 

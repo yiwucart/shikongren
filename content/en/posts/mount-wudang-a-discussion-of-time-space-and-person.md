@@ -18,7 +18,7 @@ words: 1612
 
 Wudang Shan, the foremost mountain of Taoism.
 
-Its Taoist culture is vast and deep, of immense antiquity. It is not counted among the five sacred peaks, yet it is honoured as the Great Mountain and called "a wonder without equal since the beginning of time, the first immortal mountain under heaven" — with its mysterious, empty, numinous fairyland, its arcane and drifting martial art, and a culture that may be called the soul of China. It was the imperial altar through successive dynasties.
+Its Taoist culture is vast and deep, of immense antiquity. It is not counted among the five sacred peaks, yet it is honoured as the Great Mountain and called “a wonder without equal since the beginning of time, the first immortal mountain under heaven” — with its mysterious, empty, numinous fairyland, its arcane and drifting martial art, and a culture that may be called the soul of China. It was the imperial altar through successive dynasties.
 
 On 14 April 2011 (a *jihai* day) I arrived at the Zixiao Palace on Wudang Shan in Shiyan, Hubei. On the morning of the 15th, a *gengzi* day, accompanied by Chairman Yang of the Wudang Taoist Association, I went to the Qiongtai Middle Abbey below the Golden Summit. There Abbot Rao, director of the abbey's management committee, received us warmly, and host and guests talked in high good humour.
 
@@ -34,7 +34,7 @@ Because the 12th was a *dingyou* day, the object had to have been placed in thos
 
 Then, from the relation between time and space, I further inferred that the object must have been placed in the *ding* direction on the 11th, during the *guisi* hour (9 to 11 in the morning) or the *dingyou* hour (5 to 7 in the evening). Rao remembered: he had not stayed at the abbey on the night of the 10th but down the mountain, and had come back on the morning of the 11th — the *si* hour — and casually put the thing down opposite his bed, in the *ding* direction.
 
-The abbots and Chairman Yang all exclaimed at once: "Extraordinary!"
+The abbots and Chairman Yang all exclaimed at once: “Extraordinary!”
 
 At their warm invitation I summed up the theory of time, space and person:
 

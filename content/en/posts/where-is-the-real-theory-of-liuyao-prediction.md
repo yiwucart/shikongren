@@ -11,7 +11,7 @@ src: "真理的“六爻预测学”理论在哪里？-302.md"
 words: 1615
 ---
 
-> **Translator's note.** Published in 2023, six years after "Where Is the Truth in Liuyao Prediction Theory?", this essay is the author's own answer to the question his earlier piece raised. Where the earlier article cleared the ground — rejecting "new liuyao" schools and returning to *Golden Policies* and *The Orthodox of Divination* — this one names seven specific defects he believes have kept liuyao hovering between accurate and inaccurate for five millennia, and presents his own system as the repair. Two of the seven are technical terms he treats as proprietary: *shishi dongyao* (事实动爻, "the factual moving line") and *waiying* (外应, "external correspondence," the omen that arrives while the question is being asked). The original closes with enrolment details for his course; we have condensed that section to a note.
+> **Translator's note.** Published in 2023, six years after “Where Is the Truth in Liuyao Prediction Theory?”, this essay is the author's own answer to the question his earlier piece raised. Where the earlier article cleared the ground — rejecting “new liuyao” schools and returning to *Golden Policies* and *The Orthodox of Divination* — this one names seven specific defects he believes have kept liuyao hovering between accurate and inaccurate for five millennia, and presents his own system as the repair. Two of the seven are technical terms he treats as proprietary: *shishi dongyao* (事实动爻, “the factual moving line”) and *waiying* (外应, “external correspondence,” the omen that arrives while the question is being asked). The original closes with enrolment details for his course; we have condensed that section to a note.
 
 ---
 
@@ -40,23 +40,23 @@ When you carry philosophical rhetoric — the kind designed to impress rather th
 
 Five thousand years of liuyao theory has never settled the question of **how far the diviner's own energy field reaches.**
 
-Everyone agrees that "the hexagram can be asked about anything." Almost nobody grasps that **"the hexagram can be asked about anything" does not mean "the diviner can read anything."** A reader who has mastered wealth and career questions may still fail on a missing-person case.
+Everyone agrees that “the hexagram can be asked about anything.” Almost nobody grasps that **“the hexagram can be asked about anything” does not mean “the diviner can read anything.”** A reader who has mastered wealth and career questions may still fail on a missing-person case.
 
 Still fewer grasp this: **even with a theory that is 100% correct, a reader can read precisely only within the range his own energy field covers — never outside it.** You will never read the affairs of a country's president with accuracy. You will never read the fate of a person who has no connection to you at all.
 
-## 4. Nobody has understood what "accuracy" means
+## 4. Nobody has understood what “accuracy” means
 
 Five thousand years of liuyao has never resolved this: **accuracy means predicting the state a matter will take under given conditions. It does not mean predicting the *second* result that appears after the querent learns the first prediction and deliberately changes the conditions.**
 
-Because nobody grasped this, we inherited the famous paradox of Shao Kangjie and the bird. A transcendent being holds a small bird in his closed hand and asks Shao to predict whether the bird will live or die. Whatever Shao answers, the being can make it false — crush the bird, or open the hand and let it fly. Shao had no answer. For a thousand years, men who understood nothing have used "the immortal tested Shao Kangjie" as a stick to beat hexagram divination with. (The full reasoning is in my essay "What Is Prediction, Really?" on the *Shikong Zuobiao* account.)
+Because nobody grasped this, we inherited the famous paradox of Shao Kangjie and the bird. A transcendent being holds a small bird in his closed hand and asks Shao to predict whether the bird will live or die. Whatever Shao answers, the being can make it false — crush the bird, or open the hand and let it fly. Shao had no answer. For a thousand years, men who understood nothing have used “the immortal tested Shao Kangjie” as a stick to beat hexagram divination with. (The full reasoning is in my essay “What Is Prediction, Really?” on the *Shikong Zuobiao* account.)
 
-The same confusion produces the common claim that "gambling is hard to predict." And it produces this absurdity: a querent asks whether a venture will succeed; the reading says yes; the venture does not happen; the querent announces that the prediction failed. But the venture did not fail — **he never did the thing.** Ask about a thing and never do it, and where is success or failure to be found?
+The same confusion produces the common claim that “gambling is hard to predict.” And it produces this absurdity: a querent asks whether a venture will succeed; the reading says yes; the venture does not happen; the querent announces that the prediction failed. But the venture did not fail — **he never did the thing.** Ask about a thing and never do it, and where is success or failure to be found?
 
 At this point some clever fellow will ask: *then why didn't you predict that he wouldn't do it?* A fair question. If you had asked that, it could be answered precisely. But under normal circumstances everyone assumes that a man who asks, and who receives an auspicious reading, will go and act. That is an error of business judgement, and it has nothing to do with whether the theory is sound.
 
 ## 5. Nobody has understood external correspondence
 
-Five thousand years of liuyao has never settled the relation between the hexagram and **external correspondence** (*waiying*). Ninety-five percent of masters ignore it ninety-five percent of the time — they do not observe it, or do not know how. And once the root principle *heaven's omen outranks the hexagram* is thrown away, the standard result is exactly what practitioners complain of: "however I read this hexagram it comes out the same way, and the facts turn out otherwise."
+Five thousand years of liuyao has never settled the relation between the hexagram and **external correspondence** (*waiying*). Ninety-five percent of masters ignore it ninety-five percent of the time — they do not observe it, or do not know how. And once the root principle *heaven's omen outranks the hexagram* is thrown away, the standard result is exactly what practitioners complain of: “however I read this hexagram it comes out the same way, and the facts turn out otherwise.”
 
 Study hexagrams without mastering *waiying* and you will circle outside the gate forever.
 
@@ -78,7 +78,7 @@ Otherwise you get the strange split every practitioner knows: the process is rea
 
 ## What follows
 
-Those seven are the root reasons liuyao has never achieved precision in five thousand years, and the root reason it is "easy to enter and hard to master." Any liuyao school that solves those seven theoretical obstacles will dominate. Any student who learns a liuyao theory that has genuinely solved them will sweep the field.
+Those seven are the root reasons liuyao has never achieved precision in five thousand years, and the root reason it is “easy to enter and hard to master.” Any liuyao school that solves those seven theoretical obstacles will dominate. Any student who learns a liuyao theory that has genuinely solved them will sweep the field.
 
 After thirty-eight years of research, the system I have built — the **Lü Wenyi Natural-Science Liuyao Prediction System** — resolves all seven at the root.
 

@@ -11,7 +11,7 @@ src: "什么耳光能扇死算命大师？命运预测的本质是什么？-674.
 words: 1086
 ---
 
-> **Translator's note.** The answer to the oldest joke in the trade. One foot inside the door and one out: tell me which way I will move, and I will do the opposite. A bird in a sage's hand: alive or dead? The paradox dissolves only if you see what prediction is actually predicting — the outcome of things following natural law, not the outcome of things defying a prediction they have been told. From that follows the "principle of correct consciousness" and the rule that a disaster avoided is not a disaster cancelled: the energy must go somewhere.
+> **Translator's note.** The answer to the oldest joke in the trade. One foot inside the door and one out: tell me which way I will move, and I will do the opposite. A bird in a sage's hand: alive or dead? The paradox dissolves only if you see what prediction is actually predicting — the outcome of things following natural law, not the outcome of things defying a prediction they have been told. From that follows the “principle of correct consciousness” and the rule that a disaster avoided is not a disaster cancelled: the energy must go somewhere.
 
 ---
 
@@ -43,7 +43,7 @@ Why? Because, as said, the essence of prediction is the natural law of change in
 
 In practice we often use exactly this to avert disaster. It is what I call the **principle of correct consciousness** among the five principles of averting disaster. With it we may act against the natural law of a human affair in order to adjust a fate — though only within the level of fate fixed by the prenatal environment, moving up and down inside that level, never crossing to another.
 
-Suppose we predict a car accident tomorrow. We can perfectly well stay somewhere an accident absolutely cannot happen, and that guarantees no accident. But a disaster is a form of energy. Acting against natural law in this way guarantees no crash, yet the energy of the disaster will still discharge in some other form: a quarrel with family, money borrowed by a relative or friend and not returned, a valuable thing broken, a fall and an injury. Through the principle of correct consciousness we can still choose, actively, a form we are willing to accept. Having actively avoided the crash, we should also actively dissolve that energy — give blood two or three days in advance, give a sum of money to public welfare, and so on. Avoid it and do nothing else, and you will "escape the first day but not the fifteenth," escape this disaster but not the next.
+Suppose we predict a car accident tomorrow. We can perfectly well stay somewhere an accident absolutely cannot happen, and that guarantees no accident. But a disaster is a form of energy. Acting against natural law in this way guarantees no crash, yet the energy of the disaster will still discharge in some other form: a quarrel with family, money borrowed by a relative or friend and not returned, a valuable thing broken, a fall and an injury. Through the principle of correct consciousness we can still choose, actively, a form we are willing to accept. Having actively avoided the crash, we should also actively dissolve that energy — give blood two or three days in advance, give a sum of money to public welfare, and so on. Avoid it and do nothing else, and you will “escape the first day but not the fifteenth,” escape this disaster but not the next.
 
 So the most effective way to dissolve a disaster is the **method of energy conversion**, and the **principle of energy conversion is also the essential principle of fate prediction.**
 

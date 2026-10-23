@@ -30,4 +30,4 @@ The rule runs the other way too. Choose the right year for a large undertaking a
 
 For lesser matters the year carries little weight. There the day and the hour matter, and the good or ill they carry reaches at most thirty days. It does not settle anything permanently.
 
-Note what the rule actually claims. It is not "a bad day brings bad luck." It is a **table of scale against delay**: the coarser the unit you got wrong, the larger the consequence and the longer before it lands; the finer the unit, the smaller the consequence and the sooner. That is a specific, falsifiable claim, and a reader can test it against their own record of undertakings.
+Note what the rule actually claims. It is not “a bad day brings bad luck.” It is a **table of scale against delay**: the coarser the unit you got wrong, the larger the consequence and the longer before it lands; the finer the unit, the smaller the consequence and the sooner. That is a specific, falsifiable claim, and a reader can test it against their own record of undertakings.

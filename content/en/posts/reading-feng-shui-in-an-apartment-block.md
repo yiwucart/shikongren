@@ -28,7 +28,7 @@ What follows approaches the question from the side of choosing.
 
 **First principle: choose from the large to the small.**
 
-"Large" means the district: whether to choose in the eastern part of the city or the western, the southern or the northern.
+“Large” means the district: whether to choose in the eastern part of the city or the western, the southern or the northern.
 
 **Second:** having settled the district, settle the compound within it; then the building within the compound; then which entrance or stairwell of that building; then which floor plan; then, facing several rooms, which is suitable as the master bedroom, which as a study for the child, which as a guest room, which as storage. Finally, when furnishing, mind the placement of the sand-and-water objects — the television, the computer, the fish tank.
 
@@ -71,7 +71,7 @@ Building 9 has auspicious water to the south; east and west form a balanced syst
 
 Comparing the three: building 1 is best, with the greatest auspicious energy; building 9 is next; building 4 is the weakest.
 
-And do not assume that the compound's "king building" — the one everybody wants — has good feng shui. The king building has the best *view*. A good view is not good feng shui.
+And do not assume that the compound's “king building” — the one everybody wants — has good feng shui. The king building has the best *view*. A good view is not good feng shui.
 
 Step two: having chosen building 1, it has four stairwells, and their feng shui differs considerably. Which is best is again decided by the eight directions.
 
@@ -144,4 +144,4 @@ The master bedroom has a bathroom to its north — inauspicious. To its northeas
 
 **Note:** in a flat, the entry door may be classified as water, but do not read fortune by the door, because the entry door is normally shut. If you get it right by the door, it is pure coincidence.
 
-Reading a site means seizing the principal contradiction. A mistake that people trained in traditional feng shui make very easily is failing to distinguish principal from secondary. They walk in and say: "that painting hanging there is why you lost money this year." The client did lose money this year, so the statement was correct — but the loss was not caused by the painting. It was probably caused by the kitchen, the bathroom, or the television, because a painting's energy is nothing beside theirs. (The painting, as an information field, can be used to *predict* what is happening to the client; but it is not the cause of what is happening. Many people think taking the painting down will change the situation, and in fact when the painting comes down the client's luck does not improve.) Change your thinking: do not assume that because your reading was right, the thing you named was the cause.
+Reading a site means seizing the principal contradiction. A mistake that people trained in traditional feng shui make very easily is failing to distinguish principal from secondary. They walk in and say: “that painting hanging there is why you lost money this year.” The client did lose money this year, so the statement was correct — but the loss was not caused by the painting. It was probably caused by the kitchen, the bathroom, or the television, because a painting's energy is nothing beside theirs. (The painting, as an information field, can be used to *predict* what is happening to the client; but it is not the cause of what is happening. Many people think taking the painting down will change the situation, and in fact when the painting comes down the client's luck does not improve.) Change your thinking: do not assume that because your reading was right, the thing you named was the cause.

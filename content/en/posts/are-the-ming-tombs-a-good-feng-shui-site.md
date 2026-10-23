@@ -16,7 +16,7 @@ words: 1174
 ---
 
 
-The Ming tombs outside Beijing are the "dragon points" of thirteen Ming emperors. And yet not one of the eight Ming emperors born *after* those imperial tombs existed lived past forty. The Chongzhen emperor, born after the Zhaoling tomb of the Longqing emperor was made, not only lost the dynasty but died at thirty-five. Before him, the Tianqi emperor, Zhu Youxiao, lived only twenty-three years. And the other eight of the sixteen Ming emperors who did live past forty were all born *before* the tombs outside Beijing existed.
+The Ming tombs outside Beijing are the “dragon points” of thirteen Ming emperors. And yet not one of the eight Ming emperors born *after* those imperial tombs existed lived past forty. The Chongzhen emperor, born after the Zhaoling tomb of the Longqing emperor was made, not only lost the dynasty but died at thirty-five. Before him, the Tianqi emperor, Zhu Youxiao, lived only twenty-three years. And the other eight of the sixteen Ming emperors who did live past forty were all born *before* the tombs outside Beijing existed.
 
 **A person's fate is decided by the feng shui of the ancestral graves before his birth, and by the feng shui of the house where his mother spent most of the ten months of pregnancy. Changes to the ancestral graves after his birth, and the feng shui of the houses he later lives and works in, cause only a fluctuation within the quality tier that the pre-natal grave and dwelling fixed for him.**
 

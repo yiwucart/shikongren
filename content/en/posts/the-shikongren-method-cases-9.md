@@ -32,7 +32,7 @@ A woman was pouring tea for us. She thought the water too hot, and poured it bac
 
 * * *
 
-Chen Peng — I read that he had lost money because of a woman. In a very auspicious direction of his, a teacup; a waitress came and took the cup from in front of him. He was just saying, "Read me, then, how am I?" — 2019 or some such year, I forget the direction — and the master read that he had lost money because of a woman. He said it was not one woman but two. His wife had invested all the money with another woman; that woman ran off. He had given all his assets to his wife, his wife invested them with someone else, and that person took them and ran. He had only fixed assets left; not one yuan of savings, all of it cheated away. The waitress cleared the table completely clean, and on her way out put in one more word.
+Chen Peng — I read that he had lost money because of a woman. In a very auspicious direction of his, a teacup; a waitress came and took the cup from in front of him. He was just saying, “Read me, then, how am I?” — 2019 or some such year, I forget the direction — and the master read that he had lost money because of a woman. He said it was not one woman but two. His wife had invested all the money with another woman; that woman ran off. He had given all his assets to his wife, his wife invested them with someone else, and that person took them and ran. He had only fixed assets left; not one yuan of savings, all of it cheated away. The waitress cleared the table completely clean, and on her way out put in one more word.
 
 * * *
 
@@ -40,7 +40,7 @@ To handle a client, catch the most obvious actions and gestures; there is no nee
 
 If you do remember that the northwest is cultivation, study and culture, you can read that in that year he gained something through study — or that money came, because it is connected with study: he joined a class, met someone, and that person asked him to look at a feng shui site and he earned a little. That is profiting through study.
 
-Watch who spills food on his clothes, and in which direction he spills it, and you can date it. If there is no time at all, say "recently" — in the next few days, the last two days, or within two days.
+Watch who spills food on his clothes, and in which direction he spills it, and you can date it. If there is no time at all, say “recently” — in the next few days, the last two days, or within two days.
 
 When you go out to inspect feng shui, the client who follows you is always producing gestures, and a few readings with the Shikongren method will impress him. If he is climbing a slope and does not get up it and falls, look at the direction: if he was climbing south and fell on the southern slope, then in a *bingwu* or *renzi* year there will be a setback in his career.
 

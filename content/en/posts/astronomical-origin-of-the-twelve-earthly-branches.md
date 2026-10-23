@@ -15,7 +15,7 @@ words: 624
 
 ---
 
-The twelve Earthly Branches were fixed by the ancients from the motion of Jupiter. Jupiter's orbital period around the Sun is twelve years; Chinese astronomy calls the planet *suixing*, "the year star", or *taisui* — and the twelve-Branch count is the same twelve years. (The figure shows Jupiter's position within the solar system.)
+The twelve Earthly Branches were fixed by the ancients from the motion of Jupiter. Jupiter's orbital period around the Sun is twelve years; Chinese astronomy calls the planet *suixing*, “the year star”, or *taisui* — and the twelve-Branch count is the same twelve years. (The figure shows Jupiter's position within the solar system.)
 
 ![Jupiter in the solar system](/img/9713e5f340323e54.jpeg)
 
@@ -33,7 +33,7 @@ The twelve Earthly Branches come from exactly that twelve-year period. And here 
 
 What the twelve Branches actually denote is **the relative positional relationship among Jupiter, Earth and the Sun.**
 
-When that three-body geometry differs, the "primordial life energy" arriving from the cosmos reaches Earth with a very different intensity and through a very different mode of action — precisely because Jupiter is standing somewhere else.
+When that three-body geometry differs, the “primordial life energy” arriving from the cosmos reaches Earth with a very different intensity and through a very different mode of action — precisely because Jupiter is standing somewhere else.
 
 Since the intensity and the mode of that energy differ from one year to the next, the ancients broke the cycle of Jupiter, Sun and Earth into twelve types, twelve configurations. A person born in one year therefore receives the energy differently from a person born in the next, and differently again from a person born in the year after that. This is why those born in a *zi* year, a *chou* year and a *yin* year are not the same in their fates.
 

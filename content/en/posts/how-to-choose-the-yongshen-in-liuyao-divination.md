@@ -11,7 +11,7 @@ src: "六爻预测如何取“用神”？-662.md"
 words: 1344
 ---
 
-> **Translator's note.** In liuyao (six-line divination), the *yongshen* — the "useful god," the line that carries the answer — is the single most consequential choice a reader makes. This piece argues that the choice is not dictated by the subject ("a question about money") but by the *exact point of inquiry* ("will I get this debt back from this particular person"). The two long enumerations in the original are reproduced here as a table; the remaining four of the Six Relations (Parents, Siblings, Offspring, and the Subject/Object lines) run the same way and the author defers them to other essays. The tone in the middle section is his usual: he does not soften it, and neither have we.
+> **Translator's note.** In liuyao (six-line divination), the *yongshen* — the “useful god,” the line that carries the answer — is the single most consequential choice a reader makes. This piece argues that the choice is not dictated by the subject (“a question about money”) but by the *exact point of inquiry* (“will I get this debt back from this particular person”). The two long enumerations in the original are reproduced here as a table; the remaining four of the Six Relations (Parents, Siblings, Offspring, and the Subject/Object lines) run the same way and the author defers them to other essays. The tone in the middle section is his usual: he does not soften it, and neither have we.
 
 ---
 
@@ -43,7 +43,7 @@ So how do you choose it?
 
 The other four — Parents, Siblings, Offspring, and the Subject and Object lines — work the same way; the author treats them in other essays.
 
-**Only once you know what each of the Six Relations means in each specific type of inquiry can you analyse a hexagram against a clearly defined question — and only then can you deliver the verdict on the spot** (*tiekou zhiduan*, literally "iron mouth, direct judgement": the old term for an answer given without hedging).
+**Only once you know what each of the Six Relations means in each specific type of inquiry can you analyse a hexagram against a clearly defined question — and only then can you deliver the verdict on the spot** (*tiekou zhiduan*, literally “iron mouth, direct judgement”: the old term for an answer given without hedging).
 
 Work only from the stock meanings listed in traditional liuyao textbooks, and you will never get there.
 
@@ -55,15 +55,15 @@ Take a student who has just sat the university entrance exam and asks whether he
 
 Why?
 
-**Case one: he is a weak student.** With Officer–Ghost, Parents and Subject, you have about a 50% chance of being right. Why only 50%? Because this student is in fact planning to pay his way into a private university — any university at all, as long as he can get in by paying. Under *that* point of inquiry, your accuracy is 100%. But if he has already decided he will pay his way into *one specific* university and will go nowhere else, then under *that* point of inquiry your accuracy is 50% — because what he is actually asking is "can I buy my way into *this* university," and under that reading the *yongshen* is primarily **the Subject line and the Object line**. Officer–Ghost and Parents have lost their function as *yongshen* entirely.
+**Case one: he is a weak student.** With Officer–Ghost, Parents and Subject, you have about a 50% chance of being right. Why only 50%? Because this student is in fact planning to pay his way into a private university — any university at all, as long as he can get in by paying. Under *that* point of inquiry, your accuracy is 100%. But if he has already decided he will pay his way into *one specific* university and will go nowhere else, then under *that* point of inquiry your accuracy is 50% — because what he is actually asking is “can I buy my way into *this* university,” and under that reading the *yongshen* is primarily **the Subject line and the Object line**. Officer–Ghost and Parents have lost their function as *yongshen* entirely.
 
 Under that point of inquiry, once you have worked out the relationship between Subject and Object against the month pillar, day pillar, moving lines and transformed lines, the conclusion — in or out — is unambiguous. And so is the *reason* for it, derived from those same relationships read through the meanings of the Six Relations.
 
-**Case two: he is an outstanding student.** Now taking Officer–Ghost, Parents and Subject as *yongshen* is pure fabrication. Why? Because for this student, getting into *a* university was never in question. The question is *which* one. He appears to ask "will I get in"; he is actually asking "will I get into *this particular* university." Under that point of inquiry you need only Subject and Object. There is no reason whatever to take Officer–Ghost and Parents.
+**Case two: he is an outstanding student.** Now taking Officer–Ghost, Parents and Subject as *yongshen* is pure fabrication. Why? Because for this student, getting into *a* university was never in question. The question is *which* one. He appears to ask “will I get in”; he is actually asking “will I get into *this particular* university.” Under that point of inquiry you need only Subject and Object. There is no reason whatever to take Officer–Ghost and Parents.
 
-At this point some "master" will ask, with what he imagines is devastating logic: *so when you read for someone, do you have to interrogate them about their point of inquiry first?*
+At this point some “master” will ask, with what he imagines is devastating logic: *so when you read for someone, do you have to interrogate them about their point of inquiry first?*
 
-If you are the sort of person who asks that question, the answer is that you are not worth discussing and your thinking is pitiful. **Because you never need to ask.** What you do is tell the querent: "If what you are asking is 'any university, as long as I get in,' then this hexagram says yes (or no). If what you are asking is 'this one specific university,' then this hexagram says yes (or no)." You hand over both readings. It costs you one extra pass over the hexagram. As for the student, he knows what he was thinking when he shook the coins. You never have to ask him.
+If you are the sort of person who asks that question, the answer is that you are not worth discussing and your thinking is pitiful. **Because you never need to ask.** What you do is tell the querent: “If what you are asking is 'any university, as long as I get in,' then this hexagram says yes (or no). If what you are asking is 'this one specific university,' then this hexagram says yes (or no).” You hand over both readings. It costs you one extra pass over the hexagram. As for the student, he knows what he was thinking when he shook the coins. You never have to ask him.
 
 To do that, of course, the reader must know how many distinct points of inquiry exist within each kind of matter — otherwise accurate reading is impossible.
 
@@ -71,9 +71,9 @@ Take money. Someone asks about their finances. The possible points of inquiry: *
 
 If the querent does not tell you which, you have to run the hexagram through each point of inquiry in turn — different point, different *yongshen* — and then report each result.
 
-And even when he *has* told you "I'm going to ask for a loan, or collect a debt," there is still the question of **from whom** — a parent, a sibling, a child, a financial institution, an official body. Borrowing from an elder makes Parents a *yongshen* too. Borrowing from a bank makes Officer–Ghost one. Borrowing from a junior makes Offspring one.
+And even when he *has* told you “I'm going to ask for a loan, or collect a debt,” there is still the question of **from whom** — a parent, a sibling, a child, a financial institution, an official body. Borrowing from an elder makes Parents a *yongshen* too. Borrowing from a bank makes Officer–Ghost one. Borrowing from a junior makes Offspring one.
 
-Even "I'm going out to work for wages" splits: has he already fixed on a particular place and employer (in which case the Object line is a major *yongshen*), or is he merely going out with no destination yet (in which case the Object line is irrelevant)?
+Even “I'm going out to work for wages” splits: has he already fixed on a particular place and employer (in which case the Object line is a major *yongshen*), or is he merely going out with no destination yet (in which case the Object line is irrelevant)?
 
 **Liuyao divination is therefore a precise science — a science of tight reasoning, and a science that requires the reader to understand how human affairs actually work.**
 

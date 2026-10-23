@@ -11,7 +11,7 @@ src: "比肩和劫财具有本质上的不同-433.md"
 words: 731
 ---
 
-> **Translator's note.** A short but load-bearing distinction. The trade lumps "parallel" and "rob" together as one ten god; Lü separates them on the narrowest possible ground: the parallel is *you*, repeated, and the rob is everyone else of your element. Four *jia* woods in a chart are one man with four houses, which is why his readings differ from another man's under the same chart. There is also an unusually candid passage on why the teacher uses invented charts in class.
+> **Translator's note.** A short but load-bearing distinction. The trade lumps “parallel” and “rob” together as one ten god; Lü separates them on the narrowest possible ground: the parallel is *you*, repeated, and the rob is everyone else of your element. Four *jia* woods in a chart are one man with four houses, which is why his readings differ from another man's under the same chart. There is also an unusually candid passage on why the teacher uses invented charts in class.
 
 ---
 

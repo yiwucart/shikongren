@@ -11,7 +11,7 @@ src: "城市楼房中也有“真龙穴”！-637.md"
 words: 1279
 ---
 
-> **Translator's note.** The companion to "Reading Feng Shui in an Apartment Block", and the more provocative of the two. If you accept that two flats in the same stack have identical surroundings, then the sand-and-water method cannot distinguish between them — which is exactly why the trade invented floor-selection rules. Lü's alternative is to compute where the ground planes of the neighbouring blocks neutralise one another, and read the floor at that height. Two field cases follow, with outcomes stated flatly. Whether or not one accepts the mechanism, the argument that floor-choice lore has no basis is well made, and the two case records are unusually specific.
+> **Translator's note.** The companion to “Reading Feng Shui in an Apartment Block”, and the more provocative of the two. If you accept that two flats in the same stack have identical surroundings, then the sand-and-water method cannot distinguish between them — which is exactly why the trade invented floor-selection rules. Lü's alternative is to compute where the ground planes of the neighbouring blocks neutralise one another, and read the floor at that height. Two field cases follow, with outcomes stated flatly. Whether or not one accepts the mechanism, the argument that floor-choice lore has no basis is well made, and the two case records are unusually specific.
 
 ---
 

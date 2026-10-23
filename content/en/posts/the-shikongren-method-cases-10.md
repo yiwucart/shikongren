@@ -31,7 +31,7 @@ Feedback that evening: I was at the high-speed rail station with my nephew, wait
 
 Near Teachers Gao, Ma and Zhu, a middle-aged woman was sweeping up standing water from the ground, sweeping all the way to the three of them. She stopped near them, and there was a joyful exchange of glances between her and the three.
 
-Analysis: (a) A middle-aged woman stands for wealth — information of money coming in. But is it certainly money coming in? Look at how the distance between her and the three changes: growing further means more loss than gain, growing nearer means more gain than loss. If the middle-aged woman is inauspicious sand, she means loss. (b) The standing water she sweeps is also wealth. Water swept in the X direction carries information of loss, but there was little water, so it does not amount to inauspicious water. (c) Her stopping in the X direction means first that there is inauspicious sand in that direction, and that at the times X and X there will be an error of decision, or a bad habit picked up (with a client one should not say "bad habit"; say "a particular interest"). Though it is inauspicious sand, the exchange of glances was joyful, which means the error of decision brought a pleasant experience.
+Analysis: (a) A middle-aged woman stands for wealth — information of money coming in. But is it certainly money coming in? Look at how the distance between her and the three changes: growing further means more loss than gain, growing nearer means more gain than loss. If the middle-aged woman is inauspicious sand, she means loss. (b) The standing water she sweeps is also wealth. Water swept in the X direction carries information of loss, but there was little water, so it does not amount to inauspicious water. (c) Her stopping in the X direction means first that there is inauspicious sand in that direction, and that at the times X and X there will be an error of decision, or a bad habit picked up (with a client one should not say “bad habit”; say “a particular interest”). Though it is inauspicious sand, the exchange of glances was joyful, which means the error of decision brought a pleasant experience.
 
 Feedback: (a) Teacher Gao took in money in the *renyin* and *gengzi* years, but with trouble and disputes. From the trouble we can reason backwards that when the woman swept the water, some splashed on Teacher Gao: money came in, yes, but being splashed is irritating; and the woman standing in the X direction is inauspicious sand, and inauspicious sand in that direction also means disputes and trouble. (b) In the year X a superior gave Teacher Ma a car, and after three months he gave it back; in the year X he bought American shares and hit a funding obstacle, which was resolved; in the year X he bought a car. (c) Teacher Zhu: in the year X someone gave him a laptop.
 
@@ -77,7 +77,7 @@ Teacher Qin braced himself against a red pillar with his right upper arm, his le
 
 Analysis: bracing means finding support, a way to solve a problem; the X direction means a close connection with the opposite sex — help obtained from the opposite sex, the problem properly solved. The waist stands for important and critical people, matters and things; the hand on the hip is a state of controlling the waist, so it reads as the ability to control important people, matters and things. Thumb forward, four fingers behind, is an awkward grip, meaning that controlling the matter took some effort. The pillar did not move here; it has only the meaning of support, and no meaning of its own. A red pillar is conspicuous, and red can be understood as sand: one is receiving the influence of auspicious sand's energy. (Colour does not move or not move; colour moving or not is still movement. Colour is a wave; as soon as colour is observed it has colour's meaning.) Do push-ups in a sandpit and the sand has its meaning.
 
-Feedback: on the day X at the hour X he collected three sets of "Shikongzuobiao" clothing; in the year X, while renovating his house, someone reported him, the property management staff were women, and the property office handled it properly.
+Feedback: on the day X at the hour X he collected three sets of “Shikongzuobiao” clothing; in the year X, while renovating his house, someone reported him, the property management staff were women, and the property office handled it properly.
 
 * * *
 
@@ -141,7 +141,7 @@ Feedback: before the *guimao* year of X, her New Year money was kept every year 
 
 Teacher Lü was walking on the temple stairs and saw a small pink shoe — a girl's shoe — abandoned at the side.
 
-Analysis: a small shoe means encountering petty people, encountering bad things, being given a hard time behind one's back (in Chinese, "giving someone small shoes").
+Analysis: a small shoe means encountering petty people, encountering bad things, being given a hard time behind one's back (in Chinese, “giving someone small shoes”).
 
 Feedback: in the year X, while building the Foyin Temple in Meizhou, he met a very large petty person — an elderly woman of great age.
 

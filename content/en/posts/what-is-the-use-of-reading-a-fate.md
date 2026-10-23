@@ -11,7 +11,7 @@ src: "进行命运预测有什么好处？-678.md"
 words: 670
 ---
 
-> **Translator's note.** The plainest statement of what prediction is for, and the one to hand a sceptic. A reading is a health check, not a treatment: it finds the problem, and the intervention comes afterwards. Four uses follow — averting harm, timing a good move, raising a person to the top of their own level, and adjusting a company's premises. The definition offered in the middle is worth noting: prediction is "a mode of inference that is mathematical and philosophical," not a mystery.
+> **Translator's note.** The plainest statement of what prediction is for, and the one to hand a sceptic. A reading is a health check, not a treatment: it finds the problem, and the intervention comes afterwards. Four uses follow — averting harm, timing a good move, raising a person to the top of their own level, and adjusting a company's premises. The definition offered in the middle is worth noting: prediction is “a mode of inference that is mathematical and philosophical,” not a mystery.
 
 ---
 

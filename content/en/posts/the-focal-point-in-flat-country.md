@@ -11,7 +11,7 @@ src: "平洋地的焦点穴-482.md"
 words: 821
 ---
 
-> **Translator's note.** A short, technical piece with an unusually clean rule in it. In flat country the old books looked for "water dragons," because rivers were the only large energy-carrying features on a plain. Modern roads do the same job, and there are far more of them. The essay gives the geometric construction for locating the strongest focal point at a bend or crossing — the third vertex of an equilateral triangle — and then a table for deciding whether a given bend helps or harms. The caveat at the end is the honest part: these rules apply to focal points, not to vein-qi points, and a vein-qi point outranks an angle of water entirely.
+> **Translator's note.** A short, technical piece with an unusually clean rule in it. In flat country the old books looked for “water dragons,” because rivers were the only large energy-carrying features on a plain. Modern roads do the same job, and there are far more of them. The essay gives the geometric construction for locating the strongest focal point at a bend or crossing — the third vertex of an equilateral triangle — and then a table for deciding whether a given bend helps or harms. The caveat at the end is the honest part: these rules apply to focal points, not to vein-qi points, and a vein-qi point outranks an angle of water entirely.
 
 ---
 

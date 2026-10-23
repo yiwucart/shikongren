@@ -11,12 +11,12 @@ src: "“奇门遁甲”是风水师的第三只眼睛吗？-632.md"
 words: 783
 ---
 
-> **Translator's note.** A short polemic from 2018, aimed at a specific claim made by a qimen master in a feng shui journal: that *Qimen Dunjia* is "the feng shui master's third eye." The author's answer is a distinction that recurs across this collection — a technique that can *diagnose* a site is not the same thing as a theory that *explains* it. The B-mode ultrasound analogy in the middle is his, not ours. Names of the master and the journal have been reduced to placeholders in the original and remain so here.
+> **Translator's note.** A short polemic from 2018, aimed at a specific claim made by a qimen master in a feng shui journal: that *Qimen Dunjia* is “the feng shui master's third eye.” The author's answer is a distinction that recurs across this collection — a technique that can *diagnose* a site is not the same thing as a theory that *explains* it. The B-mode ultrasound analogy in the middle is his, not ours. Names of the master and the journal have been reduced to placeholders in the original and remain so here.
 
 ---
 
 
-A certain qimen master published an article in a feng shui journal. He wrote that in years of studying and applying *Qimen Dunjia* he had come to feel deeply that "qimen is the feng shui master's third eye." He offered a case: using qimen he had read that a particular house plot "may have had a woman hang herself there, and perhaps a man died there too," and he advised the client, "whatever you do, do not buy this inauspicious plot."
+A certain qimen master published an article in a feng shui journal. He wrote that in years of studying and applying *Qimen Dunjia* he had come to feel deeply that “qimen is the feng shui master's third eye.” He offered a case: using qimen he had read that a particular house plot “may have had a woman hang herself there, and perhaps a man died there too,” and he advised the client, “whatever you do, do not buy this inauspicious plot.”
 
 The follow-up investigation, he said, found that the owner's mother had indeed hanged herself on the site, and the owner's elder brother had drowned himself in a river.
 
@@ -24,7 +24,7 @@ That qimen can read such things is not surprising. What surprises me is the infe
 
 Caishikou in Beijing was the execution ground of successive dynasties. Nobody knows how many heads came off there. In the Nanjing Massacre three hundred thousand people in the city were killed violently — in nearly every room. And yet Caishikou today is a prosperous, expensive district, and Nanjing is prosperous, with property at prices people can barely pay. Nor is every household that lives on the old execution ground, or anywhere in Nanjing, drowning in disaster. Among them are people who live to a hundred, people of great wealth and rank, people with children and grandchildren around them.
 
-I would like to hear the qimen masters explain *that* with a "reasonable justification."
+I would like to hear the qimen masters explain *that* with a “reasonable justification.”
 
 There is more. Qimen divides into two great factions — the fixed-palace method and the flying-palace method — and two ways of setting up the chart, intercalating the leap month or not. Four patriarchs, four schools. For the same double-hour they produce different charts, and therefore different verdicts on the same matter. All four have spent centuries insisting that they are correct and the other three are wrong. **On what basis do you declare that yours is the correct one?**
 
@@ -40,7 +40,7 @@ Was Mao Zedong's family feng shui good? Why was Mao an emperor in his own domain
 
 And then the pitch: *qimen is the feng shui master's third eye, his earth-penetrating eye, his X-ray eye, his clairvoyance. Study feng shui, then add qimen, and you grow wings — you become the highest grade of feng shui master.*
 
-Clever fraud. Because "without qimen you cannot become a top-grade feng shui master" means, in plain language, **"without qimen you cannot extract money from clients."**
+Clever fraud. Because “without qimen you cannot become a top-grade feng shui master” means, in plain language, **“without qimen you cannot extract money from clients.”**
 
 Qimen and feng shui have nothing to do with each other — exactly as liuyao can also be used to read a site and also has nothing to do with feng shui.
 

@@ -52,7 +52,7 @@ Traditional feng shui, unable to explain this, goes wrong again and again in pra
 
 ![](/img/bf7c75ec887ad8f6.jpeg)
 
-By traditional reckoning a rubble mountain like this holds no energy at all. It is called a "broken army mountain," a place where nothing may be buried.
+By traditional reckoning a rubble mountain like this holds no energy at all. It is called a “broken army mountain,” a place where nothing may be buried.
 
 In reality, in Shandong, Gansu, Ningxia and much of the south, mountains look exactly like this — and they too produce wealth and rank. Someone may ask: does the vein energy not simply run away? Yes, some of it certainly runs away. But how much each household receives is a comparative matter. Every household's water pipe leaks; the household whose pipe leaks least gets the most water. On a rubble mountain some loss is normal; no stratum is ideally complete. If the energy is auspicious, then the household whose point loses least of it will be the one that prospers most.
 
@@ -70,7 +70,7 @@ Suppose these are two neighbouring cave dwellings. The vein energy in the strata
 
 ![](/img/97271954ad7d1ce2.jpeg)
 
-This is the ancestral home of a large landowner on the loess plateau before 1949. The compound happens to sit exactly on the qi-bearing layer; all the auspicious vein energy went into his household. Even the neighbours who sat on the same layer were robbed of it by the landowner's house. That is what "grabbing the feng shui" means. And in fact the families around the landowner's house were all ordinary peasants.
+This is the ancestral home of a large landowner on the loess plateau before 1949. The compound happens to sit exactly on the qi-bearing layer; all the auspicious vein energy went into his household. Even the neighbours who sat on the same layer were robbed of it by the landowner's house. That is what “grabbing the feng shui” means. And in fact the families around the landowner's house were all ordinary peasants.
 
 ![](/img/3e56a44fcbebe188.jpeg)
 
@@ -78,4 +78,4 @@ If the auspicious layer flows only into household A, A will have wealth and rank
 
 ![](/img/4764aa05f90693a1.jpeg)
 
-Suppose the shaded band is the qi-bearing layer. Setting a point on either hill A or hill B is what traditional feng shui calls a "heaven point," and the method is what it calls "contracted burial." Put the point on A and you get vein energy, and wealth. Put it on B and you get nothing at all — B not only fails to receive the stratum's energy, it loses its own. In real life a heaven point rarely makes anyone prosper, because it is very unusual for the energy in the strata to return all the way up to a summit.
+Suppose the shaded band is the qi-bearing layer. Setting a point on either hill A or hill B is what traditional feng shui calls a “heaven point,” and the method is what it calls “contracted burial.” Put the point on A and you get vein energy, and wealth. Put it on B and you get nothing at all — B not only fails to receive the stratum's energy, it loses its own. In real life a heaven point rarely makes anyone prosper, because it is very unusual for the energy in the strata to return all the way up to a summit.

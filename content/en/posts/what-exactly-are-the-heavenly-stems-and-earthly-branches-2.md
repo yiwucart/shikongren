@@ -37,7 +37,7 @@ Why, with so many planets available, did the ancients fix on Jupiter? That is th
 
 Jupiter's position changes its effect on Earth completely. The influence on all life of Jupiter moving through the *Zi* sector is entirely different from its influence in *Chou* or *Yin*. **This is why a zodiac sign alone, without a full chart, can sometimes read a life correctly.**
 
-But the zodiac alone cannot be right every time. What it gives you is the fate shared by everyone born under that sign — the common part. "Common" means that while Jupiter moves through *Zi*, it exerts a common influence on all life on Earth. But people live in different environments. When it rains, one person is indoors, one holds an umbrella, one is out in it. The same rain affects all three differently — and yet all three are affected; only the size and the manner of the effect differ.
+But the zodiac alone cannot be right every time. What it gives you is the fate shared by everyone born under that sign — the common part. “Common” means that while Jupiter moves through *Zi*, it exerts a common influence on all life on Earth. But people live in different environments. When it rains, one person is indoors, one holds an umbrella, one is out in it. The same rain affects all three differently — and yet all three are affected; only the size and the manner of the effect differ.
 
 That is why the zodiac can be right and cannot be right. It cannot be right because every person on Earth has a particular living environment, and that is what produces the difference between fates. It can be right because everyone lives on Earth, and everyone receives the influence of the rain.
 
@@ -49,15 +49,15 @@ Because the influence of Sun and Moon on Earth is a *balanced* system, and a bal
 
 That is why the ancients fixed on Saturn and Jupiter. Modern science holds that the Jupiter–Saturn system decides whether life on Earth can exist at all. Which way life on Earth develops is not decided by the Sun and Moon, because their influence is balanced — whereas the Jupiter–Saturn system's influence is not. It changes with position.
 
-Which is to say: the Chinese ancients' notion of "nine stars in a line" is not necessarily inauspicious, nor necessarily auspicious. That is an astronomical question. But we know Saturn takes about thirty years to go round the Sun. Take the least common multiple with Jupiter's twelve, and you see where the sixty-term cycle comes from.
+Which is to say: the Chinese ancients' notion of “nine stars in a line” is not necessarily inauspicious, nor necessarily auspicious. That is an astronomical question. But we know Saturn takes about thirty years to go round the Sun. Take the least common multiple with Jupiter's twelve, and you see where the sixty-term cycle comes from.
 
-You also see why there is "Jia combines with Ji, Yi with Geng; Jia clashes with Geng, Yi with Xin": every five years, Jupiter, Saturn and the Sun fall on a single line. If Jupiter and Saturn are on opposite sides of the Sun, that is a clash (*chong*). If they are on the same side, that is a combination (*he*). That is where the "clash" and "combination" of the Heavenly Stems come from.
+You also see why there is “Jia combines with Ji, Yi with Geng; Jia clashes with Geng, Yi with Xin”: every five years, Jupiter, Saturn and the Sun fall on a single line. If Jupiter and Saturn are on opposite sides of the Sun, that is a clash (*chong*). If they are on the same side, that is a combination (*he*). That is where the “clash” and “combination” of the Heavenly Stems come from.
 
 And for Earth, whether those three bodies lie on one line, or Jupiter and Saturn sit on opposite sides of the Sun, makes an entirely different difference.
 
 So people born in a *Jiazi* year and a *Yichou* year differ enormously, both in the direction of their fate and in its substance. Because when Jupiter, Saturn, the Sun and Earth sit in a given configuration, everyone on Earth receives the same energy — but because the terrain and landforms of Earth's surface vary, and people live in different environments, that same energy acting on one particular person varies in intensity and in mode. That is what produces the difference in fate between people born in the same year.
 
-By this point, do you still think "Jiazi, Yimao, Bingyin, Dingchou" is a time?
+By this point, do you still think “Jiazi, Yimao, Bingyin, Dingchou” is a time?
 
 A person born in a *Jiazi* year has a different form of particle-clustering in the body from one born in a *Yichou* year. Take an example. In a *Jiazi*-year person the particles cluster hand-in-hand, in rings. In a *Yichou*-year person they cluster back-to-back, in heaps. Different formation, different pattern. When a car ploughs into the pattern, different people are injured and the disorder takes a different shape.
 

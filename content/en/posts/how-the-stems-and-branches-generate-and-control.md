@@ -11,17 +11,17 @@ src: "天干地支的生克问题-366.md"
 words: 1490
 ---
 
-> **Translator's note.** This is the most combative piece in the set. Its subject is nominally technical — what "generation" (*sheng*) means when one Stem or Branch supports another — but most of the article is spent demolishing the popular wealth-cures sold on the Chinese internet. Readers who find the tone harsh should know that the harshness is the point: the author is arguing that a large commercial industry is built on claims that fail their own internal logic. One passage is crude by design; it has been rendered with the coarseness intact but without gratuitous detail. Named individuals are left as the original left them, partly anonymised.
+> **Translator's note.** This is the most combative piece in the set. Its subject is nominally technical — what “generation” (*sheng*) means when one Stem or Branch supports another — but most of the article is spent demolishing the popular wealth-cures sold on the Chinese internet. Readers who find the tone harsh should know that the harshness is the point: the author is arguing that a large commercial industry is built on claims that fail their own internal logic. One passage is crude by design; it has been rendered with the coarseness intact but without gratuitous detail. Named individuals are left as the original left them, partly anonymised.
 
 ---
 
-There are two kinds of "generation" among the Stems and Branches. One genuinely generates you. The other only appears to — it is generation in words.
+There are two kinds of “generation” among the Stems and Branches. One genuinely generates you. The other only appears to — it is generation in words.
 
 **Real generation puts money on the table. Fake generation talks.**
 
 Which means that generation is not automatically auspicious. A bad man who generates you may be walking you to the execution ground. A good man who generates you may be the real thing. To be praised by a good person is a good thing; to be praised by a bad person is quite possibly the beginning of your trouble.
 
-Take a football match. The only people genuinely helping you score are your teammates. The crowd in the stands is also supporting you — but the crowd cannot step onto the pitch and put the ball in the net. The crowd supports the team without determining the result. So even within "generation" there are two cases: **generation that lands, and generation that does not.**
+Take a football match. The only people genuinely helping you score are your teammates. The crowd in the stands is also supporting you — but the crowd cannot step onto the pitch and put the ball in the net. The crowd supports the team without determining the result. So even within “generation” there are two cases: **generation that lands, and generation that does not.**
 
 However loudly the crowd cheers, it is noise. It cannot decide the match. Generation of that kind has no bearing on whether the outcome is auspicious or inauspicious, and so we simply disregard it. If you buy a football lottery ticket, will you certainly win by backing the team with the loudest supporters?
 
@@ -29,15 +29,15 @@ So: two modes of generation. Real and apparent.
 
 There is also **magnitude**. Generation of insufficient strength is equivalent to no generation. Hand someone one yuan and they feel nothing. Hand them a hundred million and someone may die of a sudden cardiac arrest — that is what a difference in the *quantity* of generation does.
 
-Anyone who studies this system without thinking rigorously about its most basic nouns and concepts will never learn to do a reading. To claim mastery, and to offer to "resolve" other people's misfortunes, on that basis is absurd.
+Anyone who studies this system without thinking rigorously about its most basic nouns and concepts will never learn to do a reading. To claim mastery, and to offer to “resolve” other people's misfortunes, on that basis is absurd.
 
 ---
 
-I once read an article titled "Methods for Inviting Wealth". To get rich, it said, first sweep your front doorstep clean — only then can the God of Wealth come home. It also said the cupboards in your kitchen must be crammed full; an empty cupboard means the household will never prosper. And it said that if you place the God of Wealth in the "wealth position", wealth will follow.
+I once read an article titled “Methods for Inviting Wealth”. To get rich, it said, first sweep your front doorstep clean — only then can the God of Wealth come home. It also said the cupboards in your kitchen must be crammed full; an empty cupboard means the household will never prosper. And it said that if you place the God of Wealth in the “wealth position”, wealth will follow.
 
 All of this is nonsense.
 
-The God of Wealth is a deity. Once a being reaches that level, it passes through walls — a god's energy is not energy our eyes can see; it passes through walls, through a water glass, through our bodies. A door cannot stop the God of Wealth from entering your house, and the God of Wealth does not need the door to get in. "Sweep your doorstep so the God of Wealth can come home" therefore has no necessity to it. Whoever wrote that article is a fraud.
+The God of Wealth is a deity. Once a being reaches that level, it passes through walls — a god's energy is not energy our eyes can see; it passes through walls, through a water glass, through our bodies. A door cannot stop the God of Wealth from entering your house, and the God of Wealth does not need the door to get in. “Sweep your doorstep so the God of Wealth can come home” therefore has no necessity to it. Whoever wrote that article is a fraud.
 
 He does not know what the God of Wealth actually *is*. He does not know the laws of its motion. He does not know its temperament. And — consider this — does the God of Wealth's arrival at your house necessarily mean it is bringing you money? Why could its arrival not mean it is taking your money out and giving it to someone else? On what basis do you guarantee that its arrival is a delivery and not a withdrawal?
 
@@ -45,11 +45,11 @@ To assume that enshrining the God of Wealth at home produces wealth is a mode of
 
 ---
 
-Place the God of Wealth in the "wealth position". Which position would that be?
+Place the God of Wealth in the “wealth position”. Which position would that be?
 
 Every school, every faction, every half-baked theory has its own answer. Assemble all the fraudulent theories in China into one list and you will discover that all 360 degrees — sky above, ground below — are a wealth position. Some diviners cast a hexagram to find it: cast once and wealth sits in the *chou* direction; cast again and it is in *yin*; cast again and it is in *jia*. Run all sixty-four hexagrams and every degree of your house is a wealth position.
 
-Different theories, different positions. **The very question "where is the wealth position" is incoherent.**
+Different theories, different positions. **The very question “where is the wealth position” is incoherent.**
 
 And even granting the premise: all 360 degrees are wealth positions. The real question is *which direction are you actually connected to?* That is one reason a person becomes wealthy or does not. Which direction is closest to you, and which is not — a bank lends money to anybody, but will any bank lend to *you*? Anyone can walk in with a hundred million to deposit, but must the bank take it? Plainly not.
 
@@ -65,9 +65,9 @@ For millennia this is what we have propagated: confidence tricks dressed as doct
 
 ---
 
-We are going to deal with the whole family of methods for "inviting wealth", "inviting office" and "inviting marriage". Let me state the conclusion now: **every traditional method for promoting wealth, position or marriage fails on scientific grounds, fails on logical grounds, and has no effect in observable practice.** They are confidence tricks.
+We are going to deal with the whole family of methods for “inviting wealth”, “inviting office” and “inviting marriage”. Let me state the conclusion now: **every traditional method for promoting wealth, position or marriage fails on scientific grounds, fails on logical grounds, and has no effect in observable practice.** They are confidence tricks.
 
-A management-training consultant came to see me recently. He had paid 180,000 yuan to a certain Master Wang XX for a method to hurry his daughter into marriage. The method: place a lily in front of his daughter's bed every day for three months. The reasoning was a pun — *baihe*, "lily", sounds like *baihe*, "a hundred unions"; so a lily produces a husband.
+A management-training consultant came to see me recently. He had paid 180,000 yuan to a certain Master Wang XX for a method to hurry his daughter into marriage. The method: place a lily in front of his daughter's bed every day for three months. The reasoning was a pun — *baihe*, “lily”, sounds like *baihe*, “a hundred unions”; so a lily produces a husband.
 
 He did it for four months. Nothing happened. He went back to ask. Master Wang told him to keep placing lilies, and to continue until the girl was married.
 

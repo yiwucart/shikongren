@@ -11,7 +11,7 @@ src: "为什么学习易经的人总是被大师们欺骗？-417.md"
 words: 1431
 ---
 
-> **Translator's note.** This essay is written for Chinese readers inside a specific ecosystem — the *yixue* training market, where teachers sell courses and "masters" sell remedies — and it assumes familiarity with a few things an outside reader will not have. Sima Nan (司马南) is a well-known Chinese broadcaster who spent decades publicly debunking qigong healers, fortune-tellers and other claimants to supernatural power; he is the figure the professors in this essay are arguing against. The "New School, Old School, Blind School" mentioned near the end are the three main lineages in modern Chinese fate calculation: the twentieth-century reformers, the classical tradition, and *mangpai*, the blind masters' tradition, transmitted orally among blind practitioners. The essay's argument, however, does not depend on any of this: it is about why people believe what they are told.
+> **Translator's note.** This essay is written for Chinese readers inside a specific ecosystem — the *yixue* training market, where teachers sell courses and “masters” sell remedies — and it assumes familiarity with a few things an outside reader will not have. Sima Nan (司马南) is a well-known Chinese broadcaster who spent decades publicly debunking qigong healers, fortune-tellers and other claimants to supernatural power; he is the figure the professors in this essay are arguing against. The “New School, Old School, Blind School” mentioned near the end are the three main lineages in modern Chinese fate calculation: the twentieth-century reformers, the classical tradition, and *mangpai*, the blind masters' tradition, transmitted orally among blind practitioners. The essay's argument, however, does not depend on any of this: it is about why people believe what they are told.
 
 ---
 
@@ -25,11 +25,11 @@ You may think you know why. I doubt you do.
 
 **(a) You have too little scientific knowledge**, so you cannot read the theories you are learning through a scientific lens. Without science you are easy to cheat.
 
-People say feng shui is in your genes. If you knew what a gene is, you would not be taken in. If you knew what feng shui is, you would not believe in "cosmic feng shui." Take the nano water cup: if you knew what *nano* means, you would not buy one. The whole country bought these things because nobody knows what a quantum is, and so people believe in quantum clothing and quantum cups. Insufficient science is enough to get you cheated.
+People say feng shui is in your genes. If you knew what a gene is, you would not be taken in. If you knew what feng shui is, you would not believe in “cosmic feng shui.” Take the nano water cup: if you knew what *nano* means, you would not buy one. The whole country bought these things because nobody knows what a quantum is, and so people believe in quantum clothing and quantum cups. Insufficient science is enough to get you cheated.
 
 **(b) A severe lack of logical reasoning.** Whatever someone tells you, you believe. You do not put questions.
 
-Of all the deficits in our culture this is the one. From antiquity to the present, we have not reasoned logically. We open our mouths and it is *qu lei bi xiang* — "assign by category, infer by analogy." Analogy has its uses. But inference is a far more powerful instrument.
+Of all the deficits in our culture this is the one. From antiquity to the present, we have not reasoned logically. We open our mouths and it is *qu lei bi xiang* — “assign by category, infer by analogy.” Analogy has its uses. But inference is a far more powerful instrument.
 
 Take doors facing doors. A master says doors facing doors is inauspicious, and you believe it. Reason for a moment and you would ask: a toilet door facing a kitchen door — is that bad for the toilet, or bad for the kitchen? A kitchen door facing a bedroom door — bad for the kitchen, or for the bedroom? Does a kitchen door in the east facing west give the same result as the reverse? Why is it that cinemas, theatres and shopping malls all have doors facing doors, and the government says that is auspicious, and the scientists say so too — try opening a shop *without* doors facing doors and see whether they let you trade.
 

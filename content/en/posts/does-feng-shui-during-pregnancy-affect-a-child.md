@@ -34,7 +34,7 @@ The more important side of pregnancy feng shui is this: **it has a decisive infl
 
 Because pregnancy feng shui is a mould. Whatever the mould, ten months later it produces that product. If the mould has defects, the product — the child — will have defects of every kind.
 
-If the mould of pregnancy feng shui has the defect of "short life," the child will be short-lived. If it has the defect of "poverty and begging," the child will be poor and beg. If it has the virtue of "great wealth," the child will be greatly wealthy. If it has the virtue of "high office and honour," the child will hold high office and be honoured.
+If the mould of pregnancy feng shui has the defect of “short life,” the child will be short-lived. If it has the defect of “poverty and begging,” the child will be poor and beg. If it has the virtue of “great wealth,” the child will be greatly wealthy. If it has the virtue of “high office and honour,” the child will hold high office and be honoured.
 
 Pregnancy feng shui is the mould that produces a person. The quality of the mould decides the quality tier of the person produced. Where the finished product is used, and how it is ground and adjusted — that is the work of acquired feng shui. But if the product came out with a congenital defect, no amount of use, grinding or adjustment will turn that defective person into a flawless one.
 
@@ -42,4 +42,4 @@ Everyone in the world spends money hiring tutors, sending children to cram schoo
 
 ![](/img/4df976f6362da2a4.jpeg)
 
-**"Do not lose at the starting line" does not mean not losing at nursery and primary school. It means not losing at pregnancy feng shui. Lose there, and there is no hope left.**
+**“Do not lose at the starting line” does not mean not losing at nursery and primary school. It means not losing at pregnancy feng shui. Lose there, and there is no hope left.**

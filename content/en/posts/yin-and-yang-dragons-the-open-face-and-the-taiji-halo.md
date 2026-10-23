@@ -11,7 +11,7 @@ src: "传统风水学之“阴龙、阳龙、开面处、太极晕”实地照�
 words: 1276
 ---
 
-> **Translator's note.** The practical companion to "What Exactly Is the Taiji Halo?" — same argument, this time walked through with reference to field photographs. The original is built around nine images: a yin dragon and a yang dragon, an open face, a taiji halo seen from the facing mountain, the sunken yin and raised yang positions within the halo, a halo in a pit (the error), the imperial tombs at the Eastern Qing tombs, and a diagram of the four images. Those photographs are reproduced at the points where the text refers to them. One passage of curses against plagiarists has been reduced to a note, per our usual practice.
+> **Translator's note.** The practical companion to “What Exactly Is the Taiji Halo?” — same argument, this time walked through with reference to field photographs. The original is built around nine images: a yin dragon and a yang dragon, an open face, a taiji halo seen from the facing mountain, the sunken yin and raised yang positions within the halo, a halo in a pit (the error), the imperial tombs at the Eastern Qing tombs, and a diagram of the four images. Those photographs are reproduced at the points where the text refers to them. One passage of curses against plagiarists has been reduced to a note, per our usual practice.
 
 ---
 
@@ -78,7 +78,7 @@ A taiji halo can arise in two ways. One is from **changes in landform and topogr
 
 These two have nothing to do with each other. In traditional feng shui, **only the halo formed by landform is a true taiji halo.**
 
-The taiji halo is the sole criterion for whether a true dragon's body carries a true point. Without a halo, no matter how living or how true the dragon, every point on its body is a false point — what the tradition calls a **"false flower point"** (*xuhua xue*).
+The taiji halo is the sole criterion for whether a true dragon's body carries a true point. Without a halo, no matter how living or how true the dragon, every point on its body is a false point — what the tradition calls a **“false flower point”** (*xuhua xue*).
 
 (A note from the author: because plagiarism is endemic in this field, and for the protection of his own work, much of the core content is taught only in person. He asks that readers not reproduce the material.)
 

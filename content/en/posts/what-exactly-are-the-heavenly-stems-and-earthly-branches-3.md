@@ -11,17 +11,17 @@ src: "天干地支到底是什么东西？（三）-368.md"
 words: 3437
 ---
 
-> **Translator's note.** This final part is the most polemical of the three. It moves from the mechanics of the system to an attack on the profession — on the schools, on the masters who write the books, and on the habit of mind that keeps the whole thing running. The author names the four canonical Tang-dynasty geomancers (Yang, Liao, Zeng, Lai) and refers to a living academic under the anonymisation used in the Chinese original; that anonymisation has been preserved. The Chinese text is more personal in its accusations than the English renders it. Nothing in the argument depends on the accusations, so readers who find them distracting can skip the four paragraphs marked as such without losing the thread. Two technical terms recur: *shengqi*, the "life-breath," and *yinyang chonghe zhi qi*, the qi of yin and yang in harmonious opposition.
+> **Translator's note.** This final part is the most polemical of the three. It moves from the mechanics of the system to an attack on the profession — on the schools, on the masters who write the books, and on the habit of mind that keeps the whole thing running. The author names the four canonical Tang-dynasty geomancers (Yang, Liao, Zeng, Lai) and refers to a living academic under the anonymisation used in the Chinese original; that anonymisation has been preserved. The Chinese text is more personal in its accusations than the English renders it. Nothing in the argument depends on the accusations, so readers who find them distracting can skip the four paragraphs marked as such without losing the thread. Two technical terms recur: *shengqi*, the “life-breath,” and *yinyang chonghe zhi qi*, the qi of yin and yang in harmonious opposition.
 
 ---
 
-When you study traditional culture, do not assume that traditional culture is superstition. It is called superstition because you tell clients nonsense like "Jia Yang Wood is a towering tree, Yi Yin Wood is a flower or a shrub." If you genuinely understood that *Jiazi* means a particular kind of energy in your body — that a person born in a *Jiazi* year has a different particle-clustering from one born in a *Yichou* year — then things would look different.
+When you study traditional culture, do not assume that traditional culture is superstition. It is called superstition because you tell clients nonsense like “Jia Yang Wood is a towering tree, Yi Yin Wood is a flower or a shrub.” If you genuinely understood that *Jiazi* means a particular kind of energy in your body — that a person born in a *Jiazi* year has a different particle-clustering from one born in a *Yichou* year — then things would look different.
 
 When the year *Jihai* arrives, the energy that *Ji* and *Hai* bring from the cosmos, the energy of the configuration of *Ji*, *Hai*, Saturn, Jupiter, the Sun and Earth, strikes the Earth. The clustered particles in your body are affected by that incoming energy, and the clustering changes.
 
 Take an example. We are sitting in orderly rows in a classroom when a wolfdog bursts in, leaping and thrashing. Our seating is scattered and disordered. That is how external energy breaks an existing order.
 
-This is why the "current year, current month, current day, current hour" affect a person's fate. Not because time acts on us. Because energy arriving from that direction strikes our bodies and turns the hand-in-hand particles into back-to-back ones. Our fate changes. Time is not what changes it.
+This is why the “current year, current month, current day, current hour” affect a person's fate. Not because time acts on us. Because energy arriving from that direction strikes our bodies and turns the hand-in-hand particles into back-to-back ones. Our fate changes. Time is not what changes it.
 
 If your habit of thought shifts, then when you look at a Bazi chart or at a feng shui you will understand why a human fate is the way it is.
 
@@ -47,23 +47,23 @@ Which brings us to another habit of thought, and the enormous gap between it and
 
 ### The basic law is not the world
 
-From the day we begin learning fortune-telling we are shown "Wood generates Fire, Fire generates Earth, Earth generates Metal, Metal generates Water, Water generates Wood." This cycle is not wrong. It is only the basic law — and the basic law is not the whole of how things generate and overcome one another.
+From the day we begin learning fortune-telling we are shown “Wood generates Fire, Fire generates Earth, Earth generates Metal, Metal generates Water, Water generates Wood.” This cycle is not wrong. It is only the basic law — and the basic law is not the whole of how things generate and overcome one another.
 
 In objective fact, the quantity of Fire generating Wood vastly exceeds the quantity of Wood generating Fire. **Fire generating Wood is the fundamental reason the world exists, not Wood generating Fire.** Wood generating Fire is the basic law. In the human world we see only that wood can light a fire, and we do not see the fire that is sunlight. The ancients said sunlight is Fire. Without sunlight, would plants on Earth still exist? Without light, every plant on Earth dies and is gone. Plants exist because they are struck by sunlight — Fire generating Wood. Without that, there would be no plants on Earth.
 
 Everyone says Fire generates Earth. But you have not noticed that Earth generating Fire is more powerful still. Coal is Earth, and coal generates fire — Earth generating Fire.
 
-Petroleum has the Water property of the Five Phases. "Moistening and descending" is the signature of Water, and petroleum, gasoline, kerosene and diesel all have it: *run*, moistening, means it penetrates; *xia*, descending, is a mode of motion. Every petroleum has this moistening-descending function. By the Five Phases, petroleum is Water in character — and petroleum is precisely what generates fire. Which shows that the ancients' generation-and-overcoming cycle is only the basic law, and the basic law cannot explain everything in this world.
+Petroleum has the Water property of the Five Phases. “Moistening and descending” is the signature of Water, and petroleum, gasoline, kerosene and diesel all have it: *run*, moistening, means it penetrates; *xia*, descending, is a mode of motion. Every petroleum has this moistening-descending function. By the Five Phases, petroleum is Water in character — and petroleum is precisely what generates fire. Which shows that the ancients' generation-and-overcoming cycle is only the basic law, and the basic law cannot explain everything in this world.
 
 In geometry, side-angle-side gives you congruent triangles. That one rule cannot solve every triangle problem, because you can also prove congruence by side-side-side, or by angle-angle-side. So the Five-Phase cycle is only the basic law.
 
 If we want to read a fate accurately, if we want to interpret this world, we cannot judge by the basic law.
 
-In the *Jinsuo Yuguan* and *Guolu Yinyang* schools: "sand in the east is auspicious, water in the west is auspicious." In practice, plenty of eldest sons with water in the east still get promoted, get rich, fill the house with children and live to a hundred — while men with sand in the east lose money, die young, and are cut down by blades or shot. The facts show that "sand east, water west is auspicious" is only the basic law.
+In the *Jinsuo Yuguan* and *Guolu Yinyang* schools: “sand in the east is auspicious, water in the west is auspicious.” In practice, plenty of eldest sons with water in the east still get promoted, get rich, fill the house with children and live to a hundred — while men with sand in the east lose money, die young, and are cut down by blades or shot. The facts show that “sand east, water west is auspicious” is only the basic law.
 
 To try to unlock the world's secrets with one basic qualitative rule is like a kindergarten child who has just learned that 1 + 1 = 2 setting out to crack Goldbach's conjecture.
 
-There is a joke about this. A landlord hires a tutor for his son. Day one the tutor teaches "one" — a single stroke. Day two, "two" — two strokes. Day three, "three" — three strokes. The son then tells his father he has learned to write, and the tutor is dismissed. Day four, the landlord wants to invite a guest to dinner and asks his son to write an invitation to a man named *Qian Baiwan* — "Thousand Hundred Ten-Thousand." Days pass and the invitation is not ready. The landlord goes to look, opens the door, and finds the room strewn with paper covered in horizontal strokes. The son looks up: "Why does this guest have such a strange name as Thousand Hundred Ten-Thousand? I haven't finished the strokes yet."
+There is a joke about this. A landlord hires a tutor for his son. Day one the tutor teaches “one” — a single stroke. Day two, “two” — two strokes. Day three, “three” — three strokes. The son then tells his father he has learned to write, and the tutor is dismissed. Day four, the landlord wants to invite a guest to dinner and asks his son to write an invitation to a man named *Qian Baiwan* — “Thousand Hundred Ten-Thousand.” Days pass and the invitation is not ready. The landlord goes to look, opens the door, and finds the room strewn with paper covered in horizontal strokes. The son looks up: “Why does this guest have such a strange name as Thousand Hundred Ten-Thousand? I haven't finished the strokes yet.”
 
 That is the joke that basic law alone produces. To think you can finish writing by basic law is an absurd habit of thought — and it is widespread among practitioners of Yixue.
 
@@ -81,11 +81,11 @@ Why use that tool? Because through it we can tell where east, south, west and no
 
 The magnetic field is nothing but a tool for judging direction. Feng shui is not a magnetic field, and a magnetic field is not feng shui. Anyone who says the magnetic field is feng shui has not even understood the old books.
 
-The ancients said it plainly: **"The buried take advantage of the life-breath."** Every practitioner knows this line and quotes it. About the life-breath, or the vein-breath of the dragon, the ancients were clear: it is the qi of yin and yang in harmonious opposition. That is not a magnetic field. Feng shui is the qi of yin and yang in harmonious opposition; the energy of feng shui is the life-breath; the energy of feng shui is the vein-breath of the dragon. Therefore feng shui is not a magnetic field.
+The ancients said it plainly: **“The buried take advantage of the life-breath.”** Every practitioner knows this line and quotes it. About the life-breath, or the vein-breath of the dragon, the ancients were clear: it is the qi of yin and yang in harmonious opposition. That is not a magnetic field. Feng shui is the qi of yin and yang in harmonious opposition; the energy of feng shui is the life-breath; the energy of feng shui is the vein-breath of the dragon. Therefore feng shui is not a magnetic field.
 
 We, the descendants of the ancients, actually believe feng shui is a magnetic field — and then wonder why we cannot use feng shui to benefit people and ourselves and solve their problems. This is the fundamental reason the masters ruin themselves and their own children. How many masters have adjusted their own sons and daughters into good fortune? Not many. Nor have many adjusted other people's families completely — because they all believe feng shui is a magnetic field.
 
-Now there is even a school called "genetic feng shui." Feng shui has nothing to do with genes. What a gene is, the masters themselves do not know. I asked a master the difference between DNA and RNA and he did not know — and having invented "genetic feng shui" without knowing the relation between the two, he founded a school.
+Now there is even a school called “genetic feng shui.” Feng shui has nothing to do with genes. What a gene is, the masters themselves do not know. I asked a master the difference between DNA and RNA and he did not know — and having invented “genetic feng shui” without knowing the relation between the two, he founded a school.
 
 ### The profession
 
@@ -109,9 +109,9 @@ If it is the little fox terrier, we glance at it and go on listening quietly —
 
 The Stems and Branches stand for energy from different directions, whose influence on a person is entirely different. And they stand for the ten thousand things — because energy from the *Jia* direction has a particular mode of motion, energy from *Jia* and from *Yi* in the sky has its own distinctive mode of motion, and the matter inside every thing around us likewise has a mode of motion.
 
-The energy in this glass of water has its own mode of motion, and it resembles the mode of motion of energy arriving from the cosmic direction *Ren–Zi–Gui*. So we connect the thing "water" with *Ren Zi Gui*.
+The energy in this glass of water has its own mode of motion, and it resembles the mode of motion of energy arriving from the cosmic direction *Ren–Zi–Gui*. So we connect the thing “water” with *Ren Zi Gui*.
 
-Plants are Wood. The mode of flow of the energy moving inside a plant resembles the mode of motion of energy arriving from the cosmic direction *Jia–Mao–Yi*. So we connect "Wood" with *Jia Mao Yi*.
+Plants are Wood. The mode of flow of the energy moving inside a plant resembles the mode of motion of energy arriving from the cosmic direction *Jia–Mao–Yi*. So we connect “Wood” with *Jia Mao Yi*.
 
 That is, the Stems and Branches stand for which thing's internal mode of energy motion is identical with which cosmic mode of energy motion. Only when you understand this can you find what prediction actually rests on, and know how feng shui acts on a human life. Only then, when we use these techniques to remake a life — using the chart and the environment a person lives in to remake their fate — will we know what is needed.
 

@@ -11,7 +11,7 @@ src: "“命运适应性原理”在预测学中的应用-664.md"
 words: 2131
 ---
 
-> **Translator's note.** This is the keystone of the author's method, and the one idea here that a Western reader can test against intuition and find immediately useful. A chart does not say "an event will occur." It says what will *change relative to what already is*. Move a grave from a good position to a bad one and the family meets disaster; move it from a bad position to a slightly less bad one and the family improves — same new position, opposite outcomes. From that one observation follow answers to three questions that otherwise defeat a reader: the marriage-year question, the illness question, and the prison question. The fish-and-polar-bear analogy and the camel in the desert carry the rest.
+> **Translator's note.** This is the keystone of the author's method, and the one idea here that a Western reader can test against intuition and find immediately useful. A chart does not say “an event will occur.” It says what will *change relative to what already is*. Move a grave from a good position to a bad one and the family meets disaster; move it from a bad position to a slightly less bad one and the family improves — same new position, opposite outcomes. From that one observation follow answers to three questions that otherwise defeat a reader: the marriage-year question, the illness question, and the prison question. The fish-and-polar-bear analogy and the camel in the desert carry the rest.
 
 ---
 
@@ -20,7 +20,7 @@ In my books I have repeated the same points over and over: that fate is material
 
 Working in the field — surveying sites, judging charts, reading hexagrams — and teaching, it is precisely because my feet were on that ground that I did not go wrong. It let me tear off, quickly, the layers of superstition and fake method wrapped around the art, and see the thing as it is. That is where my essays exposing frauds in the field and false predictive theories came from, and where what I call Lu-style feng shui and Lu-style bazi came from.
 
-What follows is one of the "secret techniques" — though it is nothing of the kind, only a small piece of ordinary reasoning — taken straight from everyday life.
+What follows is one of the “secret techniques” — though it is nothing of the kind, only a small piece of ordinary reasoning — taken straight from everyday life.
 
 ## 1. Seven graves on one terrace
 
@@ -82,7 +82,7 @@ A man who has been tormented by a chronic illness for a dozen years asks whether
 
 An escaped convict asks whether this year holds prison. You do not know he is a fugitive, and the chart shows no prison information. What do you say?
 
-Some master will claim he can see from the chart that the man is a fugitive. I ask him: does a man who spends his whole life in prison carry prison information in every year, every month, every day, every hour of his chart? If you say yes, then I ask: does a common labourer who never saved a penny carry "not one penny" in every year, month, day and hour of *his* chart? Say yes again and there is nothing left to discuss, because you are plainly lying with your eyes open, and there is no arguing with a man who wants his face more than he wants the facts. Say no — and this year, month, day, hour the client has chosen happens to be a moment with no prison information and a moment with a penny in it. Then what?
+Some master will claim he can see from the chart that the man is a fugitive. I ask him: does a man who spends his whole life in prison carry prison information in every year, every month, every day, every hour of his chart? If you say yes, then I ask: does a common labourer who never saved a penny carry “not one penny” in every year, month, day and hour of *his* chart? Say yes again and there is nothing left to discuss, because you are plainly lying with your eyes open, and there is no arguing with a man who wants his face more than he wants the facts. Say no — and this year, month, day, hour the client has chosen happens to be a moment with no prison information and a moment with a penny in it. Then what?
 
 Know the principle and you answer:
 
@@ -98,7 +98,7 @@ The principle also explains a fact that puzzles everyone: why a man whose chart 
 
 But put the camel on a water meadow, permanently, and it sickens. Force the missing elements into a chart permanently, on the same logic, and you are not helping; you are doing harm.
 
-Any living thing, any object, that still exists has adapted to its "short of this, short of that" environment, and does not experience it as suffering. To such a creature it is *our* environment that looks unbearable. We cannot judge a fish's feeling about water and air by our own need for air and our own fear of water.
+Any living thing, any object, that still exists has adapted to its “short of this, short of that” environment, and does not experience it as suffering. To such a creature it is *our* environment that looks unbearable. We cannot judge a fish's feeling about water and air by our own need for air and our own fear of water.
 
 **Deficiency is not inauspicious; sufficiency is not auspicious.** What matters is whether a thing can live freely in the environment it is in. If it can, that is auspicious; if it cannot, that is inauspicious.
 

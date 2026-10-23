@@ -11,7 +11,7 @@ src: "“风水和易经”能预测什么人事？-673.md"
 words: 671
 ---
 
-> **Translator's note.** A short, practical list from 2017: what a client can actually bring to a reader. The opening image — prediction as a road sign, not a steering wheel — is the clearest statement in this collection of how the author thinks prediction should be used, and it is worth reading before the list. The heading says "feng shui and the *Yijing*," but the scope is the whole predictive toolkit, with the technique appropriate to each item.
+> **Translator's note.** A short, practical list from 2017: what a client can actually bring to a reader. The opening image — prediction as a road sign, not a steering wheel — is the clearest statement in this collection of how the author thinks prediction should be used, and it is worth reading before the list. The heading says “feng shui and the *Yijing*,” but the scope is the whole predictive toolkit, with the technique appropriate to each item.
 
 ---
 

@@ -11,7 +11,7 @@ src: "八字十神所代表的意义-560.md"
 words: 1206
 ---
 
-> **Translator's note.** A reference page, and the one to keep open while reading the rest. Two departures from convention: the ten gods are not split into "direct" and "indirect" versions (you cannot tell which yuan of your income was direct wealth and which indirect), but the parallel and the rob *are* split. Then the same five gods are re-read for each kind of question — wealth, career, illness, lawsuits, prison, marriage — because a ten god means nothing until you know what is being asked.
+> **Translator's note.** A reference page, and the one to keep open while reading the rest. Two departures from convention: the ten gods are not split into “direct” and “indirect” versions (you cannot tell which yuan of your income was direct wealth and which indirect), but the parallel and the rob *are* split. Then the same five gods are re-read for each kind of question — wealth, career, illness, lawsuits, prison, marriage — because a ten god means nothing until you know what is being asked.
 
 ---
 
@@ -38,7 +38,7 @@ In real life direct wealth and indirect wealth cannot in fact be separated. Do y
 
 **Owl-seal.** Matters and affairs. To a leader it means the right to sign. To an ordinary person it means career. Among the six relations it means the mother. It means a diploma, or cultural level, or cultivation.
 
-Note: a diploma and a cultural level are not always the same thing. Some people have modest diplomas and a high cultural level, so "cultural level" is the safer term when judging. If you must read the diploma, read only the *initial* diploma, because officials at county level and above, and the heads of listed companies and some other enterprises, though their cultural level may be modest, have all bought or been given refresher qualifications at master's or doctoral level. Reading diplomas has real meaning only for people who studied honestly.
+Note: a diploma and a cultural level are not always the same thing. Some people have modest diplomas and a high cultural level, so “cultural level” is the safer term when judging. If you must read the diploma, read only the *initial* diploma, because officials at county level and above, and the heads of listed companies and some other enterprises, though their cultural level may be modest, have all bought or been given refresher qualifications at master's or doctoral level. Reading diplomas has real meaning only for people who studied honestly.
 
 ## 3. Different questions, different meanings for the same ten god
 
@@ -91,7 +91,7 @@ Note: a diploma and a cultural level are not always the same thing. Some people 
 
 ## 4. Why the same unfavourable god means different things according to direction, feng shui and bodily features
 
-For people born under one bazi, the useful and unfavourable gods are indistinguishable on the time system. But when those people move in different directions, the inauspicious (or auspicious) meaning of an unfavourable (or useful) stem that looks identical on the time system differs enormously — because **the energy of direction is greater than the energy of time.** So if a person's chart has "*jia* wood as the unfavourable god" and a *jia* year comes, the time system guarantees a disaster belonging to the *jia* unfavourable god. But if that person goes to work in a fire direction and does not return to the origin point for a year, then not only does the disaster not occur — he obtains good things of the *jia* kind. And if instead he goes to work for a year in the *jia* direction, the direction of the unfavourable god, then the danger certainly does occur.
+For people born under one bazi, the useful and unfavourable gods are indistinguishable on the time system. But when those people move in different directions, the inauspicious (or auspicious) meaning of an unfavourable (or useful) stem that looks identical on the time system differs enormously — because **the energy of direction is greater than the energy of time.** So if a person's chart has “*jia* wood as the unfavourable god” and a *jia* year comes, the time system guarantees a disaster belonging to the *jia* unfavourable god. But if that person goes to work in a fire direction and does not return to the origin point for a year, then not only does the disaster not occur — he obtains good things of the *jia* kind. And if instead he goes to work for a year in the *jia* direction, the direction of the unfavourable god, then the danger certainly does occur.
 
 By the same token, because **the energy of feng shui is greater than the energy of direction**, if a person with *jia* as unfavourable god has strong auspicious sand in the *jia* direction of his living environment, then in a *jia* year he too is greatly fortunate and nothing bad happens — even if he travels to the *jia* direction of the unfavourable god, nothing bad of that kind occurs.
 

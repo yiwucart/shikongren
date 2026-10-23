@@ -11,14 +11,14 @@ src: "八字干支旺衰的判断方法-462.md"
 words: 697
 ---
 
-> **Translator's note.** Eight lines that replace the whole apparatus of classical strength assessment. Traditional bazi asks whether an element is "strong," and gives the same answer for everyone born under that chart. Lü asks a narrower question — has *this person* actualised the energy of that stem, which his body will show — and reads strength only from immediate neighbours. The gate concept survives; the notion that a chart has one fixed strength does not.
+> **Translator's note.** Eight lines that replace the whole apparatus of classical strength assessment. Traditional bazi asks whether an element is “strong,” and gives the same answer for everyone born under that chart. Lü asks a narrower question — has *this person* actualised the energy of that stem, which his body will show — and reads strength only from immediate neighbours. The gate concept survives; the notion that a chart has one fixed strength does not.
 
 ---
 
 
 Strength and weakness in a bazi does need to be discussed. But the method of judging and applying it here is, and should be, utterly different from that of traditional fate studies.
 
-The traditional concept of the "gate" is entirely correct. As the old formula has it: *to know who will be rich, look for the wealth star reaching the gate.* The gate means the day stem's immediate neighbours left and right, plus the day branch. If the month stem, hour stem or day branch controls the day master, the year stem and year branch will find it very hard to rescue him — the king of Qin had a million men, but when Jing Ke came at him with a dagger, what use were a million men? None at all. Kidnap a man and no matter how many police surround him, they can hardly help.
+The traditional concept of the “gate” is entirely correct. As the old formula has it: *to know who will be rich, look for the wealth star reaching the gate.* The gate means the day stem's immediate neighbours left and right, plus the day branch. If the month stem, hour stem or day branch controls the day master, the year stem and year branch will find it very hard to rescue him — the king of Qin had a million men, but when Jing Ke came at him with a dagger, what use were a million men? None at all. Kidnap a man and no matter how many police surround him, they can hardly help.
 
 The purpose of judging strength is to see whether a given stem or branch has actualised a certain energy in your fate.
 

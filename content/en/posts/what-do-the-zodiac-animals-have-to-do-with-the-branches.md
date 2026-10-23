@@ -11,7 +11,7 @@ src: "天干地支与生肖属相的关系-367.md"
 words: 983
 ---
 
-> **Translator's note.** Two things in this essay need flagging for a reader outside China. The "twelve zodiac animals" here are the twelve *shengxiao* — rat, ox, tiger, rabbit, dragon, snake, horse, goat, monkey, rooster, dog, pig — one per Earthly Branch, familiar to every Chinese child and, in the popular mind, a complete system of fortune-telling in itself. The author's target is not the animals but the assumption that the animals *are* the meaning of the Branches. The second thing is the argument's structure: the first half dismantles the animals, and the second half uses that dismantling to make a much larger point about all conceptual categories, including the ones practitioners treat as fixed rules.
+> **Translator's note.** Two things in this essay need flagging for a reader outside China. The “twelve zodiac animals” here are the twelve *shengxiao* — rat, ox, tiger, rabbit, dragon, snake, horse, goat, monkey, rooster, dog, pig — one per Earthly Branch, familiar to every Chinese child and, in the popular mind, a complete system of fortune-telling in itself. The author's target is not the animals but the assumption that the animals *are* the meaning of the Branches. The second thing is the argument's structure: the first half dismantles the animals, and the second half uses that dismantling to make a much larger point about all conceptual categories, including the ones practitioners treat as fixed rules.
 
 ---
 

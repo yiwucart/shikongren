@@ -20,7 +20,7 @@ The twenty-four sand burial methods are a way of setting the point that takes th
 
 *(The original notes here that plagiarism is rampant in the trade, that the author's articles have been copied widely, and that in consequence the readings of the photographs below are deliberately compressed — enough to make the point, not enough to teach the method. The full detail is reserved for his face-to-face classes.)*
 
-**1. Drawing the bow (牽弓).** The summit of the incoming dragon tilts over toward the saddle on one side, in the posture of a man drawing a bow with both hands. The point goes at the "rat flesh" — a descriptive term: when you draw a bow hard, the pectoral muscle swells up like a rat lying there. That is also where the strength is concentrated, and it is what decides whether the arrow flies.
+**1. Drawing the bow (牽弓).** The summit of the incoming dragon tilts over toward the saddle on one side, in the posture of a man drawing a bow with both hands. The point goes at the “rat flesh” — a descriptive term: when you draw a bow hard, the pectoral muscle swells up like a rat lying there. That is also where the strength is concentrated, and it is what decides whether the arrow flies.
 
 ![](/img/f8296c3624885e03.jpeg)
 
@@ -76,7 +76,7 @@ The twenty-four sand burial methods are a way of setting the point that takes th
 
 ![](/img/cd06a1e4ec3cda8a.jpeg)
 
-**14. Spitting burial (吐葬).** The dragon descends, and a mound inside a hollow knots like a dewdrop about to fall from a blade of grass. This is called "spitting breath." If the dewdrop is broken, the qi does not gather — so you can only set the point sticking to the pearl.
+**14. Spitting burial (吐葬).** The dragon descends, and a mound inside a hollow knots like a dewdrop about to fall from a blade of grass. This is called “spitting breath.” If the dewdrop is broken, the qi does not gather — so you can only set the point sticking to the pearl.
 
 ![](/img/0520b942afcefb4d.jpeg)
 

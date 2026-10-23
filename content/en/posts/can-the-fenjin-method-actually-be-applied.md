@@ -11,12 +11,12 @@ src: "风水“坐向分金”理论具有可操作性吗？-659.md"
 words: 688
 ---
 
-> **Translator's note.** Five questions, asked in public at a national conference, which between them dismantle the *zuoxiang fenjin* method without anyone having to raise a voice. The fourth is the one that ends the conversation: if you set the sitting by the centreline of the coffin, have you opened the lid to check that the bones are on that centreline? The essay is short because it does not need to be long. Read together with "Setting the Orientation" and "Can the Fenjin Method Be Applied?" it forms a single, patient demolition.
+> **Translator's note.** Five questions, asked in public at a national conference, which between them dismantle the *zuoxiang fenjin* method without anyone having to raise a voice. The fourth is the one that ends the conversation: if you set the sitting by the centreline of the coffin, have you opened the lid to check that the bones are on that centreline? The essay is short because it does not need to be long. Read together with “Setting the Orientation” and “Can the Fenjin Method Be Applied?” it forms a single, patient demolition.
 
 ---
 
 
-*Zuoxiang fenjin* — sitting, facing, and the fenjin — means the directions of the front of a house (the facing) and the back (the sitting), or the direction of the head of the corpse (the sitting) and the feet (the facing) in a grave. The "sitting and facing" is the general direction within a range of fifteen degrees; the fenjin is a further and finer determination within a range of a few degrees.
+*Zuoxiang fenjin* — sitting, facing, and the fenjin — means the directions of the front of a house (the facing) and the back (the sitting), or the direction of the head of the corpse (the sitting) and the feet (the facing) in a grave. The “sitting and facing” is the general direction within a range of fifteen degrees; the fenjin is a further and finer determination within a range of a few degrees.
 
 Chinese traditional feng shui, as it was handed down, produced this situation: because the sitting-and-facing-fenjin theory is the easiest thing in the whole subject to learn and apply — a man with no education at all can master it in a day or two — this most useless and least scientific theory spread everywhere and was accepted by great numbers of people. It also became the main trick of the swindlers in the trade. Meanwhile the most scientific and practical theories in Chinese feng shui, being beyond the grasp of the average person, were abandoned and forgotten.
 
