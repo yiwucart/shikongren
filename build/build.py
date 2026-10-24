@@ -295,17 +295,16 @@ UI_ZH = {
     'stmt_v': '本站内容仅供学习参考，版权归原作者所有，不构成任何建议。',
     'related': '同类文章',
     'disclaimer': '免责声明',
-    'disclaimer_v': '本站为传统文化交流性质的内容归档，所载文章观点与内容仅供学习参考，不构成任何建议，亦不作为任何决策依据。读者应独立判断、自负其责。',
-    'copyright': '本站全部内容来源于微信公众号「时空坐标」，作者署名吕文艺，版权归原作者及原作者所在平台所有。',
-    'nogoods': '本站与原作者不存在商业关系，内容经原作者授权整理归档，仅供学习参考。如需引用，请注明出处并以原文为准。',
-    'takedown': '如原作者或权利人认为收录内容需要处理，请通过下方方式联系，将立即处理。',
-    'follow': '关注原作者公众号「时空坐标」，获取最新文章',
+    # 页脚只有这两段：一句免责，一句来源与版权。早期写了四五段，
+    # 「仅供学习参考」「公众号时空坐标」各出现三四次，砍成一处一说。
+    'disclaimer_v': '本站为传统文化交流性质的内容归档，文章观点仅供学习参考，不构成任何建议。',
+    'copyright': '内容整理自原作者吕文艺的公众号「时空坐标」，版权归原作者所有；引用请注明出处，如需下架请通过下方方式联系。',
     'wechat': '微信公众号：',
     'tel': '联系原作者：吕文艺老师',
     'about_site': '关于本站',
     'sitemap': '网站地图',
     'cms': '内容管理',
-    'copy': '© 时空人公益推广 · shikongren.com · 内容仅供学习参考',
+    'copy': '© 时空人公益推广 · shikongren.com',
     'copy_n': '© 时空人公益推广 · shikongren.com · %d 篇原创文章',
     'site_name': '时空人公益推广',
     'wechat_name': '时空坐标',
@@ -349,24 +348,16 @@ UI_EN = {
     'related': 'Related articles',
     'disclaimer': 'Disclaimer',
     'disclaimer_v': ('This site archives material for the study of traditional Chinese culture. '
-                     'The views expressed are those of the author and are offered for reference '
-                     'only. They constitute no advice and should not be used as the basis for any '
-                     'decision. Readers should judge independently and bear their own responsibility.'),
-    'copyright': ('All content originates from the WeChat public account “Shikongren Coordinates” '
-                  '(时空坐标) and is attributed to Lü Wenyi. Copyright remains with the author and '
-                  'the publishing platform.'),
-    'nogoods': ('This site has no commercial relationship with the author. Content is archived '
-                'with permission for study and reference. When quoting, cite the original and '
-                'treat the Chinese text as authoritative.'),
-    'takedown': ('If the author or a rights holder believes any archived item should be removed, '
-                 'please use the contact below and it will be handled promptly.'),
-    'follow': 'Follow the author’s WeChat account “Shikongren Coordinates” for new articles',
+                     'The views expressed are those of the author and constitute no advice.'),
+    'copyright': ('Content is archived from the author Lü Wenyi’s WeChat account “Shikongren '
+                  'Coordinates” (时空坐标). Copyright remains with the author; cite the source '
+                  'when quoting, and use the contact below to have an item removed.'),
     'wechat': 'WeChat: ',
     'tel': 'Contact the author, Lü Wenyi: ',
     'about_site': 'About this archive',
     'sitemap': 'Sitemap',
     'cms': 'Content admin',
-    'copy': '© Shikongren Archive · shikongren.com · For study and reference only',
+    'copy': '© Shikongren Archive · shikongren.com',
     'copy_n': '© Shikongren Archive · shikongren.com · %d original articles',
     'site_name': 'Shikongren Archive',
     'wechat_name': '时空坐标 (Shikongren Coordinates)',
@@ -511,11 +502,11 @@ def ebook_chip(lang):
     """
     code = lang.get('code')
     if code == 'en':
-        head, tail = 'Ebooks', ' · 12 ↓'
+        head, tail = 'Free ebooks', ' ↓'
     elif lang.get('opencc'):
-        head, tail = '電子書', ' · 12 種 ↓'
+        head, tail = '免費下載電子書', ' ↓'
     else:
-        head, tail = '电子书', ' · 12 种 ↓'
+        head, tail = '免费下载电子书', ' ↓'
     return ('<a class="dl" href="ebooks.html"><span class="dl-h">%s</span>'
             '<span class="dl-t">%s</span></a>' % (head, tail))
 
@@ -1265,8 +1256,8 @@ def build_index_html(arts, cats, years, lang):
         more_u='More ▾' if is_en else '更多 ▾',
         less_u='Less ▴' if is_en else '收起 ▴',
         disc_h=T['disclaimer'], disc=T['disclaimer_v'],
-        cp=T['copyright'], ng=T['nogoods'], td=T['takedown'],
-        follow=T['follow'], wechat=T['wechat'], tel=T['tel'],
+        cp=T['copyright'],
+        wechat=T['wechat'], tel=T['tel'],
         about_site=T['about_site'], sitemap=T['sitemap'], cms=T['cms'],
         # 术语表只有英文版。中文页给空串，页脚保持原样。
         gloss_link=('<a href="glossary.html">Glossary</a> · ' if is_en else '')
@@ -1365,11 +1356,8 @@ INDEX_TPL = '''<!doctype html>
   </div>
   <div class="src">
     <p>{cp}</p>
-    <p>{ng}</p>
-    <p>{td}</p>
   </div>
   <div class="contact">
-    <p>{follow}</p>
     <p>{wechat}<b>{wechat_name}</b></p>
     <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a></p>
   </div>
