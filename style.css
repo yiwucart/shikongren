@@ -1010,11 +1010,18 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 /* 首页 hero 里的电子书入口 */
-.ebooklink { margin: 12px 0 0; font-size: 15px; }
+.ebooklink { margin: 18px 0 6px; font-size: 14px; }
 .ebooklink a {
+  display: inline-block;
+  padding: 7px 15px;
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(138,109,59,.35);
-  padding-bottom: 1px;
+  border: 1px solid rgba(138,109,59,.34);
+  border-radius: 999px;
+  background: rgba(255,255,255,.55);
+  transition: border-color .16s ease, background .16s ease;
 }
-.ebooklink a:hover { border-bottom-color: var(--accent); }
+.ebooklink a:hover {
+  border-color: var(--accent);
+  background: rgba(138,109,59,.06);
+}
