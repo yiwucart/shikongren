@@ -2572,26 +2572,22 @@ def build_one_lang(lang, settings):
     # 站点在百度资源平台验证的是 https://www.shikongren.com，
     # 所以这里必须用 www 域名，否则百度会当成两个不同站点。
     if not lang['dir']:
+        # 统计页与信标不属于内容，不进索引。
+        # 注意：robots 按「最具体的 UA 组」匹配，Googlebot 只看自己的组，
+        # 所以在 User-agent: * 里写 Disallow 对它无效，每组都得写一遍。
+        _dis = ('Disallow: /stats/\n'
+                'Disallow: /b.gif\n\n')
+        _uas = ('Baiduspider', 'Baiduspider-image', 'Bingbot',
+                'Googlebot', 'Googlebot-Image')
+        _robots = ''.join('User-agent: %s\nAllow: /\n%s' % (u, _dis)
+                          for u in _uas)
+        _robots += 'User-agent: *\nAllow: /\n' + _dis
+        _robots += 'Sitemap: %s/sitemapindex.xml\n' % DOMAIN
         with open(os.path.join(out_dir, 'robots.txt'), 'w',
                   encoding='utf-8', newline='\n') as f:
-            f.write(
-                # 显式放行百度爬虫。理论上 User-agent: * 已经覆盖，
-                # 但站长平台的「Robots 检查」工具按 UA 精确匹配，
-                # 显式写一段 Baiduspider 能让检查结果直接显示「允许」，
-                # 也避免以后有人加了别的 Disallow 规则误伤。
-                'User-agent: Baiduspider\n'
-                'Allow: /\n\n'
-                'User-agent: Baiduspider-image\n'
-                'Allow: /\n\n'
-                'User-agent: Bingbot\n'
-                'Allow: /\n\n'
-                'User-agent: Googlebot\n'
-                'Allow: /\n\n'
-                'User-agent: Googlebot-Image\n'
-                'Allow: /\n\n'
-                'User-agent: *\n'
-                'Allow: /\n\n'
-                'Sitemap: %s/sitemapindex.xml\n' % DOMAIN)
+            # 显式列出百度爬虫：站长平台的「Robots 检查」工具按 UA 精确匹配，
+            # 显式写一段能让检查结果直接显示「允许」。
+            f.write(_robots)
 
         # 404 页。nginx 用 error_page 指向它，页内链接必须全绝对路径。
         # 分类篇数要按英文那层算 —— 此刻构建的是中文（690 篇），
@@ -2694,6 +2690,46 @@ def build_search_index(arts, data_dir):
 
 # ---------------------------------------------------------------- 主流程
 
+BEACON = ('<script>(function(){try{'
+          'var i=new Image();'
+          'i.src="/b.gif?p="+encodeURIComponent(location.pathname)'
+          '+"&r="+encodeURIComponent(document.referrer)'
+          '+"&w="+screen.width+"&t="+Date.now();'
+          '}catch(e){}})();</script>')
+
+
+def inject_beacon(out_root):
+    """给所有页面挂 1x1 统计信标。
+
+    放在 HTML 后处理而不是往每个模板里塞：模板有文章页、三种首页、关于、
+    术语表、六张分类页、404，逐个改容易漏一个。build 每次全量重写，
+    不需要考虑重复注入。
+
+    带 t=时间戳 是为了绕开 Cloudflare 的缓存：缓存 key 含 query string，
+    参数一变就不会命中 HIT，请求才能回源被 nginx 记下来。
+    """
+    n = 0
+    for dirpath, dirs, files in os.walk(out_root):
+        # 后台不需要访问统计，统计里混进来反而干扰阅读
+        dirs[:] = [d for d in dirs if d not in ('admin', 'stats')]
+        for fn in files:
+            if not fn.endswith('.html'):
+                continue
+            p = os.path.join(dirpath, fn)
+            try:
+                with open(p, encoding='utf-8') as f:
+                    s = f.read()
+            except UnicodeDecodeError:
+                continue
+            if 'b.gif?p=' in s or '</body>' not in s:
+                continue
+            s = s.replace('</body>', BEACON + '</body>', 1)
+            with open(p, 'w', encoding='utf-8', newline='\n') as f:
+                f.write(s)
+            n += 1
+    return n
+
+
 def main():
     check_only = '--check' in sys.argv
 
@@ -2756,6 +2792,9 @@ def main():
             print('%s: 详情页 %d   摘要索引 %.1fMB + 全文 %.1fMB / %d 分片'
                   % (lang['full'], r['n'], r['brief'] / 1024 / 1024,
                      r['full'] / 1024 / 1024, r['shards']))
+
+    n_beacon = inject_beacon(OUT)
+    print('统计信标: %d 个页面已注入' % n_beacon)
 
     print('构建完成')
 
