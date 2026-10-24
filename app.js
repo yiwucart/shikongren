@@ -266,8 +266,11 @@
     if (kw) {
       countEl.innerHTML = fmt(pick('count_search', n, '搜索「%s」：命中 %d 篇'), esc(kw), n) +
         (mode === 'full' ? tx('count_full', '（全文）') : tx('count_sum', '（标题与摘要）'));
-    } else {
+    } else if (curCat) {
       countEl.textContent = pick('count_all', n, '共收录 %d 篇').replace('%d', n);
+    } else {
+      // 首屏什么都不筛时藏掉这行 —— hero 数据栏已经有 690 篇，别再说一遍
+      countEl.textContent = '';
     }
     empty.hidden = n > 0;
   }
