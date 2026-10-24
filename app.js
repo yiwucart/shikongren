@@ -16,6 +16,46 @@
   var clear = document.getElementById('clear');
   var countEl = document.getElementById('count');
   var empty = document.getElementById('empty');
+  var moreWrap = document.getElementById('loadmore');
+  var moreBtn = document.getElementById('loadmore-btn');
+  var moreNote = document.getElementById('loadmore-note');
+
+  // ---------------------------------------------------------------- 首页分页
+  // 690 张卡片一次铺出来，手机要滑两万多像素才到底，页脚基本到不了。
+  // 先出 PAGE 张，之后每次再放 STEP 张。卡片仍在 HTML 里（爬虫照抓），
+  // 只是超出部分先挂 .pg-hide。
+  var PAGE = window.matchMedia('(max-width: 640px)').matches ? 10 : 12;
+  var STEP = 20;
+  var limit = PAGE;
+
+  function syncMore() {
+    if (!moreWrap) return;
+    var total = grid.children.length;
+    var rest = total - limit;
+    if (rest <= 0) { moreWrap.hidden = true; return; }
+    var n = Math.min(STEP, rest);
+    moreWrap.hidden = false;
+    moreBtn.textContent = tx('more_btn', '再看 %d 篇').replace('%d', n);
+    moreNote.textContent = tx('more_rest', '还有 %d 篇未展开').replace('%d', rest);
+  }
+
+  function applyLimit() {
+    var cs = grid.children;
+    for (var i = 0; i < cs.length; i++) {
+      if (i < limit) cs[i].classList.remove('pg-hide');
+      else cs[i].classList.add('pg-hide');
+    }
+    syncMore();
+  }
+
+  if (moreBtn) {
+    moreBtn.addEventListener('click', function () {
+      limit += STEP;
+      applyLimit();
+      // 放完这批后焦点落回按钮，键盘用户不用再 Tab 一遍
+      if (!moreWrap.hidden) moreBtn.focus();
+    });
+  }
 
   // 界面文案由构建时注入的 window.I18N 提供（英文站需要）。
   // 没有注入时退回下面的中文原文 —— 繁体/简体页面行为不变。
@@ -221,6 +261,7 @@
     list.forEach(function (el) { frag.appendChild(el); });
     grid.innerHTML = '';
     grid.appendChild(frag);
+    applyLimit();
     var n = list.length;
     if (kw) {
       countEl.innerHTML = fmt(pick('count_search', n, '搜索「%s」：命中 %d 篇'), esc(kw), n) +
@@ -246,6 +287,7 @@
         '</span></div></a>';
     }).join('');
     grid.innerHTML = html;
+    applyLimit();
     countEl.innerHTML = fmt(pick('count_search', hits.length, '搜索「%s」：命中 %d 篇'), esc(kw), hits.length) +
       (label || '');
     empty.hidden = hits.length > 0;
@@ -254,6 +296,8 @@
   var curCat = null;
 
   function applyInstant(kw) {
+    // 每次筛选/搜索都从第一屏开始，别把上一次「再看 N 篇」的进度带过来
+    limit = PAGE;
     // 先用页面已有卡片做快速过滤（无需网络）
     var list = all.slice();
     if (curCat) {
@@ -303,6 +347,7 @@
 
   function applySummary(kw) {
     if (!SUMMARY) return 0;
+    limit = PAGE;
     var hits = matchIndex(SUMMARY, tokens(kw), curCat);
     renderHits(hits, kw, tx('count_summary', '（摘要）'));
     return hits.length;
@@ -310,6 +355,7 @@
 
   function applyFull(kw) {
     if (!FULL) return 0;
+    limit = PAGE;
     var hits = matchIndex(FULL, tokens(kw), curCat);
     renderHits(hits, kw, tx('count_full', '（全文）'));
     return hits.length;
@@ -370,7 +416,7 @@
       var bar = document.querySelector('.catbar');
       if (bar && bar.classList.contains('open')) {
         bar.classList.remove('open');
-        syncMore(false);
+        syncCats(false);
       }
     });
   });
@@ -379,7 +425,7 @@
   var catbar = document.querySelector('.catbar');
   var catmore = document.getElementById('catsmore');
 
-  function syncMore(open) {
+  function syncCats(open) {
     if (!catmore) return;
     catmore.setAttribute('aria-expanded', open ? 'true' : 'false');
     var span = catmore.querySelector('span');
@@ -389,7 +435,7 @@
   if (catbar && catmore) {
     catmore.addEventListener('click', function () {
       var open = catbar.classList.toggle('open');
-      syncMore(open);
+      syncCats(open);
     });
   }
 

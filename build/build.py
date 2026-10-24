@@ -269,10 +269,11 @@ def hreflang_tags(lang, rel='index.html', post=None):
 # 界面固定文案（导航、按钮、页脚免责声明等）。繁体版用 OpenCC 现场转，
 # 英文版暂时只有少量文案（stub 语言不出文章页，用不到多少）。
 UI_ZH = {
-    'eyebrow': '吕氏时空人 · 公益推广',
     'h1': '时空人公益推广',
     'subtitle': '吕文艺老师作品归档',
-    'lede': '吕文艺老师「吕氏时空人」理论技术作品的整理与检索。本站收录微信公众号「时空坐标」原创文章 %s 篇，覆盖 %s 个主题，%s 年内容。',
+    # 不再重复统计里的数字（690 篇 / 2017–2026 都在下面的数据栏里），
+    # 眉题也去掉了：原来「吕氏时空人 · 公益推广」和 H1 说的是同一件事。
+    'lede': '吕文艺老师「吕氏时空人」理论技术作品的整理与检索。公众号「时空坐标」九年原创文章，按主题归档，可全文检索。',
     'ph': '输入标题或关键词，例如：案例集锦、八字、化解、择日…',
     'clear': '清除',
     'stat_n': '篇原创',
@@ -320,11 +321,10 @@ UI_ZH = {
 # 英文界面文案。英文版不是 OpenCC 转的，是独立撰写 —— 这些key必须与 UI_ZH 一一对应，
 # 缺一个就会在页面上留一个空的 {} 位置，所以下面用 assert 卡住。
 UI_EN = {
-    'eyebrow': 'Lü School of Shikongren · Public archive',
     'h1': 'Shikongren Archive',
     'subtitle': "Lü Wenyi's collected works",
-    'lede': ('A searchable archive of original articles by Lü Wenyi, founder of the Lü School of '
-             'Shikongren. %s articles across %s, spanning %s.'),
+    'lede': ('A searchable archive of Lü Wenyi’s essays on the Lü School of Shikongren — original '
+             'articles from the WeChat account “Shikong Coordinate”, filed by topic.'),
     'ph': 'Search articles — e.g. Bazi, feng shui, direction…',
     'clear': 'Clear',
     'stat_n': 'articles',
@@ -430,6 +430,9 @@ I18N_ZH = {
     'count_loading': '搜索「%s」：摘要命中 %d 篇，正在补全全文…',
     'len_k': '%d 千字',
     'len_c': '%d 字',
+    'more_btn': '再看 %d 篇',
+    'more_rest': '还有 %d 篇未展开',
+    'more_end': '已经到底了',
 }
 
 I18N_EN = {
@@ -444,6 +447,9 @@ I18N_EN = {
     'count_loading': 'Search “%s”: %d results in summaries, loading full text…',
     'len_k': '%dk chars',
     'len_c': '%d chars',
+    'more_btn': 'Show %d more',
+    'more_rest': '%d more not shown',
+    'more_end': 'That’s everything',
 }
 
 
@@ -1237,11 +1243,8 @@ def build_index_html(arts, cats, years, lang):
         site=T['site_name'],
         alt=hreflang_tags(lang, 'index.html'),
         verify=VERIFY_BLOCK,
-        eyebrow=T['eyebrow'],
         h1=T['h1'],
-        lede=T['lede'] % (len(arts) if lang.get('code') != 'en' else str(len(arts)),
-                          n_cat if lang.get('code') != 'en' else _plural(n_cat, 'topic'),
-                          len(years) if lang.get('code') != 'en' else _plural(len(years), 'year')),
+        lede=T['lede'],
         s_n=len(arts), s_nu=T['stat_n'],
         # 中文是「2021 最早」，英文得写成「from 2021」—— 语序相反，
         # 模板只有一个 <b>{值}</b> {单位} 的位置，所以英文把介词并进值里。
@@ -1309,11 +1312,10 @@ INDEX_TPL = '''<!doctype html>
 <body>
 <header class="hero">
   <div class="wrap">
-    <div class="herotop">
-      <p class="eyebrow">{eyebrow}</p>
+    <div class="herohead">
+      <h1>{h1}</h1>
       {langsw}
     </div>
-    <h1>{h1}</h1>
     <p class="lede">{lede}</p>
     <div class="stats">
       <span><b>{s_n}</b> {s_nu}</span>
@@ -1326,11 +1328,6 @@ INDEX_TPL = '''<!doctype html>
       <button id="clear">{clear}</button>
     </div>
     <div id="count" class="count"></div>
-    <div class="herobio">
-      <img src="/img/uploads/luwenyi-avatar.jpg" alt="{author_alt}" width="56" height="56" />
-      <p><b>{author_name}</b>　{bio}
-        <a href="about.html">{aboutlink}</a></p>
-    </div>
   </div>
 </header>
 
@@ -1345,7 +1342,21 @@ INDEX_TPL = '''<!doctype html>
 <main class="wrap">
   <div id="grid" class="grid">{cards}</div>
   <p id="empty" class="empty" hidden>{nomatch}</p>
+  <!-- 首页一次不铺 690 张：先出 PAGE 张，按钮每次再放 STEP 张。
+       卡片仍在 HTML 里（SEO 抓得到），只是超出部分先 display:none。 -->
+  <div id="loadmore" class="loadmore" hidden>
+    <button id="loadmore-btn" type="button"></button>
+    <span id="loadmore-note"></span>
+  </div>
 </main>
+
+<section class="wrap aboutbar">
+  <div class="herobio">
+    <img src="/img/uploads/luwenyi-avatar.jpg" alt="{author_alt}" width="34" height="34" loading="lazy" />
+    <p><b>{author_name}</b>　{bio}
+      <a href="about.html">{aboutlink}</a></p>
+  </div>
+</section>
 
 <footer class="wrap foot">
   <div class="disclaimer">
