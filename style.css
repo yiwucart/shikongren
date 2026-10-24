@@ -43,6 +43,16 @@ html[lang="en"] body {
   color: var(--accent);
   text-transform: uppercase;
 }
+/* 眉题与语言切换同一行，省掉一整行高度（手机上切换器是浮动的，自动脱出该行） */
+.herotop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.herotop .eyebrow { margin: 0; }
+.herotop .langsw { margin: 0; }
 .hero h1 {
   margin: 0 0 14px;
   font-size: 38px;
@@ -650,30 +660,26 @@ html[lang="en"] body {
 }
 .foot .contact p:last-child { margin-bottom: 8px; }
 
-/* 首页作者小卡 */
+/* 首页作者小卡：从「卡片」改成一行署名，高度砍掉一半多 */
 .herobio {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 20px;
-  padding: 14px 18px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  gap: 10px;
+  margin-top: 16px;
 }
 .herobio img {
   flex: none;
-  width: 56px;
-  height: 56px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--accent);
+  border: 1px solid rgba(138,109,59,.35);
 }
 .herobio p {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--ink-2);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-3);
 }
 .herobio b { color: var(--ink); font-weight: 600; }
 .herobio a { color: var(--accent); text-decoration: none; white-space: nowrap; }

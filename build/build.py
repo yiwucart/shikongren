@@ -1305,8 +1305,10 @@ INDEX_TPL = '''<!doctype html>
 <body>
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">{eyebrow}</p>
-    {langsw}
+    <div class="herotop">
+      <p class="eyebrow">{eyebrow}</p>
+      {langsw}
+    </div>
     <h1>{h1}</h1>
     <p class="lede">{lede}</p>
     <div class="stats">
