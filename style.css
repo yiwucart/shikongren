@@ -843,8 +843,10 @@ img { max-width: 100%; }
     max-height: 420px;
     overflow: visible;
   }
-  /* 手机宽度下电子书标签只留书名，省下三十来像素够多露一个分类 */
+  /* 手机宽度下电子书标签只留书名，省下三十来像素够多露一个分类；
+     箭头保留，仍是「能下载」的提示 */
   .cats a.dl .dl-t { display: none; }
+  .cats a.dl::after { content: ' ↓'; }
   .cats a {
     flex: 0 0 auto;
     padding: 5px 10px;
