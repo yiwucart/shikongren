@@ -378,8 +378,9 @@ html[lang="en"] body {
 /* 正文里夹的中文（如 note 里的“五行”）：Georgia 下会落到很细的兜底字形 */
 .glossary .zh-inline {
   font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
-  font-size: 0.95em;
-  color: var(--ink-2);
+  font-size: 1.05em;
+  font-weight: 500;
+  color: var(--ink);
 }
 
 .glossnote {
