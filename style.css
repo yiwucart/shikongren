@@ -806,16 +806,27 @@ img { max-width: 100%; }
     flex-wrap: wrap;
     gap: 6px;
     max-width: 100%;
-    padding: 12px 76px 4px 16px;
+    padding: 12px 16px 4px;
     max-height: 46px;
     overflow: hidden;
     transition: max-height .22s ease;
   }
   .catbar.open .cats {
     max-height: 420px;
-    padding-right: 16px;
     overflow: visible;
   }
+  /* 右端渐隐 + 「更多」压在渐隐上，标签可以一直铺到屏幕边 */
+  .catbar::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 92px;
+    height: 46px;
+    background: linear-gradient(90deg, rgba(250,249,247,0), var(--bg) 46%);
+    pointer-events: none;
+  }
+  .catbar.open::after { display: none; }
   .cats a {
     flex: 0 0 auto;
     padding: 5px 10px;
@@ -832,9 +843,9 @@ img { max-width: 100%; }
   .catsmore {
     display: block;
     position: absolute;
-    right: 16px;
+    right: 14px;
     top: 14px;
-    padding: 5px 10px;
+    padding: 5px 9px;
     min-height: 30px;
     font-family: inherit;
     font-size: 12.5px;
