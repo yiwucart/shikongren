@@ -2377,7 +2377,7 @@ SECTION_TPL = '''<!doctype html>
     <h4>{disc_h}</h4>
     <p>{disc}</p>
   </div>
-  <p><a href="{pfx}index.html">{back_home}</a> · {gloss} · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p><a href="{pfx}index.html">{back_home}</a> · {gloss} · <a href="ebooks.html">Ebooks</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
