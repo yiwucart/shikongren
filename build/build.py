@@ -1715,7 +1715,7 @@ def build_glossary_html(arts, lang):
             if t.get('note'):
                 parts.append('<p class="gnote">%s</p>' % t['note'])
             if links:
-                parts.append('<p class="gsee"><b>Read more</b> %s</p>' % ' · '.join(links))
+                parts.append('<p class="gsee"><b>Read more:</b> %s</p>' % ' · '.join(links))
             parts.append('</dd></div>')
         parts.append('</dl>')
 

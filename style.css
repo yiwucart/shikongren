@@ -357,8 +357,9 @@ html[lang="en"] body {
 .glossary .ten { font-size: 17px; font-weight: 600; color: var(--ink); }
 /* 中文用中文字体栈，否则英文页的 Georgia 会把汉字渲染成系统兜底字形 */
 .glossary .zh {
-  font-size: 15px;
-  color: var(--ink-2);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
   font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
 }
 .glossary .py { font-size: 13px; color: var(--ink-3); font-style: italic; }
@@ -368,12 +369,18 @@ html[lang="en"] body {
   font-size: 14.5px;
   color: var(--ink-2);
   padding-left: 12px;
-  border-left: 2px solid var(--accent-soft);
+  border-left: 2px solid #d9cfbe;
 }
 .glossary .gsee { font-size: 13.5px; color: var(--ink-3); }
 .glossary .gsee b { font-weight: 600; color: var(--ink-2); }
 .glossary .gsee a { color: var(--accent); text-decoration: none; }
 .glossary .gsee a:hover { text-decoration: underline; }
+/* 正文里夹的中文（如 note 里的“五行”）：Georgia 下会落到很细的兜底字形 */
+.glossary .zh-inline {
+  font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+  font-size: 0.95em;
+  color: var(--ink-2);
+}
 
 .glossnote {
   margin-top: 44px;
