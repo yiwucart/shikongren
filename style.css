@@ -748,6 +748,49 @@ img { max-width: 100%; }
   .post { max-width: 100%; }
 }
 
+/* --- 分类条：900 以下默认收成一行，点「更多」才展开 --- */
+/* 平板宽度下十几个胶囊会自动换行成三四排，比它挡住的卡片还高，
+   所以折叠阈值定在 900，而不是手机断点 640。 */
+@media (max-width: 900px) {
+  .cats {
+    padding: 16px 24px 6px;
+    max-height: 58px;
+    overflow: hidden;
+    transition: max-height .22s ease;
+  }
+  .catbar.open .cats { max-height: 420px; overflow: visible; }
+  /* 右端渐隐，标签可以一直铺到屏幕边 */
+  .catbar::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 96px;
+    height: 58px;
+    background: linear-gradient(90deg, rgba(250,249,247,0), var(--bg) 46%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .catbar.open::after { display: none; }
+  .catsmore {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    z-index: 2;
+    padding: 5px 11px;
+    min-height: 32px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--accent);
+    background: var(--panel);
+    border: 1px solid rgba(138,109,59,.42);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .catbar.open .catsmore { position: static; margin: 10px 24px 0 auto; }
+}
+
 /* --- 手机 --- */
 @media (max-width: 640px) {
   /* 布局间距收窄 */
@@ -807,19 +850,6 @@ img { max-width: 100%; }
     max-height: 420px;
     overflow: visible;
   }
-  /* 右端渐隐 + 「更多」压在渐隐上，标签可以一直铺到屏幕边 */
-  .catbar::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 92px;
-    height: 46px;
-    background: linear-gradient(90deg, rgba(250,249,247,0), var(--bg) 46%);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .catbar.open::after { display: none; }
   .cats a {
     flex: 0 0 auto;
     padding: 5px 10px;
@@ -834,25 +864,13 @@ img { max-width: 100%; }
   .cats a em { display: none; }
   .cats a.dl { margin-right: 0; }
   .catsmore {
-    display: block;
-    position: absolute;
-    right: 14px;
-    top: 14px;
-    z-index: 2;
     padding: 5px 9px;
     min-height: 30px;
-    font-family: inherit;
     font-size: 12.5px;
-    color: var(--accent);
-    background: var(--panel);
-    border: 1px solid rgba(138,109,59,.4);
-    border-radius: 999px;
-    cursor: pointer;
+    right: 14px;
+    top: 14px;
   }
-  .catbar.open .catsmore {
-    position: static;
-    margin: 8px 16px 0 auto;
-  }
+  .catbar.open .catsmore { margin: 8px 16px 0 auto; }
 
   /* 卡片单列，点击区域更大 */
   .grid { grid-template-columns: 1fr; gap: 12px; padding: 20px 0 40px; }
