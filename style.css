@@ -917,9 +917,9 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 /* ---------- 电子书下载页 ---------- */
 /* 四卷 PDF 的入口。卡片左图右文，桌面两列、窄屏一列。
    封面图是 PDF 第一页渲染出来的 110dpi 缩略图，比例固定 148:210。 */
-.ebooks { max-width: 1020px; }
+.ebooks { max-width: 1080px; }
 .ebooks .ebintro {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   font-size: 15.5px;
   line-height: 1.85;
   color: var(--ink-2);
@@ -940,10 +940,10 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   transition: box-shadow .18s ease, border-color .18s ease;
 }
 .book:hover { border-color: #d8d0c2; box-shadow: 0 4px 18px rgba(31,35,40,.07); }
-.bk-cover { flex: 0 0 102px; }
+.bk-cover { flex: 0 0 112px; }
 .bk-cover img {
   display: block;
-  width: 102px;
+  width: 112px;
   height: auto;
   border-radius: 3px;
   box-shadow: 0 2px 9px rgba(31,35,40,.16);
@@ -976,3 +976,20 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 @media (max-width: 800px) {
   .booklist { grid-template-columns: 1fr; }
 }
+@media (max-width: 520px) {
+  .book { padding: 14px; gap: 13px; }
+  .bk-cover { flex: 0 0 80px; }
+  .bk-cover img { width: 80px; }
+  .bk-body h2 { font-size: 16px; }
+  .bk-desc { font-size: 13px; line-height: 1.68; }
+}
+
+/* 首页 hero 里的电子书入口 */
+.ebooklink { margin: 12px 0 0; font-size: 15px; }
+.ebooklink a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(138,109,59,.35);
+  padding-bottom: 1px;
+}
+.ebooklink a:hover { border-bottom-color: var(--accent); }

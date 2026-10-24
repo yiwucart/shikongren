@@ -497,6 +497,18 @@ def ebooks_link(lang, rel=''):
     return '<a href="%sebooks.html">%s</a> · ' % (rel, lbl)
 
 
+def ebook_bar(lang):
+    """首页 hero 里的一行电子书入口 —— 只在页脚放，等于没人看得到。"""
+    code = lang.get('code')
+    if code == 'en':
+        txt = 'Four volumes as free PDF ebooks — no sign-up'
+    elif lang.get('opencc'):
+        txt = '四卷電子書，免費下載（PDF，不用註冊）'
+    else:
+        txt = '四卷电子书，免费下载（PDF，不用注册）'
+    return '<p class="ebooklink"><a href="ebooks.html">%s →</a></p>' % txt
+
+
 def esc(s):
     return html.escape(str(s or ''), quote=True)
 
@@ -1248,6 +1260,7 @@ def build_index_html(arts, cats, years, lang):
         # 术语表只有英文版。中文页给空串，页脚保持原样。
         gloss_link=('<a href="glossary.html">Glossary</a> · ' if is_en else '')
                    + ebooks_link(lang),
+        ebookbar=ebook_bar(lang),
         copy=T['copy'],
         pfx=pfx,
         i18n=json.dumps(i18n(lang), ensure_ascii=False),
@@ -1298,6 +1311,7 @@ INDEX_TPL = '''<!doctype html>
       <span><b>{s_last}</b> {s_lastu}</span>
       <span><b>{s_words}</b> {s_wordsu}</span>
     </div>
+    {ebookbar}
     <div class="searchbar">
       <input id="q" type="search" placeholder="{ph}" autocomplete="off">
       <button id="clear">{clear}</button>
