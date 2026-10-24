@@ -1182,8 +1182,20 @@ def build_index_html(arts, cats, years, lang):
             '</a>' % (esc(a['slug']), esc(a['category']), esc(a['title']),
                       esc(ex), esc(a['date']), a['words'], T['words_unit']))
 
-    nav = ''.join('<a href="#cat-%s">%s <em>%d</em></a>' % (c, esc(cat_display(lang, c)), cats.get(c, 0))
-                  for c in cats if cats.get(c, 0))
+    # 分类条：英文站指向六张落地页（有独立 URL，能被收录）；
+    # 中文/繁体没有落地页，仍然是首页内的锚点筛选。
+    if is_en:
+        _sec_slug = {s['key']: s['slug'] for s in SECTIONS}
+        nav = ''.join(
+            ('<a href="%s.html">%s <em>%d</em></a>'
+             % (_sec_slug[c], esc(cat_display(lang, c)), cats.get(c, 0)))
+            if c in _sec_slug else
+            ('<a href="#cat-%s">%s <em>%d</em></a>'
+             % (c, esc(cat_display(lang, c)), cats.get(c, 0)))
+            for c in cats if cats.get(c, 0))
+    else:
+        nav = ''.join('<a href="#cat-%s">%s <em>%d</em></a>' % (c, esc(cat_display(lang, c)), cats.get(c, 0))
+                      for c in cats if cats.get(c, 0))
 
     total_words = sum(a['words'] for a in arts)
     n_cat = len([c for c in CATS if cats.get(c, 0)])
@@ -1819,6 +1831,473 @@ def build_glossary_html(arts, lang):
         ld=ld_page(url_for(lang, 'glossary.html'), doc_title, desc, lang))
 
 
+# ---------------------------------------------------------------- 英文分类落地页
+
+# 六层各做一张落地页。首页原本只有锚点筛选（#cat-xxx），全站 119 篇挤在
+# 一个 URL 下，搜索引擎看不到「主题」这一层。这里给每层一个真实 URL。
+#
+# 每页的导语是原创撰写的，不是把卡片列表套个壳 —— 只有列表的聚合页
+# 会被判成薄内容，所以每页都要回答「这一层在讲什么、怎么读、先读哪三篇」。
+#
+# 分组用 order 定位（series + order 是稳定排序）：
+#   r=(起, 止) 按 order 区间取；o=[...] 显式列 order，用于跨区间的情况。
+SECTIONS = [
+    dict(
+        slug='foundations', key='易学基础',
+        name='Foundations of Yixue',
+        sub='Trigrams, yin-yang, the five phases, Qimen',
+        desc='The vocabulary the rest of the site depends on: where the ten stems '
+             'and twelve branches come from, what the five phases actually name, '
+             'and what the Yijing can and cannot predict.',
+        intro=[
+            'Everything else here rests on this section. Before a chart can be read or a '
+            'site judged, the system needs a vocabulary — and this school\'s vocabulary is '
+            'not the one the popular books use. The ten stems and twelve branches are not '
+            'mystical symbols. They are counters derived from astronomical observation, and '
+            'they mark time and direction before they mark anything else. The five phases '
+            '(<i>wuxing</i>, 五行) are not five substances but five states of movement, which '
+            'is why a translation like “five elements” keeps producing nonsense.',
+            'Read in order, the first seven essays rebuild the stems and branches from their '
+            'origin in sky observation. The next three take the five phases apart, including '
+            'the question of whether the generating cycle is a theorem or something the '
+            'tradition simply assumed. The middle block covers the two divination systems '
+            'this school actually uses — Liuyao and Shenbing Qimen. The last essays are about '
+            'the business of studying at all: what the school claims, what it refuses to '
+            'claim, and why students of the <i>Yijing</i> keep getting cheated.',
+            'If you only read three: <i>The Physical Nature of the Heavenly Stems and '
+            'Earthly Branches</i>, <i>Is the Five-Element Sequence a Theorem or an Axiom?</i>, '
+            'and <i>What Can Feng Shui and the Yijing Actually Predict?</i>',
+        ],
+        groups=[
+            dict(t='The ten stems and twelve branches',
+                 b='Where they came from, what they count, and why they are not symbols.',
+                 r=(1, 7)),
+            dict(t='The five phases',
+                 b='Five states of movement — and the weak point in the generating cycle.',
+                 r=(8, 10)),
+            dict(t='Liuyao and Qimen',
+                 b='The two divination systems used here, and what makes one of them real.',
+                 r=(11, 20)),
+            dict(t='Yin, yang and the taiji halo',
+                 b='The geometry behind the classic diagram, read from the ground up.',
+                 r=(21, 23)),
+            dict(t='Studying the school',
+                 b='What this school is, and what it costs a student to learn it.',
+                 r=(24, 24)),
+        ],
+    ),
+    dict(
+        slug='practice', key='风水实务',
+        name='Feng Shui Practice',
+        sub='Sand and water, the origin point, graves, direction',
+        desc='How a practitioner actually reads a site: seeking the dragon, setting the '
+             'point, telling sand from water, and the cases where the classical method '
+             'has to be stretched over modern ground.',
+        intro=[
+            'This is the largest section, and the one most readers come for. It is not a '
+            'manual of rules to apply to your flat. It is a record of how a practitioner '
+            'looks at a site: what gets measured, in what order, and what gets thrown out '
+            'as noise.',
+            'The sequence follows the classical procedure. First, what a master is even '
+            'looking for — which is not “good energy” but a place where a vein of energy '
+            'stops. Then seeking the dragon: tracing that vein through the landscape until '
+            'it comes to rest. Then setting the point on the place where it rests. Then sand '
+            'and water, which are not “mountains” and “rivers” but two functional '
+            'categories — what holds energy and what moves it. Then orientation, which is a '
+            'reading of the whole site rather than a compass stuck on a door.',
+            'After that the section moves onto ground the classical method has to be '
+            'stretched over: apartment blocks, public cemeteries, shops on a street, a site '
+            'by the sea, a village built on water, a temple. Then families — graves, '
+            'descendants, and what happens when relatives want the same feng shui. The final '
+            'block is argument rather than instruction: a mountain cannot be pinned, a cut '
+            'vein is not always a disaster, a missing corner does not damage your career, and '
+            'feng shui cannot fix laziness.',
+        ],
+        groups=[
+            dict(t='What a master is looking for', b='The question behind every site reading.', r=(1, 3)),
+            dict(t='Seeking the dragon', b='Tracing a vein until it stops — and what a cut vein means.', r=(4, 8)),
+            dict(t='Setting the point', b='Where the vein stops, how the point is fixed, and how it is done on flat land.', r=(9, 12)),
+            dict(t='Sand and water', b='Two functional categories, not mountains and rivers.', r=(13, 16)),
+            dict(t='Cities and buildings', b='The classical method applied to concrete: blocks, floors, a dragon point in an office.', r=(17, 20)),
+            dict(t='Family, graves and descendants', b='Whether a grave reaches the living, and how far.', r=(21, 25)),
+            dict(t='Reading a site', b='A classical text annotated, a sea coast, a row of shopfronts.', r=(26, 30)),
+            dict(t='What feng shui cannot do', b='The limits, argued case by case.', r=(31, 36)),
+            dict(t='Specific situations', b='Corners, the green dragon, temples, water country, cremation, and family disputes over a grave.', r=(37, 44)),
+        ],
+    ),
+    dict(
+        slug='bazi', key='八字命理',
+        name='Bazi and Four Pillars',
+        sub='The four pillars, the ten gods and the three systems',
+        desc='The Four Pillars read as a model rather than a fortune: the four systems behind '
+             'a birth chart, how the chart is counted, what the ten gods name, and why '
+             'identical charts give different lives.',
+        intro=[
+            'Four Pillars (<i>bazi</i>, 八字) is a time system before it is anything else. A '
+            'birth moment is written as four pairs of a stem and a branch — year, month, day, '
+            'hour — eight characters in all, and every later judgement is derived from those '
+            'eight. The reading is not a list of lucky and unlucky traits. It is a model of '
+            'how one moment sits inside the larger cycles around it.',
+            'These eighteen essays are about the model rather than about fortune-telling '
+            'technique. The first block lays out the four systems a chart is built from — '
+            'positioning, time, environment and counting. The second shows how the chart is '
+            'actually counted, and what “strength” means when it is measured instead of '
+            'guessed. The third takes the ten gods apart: what they name, how they are told '
+            'apart, and where the standard correspondences break down. The last block is '
+            'honest about failure — twins with the same chart, charts that give different '
+            'fates, and a theory put to a test.',
+            'If you only read three: <i>The Logic of Bazi Reading</i>, <i>What the Ten Gods '
+            'Mean</i>, and <i>Why Identical Charts Give Different Fates</i>.',
+        ],
+        groups=[
+            dict(t='The four systems', b='Positioning, time, environment, counting — the model assembled.', r=(1, 4)),
+            dict(t='Counting the chart', b='Stems and branches counted, strength measured, the model put to use.', r=(5, 8)),
+            dict(t='The ten gods', b='What they name, how they are told apart, and what is missing from the standard table.', r=(9, 13)),
+            dict(t='Where the model breaks', b='Twins, identical charts, a theory tested, and why a correct reading gets rejected.', r=(14, 18)),
+        ],
+    ),
+    dict(
+        slug='cases', key='预测案例',
+        name='Divination Cases',
+        sub='Live readings, field records and the method behind them',
+        desc='Readings recorded before the event rather than explained after it: a numbered '
+             'case series, and one mountain site read in full.',
+        intro=[
+            'A prediction that is only explained after the event is not evidence of '
+            'anything. This section is the archive\'s attempt to do the harder thing: record '
+            'a reading before the outcome is known, with the reasoning visible, so that it '
+            'can be checked later and — where it fails — be seen to fail.',
+            'The numbered series follows one method across different people and problems. '
+            'The entries are short because a reading is short: a chart, a question, a '
+            'judgement. What makes them worth reading together is that the same steps recur, '
+            'and you can watch the practitioner decide which system a question belongs to '
+            'before answering it. Set against that, <i>Mount Wudang</i> is a single site read '
+            'at length — the whole procedure on one landscape instead of one question.',
+            'Start with case one for the method, then read the Wudang study to see it '
+            'carried through without the compression.',
+        ],
+        groups=[
+            dict(t='The case series', b='One method, many questions, recorded before the outcome.', o=[1, 2, 3, 4, 5, 6, 7, 9, 10]),
+            dict(t='A single site, read in full', b='One landscape, the whole procedure, nothing shortened.', o=[8]),
+        ],
+    ),
+    dict(
+        slug='theory', key='预测理论',
+        name='Prediction Theory',
+        sub='What prediction can and cannot claim',
+        desc='What a prediction actually asserts, why a fate can be calculated at all, where '
+             'formulas go wrong, and why many people die at once.',
+        intro=[
+            'This section is not about technique. It is about what a prediction is allowed to '
+            'claim once it has been made. If a chart can be read, what exactly has been read — '
+            'a fixed outcome, a tendency, or a range of possible responses? The essays here '
+            'take the uncomfortable questions in order rather than deferring them.',
+            'The first three set out the ground: what use a reading has, why a fate can be '
+            'predicted at all, and what the act of prediction actually consists of. The next '
+            'four are about failure and scale — the problem with formulas, what injury, '
+            'illness and disaster mean inside the model, how the principle of adaptation '
+            'works, and why many people die at once when the model is supposed to be about '
+            'individuals. The last three are method questions that decide real readings: '
+            'whether the hour of birth can be fixed, how much the day matters, and what to do '
+            'with a system like the nine stars that has been folded into the tradition.',
+        ],
+        groups=[
+            dict(t='What prediction is', b='Use, possibility, and the act itself.', r=(1, 3)),
+            dict(t='How it fails', b='Formulas, disaster, adaptation, and death at scale.', r=(4, 7)),
+            dict(t='Method questions', b='The nine stars, the hour of birth, and how much the day matters.', r=(8, 10)),
+        ],
+    ),
+    dict(
+        slug='remediation', key='化解调理',
+        name='Remediation',
+        sub='What can be done about a fate, and where the claim stops',
+        desc='What adjustment can and cannot change: the principles behind it, what it looks '
+             'like applied to marriage, study, a child or a contract, and the ceiling '
+             'every remedy runs into.',
+        intro=[
+            'This is the section readers want most and the one this archive treats most '
+            'carefully. Popular feng shui sells adjustment as a fix: buy the object, move the '
+            'bed, the problem goes away. Nothing here works that way. The question this '
+            'section keeps asking is narrower and harder — what can actually be changed, by '
+            'what mechanism, and how would you know whether it worked?',
+            'The first block sets the standard. A remedy has to be tested before it is sold, '
+            'it has to sit inside time, space and person rather than in an object, and it has '
+            'a ceiling that no amount of effort raises. The middle block applies that '
+            'standard to specific problems: a marriage, a child who will not study, a '
+            'promotion, a contract that has to be won, a gaming addiction. The last block is '
+            'the boundary — when adjustment stops being adjustment and becomes a claim the '
+            'method cannot support.',
+            'If you read one essay in this section, read <i>The Ceiling of Adjustment</i>. It '
+            'is the argument the other twelve depend on.',
+        ],
+        groups=[
+            dict(t='Principles and limits', b='What a remedy must pass before it counts as one.', r=(1, 4)),
+            dict(t='Applied to a problem', b='Marriage, a child, study, promotion, a contract.', o=[5, 6, 10, 11, 12]),
+            dict(t='Where the claim stops', b='Four tests, eight directions, and the ceiling.', o=[7, 8, 9, 13]),
+        ],
+    ),
+]
+
+
+def _section_arts(arts, key):
+    """取某一层的中文 key 对应的文章，按 order 排好。"""
+    got = [a for a in arts if a.get('cat_key') == key]
+    got.sort(key=lambda a: (a.get('order') or 0, a.get('date') or ''))
+    return got
+
+
+def _section_alt(lang, slug):
+    """分类页只有英文版，hreflang 只写 en 与 x-default。
+
+    与术语表同一个道理：不能复用 hreflang_tags，否则会生成
+    /<slug>.html 和 /tc/<slug>.html 两条 404。
+    """
+    href = url_for(lang, slug + '.html')
+    return ('<link rel="alternate" hreflang="en" href="%s">\n'
+            '<link rel="alternate" hreflang="x-default" href="%s">'
+            % (esc(href), esc(href)))
+
+
+def build_section_html(sec, arts, lang, all_secs):
+    T = ui(lang)
+    pfx = lang_prefix(lang)
+    mine = _section_arts(arts, sec['key'])
+    by_order = {}
+    for a in mine:
+        by_order.setdefault(a.get('order'), a)
+
+    # 分组：按 order 区间或显式列表取，取不到的 order 记为告警
+    parts, used = [], set()
+    for g in sec['groups']:
+        if g.get('o'):
+            picked = [by_order[o] for o in g['o'] if o in by_order]
+        else:
+            lo, hi = g['r']
+            picked = [a for a in mine if lo <= (a.get('order') or 0) <= hi]
+        if not picked:
+            print('  ! section %s: group "%s" is empty' % (sec['slug'], g['t']))
+            continue
+        used.update(a['slug'] for a in picked)
+        rows = []
+        for a in picked:
+            rows.append(
+                '<li><a href="posts/%s.html">%s</a>'
+                '<span class="smeta"><time>%s</time> · %d words</span></li>'
+                % (esc(a['slug']), esc(a['title']), esc(a['date']), a['words']))
+        parts.append('<h2>%s</h2>' % g['t'])
+        parts.append('<p class="secblurb">%s</p>' % g['b'])
+        parts.append('<ol class="seclist">%s</ol>' % ''.join(rows))
+
+    # 漏网的文章不能默默丢掉 —— 补在最后，并打日志
+    rest = [a for a in mine if a['slug'] not in used]
+    if rest:
+        print('  ! section %s: %d article(s) not covered by any group: %s'
+              % (sec['slug'], len(rest), ', '.join(a['slug'] for a in rest)))
+        parts.append('<h2>Also in this section</h2><p class="secblurb">'
+                     'Unclassified for now.</p>')
+        parts.append('<ol class="seclist">%s</ol>' % ''.join(
+            '<li><a href="posts/%s.html">%s</a><span class="smeta"><time>%s</time> · %d words</span></li>'
+            % (esc(a['slug']), esc(a['title']), esc(a['date']), a['words']) for a in rest))
+
+    # 上一节 / 全部 / 下一节
+    idx = [s['slug'] for s in all_secs].index(sec['slug'])
+    nav = []
+    if idx > 0:
+        prev = all_secs[idx - 1]
+        nav.append('<a class="prev" href="%s.html">← %s</a>' % (esc(prev['slug']), esc(prev['name'])))
+    else:
+        nav.append('<span></span>')
+    nav.append('<a class="allsec" href="index.html">All sections</a>')
+    if idx < len(all_secs) - 1:
+        nxt = all_secs[idx + 1]
+        nav.append('<a class="next" href="%s.html">%s →</a>' % (esc(nxt['slug']), esc(nxt['name'])))
+    else:
+        nav.append('<span></span>')
+
+    doc_title = '%s · %d articles · Shikongren Archive' % (sec['name'], len(mine))
+    intro = ''.join('<p>%s</p>' % p for p in sec['intro'])
+
+    ld = _ld_json({
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'CollectionPage',
+                '@id': url_for(lang, sec['slug'] + '.html') + '#collection',
+                'url': url_for(lang, sec['slug'] + '.html'),
+                'name': sec['name'],
+                'description': sec['desc'],
+                'inLanguage': lang.get('html_lang', 'en'),
+                'isPartOf': {'@type': 'WebSite', 'url': DOMAIN + '/en/'},
+                'hasPart': [
+                    {'@type': 'Article', 'headline': a['title'],
+                     'url': url_for(lang, 'posts/%s.html' % a['slug']),
+                     'datePublished': a['date']}
+                    for a in mine
+                ],
+            },
+            {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {'@type': 'ListItem', 'position': 1, 'name': 'All articles',
+                     'item': url_for(lang, 'index.html')},
+                    {'@type': 'ListItem', 'position': 2, 'name': sec['name'],
+                     'item': url_for(lang, sec['slug'] + '.html')},
+                ],
+            },
+        ],
+    })
+
+    return SECTION_TPL.format(
+        hlang=lang['html_lang'], doc_title=esc(doc_title),
+        h1=esc(sec['name']), sub=esc(sec['sub']), desc=esc(sec['desc']),
+        site=T['site_name'], canonical=url_for(lang, sec['slug'] + '.html'),
+        alt=_section_alt(lang, sec['slug']),
+        langsw=build_switcher(lang, sec['slug'] + '.html', fallback_home=True),
+        back=T['back'], pfx=pfx, stamp=STAMP, verify=VERIFY_BLOCK,
+        count='Section %d of %d' % (idx + 1, len(all_secs)),
+        n=_plural(len(mine), 'article'), intro=intro, groups='\n'.join(parts),
+        secnav=''.join(nav),
+        disc_h=T['disclaimer'], disc=T['stmt_v'], back_home=T['back_home'],
+        sitemap=T['sitemap'], gloss='<a href="glossary.html">Glossary</a>',
+        copy=T['copy_n'] % len(arts), ld=ld,
+        cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
+
+
+SECTION_TPL = '''<!doctype html>
+<html lang="{hlang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{doc_title}</title>
+<meta name="description" content="{desc}">
+<meta name="author" content="Lü Wenyi">
+<meta property="og:title" content="{doc_title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{site}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="{cover}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{doc_title}">
+<meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{cover}">
+<meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="{canonical}">
+{alt}
+<link rel="stylesheet" href="{pfx}style.css?v={stamp}">
+{verify}
+<script type="application/ld+json">{ld}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a href="{pfx}index.html" class="home">{back}</a>
+  {langsw}
+</div></header>
+
+<article class="wrap page section">
+  <p class="eyebrow">{count} · {n}</p>
+  <h1>{h1}</h1>
+  <p class="pagesub">{sub}</p>
+  <div class="content secintro">
+{intro}
+  </div>
+  <div class="secbody">
+{groups}
+  </div>
+  <nav class="secnav" aria-label="Sections">{secnav}</nav>
+</article>
+
+<footer class="wrap foot">
+  <div class="disclaimer">
+    <h4>{disc_h}</h4>
+    <p>{disc}</p>
+  </div>
+  <p><a href="{pfx}index.html">{back_home}</a> · {gloss} · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p class="copy">{copy}</p>
+</footer>
+</body>
+</html>'''
+
+
+# ---------------------------------------------------------------- 404 页
+
+def build_404_html(arts, lang):
+    """站点 404 页。nginx 用 `error_page 404 /404.html` 指向它。
+
+    两个约束：
+    1. 页面在根目录，但访客的浏览器地址是任意出错路径（例如
+       /en/posts/typo.html），相对链接会解析到 /en/posts/style.css 上。
+       所以这里所有 href / src 必须写绝对路径。
+    2. 中英双语同页。不做按路径分流（那要改 nginx 的 location 块，
+       风险大于收益）：英文在上、中文在下，两种读者都不必猜。
+    """
+    T = ui(lang)
+    secs = []
+    for s in SECTIONS:
+        n = len(_section_arts(arts, s['key']))
+        secs.append('<li><a href="/en/%s.html">%s</a> <em>%d</em><br>'
+                    '<span class="smeta">%s</span></li>'
+                    % (esc(s['slug']), esc(s['name']), n, esc(s['sub'])))
+
+    return N404_TPL.format(
+        site=T['site_name'], stamp=STAMP, verify=VERIFY_BLOCK,
+        n=len(arts), secs=''.join(secs), copy=T['copy'])
+
+
+N404_TPL = '''<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page not found · 页面不存在 · {site}</title>
+<meta name="robots" content="noindex,follow">
+<link rel="stylesheet" href="/style.css?v={stamp}">
+{verify}
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a href="/" class="home">← Home · 首页</a>
+</div></header>
+
+<article class="wrap page n404">
+  <section lang="en">
+    <p class="eyebrow">404</p>
+    <h1>Page not found</h1>
+    <p class="pagesub">The address you asked for is not here — either it was mistyped,
+      or the article moved when the archive was rebuilt.</p>
+    <div class="content">
+      <p>Everything in the archive is reachable from six sections. Pick the one closest
+         to what you were looking for:</p>
+      <ul class="n404secs">{secs}</ul>
+      <p>Otherwise: <a href="/en/">all {n} articles</a> (with search) ·
+         <a href="/en/glossary.html">glossary of terms</a> ·
+         <a href="/en/about.html">about this archive</a>.</p>
+    </div>
+  </section>
+
+  <section lang="zh-CN" class="n404zh">
+    <h2>页面不存在</h2>
+    <p class="pagesub">你访问的地址没有内容，可能是地址打错了，或者这篇文章在站点重建时换了位置。</p>
+    <div class="content">
+      <p>可以从这些地方找回来：</p>
+      <ul>
+        <li><a href="/">首页 · 全部文章（带搜索）</a></li>
+        <li><a href="/about.html">关于这个站点</a></li>
+        <li><a href="/tc/">繁體版</a> · <a href="/en/">English</a></li>
+        <li><a href="/sitemapindex.xml">站点地图</a></li>
+      </ul>
+    </div>
+  </section>
+</article>
+
+<footer class="wrap foot">
+  <p class="copy">{copy}</p>
+</footer>
+</body>
+</html>'''
+
+
 EN_TPL = '''<!doctype html>
 <html lang="en">
 <head>
@@ -1856,7 +2335,7 @@ EN_TPL = '''<!doctype html>
       complete with {n} articles; a full English translation is being prepared and reviewed.</p>
       <p><b>Why it takes time</b>: These articles concern Chinese metaphysical arts
       (八字 Bāzì / 風水 Fēngshuǐ / 六爻 Liùyáo) whose technical terms
-      &mdash; 用神 <i>yòngshén</i>, 忌神 <i>jìshén</i>, 大運 <i>dàyùn</i>, 五行 <i>wǔxíng</i> &mdash;
+      &mdash; 用神 <i>yòngshén</i>, 忌神 <i>jìshén</i>, 大運 <i>dàyùn</i>, 五行 <i>wuxing</i> &mdash;
       have no standard English equivalents. A literal machine translation would be misleading,
       so every article is reviewed by a human before publication.</p>
       <p><b>In the meantime</b>, please use the Chinese edition. If you read Chinese and would like
@@ -1910,6 +2389,12 @@ def build_sitemap(arts, lang):
             and os.path.isfile(os.path.join(CONTENT, 'en', 'glossary.json'))):
         urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
                     '<priority>0.7</priority></url>' % url_for(lang, 'glossary.html'))
+    # 六张分类落地页也只在英文站存在
+    if lang.get('code') == 'en':
+        for _s in SECTIONS:
+            urls.append('<url><loc>%s</loc><changefreq>weekly</changefreq>'
+                        '<priority>0.9</priority></url>'
+                        % url_for(lang, _s['slug'] + '.html'))
     urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
                 '<priority>0.8</priority></url>' % url_for(lang, 'about.html'))
     if lang.get('stub'):
@@ -2064,6 +2549,14 @@ def build_one_lang(lang, settings):
                       encoding='utf-8', newline='\n') as f:
                 f.write(build_glossary_html(arts, lang))
 
+        # 六张分类落地页。每张按 cat_key 取自己那一层的文章，页面里有导语、
+        # 分组说明和完整条目 —— 不是把首页卡片换个排列的薄聚合页。
+        for _s in SECTIONS:
+            _html = build_section_html(_s, arts, lang, SECTIONS)
+            with open(os.path.join(out_dir, _s['slug'] + '.html'), 'w',
+                      encoding='utf-8', newline='\n') as f:
+                f.write(_html)
+
     # sitemap：每种语言一份，放在该语言的目录里，与页面层级一致
     with open(os.path.join(out_dir, 'sitemap.xml'), 'w',
               encoding='utf-8', newline='\n') as f:
@@ -2099,6 +2592,15 @@ def build_one_lang(lang, settings):
                 'User-agent: *\n'
                 'Allow: /\n\n'
                 'Sitemap: %s/sitemapindex.xml\n' % DOMAIN)
+
+        # 404 页。nginx 用 error_page 指向它，页内链接必须全绝对路径。
+        # 分类篇数要按英文那层算 —— 此刻构建的是中文（690 篇），
+        # 直接拿 arts 数出来会是 261/96 之类，与英文分类页对不上。
+        _en = next((l for l in LANGS if l.get('code') == 'en'), None)
+        _en_arts = load_articles(_en) if _en else arts
+        with open(os.path.join(out_dir, '404.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(build_404_html(_en_arts, lang))
 
     # 把语言信息写进 manifest，前端据此知道去哪加载、当前是什么语言
     mpath = os.path.join(data_dir, 'search-manifest.json')

@@ -416,6 +416,102 @@ html[lang="en"] body {
   .glossary dd p { font-size: 15.5px; }
 }
 
+/* ---------- 分类落地页（只有英文版有） ---------- */
+.section { max-width: 760px; }
+.section .eyebrow { margin: 0 0 10px; }
+.secintro { padding-top: 22px; }
+.secintro p { font-size: 16.5px; line-height: 1.85; color: var(--ink-2); }
+.secintro p:first-child { color: var(--ink); }
+
+.secbody { margin-top: 16px; }
+.secbody h2 {
+  margin: 40px 0 4px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.secblurb {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+.seclist { margin: 0 0 8px; padding: 0; list-style: none; counter-reset: sec; }
+.seclist li {
+  counter-increment: sec;
+  position: relative;
+  padding: 9px 0 9px 34px;
+  border-bottom: 1px dashed var(--line);
+}
+.seclist li::before {
+  content: counter(sec);
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 22px;
+  text-align: right;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+.seclist a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.seclist a:hover { color: var(--accent); }
+.seclist .smeta {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+.secnav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 48px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+.secnav a { color: var(--accent); text-decoration: none; }
+.secnav a:hover { text-decoration: underline; }
+.secnav .allsec { color: var(--ink-3); }
+.secnav .next { text-align: right; }
+
+/* ---------- 404 ---------- */
+.n404 section + section {
+  margin-top: 44px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.n404 h2 { margin: 0 0 6px; font-size: 24px; font-weight: 600; }
+.n404 .content { border-top: 0; margin-top: 14px; }
+.n404 ul { margin: 0 0 16px; padding-left: 1.1em; }
+.n404 li { margin: 0 0 8px; line-height: 1.7; }
+.n404 li em { font-style: normal; color: var(--ink-3); font-size: 13px; margin-left: 6px; }
+.n404 .smeta { color: var(--ink-3); font-size: 13px; }
+.n404 ul.n404secs { list-style: none; padding: 0; }
+.n404 ul.n404secs li {
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.n404 ul.n404secs a { color: var(--ink); text-decoration: none; font-size: 16px; }
+.n404 ul.n404secs a:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .secintro p { font-size: 16px; }
+  .secbody h2 { font-size: 17.5px; margin-top: 32px; }
+  .seclist a { font-size: 15.5px; }
+  .secnav { grid-template-columns: 1fr; gap: 10px; text-align: left; }
+  .secnav .next { text-align: left; }
+  .n404 h2 { font-size: 21px; }
+}
+
 /* 二维码区：居中展示 */
 .qrbox {
   margin: 0 0 1.6em;

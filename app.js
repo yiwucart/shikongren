@@ -352,6 +352,10 @@
 
   document.querySelectorAll('.cats a').forEach(function (a) {
     a.addEventListener('click', function (e) {
+      // 英文站的分类条是真链接（指向各分类落地页），交给浏览器跳转。
+      // 只有以 # 开头的锚点才是首页内筛选（中文/繁体站）。
+      var href = a.getAttribute('href') || '';
+      if (href && href.charAt(0) !== '#') return;
       e.preventDefault();
       var label = a.textContent.replace(/\s*\d+\s*$/, '').trim();
       document.querySelectorAll('.cats a').forEach(function (x) { x.classList.remove('on'); });
