@@ -487,6 +487,16 @@ def _plural(n, word):
     return '%d %ss' % (n, word)
 
 
+def ebooks_link(lang, rel=''):
+    """页脚的电子书入口。三语都有这一页，所以不需要条件判断内容是否存在。"""
+    code = lang.get('code')
+    if code == 'en':
+        lbl = 'Ebooks'
+    else:
+        lbl = '電子書' if lang.get('opencc') else '电子书'
+    return '<a href="%sebooks.html">%s</a> · ' % (rel, lbl)
+
+
 def esc(s):
     return html.escape(str(s or ''), quote=True)
 
@@ -1236,7 +1246,8 @@ def build_index_html(arts, cats, years, lang):
         follow=T['follow'], wechat=T['wechat'], tel=T['tel'],
         about_site=T['about_site'], sitemap=T['sitemap'], cms=T['cms'],
         # 术语表只有英文版。中文页给空串，页脚保持原样。
-        gloss_link=('<a href="glossary.html">Glossary</a> · ' if is_en else ''),
+        gloss_link=('<a href="glossary.html">Glossary</a> · ' if is_en else '')
+                   + ebooks_link(lang),
         copy=T['copy'],
         pfx=pfx,
         i18n=json.dumps(i18n(lang), ensure_ascii=False),
@@ -1472,7 +1483,7 @@ def build_post_html(a, by_cat, lang):
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
         about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'],
         gloss_link=('<a href="../glossary.html">Glossary</a> · '
-                    if lang.get('code') == 'en' else ''),
+                    if lang.get('code') == 'en' else '') + ebooks_link(lang, '../'),
         ld=ld_post(a, url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
                    a['title'], desc, lang),
         pubdate=(a['date'] or '2026-01-01'),
@@ -1686,7 +1697,7 @@ def build_about_html(page, arts, lang):
         verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
         back_home=T['back_home'], sitemap=T['sitemap'],
         gloss_link=('<a href="glossary.html">Glossary</a> · '
-                    if lang.get('code') == 'en' else ''),
+                    if lang.get('code') == 'en' else '') + ebooks_link(lang),
         copy=T['copy_n'] % len(arts),
         ld=ld_page(url_for(lang, 'about.html'), title, desc, lang),
         cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
@@ -1757,6 +1768,131 @@ def _glossary_alt(lang):
     return ('<link rel="alternate" hreflang="en" href="%s">\n'
             '<link rel="alternate" hreflang="x-default" href="%s">'
             % (esc(href), esc(href)))
+
+
+# ---------------------------------------------------------------- 电子书下载页
+# 四卷 PDF（中英各四卷）放在站点根 /ebooks/ 下，这一页只是入口。
+# PDF 与封面缩略图不进 Git（合计 35MB），由 outputs/ebook 的生成流程产出后
+# 直接放到服务器的 /www/wwwroot/shikongren.com/ebooks/，部署脚本不会清理该目录。
+# 书目文案在 content/ebooks.json，页面只读数据，不碰任何 md。
+EBOOKS_TPL = '''<!doctype html>
+<html lang="{hlang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{doc_title} · {site}</title>
+<meta name="description" content="{desc}">
+<meta name="author" content="Lü Wenyi">
+<meta property="og:title" content="{doc_title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{site}">
+<meta property="og:locale" content="{locale}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{doc_title}">
+<meta name="twitter:description" content="{desc}">
+<meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="{canonical}">
+{alt}
+<link rel="stylesheet" href="{pfx}style.css?v={stamp}">
+{verify}
+<script type="application/ld+json">{ld}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a href="{pfx}index.html" class="home">{back}</a>
+  {langsw}
+</div></header>
+
+<article class="wrap page ebooks">
+  <h1>{h1}</h1>
+  <p class="pagesub">{sub}</p>
+  <div class="content">
+{intro}
+  </div>
+  <div class="booklist">
+{books}
+  </div>
+  <div class="ebnote">
+    <h2>{note_h}</h2>
+{note}
+  </div>
+</article>
+
+<footer class="wrap foot">
+  <div class="disclaimer">
+    <h4>{disc_h}</h4>
+    <p>{disc}</p>
+  </div>
+  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p class="copy">{copy}</p>
+</footer>
+</body>
+</html>'''
+
+
+def build_ebooks_html(lang):
+    """中英各四卷 PDF 的下载页。三语都生成：繁体由简体文案经 OpenCC 转。"""
+    path = os.path.join(CONTENT, 'ebooks.json')
+    with open(path, encoding='utf-8') as f:
+        data = json.load(f)
+    code = lang.get('code')
+    key = 'en' if code == 'en' else 'zh'
+    meta = data[key]
+    books = data['books'][key]
+    T = ui(lang)
+    cc = get_opencc(lang) if lang.get('opencc') else None
+
+    def tr(s):
+        return cc.convert(s) if cc else s
+
+    pfx = lang_prefix(lang)
+    dl_word = 'Download PDF' if code == 'en' else '下载 PDF'
+    unit = '%d essays · %d pages · %s' if code == 'en' else '%d 篇 · %d 页 · %s'
+
+    cards = []
+    for b in books:
+        url = '%sebooks/%s' % (pfx, b['file'])
+        img = '%sebooks/%s' % (pfx, b['cover'])
+        cards.append(
+            '<div class="book">\n'
+            '  <a class="bk-cover" href="%s" aria-label="%s"><img src="%s" alt="%s" loading="lazy"></a>\n'
+            '  <div class="bk-body">\n'
+            '    <h2>%s</h2>\n'
+            '    <p class="bk-sub">%s</p>\n'
+            '    <p class="bk-desc">%s</p>\n'
+            '    <p class="bk-meta">%s</p>\n'
+            '    <a class="bk-dl" href="%s" download>%s</a>\n'
+            '  </div>\n'
+            '</div>' % (
+                esc(url), esc(tr(b['title'])), esc(img), esc(tr(b['title'])),
+                esc(tr(b['title'])), esc(tr(b['sub'])), esc(tr(b['desc'])),
+                esc(unit % (b['n'], b['pages'], b['size'])),
+                esc(url), esc(dl_word)))
+
+    intro = '\n'.join('  <p class="ebintro">%s</p>' % esc(tr(p))
+                      for p in meta['intro'])
+    note = '\n'.join('    <p>%s</p>' % esc(tr(p)) for p in meta['note'])
+    desc = tr(meta['sub']) + ' — ' + esc(tr(books[0]['title'])) + ' … ' + esc(tr(books[-1]['title']))
+    copy = ('Four volumes · free to download · %s' % DOMAIN if code == 'en'
+            else '四卷 · 免费下载 · %s' % DOMAIN)
+
+    return EBOOKS_TPL.format(
+        hlang=lang['html_lang'], doc_title=esc(tr(meta['doc_title'])),
+        site=T['site_name'], desc=esc(tr(meta.get('desc') or meta['sub'])),
+        locale=('en_US' if code == 'en' else 'zh_CN'),
+        canonical=url_for(lang, 'ebooks.html'),
+        alt=hreflang_tags(lang, 'ebooks.html'),
+        pfx=pfx, stamp=STAMP, verify=VERIFY_BLOCK,
+        h1=esc(tr(meta['h1'])), sub=esc(tr(meta['sub'])),
+        intro=intro, books='\n'.join(cards),
+        note_h=esc(tr(meta['note_h'])), note=note,
+        back=T['back'], langsw=build_switcher(lang, 'ebooks.html'),
+        disc_h=T['disclaimer'], disc=T['stmt_v'],
+        back_home=T['back_home'], sitemap=T['sitemap'], copy=esc(copy),
+        ld=ld_page(url_for(lang, 'ebooks.html'), tr(meta['doc_title']),
+                   tr(meta['sub']), lang))
 
 
 def build_glossary_html(arts, lang):
@@ -2397,6 +2533,10 @@ def build_sitemap(arts, lang):
                         % url_for(lang, _s['slug'] + '.html'))
     urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
                 '<priority>0.8</priority></url>' % url_for(lang, 'about.html'))
+    # 电子书下载页三语都有
+    if os.path.isfile(os.path.join(CONTENT, 'ebooks.json')):
+        urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
+                    '<priority>0.8</priority></url>' % url_for(lang, 'ebooks.html'))
     if lang.get('stub'):
         return ('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -2540,6 +2680,12 @@ def build_one_lang(lang, settings):
         with open(os.path.join(out_dir, 'about.html'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(html)
+
+    # 电子书下载页 —— 三语都有（繁体由简体文案经 OpenCC 转）
+    if os.path.isfile(os.path.join(CONTENT, 'ebooks.json')):
+        with open(os.path.join(out_dir, 'ebooks.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(build_ebooks_html(lang))
 
     # 术语表 —— 只有英文版有内容，中文/繁体不生成，也不进它们的 sitemap
     if lang.get('code') == 'en':
