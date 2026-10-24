@@ -800,15 +800,16 @@ img { max-width: 100%; }
   .cats {
     display: flex;
     flex-wrap: wrap;
-    gap: 7px;
+    gap: 6px;
     max-width: 100%;
-    padding: 14px 0 6px;
+    padding: 12px 0 4px;
   }
   .cats a {
     flex: 0 0 auto;
-    padding: 6px 12px;
-    min-height: 32px;
-    font-size: 13px;
+    padding: 5px 10px;
+    min-height: 30px;
+    font-size: 12.5px;
+    line-height: 1.3;
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
