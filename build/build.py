@@ -505,12 +505,13 @@ def ebook_chip(lang):
     """
     code = lang.get('code')
     if code == 'en':
-        txt = 'Ebooks · 12 ↓'
+        head, tail = 'Ebooks', ' · 12 ↓'
     elif lang.get('opencc'):
-        txt = '電子書 · 12 種 ↓'
+        head, tail = '電子書', ' · 12 種 ↓'
     else:
-        txt = '电子书 · 12 种 ↓'
-    return '<a class="dl" href="ebooks.html">%s</a>' % txt
+        head, tail = '电子书', ' · 12 种 ↓'
+    return ('<a class="dl" href="ebooks.html"><span class="dl-h">%s</span>'
+            '<span class="dl-t">%s</span></a>' % (head, tail))
 
 
 def esc(s):

@@ -753,19 +753,16 @@ img { max-width: 100%; }
    所以折叠阈值定在 900，而不是手机断点 640。 */
 @media (max-width: 900px) {
   .cats {
-    padding: 16px 24px 6px;
+    /* 右侧留出「更多」的位置，标签不会钻到按钮底下露出半截 */
+    padding: 16px 118px 6px 24px;
     max-height: 58px;
     overflow: hidden;
     transition: max-height .22s ease;
-    /* 右端直接把标签淡出（不靠背景色盖），「更多」压在上面不会被半截字干扰 */
-    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 118px), transparent 100%);
-    mask-image: linear-gradient(90deg, #000 calc(100% - 118px), transparent 100%);
   }
   .catbar.open .cats {
+    padding-right: 24px;
     max-height: 420px;
     overflow: visible;
-    -webkit-mask-image: none;
-    mask-image: none;
   }
   .catsmore {
     display: block;
@@ -836,17 +833,18 @@ img { max-width: 100%; }
     flex-wrap: wrap;
     gap: 6px;
     max-width: 100%;
-    padding: 12px 16px 4px;
+    padding: 12px 92px 4px 16px;
     max-height: 46px;
     overflow: hidden;
     transition: max-height .22s ease;
-    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 98px), transparent 100%);
-    mask-image: linear-gradient(90deg, #000 calc(100% - 98px), transparent 100%);
   }
   .catbar.open .cats {
+    padding-right: 16px;
     max-height: 420px;
     overflow: visible;
   }
+  /* 手机宽度下电子书标签只留书名，省下三十来像素够多露一个分类 */
+  .cats a.dl .dl-t { display: none; }
   .cats a {
     flex: 0 0 auto;
     padding: 5px 10px;
