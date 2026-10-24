@@ -1257,6 +1257,9 @@ def build_index_html(arts, cats, years, lang):
         wechat_name=T['wechat_name'],
         langsw=build_switcher(lang, 'index.html'),
         allu=T['all'], nav=nav, cards=''.join(cards), nomatch=T['nomatch'],
+        # 手机上分类条默认只占一行，「更多」展开其余；桌面端这个按钮不显示
+        more_u='More' if is_en else '更多',
+        less_u='Less' if is_en else '收起',
         disc_h=T['disclaimer'], disc=T['disclaimer_v'],
         cp=T['copyright'], ng=T['nogoods'], td=T['takedown'],
         follow=T['follow'], wechat=T['wechat'], tel=T['tel'],
@@ -1330,9 +1333,13 @@ INDEX_TPL = '''<!doctype html>
   </div>
 </header>
 
-<nav class="cats wrap">
-  <a href="#" class="all">{allu}</a>{ebookchip}{nav}
-</nav>
+<div class="catbar">
+  <nav class="cats wrap" id="cats">
+    <a href="#" class="all">{allu}</a>{ebookchip}{nav}
+  </nav>
+  <button type="button" class="catsmore" id="catsmore" aria-expanded="false" aria-controls="cats"
+          data-more="{more_u}" data-less="{less_u}"><span>{more_u}</span> ▾</button>
+</div>
 
 <main class="wrap">
   <div id="grid" class="grid">{cards}</div>

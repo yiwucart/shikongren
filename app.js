@@ -366,8 +366,32 @@
       else if (kw && SUMMARY) applySummary(kw);
       else applyInstant(kw);
       window.scrollTo({ top: grid.offsetTop - 90, behavior: 'smooth' });
+      // 手机端筛完把分类条收回去，别让展开的那几行继续占着屏幕
+      var bar = document.querySelector('.catbar');
+      if (bar && bar.classList.contains('open')) {
+        bar.classList.remove('open');
+        syncMore(false);
+      }
     });
   });
+
+  // 手机端分类条：默认一行，「更多」展开全部
+  var catbar = document.querySelector('.catbar');
+  var catmore = document.getElementById('catsmore');
+
+  function syncMore(open) {
+    if (!catmore) return;
+    catmore.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var span = catmore.querySelector('span');
+    if (span) span.textContent = open ? catmore.dataset.less : catmore.dataset.more;
+  }
+
+  if (catbar && catmore) {
+    catmore.addEventListener('click', function () {
+      var open = catbar.classList.toggle('open');
+      syncMore(open);
+    });
+  }
 
   document.addEventListener('keydown', function (e) {
     if (e.key === '/' && document.activeElement !== q) {
