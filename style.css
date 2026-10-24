@@ -661,7 +661,7 @@ html[lang="en"] body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 .herobio img {
   flex: none;
@@ -680,9 +680,6 @@ html[lang="en"] body {
 .herobio b { color: var(--ink); font-weight: 600; }
 .herobio a { color: var(--accent); text-decoration: none; white-space: nowrap; }
 .herobio a:hover { text-decoration: underline; }
-/* 作者与「关于本站」放在列表之后、页脚之前 —— 不占头部，也不会随分页被埋掉 */
-.aboutbar { padding-bottom: 26px; }
-.aboutbar .herobio { margin-top: 0; padding-top: 18px; border-top: 1px solid var(--line); }
 
 /* 首页分页：先出若干张，按钮再放下一批 */
 .card.pg-hide { display: none !important; }
@@ -988,7 +985,7 @@ img { max-width: 100%; }
   .authorinfo p { font-size: 14px; line-height: 1.85; }
 
   /* 首页作者小卡（已经移到底部，不再是白底卡片） */
-  .herobio { gap: 10px; margin-top: 14px; padding-top: 14px; }
+  .herobio { gap: 10px; margin-top: 10px; }
   .herobio img { width: 32px; height: 32px; }
   .herobio p { font-size: 12.5px; line-height: 1.65; }
 }

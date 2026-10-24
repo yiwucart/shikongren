@@ -1319,6 +1319,11 @@ INDEX_TPL = '''<!doctype html>
       <button id="clear">{clear}</button>
     </div>
     <div id="count" class="count"></div>
+    <div class="herobio">
+      <img src="/img/uploads/luwenyi-avatar.jpg" alt="{author_alt}" width="34" height="34" loading="lazy" />
+      <p><b>{author_name}</b>　{bio}
+        <a href="about.html">{aboutlink}</a></p>
+    </div>
   </div>
 </header>
 
@@ -1340,14 +1345,6 @@ INDEX_TPL = '''<!doctype html>
     <span id="loadmore-note"></span>
   </div>
 </main>
-
-<section class="wrap aboutbar">
-  <div class="herobio">
-    <img src="/img/uploads/luwenyi-avatar.jpg" alt="{author_alt}" width="34" height="34" loading="lazy" />
-    <p><b>{author_name}</b>　{bio}
-      <a href="about.html">{aboutlink}</a></p>
-  </div>
-</section>
 
 <footer class="wrap foot">
   <div class="disclaimer">
