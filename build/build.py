@@ -295,10 +295,10 @@ UI_ZH = {
     'stmt_v': '本站内容仅供学习参考，版权归原作者所有，不构成任何建议。',
     'related': '同类文章',
     'disclaimer': '免责声明',
-    # 页脚只有这两段：一句免责，一句来源与版权。早期写了四五段，
-    # 「仅供学习参考」「公众号时空坐标」各出现三四次，砍成一处一说。
+    # 首页页脚已压成两段：cp 是免责+来源版权合一句，联系只剩一行。
+    # disclaimer_v 只剩「免责声明」框还在用（首页框已删），保留 key 以防其他页引用。
     'disclaimer_v': '本站为传统文化交流性质的内容归档，文章观点仅供学习参考，不构成任何建议。',
-    'copyright': '内容整理自原作者吕文艺的公众号「时空坐标」，版权归原作者所有；引用请注明出处，如需下架请通过下方方式联系。',
+    'copyright': '本站为传统文化交流性质的内容归档，观点仅供学习参考，不构成任何建议；内容整理自吕文艺公众号「时空坐标」，版权归原作者所有，引用请注明出处。',
     'wechat': '微信公众号：',
     'tel': '联系原作者：吕文艺老师',
     'about_site': '关于本站',
@@ -349,9 +349,9 @@ UI_EN = {
     'disclaimer': 'Disclaimer',
     'disclaimer_v': ('This site archives material for the study of traditional Chinese culture. '
                      'The views expressed are those of the author and constitute no advice.'),
-    'copyright': ('Content is archived from the author Lü Wenyi’s WeChat account “Shikongren '
-                  'Coordinates” (时空坐标). Copyright remains with the author; cite the source '
-                  'when quoting, and use the contact below to have an item removed.'),
+    'copyright': ('This archive is for study and reference only and constitutes no advice. Content '
+                  'is from Lü Wenyi’s WeChat account “Shikongren Coordinates” (时空坐标); copyright '
+                  'remains with the author — cite the source when quoting.'),
     'wechat': 'WeChat: ',
     'tel': 'Contact the author, Lü Wenyi: ',
     'about_site': 'About this archive',
@@ -1347,16 +1347,9 @@ INDEX_TPL = '''<!doctype html>
 </main>
 
 <footer class="wrap foot">
-  <div class="disclaimer">
-    <h4>{disc_h}</h4>
-    <p>{disc}</p>
-  </div>
   <div class="src">
     <p>{cp}</p>
-  </div>
-  <div class="contact">
-    <p>{wechat}<b>{wechat_name}</b></p>
-    <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a></p>
+    <p>{wechat}<b>{wechat_name}</b> · {tel} <a class="tel" href="tel:18601944999">18601944999</a></p>
   </div>
   <p class="footlinks">
     <a href="about.html">{about_site}</a> ·
