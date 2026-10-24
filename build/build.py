@@ -497,16 +497,20 @@ def ebooks_link(lang, rel=''):
     return '<a href="%sebooks.html">%s</a> · ' % (rel, lbl)
 
 
-def ebook_bar(lang):
-    """首页 hero 里的一行电子书入口 —— 只在页脚放，等于没人看得到。"""
+def ebook_chip(lang):
+    """分类条里的电子书入口。
+
+    原先放在 hero 里，手机上等于白白多吃掉四十多像素；挪到分类条这一行，
+    既跟「找内容」的动线在一起，也不再撑高头部。
+    """
     code = lang.get('code')
     if code == 'en':
-        txt = 'Twelve PDF books, free — four in English, eight originals'
+        txt = 'Ebooks · 12 ↓'
     elif lang.get('opencc'):
-        txt = '十二種電子書，免費下載（原著八部 · 編選四卷）'
+        txt = '電子書 · 12 種 ↓'
     else:
-        txt = '十二种电子书，免费下载（原著八部 · 编选四卷）'
-    return '<p class="ebooklink"><a href="ebooks.html">%s →</a></p>' % txt
+        txt = '电子书 · 12 种 ↓'
+    return '<a class="dl" href="ebooks.html">%s</a>' % txt
 
 
 def esc(s):
@@ -1260,7 +1264,7 @@ def build_index_html(arts, cats, years, lang):
         # 术语表只有英文版。中文页给空串，页脚保持原样。
         gloss_link=('<a href="glossary.html">Glossary</a> · ' if is_en else '')
                    + ebooks_link(lang),
-        ebookbar=ebook_bar(lang),
+        ebookchip=ebook_chip(lang),
         copy=T['copy'],
         pfx=pfx,
         i18n=json.dumps(i18n(lang), ensure_ascii=False),
@@ -1311,7 +1315,6 @@ INDEX_TPL = '''<!doctype html>
       <span><b>{s_last}</b> {s_lastu}</span>
       <span><b>{s_words}</b> {s_wordsu}</span>
     </div>
-    {ebookbar}
     <div class="searchbar">
       <input id="q" type="search" placeholder="{ph}" autocomplete="off">
       <button id="clear">{clear}</button>
@@ -1326,7 +1329,7 @@ INDEX_TPL = '''<!doctype html>
 </header>
 
 <nav class="cats wrap">
-  <a href="#" class="all">{allu}</a>{nav}
+  <a href="#" class="all">{allu}</a>{ebookchip}{nav}
 </nav>
 
 <main class="wrap">
