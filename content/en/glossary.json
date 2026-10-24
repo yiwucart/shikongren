@@ -1,0 +1,339 @@
+{
+  "title": "Glossary",
+  "doc_title": "Glossary of Feng Shui and Bazi Terms",
+  "subtitle": "The thirty-three words this archive cannot translate any other way",
+  "intro": [
+    "This is not a dictionary of Chinese metaphysics at large. It is the working vocabulary of one system — the Lü School of Shikongren — as it is used in the English edition of this archive, and it exists because several of these words have a standard English translation that is actively wrong.",
+    "Two rules were followed throughout. A term is rendered literally first and then explained by the function it performs in a reading; and where the ordinary English word would mislead, the entry says so. <em>Sha</em>, for instance, is not sand. The entries are grouped in the order a reader meets them: the ground terms, what feng shui is looking for, the points and directions, the chart, the theory, and what can be done about a result.",
+    "Each entry ends with links to the articles where the term is defined or used at length. Where two English renderings circulate in the archive, both are given rather than hidden."
+  ],
+  "note_h": "A note on the translations",
+  "note": [
+    "<b>Five elements</b> or <b>five phases</b>? Both, for the same word 五行. <em>Xing</em> means a phase of movement, not a substance, so “five phases” is the more exact rendering — but “five elements” is what English readers search for and what most of the literature uses, so the archive keeps both and the entry explains the difference.",
+    "<b>Sand</b> means any solid mass; <b>water</b> means any open body of water. These are the two most misleading terms here for an English reader, and no smoother translation was found: “form” and “flow” were tried and lost the connection to the Chinese sources. The glossary entry, not the prose, carries the warning.",
+    "A term is only listed once the archive has at least one article that uses it substantively. Nothing here is included for completeness."
+  ],
+  "groups": [
+    {
+      "id": "ground",
+      "name": "The ground terms",
+      "blurb": "The vocabulary every other article assumes. Each of these words has an everyday English sense that will mislead if you keep it.",
+      "terms": [
+        {
+          "id": "yin-and-yang",
+          "en": "Yin and yang",
+          "py": "yinyang",
+          "zh": "阴阳",
+          "def": "Two states of one energy, not two substances. Yang is the moving, warming, rising aspect; yin is the resting, cooling, descending one. Neither is auspicious or inauspicious in itself, and the words carry no moral charge: a reading is always about whether the two are in the right relation at a particular place and time.",
+          "note": "A site or a chart is never judged “too yin” or “too yang” in the abstract. The question is which one is present, how much, and where it goes.",
+          "see": ["movement-laws-of-the-harmonized-yin-yang-qi"]
+        },
+        {
+          "id": "five-elements",
+          "en": "Five elements",
+          "py": "wuxing",
+          "zh": "五行",
+          "def": "The five behaviour-types — wood, fire, earth, metal, water — under which everything is classified. Also rendered <em>five phases</em>, and the second is the more exact of the two: <em>xing</em> is a phase of movement, not a substance. The whole system rests on the claim that these five modes generate and control one another in a fixed order.",
+          "note": "They are not materials. Metal here does not mean iron, and water does not mean the liquid. Each names a mode of change.",
+          "see": ["is-the-five-element-sequence-a-theorem-or-an-axiom", "judging-the-useful-and-unfavourable-gods"]
+        },
+        {
+          "id": "heavenly-stems",
+          "en": "Heavenly stems",
+          "py": "tiangan",
+          "zh": "天干",
+          "def": "Ten signs — <em>jia, yi, bing, ding, wu, ji, geng, xin, ren, gui</em> — which combine with the twelve branches to name time. Each carries an element and a polarity. The ten are not decorative labels; they are the smallest unit of classification in the system.",
+          "note": "The stems are the part of the calendar the sun measures; the branches are the part the moon and Jupiter measure. The archive treats that difference as evidence, not tradition.",
+          "see": ["astronomical-origin-of-the-ten-heavenly-stems", "what-exactly-are-the-heavenly-stems-and-earthly-branches-1"]
+        },
+        {
+          "id": "earthly-branches",
+          "en": "Earthly branches",
+          "py": "dizhi",
+          "zh": "地支",
+          "def": "Twelve signs, from <em>zi</em> to <em>hai</em>, each tied to a month, an hour, a direction, and one of the twelve animals. The animals belong to the branches, not to the year as such.",
+          "see": ["astronomical-origin-of-the-twelve-earthly-branches", "what-do-the-zodiac-animals-have-to-do-with-the-branches"]
+        },
+        {
+          "id": "twenty-four-mountains",
+          "en": "Twenty-four mountains",
+          "py": "ershisi shan",
+          "zh": "二十四山",
+          "def": "The compass divided into twenty-four sectors of fifteen degrees each — twelve branches, eight stems, four corner trigrams — precise enough for a reading. “Mountain” here means a named sector of the compass, not a hill. Also called the twenty-four directions.",
+          "note": "The four corner sectors (qian, kun, gen, xun) are not elements in this system. Each is half of one neighbouring mountain and half of the next, which is why the same treatment in the same corner can produce opposite results in two adjacent houses.",
+          "see": ["five-element-properties-of-the-twenty-four-directions", "sand-and-water-in-the-twenty-four-directions"]
+        },
+        {
+          "id": "bazi",
+          "en": "Bazi",
+          "py": "bazi",
+          "zh": "八字",
+          "def": "Literally “eight characters”: the four pairs of stem and branch for the year, month, day and hour of birth, written as four pillars. The chart is treated as a set of eight positions rather than eight meanings — what matters is the relation between them.",
+          "see": ["the-logic-of-bazi-reading", "the-positioning-system-of-a-bazi"]
+        }
+      ]
+    },
+    {
+      "id": "looking",
+      "name": "What feng shui is looking for",
+      "blurb": "The archive spends more words on this than on any other question, because the tradition named its object and never said what it was.",
+      "terms": [
+        {
+          "id": "living-qi",
+          "en": "Living qi",
+          "py": "shengqi",
+          "zh": "生气",
+          "def": "The thing a practitioner walks a hillside looking for. Guo Pu's <em>Zangshu</em> defines burial as “riding the living qi”, and the tradition never worked out what that was. This system identifies it as a form of energy that moves under gravity, from above to below, and collects where the ground lets it.",
+          "note": "Not a magnetic field, not wind, not any kind of wave. The archive is emphatic about this because most modern attempts to make feng shui sound scientific do it by naming one of those.",
+          "see": ["what-is-a-feng-shui-master-actually-looking-for"]
+        },
+        {
+          "id": "primordial-motive-energy",
+          "en": "Life's primordial motive energy",
+          "py": "shengming yuan dongli nengliang",
+          "zh": "生命原动力能量",
+          "def": "Lü's replacement name for living qi: energy in the state before it has taken a particular form, able to become whatever the situation requires. His analogy is the bone-marrow stem cell, which can be cultured into the cells of any organ. The renaming is meant to make the concept testable rather than devotional.",
+          "see": ["what-is-a-feng-shui-master-actually-looking-for"]
+        },
+        {
+          "id": "chonghe-zhi-qi",
+          "en": "Chonghe zhi qi",
+          "py": "chonghe zhi qi",
+          "zh": "冲和之气",
+          "def": "The qi of harmony and balance: energy in which yin and yang are fully fused. “Solitary yin does not generate, solitary yang does not grow” — only the fused state is usable. This is the criterion behind most judgments in the system, and the reason a chart missing an element is not automatically a bad chart.",
+          "see": ["movement-laws-of-the-harmonized-yin-yang-qi", "the-fortunate-live-in-fortunate-places"]
+        },
+        {
+          "id": "vein-energy",
+          "en": "Vein energy",
+          "py": "maiqi",
+          "zh": "脉气",
+          "def": "The portion of living qi carried inside the ground along a particular stratum. It is what a grave or a house is positioned to receive, and its quantity is decided by how far upstream the bearing stratum runs unbroken, how often it undulates, and how its density compares with the layers above and below.",
+          "note": "Rendered both “vein energy” and “vein qi” in this archive. They are the same term.",
+          "see": ["where-vein-qi-accumulates-in-the-strata", "what-is-a-true-dragon-point"]
+        },
+        {
+          "id": "dragon-vein",
+          "en": "Dragon vein",
+          "py": "longmai",
+          "zh": "龙脉",
+          "def": "A mountain range read as a conduit for vein energy. The traditional image is kept because every Chinese source uses it, but the dragon is not a creature and the vein is not a blood vessel: the metaphor describes a continuous path along which energy descends.",
+          "note": "The length of the dragon does not decide the strength of a point. A long range broken upstream can carry less than a short one that is intact.",
+          "see": ["the-dragon-vein-passing-the-canopy-the-gorge-and-the-breath", "is-a-cut-dragon-vein-always-inauspicious"]
+        },
+        {
+          "id": "energy-channel",
+          "en": "Energy channel",
+          "py": "nengliang tongdao",
+          "zh": "能量通道",
+          "def": "The downhill path along which energy actually reaches a given point. Three graves twenty centimetres apart on one slope can have entirely different fortunes because only one of them sits on the channel; the others are near the flow without being under it.",
+          "see": ["energy-channels-in-the-mountains"]
+        }
+      ]
+    },
+    {
+      "id": "points",
+      "name": "Points, directions, and two words that mislead",
+      "blurb": "Three different things are all translated as “point”, and two ordinary English nouns mean something else here entirely.",
+      "terms": [
+        {
+          "id": "origin-point",
+          "en": "Origin point",
+          "py": "yuandian",
+          "zh": "原点",
+          "def": "The point being read — the centre of a house, or the position of a grave. Every judgment is made relative to it: energy that never arrives at the origin point has no effect on the people who live there, however impressive the landscape.",
+          "note": "Not the same as the focal point. The origin is where you stand to read; the focal point is what you find when you look.",
+          "see": ["precautions-when-setting-the-focal-point", "four-ounces-one-thousand-pounds"]
+        },
+        {
+          "id": "focal-point",
+          "en": "Focal point",
+          "py": "jiaodian xue",
+          "zh": "焦点穴",
+          "def": "The position located from the surface — where water and landform converge — and the thing traditional feng shui means by “the point”. It is a surface reading: it can be done well or badly, but it cannot see the strata.",
+          "note": "Keep three words apart. The focal point is found from the surface; the true dragon point is found from the strata; the origin point is the place being read.",
+          "see": ["precautions-when-setting-the-focal-point", "the-focal-point-in-flat-country"]
+        },
+        {
+          "id": "true-dragon-point",
+          "en": "True dragon point",
+          "py": "zhenlong xue",
+          "zh": "真龙穴",
+          "def": "A point where vein energy is at its greatest and most concentrated, located from the strata rather than from the shape of the land. Any true dragon point guarantees at least an upper-middle level of prosperity; the differences between them are decided by what happens upstream, not by how beautifully the hills embrace the site.",
+          "note": "Its relation to sand and water is the relation of a beautiful woman to beautiful clothes — the clothes can be changed, the woman cannot.",
+          "see": ["what-is-a-true-dragon-point"]
+        },
+        {
+          "id": "zero-plane",
+          "en": "Zero plane",
+          "py": "ling pingmian",
+          "zh": "零平面",
+          "def": "The baseline against which every elevation around a site is measured. A sea or a large lake is treated as the zero plane — an absence, in effect, rather than an expanse of the water element.",
+          "note": "This is why a coastal site is read differently from an inland one with a river. The sea sets the datum and the terrain is measured as rising from it.",
+          "see": ["reading-a-site-by-the-sea", "which-floor-is-auspicious"]
+        },
+        {
+          "id": "sand",
+          "en": "Sand",
+          "py": "sha",
+          "zh": "砂",
+          "def": "Any solid mass — a mountain, a wall, a fridge, a row of trees. Sand does not mean sand. What makes something sand is that it blocks or holds energy instead of letting it pass; every factory is sand, and so is every electrical appliance.",
+          "note": "The most misleading term in the archive for an English reader. “Embraced by sand” means enclosed by solid forms.",
+          "see": ["telling-sand-from-water-1", "sand-and-water-in-the-twenty-four-directions"]
+        },
+        {
+          "id": "water",
+          "en": "Water",
+          "py": "shui",
+          "zh": "水",
+          "def": "Any open body of water that energy can travel along or settle into — a river, a road, an open doorway, a fish tank. Like sand, it is a functional category, not a material one.",
+          "see": ["telling-sand-from-water-1", "reading-a-site-by-the-sea"]
+        },
+        {
+          "id": "orientation",
+          "en": "Orientation",
+          "py": "lixiang",
+          "zh": "立向",
+          "def": "The sitting and facing direction of a house or a grave. In this system it is set by the direction in which the vein's qi comes and goes — not by a formula applied to the birth year of the owner.",
+          "see": ["setting-the-orientation"]
+        }
+      ]
+    },
+    {
+      "id": "chart",
+      "name": "The chart",
+      "blurb": "The vocabulary of bazi reading. Almost every word here names a relation rather than a thing.",
+      "terms": [
+        {
+          "id": "day-master",
+          "en": "Day master",
+          "py": "rizhu",
+          "zh": "日主",
+          "def": "The stem of the day of birth — the position that stands for the person whose chart it is. Every other character is read as a relation to it, which is why the same chart read for two different people gives two different readings.",
+          "see": ["the-positioning-system-of-a-bazi", "telling-the-ten-gods-apart"]
+        },
+        {
+          "id": "ten-gods",
+          "en": "Ten gods",
+          "py": "shishen",
+          "zh": "十神",
+          "def": "The ten relations any other character can have to the day master: five kinds of relation, each in a same-polarity and an opposite-polarity form. They are not deities and not personality types; they are the vocabulary in which a chart is described.",
+          "note": "The conventional names — wealth, officer, seal, output, parallel — label relations, not possessions. A person does not “have” a wealth god in the way he has a bank account.",
+          "see": ["what-the-ten-gods-mean", "telling-the-ten-gods-apart"]
+        },
+        {
+          "id": "useful-god",
+          "en": "Useful god and unfavourable god",
+          "py": "yongshen, jishen",
+          "zh": "用神 / 忌神",
+          "def": "The element or character a chart needs in order to reach harmony, and the one that damages it. Fixing these two is most of a reading: once they are decided, every year and every direction can be judged by whether it supplies the first or strengthens the second.",
+          "see": ["judging-the-useful-and-unfavourable-gods"]
+        },
+        {
+          "id": "luck-cycle",
+          "en": "Luck cycle",
+          "py": "dayun",
+          "zh": "大运",
+          "def": "The ten-year period a person enters after birth, each governed by one pair of stem and branch. The chart is fixed; a person lives inside the luck cycle and its years, months, days and hours, which is where change comes from.",
+          "see": ["the-time-system-of-bazi"]
+        },
+        {
+          "id": "annual-cycle",
+          "en": "Annual cycle",
+          "py": "liunian",
+          "zh": "流年",
+          "def": "The year's own stem and branch, read against the chart. The same year can be excellent for one person and disastrous for another, because a year is judged by its relation to the useful god, not by its qualities in itself.",
+          "see": ["the-time-system-of-bazi", "the-principle-of-adaptation"]
+        },
+        {
+          "id": "hidden-stems",
+          "en": "Hidden stems",
+          "py": "canggan",
+          "zh": "藏干",
+          "def": "The stems said to be contained inside an earthly branch — one, two or three per branch. This archive argues that they should not be read at all: what a branch does is decided by its element and its position, and adding hidden stems multiplies the possibilities until any reading can be justified.",
+          "note": "A good example of how the system is built by subtraction. Where a traditional manual adds a layer, this one usually removes it and then shows what the removal explains.",
+          "see": ["the-problem-with-formulas"]
+        },
+        {
+          "id": "structure",
+          "en": "Structure",
+          "py": "geju",
+          "zh": "格局",
+          "def": "The overall shape of a chart — which relation dominates, and therefore what kind of life the chart describes. Structure is a summary, not a cause: it is what you say after the useful god has been decided, not a substitute for deciding it.",
+          "see": ["the-bazi-model-as-a-functional-mould", "the-bazi-model-in-use"]
+        }
+      ]
+    },
+    {
+      "id": "theory",
+      "name": "The theory",
+      "blurb": "Four terms that carry the system's claims about how fate works — and, in the last three, about how it can be changed.",
+      "terms": [
+        {
+          "id": "time-space-person",
+          "en": "Time, space and person",
+          "py": "shikongren",
+          "zh": "时空人",
+          "def": "The three variables of the system: when a thing happens, where it happens, and who it happens to. Every prediction in the archive fixes two of them and solves for the third; every failed prediction is a case where one of the three was assumed rather than known.",
+          "see": ["time-space-and-person", "mount-wudang-a-discussion-of-time-space-and-person"]
+        },
+        {
+          "id": "principle-of-adaptation",
+          "en": "Principle of adaptation",
+          "py": "mingyun shiyingxing yuanli",
+          "zh": "命运适应性原理",
+          "def": "The claim that a chart does not say what will happen but how a change will compare with the present state. Move from one auspicious position to another and little happens; move to the same new position from an inauspicious one and the result is good. This is how the system explains why one year can be a marriage for one person and a divorce for another.",
+          "see": ["the-principle-of-adaptation"]
+        },
+        {
+          "id": "correct-consciousness",
+          "en": "Principle of correct consciousness",
+          "py": "zheng yishi yuanli",
+          "zh": "正意识原理",
+          "def": "One of the five principles of averting disaster: matter determines consciousness, but consciousness acts back on matter, so a correct understanding of a danger changes the outcome. A disaster that is avoided does not vanish — it is met in a different form.",
+          "see": ["five-principles-of-disaster-resolution"]
+        },
+        {
+          "id": "energy-conversion",
+          "en": "Principle of energy conversion",
+          "py": "nengliang zhuanhua yuanli",
+          "zh": "能量转化原理",
+          "def": "The claim that a disaster can be dissolved by converting its energy into another form rather than by blocking it. This is the theoretical basis of most practical remedies in the archive: what changes is the form the event takes, not the quantity of energy involved.",
+          "see": ["five-principles-of-disaster-resolution"]
+        }
+      ]
+    },
+    {
+      "id": "remedy",
+      "name": "Doing something about it",
+      "blurb": "Three terms from the layer that tells you what can be done — and, with the last one, where the doing stops.",
+      "terms": [
+        {
+          "id": "adjustment",
+          "en": "Adjustment",
+          "py": "tiaoli",
+          "zh": "调理 / 化解",
+          "def": "Changing a site, a set of circumstances, or a person's position so that inauspicious energy misses and auspicious energy arrives. Both English words are in use here: “adjustment” for the ongoing work on a place or a life, “remediation” as the name of the category.",
+          "note": "Adjustment is bounded. It can raise someone within the level their chart already allows; it cannot move them to another level.",
+          "see": ["five-notes-on-resolving-disaster", "the-ceiling-of-adjustment"]
+        },
+        {
+          "id": "external-force",
+          "en": "External force",
+          "py": "waili",
+          "zh": "外力",
+          "def": "In remediation, anything outside the person that is changed in order to change the result — a direction, a building, a tree, a move to another city. The category exists to mark a distinction the archive insists on: a person's own effort is not an external force, and no amount of adjustment replaces it.",
+          "see": ["five-principles-of-disaster-resolution", "feng-shui-cannot-fix-laziness"]
+        },
+        {
+          "id": "ceiling-of-adjustment",
+          "en": "The ceiling of adjustment",
+          "py": "tiaoli de cengji shangxian",
+          "zh": "调理的层级上限",
+          "def": "The limit on what remediation can do: within the level a chart already permits, adjustment works; across levels it does not. A section chief can be helped toward a county post; a county post cannot be adjusted into a provincial one.",
+          "see": ["the-ceiling-of-adjustment", "four-tests-for-a-remedy"]
+        }
+      ]
+    }
+  ]
+}

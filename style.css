@@ -336,6 +336,62 @@ html[lang="en"] body {
 .pagesub { margin: 0 0 8px; font-size: 14px; color: var(--ink-3); }
 .page .content { border-top: 1px solid var(--line); }
 
+/* ---------- 术语表（只有英文版有这一页） ---------- */
+.glossnav { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 6px; }
+.glossnav a {
+  font-size: 13px;
+  padding: 5px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.glossnav a:hover { color: var(--accent); border-color: var(--accent); }
+
+.glossary h2 { margin: 44px 0 4px; font-size: 21px; font-weight: 600; }
+.glossary .glossblurb { margin: 0 0 6px; font-size: 15px; color: var(--ink-3); line-height: 1.7; }
+.glossary dl.terms { margin: 0; }
+.glossary .term { padding: 16px 0 14px; border-bottom: 1px dashed var(--line); }
+.glossary .term:last-child { border-bottom: 0; }
+.glossary dt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
+.glossary .ten { font-size: 17px; font-weight: 600; color: var(--ink); }
+/* 中文用中文字体栈，否则英文页的 Georgia 会把汉字渲染成系统兜底字形 */
+.glossary .zh {
+  font-size: 15px;
+  color: var(--ink-2);
+  font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+}
+.glossary .py { font-size: 13px; color: var(--ink-3); font-style: italic; }
+.glossary dd { margin: 6px 0 0; }
+.glossary dd p { font-size: 16px; line-height: 1.85; margin: 0 0 0.65em; }
+.glossary .gnote {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  padding-left: 12px;
+  border-left: 2px solid var(--accent-soft);
+}
+.glossary .gsee { font-size: 13.5px; color: var(--ink-3); }
+.glossary .gsee b { font-weight: 600; color: var(--ink-2); }
+.glossary .gsee a { color: var(--accent); text-decoration: none; }
+.glossary .gsee a:hover { text-decoration: underline; }
+
+.glossnote {
+  margin-top: 44px;
+  padding: 20px 22px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.glossary .glossnote h2 { margin: 0 0 10px; font-size: 17px; }
+.glossary .glossnote p { font-size: 14.5px; line-height: 1.8; color: var(--ink-2); }
+
+@media (max-width: 640px) {
+  .glossnav { gap: 6px; }
+  .glossnav a { font-size: 12.5px; padding: 5px 10px; }
+  .glossary h2 { font-size: 19px; margin-top: 36px; }
+  .glossary dd p { font-size: 15.5px; }
+}
+
 /* 二维码区：居中展示 */
 .qrbox {
   margin: 0 0 1.6em;

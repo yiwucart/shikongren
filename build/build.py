@@ -196,11 +196,14 @@ def _post_slugs(lang, post):
     return out
 
 
-def build_switcher(cur, rel='', post=None):
+def build_switcher(cur, rel='', post=None, fallback_home=False):
     """三语切换器。cur 是当前语言对象，rel 是当前页在该语言下的相对路径。
 
     post 不为空时按译文实际存在与否给链接：没有英文译文的文章，
     点 EN 回到英文首页（可到达），而不是给一个 404。
+
+    fallback_home=True 用于**只有一种语言存在**的独立页（如英文术语表）：
+    其他语言的链接一律回到该语言的首页，免得指向不存在的同路径页面。
     """
     cc = get_opencc(cur)
     lbl = cc.convert('语言切换') if cc else ('Language' if cur.get('code') == 'en' else '语言切换')
@@ -218,6 +221,9 @@ def build_switcher(cur, rel='', post=None):
             cls, mark, cur_attr = '', '', ''
         elif l.get('stub') and rel.replace('index.html', ''):
             # 英文文章页还不存在，点过去会到英文说明页 —— 仍可达，保留链接
+            cls, mark, href, cur_attr = '', '', url_for(l, 'index.html'), ''
+        elif fallback_home:
+            # 该页面只有当前语言有，别的语言回首页
             cls, mark, href, cur_attr = '', '', url_for(l, 'index.html'), ''
         else:
             cls, mark, href, cur_attr = '', '', url_for(l, rel), ''
@@ -1149,6 +1155,8 @@ def build_index_html(arts, cats, years, lang):
         cp=T['copyright'], ng=T['nogoods'], td=T['takedown'],
         follow=T['follow'], wechat=T['wechat'], tel=T['tel'],
         about_site=T['about_site'], sitemap=T['sitemap'], cms=T['cms'],
+        # 术语表只有英文版。中文页给空串，页脚保持原样。
+        gloss_link=('<a href="glossary.html">Glossary</a> · ' if is_en else ''),
         copy=T['copy'],
         pfx=pfx,
         i18n=json.dumps(i18n(lang), ensure_ascii=False),
@@ -1238,7 +1246,7 @@ INDEX_TPL = '''<!doctype html>
   </div>
   <p class="footlinks">
     <a href="about.html">{about_site}</a> ·
-    <a href="{pfx}sitemap.xml">{sitemap}</a> ·
+    {gloss_link}<a href="{pfx}sitemap.xml">{sitemap}</a> ·
     <a href="/admin/">{cms}</a>
   </p>
   <p class="copy">{copy}</p>
@@ -1312,7 +1320,7 @@ POST_TPL = '''<!doctype html>
   <div class="contact">
     <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a> · {wechat_v}</p>
   </div>
-  <p><a href="{home_pfx}about.html">{about_site}</a> · <a href="{home_pfx}index.html">{back_home}</a></p>
+  <p><a href="{home_pfx}about.html">{about_site}</a> · {gloss_link}<a href="{home_pfx}index.html">{back_home}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -1379,6 +1387,8 @@ def build_post_html(a, by_cat, lang):
         content=md_to_html(a['body'], img_prefix=pfx), related=rh, stamp=STAMP,
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
         about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'],
+        gloss_link=('<a href="../glossary.html">Glossary</a> · '
+                    if lang.get('code') == 'en' else ''),
         ld=ld_post(a, url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
                    a['title'], desc, lang),
         pubdate=(a['date'] or '2026-01-01'),
@@ -1429,7 +1439,7 @@ ABOUT_TPL = '''<!doctype html>
     <h4>{disc_h}</h4>
     <p>{disc}</p>
   </div>
-  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p>{gloss_link}<a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -1591,9 +1601,150 @@ def build_about_html(page, arts, lang):
         content=_about_blocks(body), stamp=STAMP,
         verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
         back_home=T['back_home'], sitemap=T['sitemap'],
+        gloss_link=('<a href="glossary.html">Glossary</a> · '
+                    if lang.get('code') == 'en' else ''),
         copy=T['copy_n'] % len(arts),
         ld=ld_page(url_for(lang, 'about.html'), title, desc, lang),
         cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
+
+
+# ---------------------------------------------------------------- 术语表
+# 内容放在 content/en/glossary.json：词条是数据，不该长在构建脚本里。
+# 这个页面**只有英文版**，中文站没有对应页 —— 所以 hreflang 与切换器都要特判，
+# 否则会生成 /glossary.html、/tc/glossary.html 两条 404。
+
+GLOSSARY_TPL = '''<!doctype html>
+<html lang="{hlang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{doc_title} · {site}</title>
+<meta name="description" content="{desc}">
+<meta name="author" content="Lü Wenyi">
+<meta property="og:title" content="{doc_title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="{site}">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{doc_title}">
+<meta name="twitter:description" content="{desc}">
+<meta name="baidu-site-verification" content="codeva-m8N0GhhwKD" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="{canonical}">
+{alt}
+<link rel="stylesheet" href="{pfx}style.css?v={stamp}">
+{verify}
+<script type="application/ld+json">{ld}</script>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a href="{pfx}index.html" class="home">{back}</a>
+  {langsw}
+</div></header>
+
+<article class="wrap page glossary">
+  <h1>{title}</h1>
+  <p class="pagesub">{subtitle}</p>
+  <div class="content">
+{content}
+  </div>
+</article>
+
+<footer class="wrap foot">
+  <div class="disclaimer">
+    <h4>{disc_h}</h4>
+    <p>{disc}</p>
+  </div>
+  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p class="copy">{copy}</p>
+</footer>
+</body>
+</html>'''
+
+
+def _glossary_alt(lang):
+    """术语表只有英文版：hreflang 只写 en 与 x-default。
+
+    不能复用 hreflang_tags —— 它给三种语言各生成一条，
+    而 /glossary.html 与 /tc/glossary.html 并不存在，等于让搜索引擎抓 404。
+    """
+    href = url_for(lang, 'glossary.html')
+    return ('<link rel="alternate" hreflang="en" href="%s">\n'
+            '<link rel="alternate" hreflang="x-default" href="%s">'
+            % (esc(href), esc(href)))
+
+
+def build_glossary_html(arts, lang):
+    path = os.path.join(CONTENT, 'en', 'glossary.json')
+    with open(path, encoding='utf-8') as f:
+        data = json.load(f)
+    T = ui(lang)
+    by_slug = {a['slug']: a for a in arts}
+
+    parts = []
+    for p in data['intro']:
+        parts.append('<p>%s</p>' % p)
+
+    parts.append('<nav class="glossnav" aria-label="Sections">%s</nav>'
+                 % ''.join('<a href="#%s">%s</a>' % (esc(g['id']), esc(g['name']))
+                           for g in data['groups']))
+
+    missing = []
+    n_terms = 0
+    for g in data['groups']:
+        parts.append('<h2 id="%s">%s</h2>' % (esc(g['id']), esc(g['name'])))
+        if g.get('blurb'):
+            parts.append('<p class="glossblurb">%s</p>' % g['blurb'])
+        parts.append('<dl class="terms">')
+        for t in g['terms']:
+            n_terms += 1
+            links = []
+            for s in t.get('see') or []:
+                a = by_slug.get(s)
+                if not a:
+                    missing.append('%s -> %s' % (t['id'], s))
+                    continue
+                links.append('<a href="posts/%s.html">%s</a>' % (esc(s), esc(a['title'])))
+            parts.append('<div class="term" id="%s">' % esc(t['id']))
+            parts.append('<dt><span class="ten">%s</span>'
+                         '<span class="zh">%s</span>'
+                         '<span class="py">%s</span></dt>'
+                         % (t['en'], esc(t['zh']), esc(t['py'])))
+            parts.append('<dd><p>%s</p>' % t['def'])
+            if t.get('note'):
+                parts.append('<p class="gnote">%s</p>' % t['note'])
+            if links:
+                parts.append('<p class="gsee"><b>Read more</b> %s</p>' % ' · '.join(links))
+            parts.append('</dd></div>')
+        parts.append('</dl>')
+
+    parts.append('<div class="glossnote">')
+    parts.append('<h2>%s</h2>' % esc(data['note_h']))
+    for p in data['note']:
+        parts.append('<p>%s</p>' % p)
+    parts.append('</div>')
+
+    if missing:
+        print('  ! glossary: %d dead link(s): %s' % (len(missing), ', '.join(missing)))
+
+    h1 = data['title']
+    doc_title = data.get('doc_title') or h1
+    desc = ('%d terms from the Lü School of Shikongren, translated and explained: living qi, '
+            'vein energy, the true dragon point, the day master and the useful god, plus the '
+            'ordinary English words that mislead.' % n_terms)
+    return GLOSSARY_TPL.format(
+        hlang=lang['html_lang'], title=esc(h1), doc_title=esc(doc_title),
+        subtitle=esc(data['subtitle']),
+        desc=esc(desc), site=T['site_name'],
+        canonical=url_for(lang, 'glossary.html'),
+        alt=_glossary_alt(lang),
+        langsw=build_switcher(lang, 'glossary.html', fallback_home=True),
+        back=T['back'], pfx=lang_prefix(lang), content='\n'.join(parts), stamp=STAMP,
+        verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
+        back_home=T['back_home'], sitemap=T['sitemap'],
+        copy=T['copy_n'] % len(arts),
+        ld=ld_page(url_for(lang, 'glossary.html'), doc_title, desc, lang))
 
 
 EN_TPL = '''<!doctype html>
@@ -1681,9 +1832,14 @@ EN_TPL = '''<!doctype html>
 
 def build_sitemap(arts, lang):
     urls = ['<url><loc>%s</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>'
-            % url_for(lang, 'index.html'),
-            '<url><loc>%s</loc><changefreq>monthly</changefreq>'
-            '<priority>0.8</priority></url>' % url_for(lang, 'about.html')]
+            % url_for(lang, 'index.html')]
+    # 英文术语表只在英文站存在，别的语言不能进 sitemap
+    if (lang.get('code') == 'en'
+            and os.path.isfile(os.path.join(CONTENT, 'en', 'glossary.json'))):
+        urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
+                    '<priority>0.7</priority></url>' % url_for(lang, 'glossary.html'))
+    urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
+                '<priority>0.8</priority></url>' % url_for(lang, 'about.html'))
     if lang.get('stub'):
         return ('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -1827,6 +1983,14 @@ def build_one_lang(lang, settings):
         with open(os.path.join(out_dir, 'about.html'), 'w',
                   encoding='utf-8', newline='\n') as f:
             f.write(html)
+
+    # 术语表 —— 只有英文版有内容，中文/繁体不生成，也不进它们的 sitemap
+    if lang.get('code') == 'en':
+        gpath = os.path.join(CONTENT, 'en', 'glossary.json')
+        if os.path.isfile(gpath):
+            with open(os.path.join(out_dir, 'glossary.html'), 'w',
+                      encoding='utf-8', newline='\n') as f:
+                f.write(build_glossary_html(arts, lang))
 
     # sitemap：每种语言一份，放在该语言的目录里，与页面层级一致
     with open(os.path.join(out_dir, 'sitemap.xml'), 'w',
