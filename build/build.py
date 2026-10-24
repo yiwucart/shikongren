@@ -791,6 +791,74 @@ def md_to_html(body, img_prefix='../'):
     return '\n'.join(final)
 
 
+# ---- 术语表反向内链 ----------------------------------------------------
+# 规则集中放在 content/en/glossary-links.json：
+#   patterns = 术语 id -> 正文里可能的英文词形
+#   links    = 文章 slug -> 这篇文章真正在讲的术语 id
+# 放在 HTML 层注入而不是改 111 个源文件：规则改了只动一张表，
+# 正文 markdown 保持干净，中文站一行都不用碰。
+_GLOSS_CACHE = None
+
+
+def _gloss_rules():
+    global _GLOSS_CACHE
+    if _GLOSS_CACHE is not None:
+        return _GLOSS_CACHE
+    pats, links = {}, {}
+    path = os.path.join(CONTENT, 'en', 'glossary-links.json')
+    try:
+        with open(path, encoding='utf-8') as f:
+            data = json.load(f)
+        for tid, p in (data.get('patterns') or {}).items():
+            pats[tid] = re.compile(r'(?<![A-Za-z])(?:%s)(?![A-Za-z])' % p, re.I)
+        links = data.get('links') or {}
+    except (OSError, ValueError) as e:
+        print('  ! glossary-links: %s' % e)
+    _GLOSS_CACHE = (pats, links)
+    return _GLOSS_CACHE
+
+
+def with_glossary(html, slug):
+    """给英文文章正文首次出现的术语挂上术语表锚点。
+
+    只处理 <p> 和 <li>：<h1>-<h3> 里的词是标题，链上去读着累；
+    <blockquote> 里是译者注和成段引文，不该塞链接。每篇每术语最多一次，
+    段落里已有链接就整段跳过，避免 a 套 a。
+    """
+    pats, links = _gloss_rules()
+    wanted = links.get(slug) or []
+    if not wanted:
+        return html
+    used = set()
+
+    def para(m):
+        tag, inner = m.group(1), m.group(2)
+        if '<a ' in inner:
+            return m.group(0)
+        cands = []
+        for tid in wanted:
+            if tid in used or tid not in pats:
+                continue
+            mm = pats[tid].search(inner)
+            if mm:
+                cands.append((mm.start(), mm.end(), tid, mm.group(0)))
+        if not cands:
+            return m.group(0)
+        cands.sort()
+        out, pos = [], 0
+        for s, e, tid, txt in cands:
+            if s < pos:          # 与上一条重叠，这条放弃，等下个段落
+                continue
+            out.append(inner[pos:s])
+            out.append('<a class="gl" href="../glossary.html#%s">%s</a>' % (tid, txt))
+            pos = e
+            used.add(tid)
+        out.append(inner[pos:])
+        return '<%s>%s</%s>' % (tag, ''.join(out), tag)
+
+    return re.sub(r'<(p|li)>(.*?)</\1>', para, html, flags=re.S)
+
+
 def slug_of(text, fallback):
     """从文件名/标题生成 URL 安全 slug"""
     s = re.sub(r'[^\w\-.一-鿿]', '', str(text or ''))
@@ -1367,6 +1435,10 @@ def build_post_html(a, by_cat, lang):
     else:
         url_line = '<p><b>%s</b>：%s</p>' % (T['orig_link'], T['source_v'].split('｜')[0])
     slugq = urllib.parse.quote(a['slug'] + '.html', safe='/-.')
+    # 英文正文挂术语表锚点；简繁两站不碰
+    _content = md_to_html(a['body'], img_prefix=pfx)
+    if lang.get('code') == 'en':
+        _content = with_glossary(_content, a['slug'])
     return POST_TPL.format(
         hlang=lang['html_lang'],
         title=esc(a['title']), desc=esc(desc), cat=esc(cat_display(lang, a['cat_key'])),
@@ -1384,7 +1456,7 @@ def build_post_html(a, by_cat, lang):
         #   /en/posts/x.html  → ../../img/
         # 之前一律用 '../'，繁体靠 `cp -al img tc/img` 的硬链接兜着才没破图，
         # 英文没有这层兜底就 404 了。pfx 正好就是这个深度，直接复用。
-        content=md_to_html(a['body'], img_prefix=pfx), related=rh, stamp=STAMP,
+        content=_content, related=rh, stamp=STAMP,
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
         about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'],
         gloss_link=('<a href="../glossary.html">Glossary</a> · '

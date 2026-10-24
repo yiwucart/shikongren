@@ -276,6 +276,22 @@ html[lang="en"] body {
   line-height: 1.95;
 }
 .content p { margin: 0 0 1.15em; }
+/* 正文里指向术语表的锚点。全站正文链接走浏览器默认蓝，128 条术语链
+   铺进去会花成一片，所以这里让链接颜色跟正文走，只留一道淡下划线；
+   鼠标悬停才提亮。只在英文文章页出现，简繁两站没有这个 class。 */
+.content a.gl {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(138, 109, 59, .55);
+  text-underline-offset: 3px;
+}
+.content a.gl:hover,
+.content a.gl:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
 .content img, .content figure img {
   max-width: 100%;
   height: auto;
@@ -351,7 +367,7 @@ html[lang="en"] body {
 .glossary h2 { margin: 44px 0 4px; font-size: 21px; font-weight: 600; }
 .glossary .glossblurb { margin: 0 0 6px; font-size: 15px; color: var(--ink-3); line-height: 1.7; }
 .glossary dl.terms { margin: 0; }
-.glossary .term { padding: 16px 0 14px; border-bottom: 1px dashed var(--line); }
+.glossary .term { padding: 16px 0 14px; border-bottom: 1px dashed var(--line); scroll-margin-top: 24px; }
 .glossary .term:last-child { border-bottom: 0; }
 .glossary dt { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; }
 .glossary .ten { font-size: 17px; font-weight: 600; color: var(--ink); }

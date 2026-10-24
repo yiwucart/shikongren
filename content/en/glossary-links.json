@@ -1,0 +1,321 @@
+{
+  "_readme": "术语表反向内链规则。patterns: 术语 id -> 正文里的英文词形（正则，大小写不敏感，注入时自动加词边界）。links: 文章 slug -> 这篇文章真正在讲的术语。只链核心概念，不按词频堆。改这里即可，不用碰 111 个源文件。",
+  "patterns": {
+    "yin-and-yang": "yin[-–— ]and[-–— ]yang|yin[-–— ]yang",
+    "five-elements": "five elements|five phases",
+    "heavenly-stems": "heavenly stems?|ten stems",
+    "earthly-branches": "earthly branches?|twelve branches",
+    "twenty-four-mountains": "twenty[-–— ]four mountains|24 mountains",
+    "bazi": "bazi|ba ?zi|four pillars",
+    "living-qi": "living qi|sheng ?qi",
+    "primordial-motive-energy": "primordial motive energy|motive energy",
+    "chonghe-zhi-qi": "chonghe zhi qi|chong he zhi qi",
+    "vein-energy": "vein energy|vein ?qi",
+    "dragon-vein": "dragon veins?",
+    "energy-channel": "energy channels?",
+    "origin-point": "origin points?",
+    "focal-point": "focal points?",
+    "true-dragon-point": "true dragon points?",
+    "zero-plane": "zero[-–— ]plane",
+    "sand": "sand",
+    "water": "(?<!mineral )water(?! bottl)",
+    "orientation": "orientation",
+    "day-master": "day masters?",
+    "ten-gods": "ten gods",
+    "useful-god": "useful god|unfavou?rable god|yongshen|yong shen",
+    "luck-cycle": "luck cycles?",
+    "annual-cycle": "annual cycles?",
+    "hidden-stems": "hidden stems?",
+    "structure": "structures?",
+    "time-space-person": "time, space and person|shikongren",
+    "principle-of-adaptation": "principle of adaptation",
+    "correct-consciousness": "correct consciousness",
+    "energy-conversion": "energy conversion",
+    "adjustment": "adjustments?|remedies?",
+    "external-force": "external forces?",
+    "ceiling-of-adjustment": "ceiling"
+  },
+  "links": {
+    "astronomical-origin-of-the-ten-heavenly-stems": [
+      "heavenly-stems"
+    ],
+    "astronomical-origin-of-the-twelve-earthly-branches": [
+      "earthly-branches"
+    ],
+    "how-to-choose-the-yongshen-in-liuyao-divination": [
+      "useful-god"
+    ],
+    "is-the-five-element-sequence-a-theorem-or-an-axiom": [
+      "five-elements"
+    ],
+    "movement-laws-of-the-harmonized-yin-yang-qi": [
+      "chonghe-zhi-qi",
+      "yin-and-yang"
+    ],
+    "the-physical-nature-of-the-heavenly-stems-and-earthly-branches": [
+      "heavenly-stems",
+      "earthly-branches"
+    ],
+    "what-exactly-are-the-heavenly-stems-and-earthly-branches-1": [
+      "heavenly-stems",
+      "earthly-branches"
+    ],
+    "what-exactly-are-the-heavenly-stems-and-earthly-branches-2": [
+      "heavenly-stems"
+    ],
+    "what-exactly-is-the-taiji-halo": [
+      "true-dragon-point"
+    ],
+    "what-i-got-from-studying-the-lu-school-of-natural-science-yixue": [
+      "day-master"
+    ],
+    "where-does-the-truth-of-liuyao-prediction-lie": [
+      "useful-god",
+      "five-elements"
+    ],
+    "yin-and-yang-dragons-the-open-face-and-the-taiji-halo": [
+      "yin-and-yang",
+      "true-dragon-point",
+      "orientation"
+    ],
+    "are-the-ming-tombs-a-good-feng-shui-site": [
+      "vein-energy",
+      "true-dragon-point"
+    ],
+    "can-the-fenjin-method-actually-be-applied": [
+      "orientation"
+    ],
+    "energy-and-circulation": [
+      "origin-point",
+      "yin-and-yang"
+    ],
+    "energy-channels-in-the-mountains": [
+      "energy-channel",
+      "origin-point"
+    ],
+    "feng-shui-cannot-fix-laziness": [
+      "adjustment"
+    ],
+    "is-a-cut-dragon-vein-always-inauspicious": [
+      "dragon-vein"
+    ],
+    "precautions-when-setting-the-focal-point": [
+      "focal-point",
+      "vein-energy"
+    ],
+    "reading-a-public-cemetery": [
+      "dragon-vein",
+      "twenty-four-mountains"
+    ],
+    "reading-a-site-by-the-sea": [
+      "zero-plane",
+      "water"
+    ],
+    "reading-feng-shui-in-an-apartment-block": [
+      "sand",
+      "water"
+    ],
+    "sand-and-water-in-the-twenty-four-directions": [
+      "twenty-four-mountains",
+      "sand",
+      "water"
+    ],
+    "setting-the-orientation": [
+      "orientation",
+      "vein-energy"
+    ],
+    "shopfronts-on-a-street": [
+      "water"
+    ],
+    "telling-sand-from-water-1": [
+      "sand"
+    ],
+    "the-core-secret-of-seeking-the-dragon-1": [
+      "dragon-vein",
+      "vein-energy",
+      "focal-point"
+    ],
+    "the-core-secret-of-seeking-the-dragon-2": [
+      "true-dragon-point",
+      "focal-point"
+    ],
+    "the-dragon-vein-passing-the-canopy-the-gorge-and-the-breath": [
+      "dragon-vein"
+    ],
+    "the-focal-point-in-flat-country": [
+      "focal-point"
+    ],
+    "the-twenty-four-sand-burial-methods-in-photographs": [
+      "sand",
+      "vein-energy"
+    ],
+    "the-zangshu-of-guo-pu-annotated": [
+      "living-qi",
+      "focal-point",
+      "true-dragon-point"
+    ],
+    "there-are-true-dragon-points-in-city-buildings": [
+      "true-dragon-point",
+      "focal-point"
+    ],
+    "what-is-a-feng-shui-master-actually-looking-for": [
+      "living-qi",
+      "primordial-motive-energy"
+    ],
+    "what-is-a-true-dragon-point": [
+      "true-dragon-point",
+      "focal-point",
+      "vein-energy"
+    ],
+    "where-vein-qi-accumulates-in-the-strata": [
+      "vein-energy"
+    ],
+    "why-you-cannot-pin-a-mountain": [
+      "dragon-vein"
+    ],
+    "counting-stems-and-branches": [
+      "hidden-stems"
+    ],
+    "feng-shui-and-bazi": [
+      "bazi",
+      "luck-cycle"
+    ],
+    "judging-the-useful-and-unfavourable-gods": [
+      "useful-god",
+      "structure"
+    ],
+    "locating-body-parts-in-a-bazi": [
+      "bazi",
+      "heavenly-stems",
+      "earthly-branches"
+    ],
+    "strength-of-stems-and-branches": [
+      "day-master"
+    ],
+    "telling-the-ten-gods-apart": [
+      "ten-gods",
+      "useful-god"
+    ],
+    "testing-a-bazi-theory": [
+      "bazi",
+      "useful-god"
+    ],
+    "the-bazi-model-as-a-functional-mould": [
+      "bazi"
+    ],
+    "the-bazi-model-in-use": [
+      "bazi",
+      "time-space-person"
+    ],
+    "the-environmental-system-of-bazi": [
+      "useful-god"
+    ],
+    "the-logic-of-bazi-reading": [
+      "bazi"
+    ],
+    "the-parallel-and-the-rob": [
+      "day-master"
+    ],
+    "the-positioning-system-of-a-bazi": [
+      "ten-gods",
+      "structure"
+    ],
+    "the-time-system-of-bazi": [
+      "day-master",
+      "luck-cycle",
+      "annual-cycle"
+    ],
+    "twins-height-and-the-exam-score": [
+      "day-master"
+    ],
+    "what-the-ten-gods-mean": [
+      "ten-gods"
+    ],
+    "why-identical-charts-give-different-fates": [
+      "bazi"
+    ],
+    "mount-wudang-a-discussion-of-time-space-and-person": [
+      "time-space-person",
+      "yin-and-yang",
+      "external-force"
+    ],
+    "the-shikongren-method-cases-1": [
+      "time-space-person"
+    ],
+    "the-shikongren-method-cases-2": [
+      "time-space-person"
+    ],
+    "the-shikongren-method-cases-7": [
+      "time-space-person"
+    ],
+    "the-shikongren-method-cases-10": [
+      "time-space-person"
+    ],
+    "the-principle-of-adaptation": [
+      "principle-of-adaptation",
+      "five-elements",
+      "luck-cycle"
+    ],
+    "the-problem-with-formulas": [
+      "hidden-stems",
+      "luck-cycle",
+      "useful-god"
+    ],
+    "what-fate-prediction-actually-is": [
+      "correct-consciousness",
+      "energy-conversion"
+    ],
+    "what-fixes-the-hour-of-birth": [
+      "primordial-motive-energy"
+    ],
+    "what-is-the-use-of-reading-a-fate": [
+      "adjustment"
+    ],
+    "why-fate-can-be-predicted": [
+      "yin-and-yang",
+      "five-elements"
+    ],
+    "adjusting-for-a-child": [
+      "origin-point",
+      "day-master"
+    ],
+    "adjusting-for-study": [
+      "day-master"
+    ],
+    "adjusting-marriage-and-romance": [
+      "day-master",
+      "sand",
+      "water"
+    ],
+    "breaking-a-gaming-addiction": [
+      "day-master"
+    ],
+    "eight-directions-not-eight-hours": [
+      "five-elements"
+    ],
+    "five-notes-on-resolving-disaster": [
+      "adjustment"
+    ],
+    "five-principles-of-disaster-resolution": [
+      "correct-consciousness",
+      "external-force"
+    ],
+    "four-tests-for-a-remedy": [
+      "adjustment"
+    ],
+    "the-ceiling-of-adjustment": [
+      "ceiling-of-adjustment"
+    ],
+    "the-pagoda-problem": [
+      "adjustment"
+    ],
+    "time-space-and-person": [
+      "time-space-person",
+      "twenty-four-mountains"
+    ],
+    "winning-the-contract": [
+      "day-master",
+      "adjustment"
+    ]
+  }
+}
