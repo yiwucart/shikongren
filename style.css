@@ -257,18 +257,10 @@ html[lang="en"] body {
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 
 @media (max-width: 560px) {
-  .langsw {
-    position: fixed;
-    right: 14px;
-    bottom: 14px;
-    margin: 0;
-    z-index: 40;
-    background: rgba(255, 255, 255, .95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
-  }
-  /* 悬浮切换器会压住最后一张卡片，页脚留出它的高度 */
-  body { padding-bottom: 56px; }
-  .top .langsw { position: static; box-shadow: none; }
+  /* 切换器不再悬浮：首页它就在眉题那一行，文章页它本来就在顶栏右侧。
+     悬浮版会压在卡片正文上，看着像排版坏了。 */
+  .langsw { margin: 0 0 10px; }
+  .herotop .langsw { margin: 0; }
 }
 
 /* .post 与 .page 都带 wrap 类，左右内边距写死在这里，
@@ -825,6 +817,7 @@ img { max-width: 100%; }
     height: 46px;
     background: linear-gradient(90deg, rgba(250,249,247,0), var(--bg) 46%);
     pointer-events: none;
+    z-index: 1;
   }
   .catbar.open::after { display: none; }
   .cats a {
@@ -845,6 +838,7 @@ img { max-width: 100%; }
     position: absolute;
     right: 14px;
     top: 14px;
+    z-index: 2;
     padding: 5px 9px;
     min-height: 30px;
     font-family: inherit;
