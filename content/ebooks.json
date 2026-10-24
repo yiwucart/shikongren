@@ -1,118 +1,290 @@
 {
   "zh": {
     "h1": "电子书",
-    "doc_title": "免费电子书下载：易学基础 · 风水实务 · 八字命理 · 辨伪与化解",
-    "sub": "四卷 · PDF · 免费下载，不用注册",
+    "doc_title": "免费电子书下载：吕文艺原著八部 · 本站编选四卷",
+    "sub": "十二种 · PDF · 免费下载，不用注册",
     "intro": [
-      "四卷电子书，免费下载，不用注册，也不用留邮箱。它们是把站上已经公开的文章按门类重新编排成的 PDF：加了封面、目录和页码，删掉了每篇文末的推广与联系方式，正文一字未改。",
-      "四卷合计一百一十九篇，从易学基础，到风水实务、八字命理，再到辨伪、预测理论与化解。每卷可以单独读；按顺序读，是一条「先弄清词，再去看地，再去读盘，最后问它凭什么站得住」的线。手机、平板、电脑都能直接打开，A5 版面，字号按阅读而非打印设置。"
+      "两个书架。上面一栏是吕文艺的原著，八部，合计四千四百余页：风水、八字、六爻、择吉、考前调理，都是讲课整理稿与专题集，原书怎么写就怎么放，只在文件头加了封面缩略图。下面一栏是把站上已公开的一百一十九篇文章按门类重编的四卷小书，A5 版面，加了目录和书签。",
+      "全部免费，不用注册，也不用留邮箱。手机、平板、电脑都能直接打开。原著体量大，六爻那本七十多兆，建议在 Wi-Fi 下下载；只想通读或先摸清这套东西在讲什么，从下面四卷小书入手更省事。"
     ],
     "note_h": "关于这些文件",
     "note": [
-      "格式为 PDF（A5 开本），保留了可点击的目录和书签：在阅读器里打开大纲栏，可以直接跳到任意一篇。",
-      "免费下载、欢迎转发，请保留出处，请勿用于售卖。每篇文字及其英文译文，仍可在站上逐篇阅读；英文四卷收录的是对应文章的人工译本。",
-      "文中观点是作者的一家之言，靠案例立论，不靠权威立论。读者不必先信，也不必先不信——可以先看它说的东西，能不能对上你能去现场看到的那个样子。"
+      "原著是作者自印的内部资料，书上标着「免费赠送、禁止翻印」——这里照原样提供，不作删改，也不作售卖。四卷编选同样是免费转发，请保留出处。",
+      "原著里夹着课程、联系方式与招生说明，那是原书的一部分，未作处理；编选四卷把这些内容删掉了，正文一字未改。",
+      "文中的观点是作者的一家之言，靠案例立论，不靠权威立论。读者不必先信，也不必先不信——可以先看它说的东西，能不能对上你能去现场看到的那个样子。"
     ]
   },
   "en": {
     "h1": "Ebooks",
-    "doc_title": "Free ebooks: Foundations of Yixue, Feng Shui Practice, Bazi, and the Method",
-    "sub": "Four volumes · PDF · free, no sign-up",
+    "doc_title": "Free ebooks: four English volumes, and the eight Chinese originals",
+    "sub": "Twelve books · PDF · free, no sign-up",
     "intro": [
-      "Four volumes, free to download. No account, no email address. Each is a PDF assembled from essays already published on this site: cover, contents and page numbers added, the sales copy and contact details that trail the Chinese originals removed, the arguments left exactly as they were.",
-      "Together they run to 119 essays — the vocabulary layer, feng shui in practice, the four pillars, and the volume on evidence, prediction theory and remedy. Each stands alone. Read in order, they follow one line: learn the words, then look at ground, then read a chart, then ask what any of it is entitled to claim.",
-      "A5 pages, set for reading rather than printing, with a clickable table of contents and PDF bookmarks. The Chinese shelf holds the original essays; the English shelf is the translation."
+      "Two shelves. The first is English: four volumes assembled from essays already published on this site — cover, contents and page numbers added, the sales copy and contact details that trail the Chinese originals removed, the arguments left as they were. Together they run to 119 essays.",
+      "The second shelf is the source. Eight books by Lü Wenyi, some 4,400 pages in Chinese: feng shui, the four pillars, six-line divination, date selection, and a volume on adjusting a candidate's environment before an exam. They are lecture transcripts and subject collections, reproduced as printed. They are not translated."
     ],
     "note_h": "About the files",
     "note": [
-      "Every volume has a clickable contents page and a PDF outline — open the sidebar in your reader and jump straight to any essay.",
-      "Free to download and pass on. Please keep the source and credit it; do not sell it. Every essay is also readable individually on this site, in English and in the Chinese original.",
+      "Everything here is free to download and pass on. Please keep the source and credit it; do not sell it.",
+      "The English volumes have a clickable contents page and a PDF outline — open the sidebar in your reader and jump to any essay. The Chinese originals vary: two carry a full outline, the rest do not.",
+      "The eight originals are the author's own internally circulated material, marked free to give away and not to reprint. They are offered here unaltered. Course prices, phone numbers and enrolment notices inside them are part of the original and were left alone.",
       "What you will find inside is a position argued from cases, not a finding. No reader is asked to accept it on authority — only to check it against something that can be gone and looked at."
     ]
   },
-  "books": {
+  "shelves": {
     "zh": [
       {
-        "file": "yixue-jichu.pdf",
-        "cover": "cover-yixue-jichu.jpg",
-        "title": "易学基础",
-        "sub": "阴阳、五行、干支是怎么建起来的",
-        "desc": "二十四篇。把其他门类都要借用的那套词先拆开：阴阳不是两种东西，五行不是五种材料，干支也不是记号——弄清它们各自在做什么，后面才谈得上用。",
-        "n": 24,
-        "pages": 119,
-        "size": "3.8 MB"
+        "id": "originals",
+        "title": "原著 · 吕文艺",
+        "note": "八部，合计四千四百余页。风水、八字、六爻、择吉、考前调理五门，均为作者自印的讲课整理稿与专题集。",
+        "books": [
+          {
+            "file": "fengshui-2021.pdf",
+            "cover": "cover-fengshui-2021.jpg",
+            "title": "风水学",
+            "sub": "2021 版 · 平台课讲授整理稿",
+            "desc": "五百八十八页，五十四节。开头先讲「学习风水学必须明白的道理」，把「风水是磁场」「房屋缺角」「高手在民间」这些说法逐条拆掉，再讲十二种思维方式，然后才是砂水、脉气、立向的整套工序。",
+            "pages": 588,
+            "size": "11.6 MB"
+          },
+          {
+            "file": "juemi-duanfa.pdf",
+            "cover": "cover-juemi-duanfa.jpg",
+            "title": "绝密断法",
+            "sub": "残疾 · 灾难 · 死法 · 职业 · 疾病 · 财源",
+            "desc": "五百一十八页，四部分：思维导航、体系构架、风水绝密断法、人生问题化解调理。专攻六类大事——一个人会不会残、遭什么灾、死于何种情形、做什么职业、得什么病、财从哪来。",
+            "pages": 518,
+            "size": "26.3 MB"
+          },
+          {
+            "file": "bazi-2021.pdf",
+            "cover": "cover-bazi-2021.jpg",
+            "title": "八字命理学",
+            "sub": "2021 版 · 平台课讲授整理稿",
+            "desc": "六百四十二页。从干支的五种属性讲起，到日主旺衰、格局、取用、断验逐年。前半部大量篇幅在拆传统命理的错处，后半部才给整套读盘的步骤。",
+            "pages": 642,
+            "size": "6.4 MB"
+          },
+          {
+            "file": "bazi-jinghua.pdf",
+            "cover": "cover-bazi-jinghua.jpg",
+            "title": "精华集萃",
+            "sub": "八字命理学 · 断语汇编",
+            "desc": "七百零六页，八字典籍里最厚的一本。按门类汇编历年的断语与实例，每条断语后面跟着它的使用条件——作者反复强调的一点是：离开条件，准确率可能为零。",
+            "pages": 706,
+            "size": "8.9 MB"
+          },
+          {
+            "file": "liuyao-2022.pdf",
+            "cover": "cover-liuyao-2022.jpg",
+            "title": "六爻预测学",
+            "sub": "2022 · 「成败吉凶」决断专集",
+            "desc": "六百零八页。起卦、装卦、取用神、断应期，一路讲到同一卦在不同条件下的两种相反读法。书前有一篇长文讲这套体系与纳甲、梅花、奇门的分别。",
+            "pages": 608,
+            "size": "76.9 MB"
+          },
+          {
+            "file": "liuyao-duanyu.pdf",
+            "cover": "cover-liuyao-duanyu.jpg",
+            "title": "六爻绝密断语",
+            "sub": "吉凶成败断法",
+            "desc": "一百一十五页，八本里最短的一本，也是唯一一本纯断语册。每一条都跟着成立条件，适合当工具书查，不适合当入门书读。",
+            "pages": 115,
+            "size": "9.2 MB"
+          },
+          {
+            "file": "zeji-2023.pdf",
+            "cover": "cover-zeji-2023.jpg",
+            "title": "择吉讲义",
+            "sub": "2023 · 吕氏时空人择吉日时",
+            "desc": "八百三十二页，全书最长。择吉不看黄道黑道与神煞，只看四件事：什么人、往什么方向、在什么环境、做什么性质的事——四样配上具体时间。",
+            "pages": 832,
+            "size": "36.7 MB"
+          },
+          {
+            "file": "kaoqian-tiaoli.pdf",
+            "cover": "cover-kaoqian-tiaoli.jpg",
+            "title": "考前提分调理",
+            "sub": "2024 · 网课配套资料",
+            "desc": "三百一十八页。把风水与八字两套东西落到一个具体场景上：考生在考前阶段住哪间屋、睡哪个方位、书桌怎么摆、往哪个方向去考场。全书按案例走。",
+            "pages": 318,
+            "size": "16.1 MB"
+          }
+        ]
       },
       {
-        "file": "fengshui-shiwu.pdf",
-        "cover": "cover-fengshui-shiwu.jpg",
-        "title": "风水实务",
-        "sub": "从寻龙点穴到城市住宅",
-        "desc": "四十四篇，篇幅最大的一卷。从寻龙、点穴、看砂水、立向这些老工序，一路讲到今天的户型、写字楼和街巷；最后几篇讲这套东西做不到什么。",
-        "n": 44,
-        "pages": 199,
-        "size": "10.3 MB"
-      },
-      {
-        "file": "bazi-mingli.pdf",
-        "cover": "cover-bazi-mingli.jpg",
-        "title": "八字命理",
-        "sub": "读盘、取用与断验的边界",
-        "desc": "十八篇。日主怎么定旺衰，用神怎么取，一个盘从哪里读起，以及读到哪一步就该停手——不把推断说成事实。",
-        "n": 18,
-        "pages": 86,
-        "size": "1.7 MB"
-      },
-      {
-        "file": "bianwei-lilun-huajie.pdf",
-        "cover": "cover-bianwei-lilun-huajie.jpg",
-        "title": "辨伪 · 理论 · 化解",
-        "sub": "一套方法如何被检验",
-        "desc": "三十三篇。先在真个案上看法子怎么跑，再看它对「预测」这件事允许断言什么，最后看断言之后还能做什么——以及做到哪一层为止。",
-        "n": 33,
-        "pages": 173,
-        "size": "4.4 MB"
+        "id": "compiled",
+        "title": "本站编选 · 四卷",
+        "note": "把站上公开的一百一十九篇按门类重编成 A5 小书。加了封面、目录、页码和书签，删去文末推广与联系方式，正文一字未改。篇幅小，适合通读。",
+        "books": [
+          {
+            "file": "yixue-jichu.pdf",
+            "cover": "cover-yixue-jichu.jpg",
+            "title": "易学基础",
+            "sub": "阴阳、五行、干支是怎么建起来的",
+            "desc": "二十四篇。把其他门类都要借用的那套词先拆开：阴阳不是两种东西，五行不是五种材料，干支也不是记号——弄清它们各自在做什么，后面才谈得上用。",
+            "n": 24,
+            "pages": 119,
+            "size": "3.8 MB"
+          },
+          {
+            "file": "fengshui-shiwu.pdf",
+            "cover": "cover-fengshui-shiwu.jpg",
+            "title": "风水实务",
+            "sub": "从寻龙点穴到城市住宅",
+            "desc": "四十四篇，篇幅最大的一卷。从寻龙、点穴、看砂水、立向这些老工序，一路讲到今天的户型、写字楼和街巷；最后几篇讲这套东西做不到什么。",
+            "n": 44,
+            "pages": 199,
+            "size": "10.3 MB"
+          },
+          {
+            "file": "bazi-mingli.pdf",
+            "cover": "cover-bazi-mingli.jpg",
+            "title": "八字命理",
+            "sub": "读盘、取用与断验的边界",
+            "desc": "十八篇。日主怎么定旺衰，用神怎么取，一个盘从哪里读起，以及读到哪一步就该停手——不把推断说成事实。",
+            "n": 18,
+            "pages": 86,
+            "size": "1.7 MB"
+          },
+          {
+            "file": "bianwei-lilun-huajie.pdf",
+            "cover": "cover-bianwei-lilun-huajie.jpg",
+            "title": "辨伪 · 理论 · 化解",
+            "sub": "一套方法如何被检验",
+            "desc": "三十三篇。先在真个案上看法子怎么跑，再看它对「预测」这件事允许断言什么，最后看断言之后还能做什么——以及做到哪一层为止。",
+            "n": 33,
+            "pages": 173,
+            "size": "4.4 MB"
+          }
+        ]
       }
     ],
     "en": [
       {
-        "file": "foundations-of-yixue.pdf",
-        "cover": "cover-foundations-of-yixue.jpg",
-        "title": "Foundations of Yixue",
-        "sub": "Yin and yang, the five phases, the stems and the branches",
-        "desc": "Twenty-four essays that take apart the terms every other branch of Chinese metaphysics borrows — and show what each one is doing before anyone starts using it.",
-        "n": 24,
-        "pages": 155,
-        "size": "3.0 MB"
+        "id": "compiled",
+        "title": "Compiled from this site",
+        "note": "Four volumes, 119 essays in all, set as A5 reading editions with contents and bookmarks.",
+        "books": [
+          {
+            "file": "foundations-of-yixue.pdf",
+            "cover": "cover-foundations-of-yixue.jpg",
+            "title": "Foundations of Yixue",
+            "sub": "Yin and yang, the five phases, the stems and the branches",
+            "desc": "Twenty-four essays that take apart the terms every other branch of Chinese metaphysics borrows — and show what each one is doing before anyone starts using it.",
+            "n": 24,
+            "pages": 155,
+            "size": "3.0 MB"
+          },
+          {
+            "file": "practising-feng-shui.pdf",
+            "cover": "cover-practising-feng-shui.jpg",
+            "title": "Practising Feng Shui",
+            "sub": "Reading a house, a site, and a grave",
+            "desc": "Forty-four essays moving from the classical procedure — finding the dragon, fixing the seat, judging sand and water, taking the orientation — to the rooms and streets people actually live in.",
+            "n": 44,
+            "pages": 255,
+            "size": "8.2 MB"
+          },
+          {
+            "file": "reading-the-four-pillars.pdf",
+            "cover": "cover-reading-the-four-pillars.jpg",
+            "title": "Reading the Four Pillars",
+            "sub": "Bazi: the method, the cases, and the limits",
+            "desc": "Eighteen essays on the chart itself: how a day master is judged, how the useful god is chosen, and where the reading stops being an argument and starts being a guess.",
+            "n": 18,
+            "pages": 106,
+            "size": "1.0 MB"
+          },
+          {
+            "file": "testing-the-claim.pdf",
+            "cover": "cover-testing-the-claim.jpg",
+            "title": "Testing the Claim",
+            "sub": "Evidence, prediction theory, and the work of remedy",
+            "desc": "Thirty-three essays on the question a reader eventually asks: is any of this checkable? What a prediction claims, how a case is judged, and what an adjustment is supposed to change.",
+            "n": 33,
+            "pages": 183,
+            "size": "2.1 MB"
+          }
+        ]
       },
       {
-        "file": "practising-feng-shui.pdf",
-        "cover": "cover-practising-feng-shui.jpg",
-        "title": "Practising Feng Shui",
-        "sub": "Reading a house, a site, and a grave",
-        "desc": "Forty-four essays moving from the classical procedure — finding the dragon, fixing the seat, judging sand and water, taking the orientation — to the rooms and streets people actually live in.",
-        "n": 44,
-        "pages": 255,
-        "size": "8.2 MB"
-      },
-      {
-        "file": "reading-the-four-pillars.pdf",
-        "cover": "cover-reading-the-four-pillars.jpg",
-        "title": "Reading the Four Pillars",
-        "sub": "Bazi: the method, the cases, and the limits",
-        "desc": "Eighteen essays on the chart itself: how a day master is judged, how the useful god is chosen, and where the reading stops being an argument and starts being a guess.",
-        "n": 18,
-        "pages": 106,
-        "size": "1.0 MB"
-      },
-      {
-        "file": "testing-the-claim.pdf",
-        "cover": "cover-testing-the-claim.jpg",
-        "title": "Testing the Claim",
-        "sub": "Evidence, prediction theory, and the work of remedy",
-        "desc": "Thirty-three essays on the question a reader eventually asks: is any of this checkable? What a prediction claims, how a case is judged, and what an adjustment is supposed to change.",
-        "n": 33,
-        "pages": 183,
-        "size": "2.1 MB"
+        "id": "originals",
+        "title": "The Chinese originals",
+        "note": "Eight books by Lü Wenyi, some 4,400 pages, in Chinese. Free to download; the text is not translated.",
+        "books": [
+          {
+            "file": "fengshui-2021.pdf",
+            "cover": "cover-fengshui-2021.jpg",
+            "title": "Feng Shui (2021)",
+            "sub": "Lecture transcripts · 588 pages",
+            "desc": "Opens by dismantling the popular claims — feng shui as magnetism, missing corners, the master in the village — then sets out the working procedure: sand and water, the vein of qi, taking orientation.",
+            "pages": 588,
+            "size": "11.6 MB"
+          },
+          {
+            "file": "juemi-duanfa.pdf",
+            "cover": "cover-juemi-duanfa.jpg",
+            "title": "The Six Hard Readings",
+            "sub": "Disability, disaster, manner of death, trade, illness, money · 518 pages",
+            "desc": "A subject collection devoted to six things a client actually asks about, read from the site rather than the chart.",
+            "pages": 518,
+            "size": "26.3 MB"
+          },
+          {
+            "file": "bazi-2021.pdf",
+            "cover": "cover-bazi-2021.jpg",
+            "title": "Bazi (2021)",
+            "sub": "Lecture transcripts · 642 pages",
+            "desc": "From the five properties of the stems and branches to strength of the day master, structure, useful god, and year-by-year verification.",
+            "pages": 642,
+            "size": "6.4 MB"
+          },
+          {
+            "file": "bazi-jinghua.pdf",
+            "cover": "cover-bazi-jinghua.jpg",
+            "title": "Bazi: Collected Readings",
+            "sub": "706 pages",
+            "desc": "The thickest of the eight. Judgements and cases grouped by topic, each judgement followed by the conditions under which it holds.",
+            "pages": 706,
+            "size": "8.9 MB"
+          },
+          {
+            "file": "liuyao-2022.pdf",
+            "cover": "cover-liuyao-2022.jpg",
+            "title": "Six-Line Divination (2022)",
+            "sub": "Cases of success and failure · 608 pages",
+            "desc": "Casting, installing the lines, choosing the representing spirit, timing the answer — and the two opposite readings the same hexagram admits under different conditions.",
+            "pages": 608,
+            "size": "76.9 MB"
+          },
+          {
+            "file": "liuyao-duanyu.pdf",
+            "cover": "cover-liuyao-duanyu.jpg",
+            "title": "Six-Line Judgements",
+            "sub": "115 pages",
+            "desc": "The shortest of the eight and the only pure book of judgements — a reference to consult, not a place to start.",
+            "pages": 115,
+            "size": "9.2 MB"
+          },
+          {
+            "file": "zeji-2023.pdf",
+            "cover": "cover-zeji-2023.jpg",
+            "title": "Date Selection (2023)",
+            "sub": "832 pages",
+            "desc": "No yellow-and-black days, no spirits and demons. Four things only: which person, which direction, which environment, what kind of act — matched to a time.",
+            "pages": 832,
+            "size": "36.7 MB"
+          },
+          {
+            "file": "kaoqian-tiaoli.pdf",
+            "cover": "cover-kaoqian-tiaoli.jpg",
+            "title": "Adjusting for an Exam (2024)",
+            "sub": "Course companion · 318 pages",
+            "desc": "Feng shui and bazi brought down to one situation: where a candidate sleeps, which way the desk faces, which direction to travel to the hall.",
+            "pages": 318,
+            "size": "16.1 MB"
+          }
+        ]
       }
     ]
   }

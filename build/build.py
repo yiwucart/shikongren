@@ -501,11 +501,11 @@ def ebook_bar(lang):
     """首页 hero 里的一行电子书入口 —— 只在页脚放，等于没人看得到。"""
     code = lang.get('code')
     if code == 'en':
-        txt = 'Four volumes as free PDF ebooks — no sign-up'
+        txt = 'Twelve PDF books, free — four in English, eight originals'
     elif lang.get('opencc'):
-        txt = '四卷電子書，免費下載（PDF，不用註冊）'
+        txt = '十二種電子書，免費下載（原著八部 · 編選四卷）'
     else:
-        txt = '四卷电子书，免费下载（PDF，不用注册）'
+        txt = '十二种电子书，免费下载（原著八部 · 编选四卷）'
     return '<p class="ebooklink"><a href="ebooks.html">%s →</a></p>' % txt
 
 
@@ -1825,7 +1825,7 @@ EBOOKS_TPL = '''<!doctype html>
   <div class="content">
 {intro}
   </div>
-  <div class="booklist">
+  <div class="shelves">
 {books}
   </div>
   <div class="ebnote">
@@ -1854,7 +1854,6 @@ def build_ebooks_html(lang):
     code = lang.get('code')
     key = 'en' if code == 'en' else 'zh'
     meta = data[key]
-    books = data['books'][key]
     T = ui(lang)
     cc = get_opencc(lang) if lang.get('opencc') else None
 
@@ -1863,17 +1862,21 @@ def build_ebooks_html(lang):
 
     pfx = lang_prefix(lang)
     dl_word = 'Download PDF' if code == 'en' else '下载 PDF'
-    unit = '%d essays · %d pages · %s' if code == 'en' else '%d 篇 · %d 页 · %s'
 
-    cards = []
-    for b in books:
+    def card(b):
         url = '%sebooks/%s' % (pfx, b['file'])
         img = '%sebooks/%s' % (pfx, b['cover'])
-        cards.append(
+        if b.get('n'):
+            meta_line = ('%d essays · %d pages · %s' if code == 'en'
+                         else '%d 篇 · %d 页 · %s') % (b['n'], b['pages'], b['size'])
+        else:
+            meta_line = ('%d pages · %s' if code == 'en'
+                         else '%d 页 · %s') % (b['pages'], b['size'])
+        return (
             '<div class="book">\n'
-            '  <a class="bk-cover" href="%s" aria-label="%s"><img src="%s" alt="%s" loading="lazy"></a>\n'
+            '  <a class="bk-cover" href="%s" aria-label="%s"><img src="%s" alt="%s" loading="lazy" width="112" height="159"></a>\n'
             '  <div class="bk-body">\n'
-            '    <h2>%s</h2>\n'
+            '    <h3>%s</h3>\n'
             '    <p class="bk-sub">%s</p>\n'
             '    <p class="bk-desc">%s</p>\n'
             '    <p class="bk-meta">%s</p>\n'
@@ -1882,15 +1885,26 @@ def build_ebooks_html(lang):
             '</div>' % (
                 esc(url), esc(tr(b['title'])), esc(img), esc(tr(b['title'])),
                 esc(tr(b['title'])), esc(tr(b['sub'])), esc(tr(b['desc'])),
-                esc(unit % (b['n'], b['pages'], b['size'])),
-                esc(url), esc(dl_word)))
+                esc(tr(meta_line)), esc(url), esc(dl_word)))
+
+    shells = []
+    for sh in data['shelves'][key]:
+        bodies = '\n'.join(card(b) for b in sh['books'])
+        shells.append(
+            '<section class="shelf" id="%s">\n'
+            '  <div class="shelf-hd"><h2>%s</h2><span class="shelf-n">%d</span></div>\n'
+            '  <p class="shelf-note">%s</p>\n'
+            '  <div class="booklist">\n%s\n  </div>\n'
+            '</section>' % (
+                esc(sh['id']), esc(tr(sh['title'])), len(sh['books']),
+                esc(tr(sh['note'])), bodies))
 
     intro = '\n'.join('  <p class="ebintro">%s</p>' % esc(tr(p))
                       for p in meta['intro'])
     note = '\n'.join('    <p>%s</p>' % esc(tr(p)) for p in meta['note'])
-    desc = tr(meta['sub']) + ' — ' + esc(tr(books[0]['title'])) + ' … ' + esc(tr(books[-1]['title']))
-    copy = ('Four volumes · free to download · %s' % DOMAIN if code == 'en'
-            else '四卷 · 免费下载 · %s' % DOMAIN)
+    all_books = [b for sh in data['shelves'][key] for b in sh['books']]
+    copy = ('Twelve books · free to download · %s' % DOMAIN if code == 'en'
+            else '十二种 · 免费下载 · %s' % DOMAIN)
 
     return EBOOKS_TPL.format(
         hlang=lang['html_lang'], doc_title=esc(tr(meta['doc_title'])),
@@ -1900,7 +1914,7 @@ def build_ebooks_html(lang):
         alt=hreflang_tags(lang, 'ebooks.html'),
         pfx=pfx, stamp=STAMP, verify=VERIFY_BLOCK,
         h1=esc(tr(meta['h1'])), sub=esc(tr(meta['sub'])),
-        intro=intro, books='\n'.join(cards),
+        intro=intro, books='\n'.join(shells),
         note_h=esc(tr(meta['note_h'])), note=note,
         back=T['back'], langsw=build_switcher(lang, 'ebooks.html'),
         disc_h=T['disclaimer'], disc=T['stmt_v'],
