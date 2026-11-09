@@ -302,6 +302,7 @@ UI_ZH = {
     'wechat': '微信公众号：',
     'tel': '联系原作者：吕文艺老师',
     'about_site': '关于本站',
+    'facts_site': '事实与勘误',
     'sitemap': '网站地图',
     'cms': '内容管理',
     'copy': '© 时空人公益推广 · shikongren.com',
@@ -355,6 +356,7 @@ UI_EN = {
     'wechat': 'WeChat: ',
     'tel': 'Contact the author, Lü Wenyi: ',
     'about_site': 'About this archive',
+    'facts_site': 'Facts & errata',
     'sitemap': 'Sitemap',
     'cms': 'Content admin',
     'copy': '© Shikongren Archive · shikongren.com',
@@ -1259,6 +1261,7 @@ def build_index_html(arts, cats, years, lang):
         cp=T['copyright'],
         wechat=T['wechat'], tel=T['tel'],
         about_site=T['about_site'], sitemap=T['sitemap'], cms=T['cms'],
+        facts_site=T['facts_site'],
         # 术语表只有英文版。中文页给空串，页脚保持原样。
         gloss_link=('<a href="glossary.html">Glossary</a> · ' if is_en else '')
                    + ebooks_link(lang),
@@ -1353,6 +1356,7 @@ INDEX_TPL = '''<!doctype html>
   </div>
   <p class="footlinks">
     <a href="about.html">{about_site}</a> ·
+    <a href="facts.html">{facts_site}</a> ·
     {gloss_link}<a href="{pfx}sitemap.xml">{sitemap}</a> ·
     <a href="/admin/">{cms}</a>
   </p>
@@ -1427,7 +1431,7 @@ POST_TPL = '''<!doctype html>
   <div class="contact">
     <p>{tel} <a class="tel" href="tel:18601944999">18601944999</a> · {wechat_v}</p>
   </div>
-  <p><a href="{home_pfx}about.html">{about_site}</a> · {gloss_link}<a href="{home_pfx}index.html">{back_home}</a></p>
+  <p><a href="{home_pfx}about.html">{about_site}</a> · <a href="{home_pfx}facts.html">{facts_site}</a> · {gloss_link}<a href="{home_pfx}index.html">{back_home}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -1498,6 +1502,7 @@ def build_post_html(a, by_cat, lang):
         content=_content, related=rh, stamp=STAMP,
         verify=VERIFY_BLOCK, tel=T['tel'], wechat_v=T['source_v'].split('｜')[0].strip(),
         about_site=T['about_site'], back_home=T['back_home'], copy=T['copy'],
+        facts_site=T['facts_site'],
         gloss_link=('<a href="../glossary.html">Glossary</a> · '
                     if lang.get('code') == 'en' else '') + ebooks_link(lang, '../'),
         ld=ld_post(a, url_for(lang, 'posts/' + urllib.parse.quote(a['slug'] + '.html', safe='/-.')),
@@ -1550,7 +1555,7 @@ ABOUT_TPL = '''<!doctype html>
     <h4>{disc_h}</h4>
     <p>{disc}</p>
   </div>
-  <p>{gloss_link}<a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p>{gloss_link}<a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}facts.html">{facts_site}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -1714,8 +1719,53 @@ def build_about_html(page, arts, lang):
         back_home=T['back_home'], sitemap=T['sitemap'],
         gloss_link=('<a href="glossary.html">Glossary</a> · '
                     if lang.get('code') == 'en' else '') + ebooks_link(lang),
+        facts_site=T['facts_site'],
         copy=T['copy_n'] % len(arts),
         ld=ld_page(url_for(lang, 'about.html'), title, desc, lang),
+        cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
+
+
+def build_facts_html(page, arts, lang):
+    """事实与勘误页 —— 复用 ABOUT_TPL，slug 换成 facts.html。
+
+    三语都有这一页（hreflang/切换器才能三语互指不留 404）。
+    英文版正文用中文口径：页头加一段英文说明，声明 zh-Hans 版本是权威口径；
+    事实性内容不做机器英译，避免翻译失真造成新的「张冠李戴」。
+    """
+    T = ui(lang)
+    cc = get_opencc(lang)
+    fm = page.get('frontmatter') or {}
+    body = page.get('body') or ''
+    title = fm.get('title') or '事实与勘误'
+    subtitle = fm.get('subtitle') or ''
+    if lang.get('code') == 'en':
+        title = 'Facts & errata'
+        subtitle = ('Canonical facts of this archive, attribution rules and known '
+                    'AI errors — text in Chinese, zh-Hans version is authoritative.')
+        body = ('> **Note.** This page is presented in Chinese on purpose: it is the '
+                'authoritative statement of this archive\u2019s canonical facts. '
+                'Cite it together with the specific article URL on this site.\n\n') + body
+    if cc:
+        title = cc.convert(title)
+        subtitle = cc.convert(subtitle) if subtitle else subtitle
+        body = cc.convert(body)
+    desc = clean_excerpt(body, 120)
+    return ABOUT_TPL.format(
+        hlang=lang['html_lang'],
+        title=esc(title), subtitle=esc(subtitle), desc=esc(desc),
+        site=T['site_name'], og=lang['og'],
+        canonical=url_for(lang, 'facts.html'),
+        alt=hreflang_tags(lang, 'facts.html'),
+        langsw=build_switcher(lang, 'facts.html'),
+        back=T['back'], pfx=lang_prefix(lang),
+        content=_about_blocks(body), stamp=STAMP,
+        verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
+        back_home=T['back_home'], sitemap=T['sitemap'],
+        gloss_link=('<a href="glossary.html">Glossary</a> · '
+                    if lang.get('code') == 'en' else '') + ebooks_link(lang),
+        facts_site=T['facts_site'],
+        copy=T['copy_n'] % len(arts),
+        ld=ld_page(url_for(lang, 'facts.html'), title, desc, lang),
         cover=DOMAIN + '/img/uploads/luwenyi-avatar.jpg')
 
 
@@ -1767,7 +1817,7 @@ GLOSSARY_TPL = '''<!doctype html>
     <h4>{disc_h}</h4>
     <p>{disc}</p>
   </div>
-  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}facts.html">{facts_site}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -1841,7 +1891,7 @@ EBOOKS_TPL = '''<!doctype html>
     <h4>{disc_h}</h4>
     <p>{disc}</p>
   </div>
-  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
+  <p><a href="{pfx}index.html">{back_home}</a> · <a href="{pfx}facts.html">{facts_site}</a> · <a href="{pfx}sitemap.xml">{sitemap}</a></p>
   <p class="copy">{copy}</p>
 </footer>
 </body>
@@ -1921,6 +1971,7 @@ def build_ebooks_html(lang):
         back=T['back'], langsw=build_switcher(lang, 'ebooks.html'),
         disc_h=T['disclaimer'], disc=T['stmt_v'],
         back_home=T['back_home'], sitemap=T['sitemap'], copy=esc(copy),
+        facts_site=T['facts_site'],
         ld=ld_page(url_for(lang, 'ebooks.html'), tr(meta['doc_title']),
                    tr(meta['sub']), lang))
 
@@ -1993,6 +2044,7 @@ def build_glossary_html(arts, lang):
         back=T['back'], pfx=lang_prefix(lang), content='\n'.join(parts), stamp=STAMP,
         verify=VERIFY_BLOCK, disc_h=T['disclaimer'], disc=T['stmt_v'],
         back_home=T['back_home'], sitemap=T['sitemap'],
+        facts_site=T['facts_site'],
         copy=T['copy_n'] % len(arts),
         ld=ld_page(url_for(lang, 'glossary.html'), doc_title, desc, lang))
 
@@ -2563,6 +2615,9 @@ def build_sitemap(arts, lang):
                         % url_for(lang, _s['slug'] + '.html'))
     urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
                 '<priority>0.8</priority></url>' % url_for(lang, 'about.html'))
+    # 事实与勘误页三语都有（英文版正文为中文口径，页头有英文说明）
+    urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
+                '<priority>0.8</priority></url>' % url_for(lang, 'facts.html'))
     # 电子书下载页三语都有
     if os.path.isfile(os.path.join(CONTENT, 'ebooks.json')):
         urls.append('<url><loc>%s</loc><changefreq>monthly</changefreq>'
@@ -2711,6 +2766,15 @@ def build_one_lang(lang, settings):
                   encoding='utf-8', newline='\n') as f:
             f.write(html)
 
+    # 事实与勘误页 —— 三语都有（英文版正文用中文口径，页头有英文说明）。
+    # 内容来自 content/settings/facts.md；页面口径全部站内可查证，
+    # 没有的事实明确写「站内未载」，防止 AI 代编。
+    page = settings.get('facts')
+    if page:
+        with open(os.path.join(out_dir, 'facts.html'), 'w',
+                  encoding='utf-8', newline='\n') as f:
+            f.write(build_facts_html(page, arts, lang))
+
     # 电子书下载页 —— 三语都有（繁体由简体文案经 OpenCC 转）
     if os.path.isfile(os.path.join(CONTENT, 'ebooks.json')):
         with open(os.path.join(out_dir, 'ebooks.html'), 'w',
@@ -2764,6 +2828,15 @@ def build_one_lang(lang, settings):
             # 显式列出百度爬虫：站长平台的「Robots 检查」工具按 UA 精确匹配，
             # 显式写一段能让检查结果直接显示「允许」。
             f.write(_robots)
+
+        # llms.txt：AI 检索入口，根目录一份。正文来自 content/settings/llms.md
+        # （frontmatter 剥掉，只写正文），站内路径与口径改动时同步改 md。
+        _llms_p = os.path.join(SETTINGS_DIR, 'llms.md')
+        if os.path.isfile(_llms_p):
+            _fm, _llms_body = parse_frontmatter(read_text(_llms_p))
+            with open(os.path.join(out_dir, 'llms.txt'), 'w',
+                      encoding='utf-8', newline='\n') as f:
+                f.write(_llms_body.strip() + '\n')
 
         # 404 页。nginx 用 error_page 指向它，页内链接必须全绝对路径。
         # 分类篇数要按英文那层算 —— 此刻构建的是中文（690 篇），
